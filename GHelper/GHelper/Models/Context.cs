@@ -14,7 +14,7 @@ namespace GHelper.Models
 	public class Context
 	{
 		[JsonIgnore]
-		public Collection<Profile> Profiles { get; }
+		public Collection<Profile> Profiles { get; init; }
 
 		[JsonPropertyName("applicationFolder")]
 		public IDirectoryPath? ApplicationFolder { get; set; }

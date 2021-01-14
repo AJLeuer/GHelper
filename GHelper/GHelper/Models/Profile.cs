@@ -16,7 +16,7 @@ namespace GHelper.Models
 	    [JsonPropertyName("lightingCard")]
 	    public string LightingCard { get; set; }
 	    [JsonPropertyName("name")]
-	    public string Name { get; set; }
+	    public string Name { get; init; }
 	    [JsonPropertyName("syncLightingCard")]
 	    public string SyncLightingCard { get; set; }
     }
