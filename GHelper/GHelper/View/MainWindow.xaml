@@ -1,0 +1,54 @@
+﻿<Window
+    x:Class="GHelper.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:GHelper.Models"
+    xmlns:utility="using:GHelper.Utility"
+    mc:Ignorable="d">
+
+    <SplitView PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
+           IsPaneOpen="True" OpenPaneLength="256" CompactPaneLength="48" DisplayMode="Inline">
+        <SplitView.Resources>
+            
+            <DataTemplate x:Key="ContextTemplate" x:DataType="models:Context">
+                <TreeViewItem ItemsSource="{x:Bind Profiles}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="20" Source="C:\Users\Adam\Pictures\Cyberpunk 2077\NightCitySmol.png"/>
+                        <TextBlock Text="{x:Bind Name}" />
+                    </StackPanel>              
+                </TreeViewItem>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="ProfileTemplate" x:DataType="models:Profile">
+                <TreeViewItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind Name}" />
+                    </StackPanel>              
+                </TreeViewItem>
+            </DataTemplate>
+            
+            <utility:GHubItemTemplateSelector
+                x:Key="GHubItemTemplateSelector"
+                ContextTemplate="{StaticResource ContextTemplate}"
+                ProfileTemplate="{StaticResource ProfileTemplate}" />
+            
+        </SplitView.Resources>
+        <SplitView.Pane>
+            <TreeView ItemsSource="{x:Bind Contexts}"  
+                      ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}">
+            </TreeView>
+        </SplitView.Pane>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Margin="12,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+            <TextBlock Grid.Row="1" Margin="12,12,0,0" Style="{StaticResource BodyTextBlockStyle}" />
+        </Grid>
+        
+    </SplitView>
+</Window>
