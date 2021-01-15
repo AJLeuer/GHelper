@@ -7,6 +7,10 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "GHelper (Package)", "GHelpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHelper", "GHelper\GHelper\GHelper.csproj", "{4A4E09CE-7600-4B22-8444-6D31B1000148}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHelperTest", "GHelperTest\GHelperTest.csproj", "{6C637B2A-3FB6-452C-83DB-A310327078CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHelperLogic", "GHelperLogic\GHelperLogic.csproj", "{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|arm64 = Debug|arm64
@@ -47,6 +51,30 @@ Global
 		{4A4E09CE-7600-4B22-8444-6D31B1000148}.Release|x64.Build.0 = Release|x64
 		{4A4E09CE-7600-4B22-8444-6D31B1000148}.Release|x86.ActiveCfg = Release|x86
 		{4A4E09CE-7600-4B22-8444-6D31B1000148}.Release|x86.Build.0 = Release|x86
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|arm64.Build.0 = Debug|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|arm64.ActiveCfg = Release|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|arm64.Build.0 = Release|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|x64.Build.0 = Release|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|x86.Build.0 = Release|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|arm64.Build.0 = Debug|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|x64.Build.0 = Debug|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|arm64.ActiveCfg = Release|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|arm64.Build.0 = Release|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x64.ActiveCfg = Release|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x64.Build.0 = Release|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x86.ActiveCfg = Release|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

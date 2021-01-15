@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using GHelper.Models;
+using GHelperLogic.Models;
 using Microsoft.UI.Xaml;
 
 namespace GHelper.View

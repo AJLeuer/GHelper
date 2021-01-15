@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:GHelper.Models"
     xmlns:utility="using:GHelper.Utility"
+    xmlns:models1="using:GHelperLogic.Models"
     mc:Ignorable="d">
 
     <SplitView PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
@@ -21,7 +22,7 @@
                 </TreeViewItem>
             </DataTemplate>
             
-            <DataTemplate x:Key="ProfileTemplate" x:DataType="models:Profile">
+            <DataTemplate x:Key="ProfileTemplate" x:DataType="models1:Profile">
                 <TreeViewItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{x:Bind Name}" />

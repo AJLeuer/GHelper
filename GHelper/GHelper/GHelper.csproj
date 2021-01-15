@@ -16,4 +16,8 @@
     <PackageReference Include="NDepend.Path" Version="2.0.0" />
     <PackageReference Include="NodaTime" Version="3.0.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\GHelperLogic\GHelperLogic.csproj" />
+  </ItemGroup>
 </Project>
