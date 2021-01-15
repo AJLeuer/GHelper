@@ -18,32 +18,33 @@ namespace GHelperLogic.IO
 				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileRelativePath + 
 				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileName);
 
-		public Collection<Profile> ReadProfiles(IFilePath settingsFilePath = null)
+		private static Stream GHubSettingsFile;
+		
+		static GHubSettingsFileReader()
 		{
-			settingsFilePath ??= DefaultFilePath;
-			return ReadProfiles(new FileStream(
-				settingsFilePath.ToString()!, 
-				FileMode.Open, 
-				FileAccess.Read));
+			#if DEBUG
+				GHubSettingsFile = new MemoryStream(Properties.Resources.DummyGHUBSettings, false);
+			
+			#elif RELEASE
+				GHubSettingsFile = new FileStream(
+						DefaultFilePath.ToString()!,
+						FileMode.Open,
+						FileAccess.ReadWrite);
+
+			#endif
 		}
 
-		public Collection<Profile> ReadProfiles(Stream settingsFile)
+
+		public Collection<Profile> ReadProfiles(Stream settingsFile = null)
 		{
+			settingsFile ??= GHubSettingsFile;
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
 			return null;
 		}
-		
-		public Collection<Context> ReadContexts(IFilePath settingsFilePath = null)
+
+		public Collection<Context> ReadContexts(Stream settingsFile = null)
 		{
-			settingsFilePath ??= DefaultFilePath;
-			return ReadContexts(new FileStream(
-				settingsFilePath.ToString()!,
-				FileMode.Open,
-				FileAccess.Read));
-		}
-		
-		public Collection<Context> ReadContexts(Stream settingsFile)
-		{
+			settingsFile ??= GHubSettingsFile;
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
 			JToken? contextsJSON = parsedSettingsFile["applications"]?["applications"];
 			Collection<Context> contexts = JsonConvert.DeserializeObject<Collection<Context>>(contextsJSON!.ToString());

@@ -123,4 +123,11 @@
   <data name="GHubConfigFileName" xml:space="preserve">
     <value>settings.json</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DummyGHUBSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>DummyGHUBSettings.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DummyGHUBSettings_backup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>DummyGHUBSettings.backup.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
