@@ -14,7 +14,7 @@ namespace GHelperLogic.IO
 		public static IFilePath DefaultFilePath { get ; } =
 			PathHelpers.ToAbsoluteFilePath(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileRelativePath + 
+				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileDirectoryName + 
 				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileName);
 
 		private static Stream GHubSettingsFile;
@@ -22,7 +22,7 @@ namespace GHelperLogic.IO
 		static GHubSettingsFileReader()
 		{
 			#if DEBUG
-				GHubSettingsFile = new MemoryStream(Properties.Resources.DummyGHUBSettings, false);
+				GHubSettingsFile = new MemoryStream(Properties.Resources.DummyGHUBSettings, true);
 			
 			#elif RELEASE
 				GHubSettingsFile = new FileStream(

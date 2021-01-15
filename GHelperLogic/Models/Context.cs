@@ -22,7 +22,7 @@ namespace GHelper.Models
 		public IPath? ApplicationFolder { get; set; }
 		
 		[JsonProperty("applicationId")]
-		public Guid ApplicationID { get; set; }
+		public Guid? ApplicationID { get; set; }
 		
 		[JsonConverter(typeof(PathJSONConverter))]
 		[JsonProperty("applicationPath")]
@@ -35,7 +35,7 @@ namespace GHelper.Models
 		public Collection<Object>? Commands { get; set; }
 		
 		[JsonProperty("databaseId")]
-		public Guid DatabaseID { get; set; }
+		public Guid? DatabaseID { get; set; }
 		
 		[JsonProperty("isInstalled")]
 		public Boolean? IsInstalled { get; set; }

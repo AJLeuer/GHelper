@@ -12,7 +12,7 @@ namespace GHelperLogic.Models
 	    public Context? Context { get; init; }
 	    
 	    [JsonProperty("activeForApplication")]
-	    public bool ActiveForApplication { get; set; }
+	    public bool? ActiveForApplication { get; set; }
 	    
 	    [JsonConverter(typeof(PathJSONConverter))]
 	    [JsonProperty("applicationFolder")]
