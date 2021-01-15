@@ -8,10 +8,10 @@ namespace GHelper.Utility
 {
 	public class GHubItemTemplateSelector : DataTemplateSelector
 	{
-		public DataTemplate ContextTemplate { get; set; }
-		public DataTemplate ProfileTemplate { get; set; }
+		public DataTemplate? ContextTemplate { get; set; }
+		public DataTemplate? ProfileTemplate { get; set; }
 
-		protected override DataTemplate SelectTemplateCore(object item)
+		protected override DataTemplate? SelectTemplateCore(object item)
 		{
 			if (item is Context)
 			{

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using GHelper.Models;
@@ -34,15 +33,14 @@ namespace GHelperLogic.IO
 			#endif
 		}
 
-
-		public Collection<Profile> ReadProfiles(Stream settingsFile = null)
+		public Collection<Profile> ReadProfiles(Stream? settingsFile = null)
 		{
 			settingsFile ??= GHubSettingsFile;
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
-			return null;
+			return null!;
 		}
 
-		public Collection<Context> ReadContexts(Stream settingsFile = null)
+		public Collection<Context> ReadContexts(Stream? settingsFile = null)
 		{
 			settingsFile ??= GHubSettingsFile;
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);

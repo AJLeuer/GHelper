@@ -1,24 +1,9 @@
 ﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Collections.ObjectModel;
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.ViewManagement;
+using GHelper.Models;
 using GHelper.View;
-using Microsoft.UI;
+using GHelperLogic.IO;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,6 +15,9 @@ namespace GHelper
     /// </summary>
     public partial class App : Application
     {
+	    private GHubSettingsFileReader gHubSettingsFileReader;
+	    private Window? window;
+	    
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -38,6 +26,7 @@ namespace GHelper
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.gHubSettingsFileReader = new GHubSettingsFileReader();
         }
 
         /// <summary>
@@ -45,10 +34,10 @@ namespace GHelper
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
-            m_window.Activate();
+	        window = new MainWindow(new ObservableCollection<Context>(gHubSettingsFileReader.ReadContexts()));
+            window.Activate();
         }
 
         /// <summary>
@@ -62,7 +51,5 @@ namespace GHelper
         {
             // Save application state and stop any background activity
         }
-
-        private Window m_window;
     }
 }

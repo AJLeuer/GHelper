@@ -15,7 +15,7 @@ namespace GHelper.Models
 	public class Context
 	{
 		[JsonIgnore]
-		public Collection<Profile> Profiles { get; init; }
+		public Collection<Profile>? Profiles { get; init; }
 
 		[JsonConverter(typeof(PathJSONConverter))]
 		[JsonProperty("applicationFolder")]
@@ -45,7 +45,7 @@ namespace GHelper.Models
 		public LocalDateTime? LastRunTime { get; set; }
 		
 		[JsonProperty("name")]
-		public String Name { get; set; }
+		public String? Name { get; set; }
 		
 		[JsonProperty("posterUrl")]
 		public Uri? PosterURL { get; set; }
