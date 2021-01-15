@@ -9,7 +9,7 @@ namespace GHelperLogic.Models
 	public class Profile
     {
 	    [JsonIgnore]
-	    public Context? Context { get; init; }
+	    public Context? Context { get; set; }
 	    
 	    [JsonProperty("activeForApplication")]
 	    public bool? ActiveForApplication { get; set; }
@@ -73,7 +73,7 @@ namespace GHelperLogic.Models
     public class Categorycolor
     {
 	    [JsonProperty("hex")]
-	    public byte? Hex { get; set; }
+	    public String? Hex { get; set; }
 	    
 	    [JsonProperty("tag")]
 	    public string? Tag { get; set; }

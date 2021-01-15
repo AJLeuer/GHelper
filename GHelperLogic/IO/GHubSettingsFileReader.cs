@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using GHelper.Models;
 using GHelperLogic.Models;
+using GHelperLogic.Utility;
 using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -33,20 +34,46 @@ namespace GHelperLogic.IO
 			#endif
 		}
 
-		public Collection<Profile> ReadProfiles(Stream? settingsFile = null)
+		public (Collection<Context> contexts, Collection<Profile> profiles) ReadData(Stream? settingsFile = null)
 		{
 			settingsFile ??= GHubSettingsFile;
-			JObject parsedSettingsFile = readSettingsFile(settingsFile);
-			return null!;
+			(Stream firstSettingsFileCopy, Stream secondSettingsFileCopy) = settingsFile.Duplicate();
+			Collection<Context> contexts = ReadContexts(firstSettingsFileCopy);
+			Collection<Profile> profiles = ReadProfiles(secondSettingsFileCopy);
+			associateProfilesToContexts(contexts, profiles);
+			return (contexts, profiles);
 		}
 
-		public Collection<Context> ReadContexts(Stream? settingsFile = null)
+		private static Collection<Profile> ReadProfiles(Stream settingsFile)
 		{
-			settingsFile ??= GHubSettingsFile;
+			JObject parsedSettingsFile = readSettingsFile(settingsFile);
+			JToken? profilesJSON = parsedSettingsFile["profiles"]?["profiles"];
+			Collection<Profile> profiles = JsonConvert.DeserializeObject<Collection<Profile>>(profilesJSON!.ToString());
+			return profiles;
+		}
+
+		private static Collection<Context> ReadContexts(Stream settingsFile)
+		{
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
 			JToken? contextsJSON = parsedSettingsFile["applications"]?["applications"];
 			Collection<Context> contexts = JsonConvert.DeserializeObject<Collection<Context>>(contextsJSON!.ToString());
 			return contexts;
+		}
+
+		private static void associateProfilesToContexts(Collection<Context> contexts, Collection<Profile> profiles)
+		{
+			foreach (Profile profile in profiles)
+			{
+				if (profile.ApplicationID != null)
+				{
+					Context? context = contexts.GetByID(profile.ApplicationID);
+					if (context != null)
+					{
+						profile.Context = context;
+						context.Profiles.Add(profile);
+					}
+				}
+			}
 		}
 
 		private static JObject readSettingsFile(Stream settingsFile)

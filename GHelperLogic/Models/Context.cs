@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GHelperLogic.Models;
 using GHelperLogic.Utility;
@@ -14,8 +15,13 @@ namespace GHelper.Models
 	/// </summary>
 	public class Context
 	{
+		[JsonIgnore] public Collection<Profile> Profiles { get; } = new Collection<Profile>();
+
 		[JsonIgnore]
-		public Collection<Profile>? Profiles { get; init; }
+		public Guid? ID
+		{
+			get => this.ApplicationID;
+		}
 
 		[JsonConverter(typeof(PathJSONConverter))]
 		[JsonProperty("applicationFolder")]
@@ -55,5 +61,22 @@ namespace GHelper.Models
 		
 		[JsonProperty("version")]
 		public UInt16? Version { get; set; }
+
 	}
+
+	public static class ContextExtensions
+	{
+		public static Context? GetByID(this IEnumerable<Context> contexts, Guid? id)
+		{
+			foreach (Context context in contexts)
+			{
+				if ((context.ID is { } contextID) && (contextID == id))
+				{
+					return context;
+				}
+			}
+
+			return null;
+		}
+	} 
 }
