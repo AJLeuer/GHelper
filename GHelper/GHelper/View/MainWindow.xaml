@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
     <SplitView PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
-           IsPaneOpen="True" OpenPaneLength="256" CompactPaneLength="48" DisplayMode="Inline">
+           IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
         <SplitView.Resources>
             
             <DataTemplate x:Key="ContextTemplate" x:DataType="models:Context">
@@ -37,9 +37,17 @@
             
         </SplitView.Resources>
         <SplitView.Pane>
-            <TreeView ItemsSource="{x:Bind Contexts}"  
-                      ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}">
-            </TreeView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="GHub Games" Margin="60,12,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                <TreeView Grid.Row="1"  Margin="14,8,0,24" ItemsSource="{x:Bind Contexts}"  
+                          ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}">
+                </TreeView>
+            </Grid>
         </SplitView.Pane>
 
         <Grid>
