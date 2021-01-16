@@ -1,0 +1,8 @@
+﻿<StackPanel Orientation="Horizontal"
+    x:Class="GHelper.ViewModel.ProfileView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <TextBlock Text="{x:Bind Profile.Name}" />
+    
+</StackPanel>

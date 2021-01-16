@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using GHelper.Models;
+using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 
 namespace GHelper.View

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using GHelperLogic.Models;
 using GHelperLogic.Utility;
 using NDepend.Path;
 using Newtonsoft.Json;
 using NodaTime;
 
-namespace GHelper.Models
+namespace GHelperLogic.Model
 {
 	/// <summary>
 	/// Represents the concept referred to as "Game" within the GHUB app, and as an "application"
@@ -35,7 +34,7 @@ namespace GHelper.Models
 		public IPath? ApplicationPath { get; set; }
 		
 		[JsonProperty("categoryColors")]
-		public Categorycolor[]? CategoryColors { get; set; }
+		public CategoryColor[]? CategoryColors { get; set; }
 		
 		[JsonProperty("commands")]
 		public Command[]? Commands { get; set; }
@@ -79,16 +78,5 @@ namespace GHelper.Models
 			return null;
 		}
 	} 
-	
-	public class Command
-	{
-		[JsonProperty("cardId")]
-		public Guid? CardID { get; set; }
-		
-		[JsonProperty("category")]
-		public string? Category { get; set; }
-		
-		[JsonProperty("name")]
-		public string? Name { get; set; }
-	}
+
 }

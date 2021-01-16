@@ -2,9 +2,9 @@
 using GHelperLogic.Utility;
 using Newtonsoft.Json;
 
-namespace GHelperLogic.Models
+namespace GHelperLogic.Model
 {
-	public class Categorycolor
+	public class CategoryColor
 	{
 		[JsonConverter(typeof(ColorJSONConverter))]
 		[JsonProperty("hex")]

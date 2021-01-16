@@ -4,16 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:GHelper.Models"
     xmlns:utility="using:GHelper.Utility"
-    xmlns:models1="using:GHelperLogic.Models"
+    xmlns:viewModel="using:GHelper.ViewModel"
+    xmlns:model="using:GHelperLogic.Model"
     mc:Ignorable="d">
 
     <SplitView PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
            IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
         <SplitView.Resources>
             
-            <DataTemplate x:Key="ContextTemplate" x:DataType="models:Context">
+            <DataTemplate x:Key="ContextTemplate" x:DataType="model:Context">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
                     <StackPanel Orientation="Horizontal">
                         <Image Width="20" Source="C:\Users\Adam\Pictures\Cyberpunk 2077\NightCitySmol.png"/>
@@ -22,11 +22,10 @@
                 </TreeViewItem>
             </DataTemplate>
             
-            <DataTemplate x:Key="ProfileTemplate" x:DataType="models1:Profile">
+            <DataTemplate x:Key="ProfileTemplate" x:DataType="model:Profile">
                 <TreeViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind Name}" />
-                    </StackPanel>              
+                    <viewModel:ProfileView Profile="{Binding}">
+                    </viewModel:ProfileView>
                 </TreeViewItem>
             </DataTemplate>
             

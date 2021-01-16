@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using GHelper.Models;
-using GHelperLogic.Models;
+using GHelperLogic.Model;
 using GHelperLogic.Utility;
 using NDepend.Path;
 using Newtonsoft.Json;

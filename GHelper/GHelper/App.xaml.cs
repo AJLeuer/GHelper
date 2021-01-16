@@ -1,9 +1,9 @@
 ﻿using Microsoft.UI.Xaml;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel;
-using GHelper.Models;
 using GHelper.View;
 using GHelperLogic.IO;
+using GHelperLogic.Model;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

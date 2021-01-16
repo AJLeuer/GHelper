@@ -1,10 +1,9 @@
 ﻿using System;
-using GHelper.Models;
 using GHelperLogic.Utility;
 using NDepend.Path;
 using Newtonsoft.Json;
 
-namespace GHelperLogic.Models
+namespace GHelperLogic.Model
 {
 	public class Profile
     {
@@ -29,7 +28,7 @@ namespace GHelperLogic.Models
 	    public Assignment[]? Assignments { get; set; }
 	    
 	    [JsonProperty("categoryColors")]
-	    public Categorycolor[]? CategoryColors { get; set; }
+	    public CategoryColor[]? CategoryColors { get; set; }
 	    
 	    [JsonProperty("commands")]
 	    public Command[]? Commands { get; set; }
@@ -70,17 +69,4 @@ namespace GHelperLogic.Models
 	    [JsonProperty("slotId")]
 	    public string? SlotID { get; set; }
     }
-
-    public class Command
-    {
-	    [JsonProperty("cardId")]
-	    public Guid? CardID { get; set; }
-	    
-	    [JsonProperty("category")]
-	    public string? Category { get; set; }
-	    
-	    [JsonProperty("name")]
-	    public string? Name { get; set; }
-    }
-
 }
