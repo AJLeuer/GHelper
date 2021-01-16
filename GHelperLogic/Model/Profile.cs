@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using GHelperLogic.Utility;
 using NDepend.Path;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GHelperLogic.Model
 {
@@ -59,6 +61,9 @@ namespace GHelperLogic.Model
 	    
 	    [JsonProperty("version")]
 	    public UInt16? Version { get; set; }
+	    
+	    [JsonExtensionData]
+	    public IDictionary<string, JToken>? AdditionalData { get; set; }
     }
 
     public class Assignment

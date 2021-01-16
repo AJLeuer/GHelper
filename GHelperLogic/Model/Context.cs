@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using GHelperLogic.Utility;
 using NDepend.Path;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NodaTime;
 
 namespace GHelperLogic.Model
@@ -60,7 +61,9 @@ namespace GHelperLogic.Model
 		
 		[JsonProperty("version")]
 		public UInt16? Version { get; set; }
-
+		
+		[JsonExtensionData]
+		public IDictionary<string, JToken>? AdditionalData { get; set; }
 	}
 
 	public static class ContextExtensions
