@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using GHelper.Models;
 using GHelperLogic.Utility;
 using NDepend.Path;
@@ -47,7 +48,7 @@ namespace GHelperLogic.Models
 	    public Guid? LightingCard { get; set; }
 	    
 	    [JsonProperty("name")]
-	    public String? Name { get; set; }
+	    public string? Name { get; set; }
 	    
 	    [JsonProperty("posterUrl")]
 	    public Uri? PosterURL { get; set; }
@@ -68,12 +69,13 @@ namespace GHelperLogic.Models
 	    public Guid? CardID { get; set; }
 	    
 	    [JsonProperty("slotId")]
-	    public String? SlotID { get; set; }
+	    public string? SlotID { get; set; }
     }
     public class Categorycolor
     {
+	    [JsonConverter(typeof(ColorJSONConverter))]
 	    [JsonProperty("hex")]
-	    public String? Hex { get; set; }
+	    public Color? Hex { get; set; }
 	    
 	    [JsonProperty("tag")]
 	    public string? Tag { get; set; }

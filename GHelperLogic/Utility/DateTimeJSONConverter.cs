@@ -21,7 +21,7 @@ namespace GHelperLogic.Utility
 			
 			return reader.Value != null 
 				? gHUBDateTimePattern.Parse(reader.Value.ToString()!).GetValueOrThrow() 
-				: throw new ArgumentException("Could not parse JSON for file path.");
+				: throw new ArgumentException("Could not parse JSON for timestamp.");
 		}
 	}
 }

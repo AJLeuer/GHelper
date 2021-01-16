@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using GHelper.Models;
 using GHelperLogic.IO;
 using GHelperLogic.Models;
@@ -36,6 +38,13 @@ namespace GHelperTest
 			Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
 			
 			Assert.AreEqual(3, contexts.Count);
+		}
+
+		[Test]
+		public static void ShouldDeserializeContextProperties()
+		{
+			Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
+			
 			Assert.AreEqual(
 				Guid.Parse("420fd454-0c36-499d-bde4-146823b16147"), 
 				contexts[1].ApplicationID);
@@ -47,9 +56,19 @@ namespace GHelperTest
 			Collection<Profile> profiles = settingsFileReader!.ReadData(TestSettingsFile).profiles;
 			
 			Assert.AreEqual(5, profiles.Count);
+		}
+
+		[Test]
+		public static void ShouldDeserializeProfileProperties()
+		{
+			Collection<Profile> profiles = settingsFileReader!.ReadData(TestSettingsFile).profiles;
+			
 			Assert.AreEqual(
 				"Horizon Zero Dawn Complete Edition", 
 				profiles[2].Name);
+			Assert.AreEqual(
+				Color.FromArgb(0x00, 0xFF, 0x40),
+				profiles[2].CategoryColors![1].Hex);
 		}
 		
 		[Test]

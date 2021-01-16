@@ -36,7 +36,7 @@ namespace GHelper
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-	        window = new MainWindow(new ObservableCollection<Context>(gHubSettingsFileReader.ReadData()));
+	        window = new MainWindow(new ObservableCollection<Context>(gHubSettingsFileReader.ReadData().contexts));
             window.Activate();
         }
 
