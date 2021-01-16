@@ -7,13 +7,13 @@ namespace GHelperLogic.Utility
 {
 	public class PathJSONConverter : JsonConverter<IPath>
 	{
-		public override void WriteJson(JsonWriter writer, IPath value, JsonSerializer serializer)
+		public override void WriteJson(JsonWriter writer, IPath? value, JsonSerializer serializer)
 		{
-			JToken pathJSON = value.ToString();
+			JToken pathJSON = value!.ToString();
 			pathJSON.WriteTo(writer);
 		}
 
-		public override IPath ReadJson(JsonReader reader, Type objectType, IPath existingValue, bool hasExistingValue, JsonSerializer serializer)
+		public override IPath ReadJson(JsonReader reader, Type objectType, IPath? existingValue, bool hasExistingValue, JsonSerializer serializer)
 		{
 			return reader.Value != null 
 				? PathHelpers.ToAbsoluteFilePath(reader.Value.ToString()) 
