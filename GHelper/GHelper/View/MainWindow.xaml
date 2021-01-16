@@ -15,17 +15,13 @@
             
             <DataTemplate x:Key="ContextTemplate" x:DataType="model:Context">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Width="20" Source="C:\Users\Adam\Pictures\Cyberpunk 2077\NightCitySmol.png"/>
-                        <TextBlock Text="{x:Bind Name}" />
-                    </StackPanel>              
+                    <viewModel:ContextView Context="{Binding}"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="model:Profile">
                 <TreeViewItem>
-                    <viewModel:ProfileView Profile="{Binding}">
-                    </viewModel:ProfileView>
+                    <viewModel:ProfileView Profile="{Binding}"/>
                 </TreeViewItem>
             </DataTemplate>
             

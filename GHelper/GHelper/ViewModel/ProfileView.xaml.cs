@@ -7,7 +7,7 @@ namespace GHelper.ViewModel
 	public partial class ProfileView : StackPanel 
     {
 	    public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register(
-		    nameof (Profile),
+		    nameof (ProfileView.Profile),
 		    typeof (Profile),
 		    typeof (ProfileView),
 		    new PropertyMetadata(null)
