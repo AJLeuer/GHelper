@@ -22,4 +22,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\GHelperLogic\GHelperLogic.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\ReadMe.md">
+      <Link>ReadMe.md</Link>
+    </Content>
+  </ItemGroup>
 </Project>
