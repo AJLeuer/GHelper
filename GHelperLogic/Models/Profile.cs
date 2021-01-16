@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using GHelper.Models;
 using GHelperLogic.Utility;
 using NDepend.Path;
@@ -70,15 +69,6 @@ namespace GHelperLogic.Models
 	    
 	    [JsonProperty("slotId")]
 	    public string? SlotID { get; set; }
-    }
-    public class Categorycolor
-    {
-	    [JsonConverter(typeof(ColorJSONConverter))]
-	    [JsonProperty("hex")]
-	    public Color? Hex { get; set; }
-	    
-	    [JsonProperty("tag")]
-	    public string? Tag { get; set; }
     }
 
     public class Command

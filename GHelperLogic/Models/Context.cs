@@ -35,10 +35,10 @@ namespace GHelper.Models
 		public IPath? ApplicationPath { get; set; }
 		
 		[JsonProperty("categoryColors")]
-		public Collection<Object>? CategoryColors { get; set; }
+		public Categorycolor[]? CategoryColors { get; set; }
 		
 		[JsonProperty("commands")]
-		public Collection<Object>? Commands { get; set; }
+		public Command[]? Commands { get; set; }
 		
 		[JsonProperty("databaseId")]
 		public Guid? DatabaseID { get; set; }
@@ -51,7 +51,7 @@ namespace GHelper.Models
 		public LocalDateTime? LastRunTime { get; set; }
 		
 		[JsonProperty("name")]
-		public String? Name { get; set; }
+		public string? Name { get; set; }
 		
 		[JsonProperty("posterUrl")]
 		public Uri? PosterURL { get; set; }
@@ -79,4 +79,16 @@ namespace GHelper.Models
 			return null;
 		}
 	} 
+	
+	public class Command
+	{
+		[JsonProperty("cardId")]
+		public Guid? CardID { get; set; }
+		
+		[JsonProperty("category")]
+		public string? Category { get; set; }
+		
+		[JsonProperty("name")]
+		public string? Name { get; set; }
+	}
 }
