@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 
@@ -6,16 +6,11 @@ namespace GHelper.View
 {
 	public sealed partial class MainWindow : Window
 	{
-		private ObservableCollection<Context> Contexts
-		{
-			get;
-		}
-	
+		public ObservableCollection<Context>? Contexts { get; set; }
 
-		public MainWindow(ObservableCollection<Context> contexts)
+		public MainWindow()
         {
             this.InitializeComponent();
-            this.Contexts = contexts;
         }
 	}
 }
