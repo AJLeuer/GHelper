@@ -17,6 +17,10 @@ namespace GHelperLogic.Utility.JSONConverter
 		{
 			serializer.Converters.Clear();
 			Context context = serializer.Deserialize<Context>(reader)!;
+			if (context.Name == DesktopContext.DesktopContextDefaultName)
+			{
+				context = new DesktopContext(context);
+			}
 			return context;
 		}
 	}

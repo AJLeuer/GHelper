@@ -15,12 +15,39 @@ namespace GHelperLogic.Model
 	/// </summary>
 	public class Context
 	{
-		[JsonIgnore] public Collection<Profile> Profiles { get; } = new Collection<Profile>();
+		public Context() { }
+
+		public Context(Context context)
+		{
+			Profiles = context.Profiles;
+			ApplicationFolder = context.ApplicationFolder;
+			ApplicationID = context.ApplicationID;
+			ApplicationPath = context.ApplicationPath;
+			CategoryColors = context.CategoryColors;
+			Commands = context.Commands;
+			DatabaseID = context.DatabaseID;
+			IsInstalled = context.IsInstalled;
+			LastRunTime = context.LastRunTime;
+			// ReSharper disable once VirtualMemberCallInConstructor
+			Name = context.Name;
+			PosterURL = context.PosterURL;
+			ProfileURL = context.ProfileURL;
+			Version = context.Version;
+			AdditionalData = context.AdditionalData;
+		}
+
+		[JsonIgnore] public Collection<Profile> Profiles { get; set; } = new Collection<Profile>();
 
 		[JsonIgnore]
 		public Guid? ID
 		{
 			get => this.ApplicationID;
+		}
+
+		[JsonIgnore]
+		public virtual string? DisplayName
+		{
+			get { return this.Name; }
 		}
 
 		[JsonConverter(typeof(PathJSONConverter))]
@@ -64,6 +91,19 @@ namespace GHelperLogic.Model
 		
 		[JsonExtensionData]
 		public IDictionary<string, JToken>? AdditionalData { get; set; }
+	}
+
+	public class DesktopContext : Context
+	{
+		public static readonly string DesktopContextDefaultName = "APPLICATION_NAME_DESKTOP";
+		public static readonly string DesktopContextFriendlyName = "Desktop";
+
+		public override string DisplayName { get { return DesktopContextFriendlyName; } }
+
+		public DesktopContext(Context desktopContext) :
+			base(desktopContext)
+		{
+		}
 	}
 
 	public static class ContextExtensions

@@ -6,6 +6,6 @@
             xmlns:utility="using:GHelper.View.Utility">
     
     <Image Width="64" utility:Margin.Right="16" Source="{x:Bind Poster.Source}"/>
-    <TextBlock Text="{x:Bind Context.Name}" VerticalAlignment="Center" />
+    <TextBlock Text="{x:Bind Context.DisplayName}" VerticalAlignment="Center" />
     
 </StackPanel>
