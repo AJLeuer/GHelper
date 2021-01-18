@@ -1,9 +1,11 @@
 ﻿<StackPanel Orientation="Horizontal"
+            Padding="12"
             x:Class="GHelper.ViewModel.ContextView"
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:utility="using:GHelper.View.Utility">
     
-    <Image Width="20" Source="{x:Bind Poster.Source}"/>
-    <TextBlock Text="{x:Bind Context.Name}" />
+    <Image Width="64" utility:Margin.Right="16" Source="{x:Bind Poster.Source}"/>
+    <TextBlock Text="{x:Bind Context.Name}" VerticalAlignment="Center" />
     
 </StackPanel>

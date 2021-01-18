@@ -9,7 +9,7 @@
     xmlns:model="using:GHelperLogic.Model"
     mc:Ignorable="d">
 
-    <SplitView PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
+    <SplitView PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"
            IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
         <SplitView.Resources>
             
@@ -38,8 +38,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="GHub Games" Margin="60,12,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                <TreeView Grid.Row="1"  Margin="14,8,0,24" ItemsSource="{x:Bind Contexts}"  
+                <TextBlock Grid.Row="0" Text="GHub Games" Margin="24,8,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                <TreeView Grid.Row="1" ItemsSource="{x:Bind Contexts}"  
                           ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}">
                 </TreeView>
             </Grid>
