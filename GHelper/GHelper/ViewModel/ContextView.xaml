@@ -3,8 +3,7 @@
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <Image Width="20" Source="C:\Users\Adam\Pictures\Cyberpunk 2077\NightCitySmol.png"/>
+    <Image Width="20" Source="{x:Bind Poster.Source}"/>
     <TextBlock Text="{x:Bind Context.Name}" />
-
     
 </StackPanel>
