@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using GHelperLogic.Model;
 using GHelperLogic.Utility;
+using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -55,7 +56,7 @@ namespace GHelperLogic.IO
 		{
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
 			JToken? contextsJSON = parsedSettingsFile["applications"]?["applications"];
-			Collection<Context> contexts = JsonConvert.DeserializeObject<Collection<Context>>(contextsJSON!.ToString());
+			Collection<Context> contexts = JsonConvert.DeserializeObject<Collection<Context>>(contextsJSON!.ToString(), new ContextJSONConverter())!;
 			return contexts;
 		}
 

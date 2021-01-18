@@ -1,10 +1,7 @@
-﻿using System.Drawing;
-using GHelperLogic.Model;
+﻿using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
-using static GHelper.Utility.Utility;
-using Color = System.Drawing.Color;
 
 namespace GHelper.ViewModel
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using GHelperLogic.Utility;
+using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using GHelperLogic.Utility;
+using GHelperLogic.Utility.JSONConverter;
 using Newtonsoft.Json;
 
 namespace GHelperLogic.Model

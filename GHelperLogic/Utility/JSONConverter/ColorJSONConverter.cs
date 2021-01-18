@@ -3,7 +3,7 @@ using System.Drawing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GHelperLogic.Utility
+namespace GHelperLogic.Utility.JSONConverter
 {
 	public class ColorJSONConverter : JsonConverter<Color>
 	{

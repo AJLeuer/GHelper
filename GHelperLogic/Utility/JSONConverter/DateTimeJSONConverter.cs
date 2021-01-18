@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using NodaTime;
 using NodaTime.Text;
 
-namespace GHelperLogic.Utility
+namespace GHelperLogic.Utility.JSONConverter
 {
 	public class DateTimeJSONConverter : JsonConverter<LocalDateTime>
 	{

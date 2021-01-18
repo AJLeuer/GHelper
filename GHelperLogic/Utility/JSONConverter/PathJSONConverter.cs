@@ -3,7 +3,7 @@ using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GHelperLogic.Utility
+namespace GHelperLogic.Utility.JSONConverter
 {
 	public class PathJSONConverter : JsonConverter<IPath>
 	{
