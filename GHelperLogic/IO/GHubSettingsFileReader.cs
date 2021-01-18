@@ -21,10 +21,10 @@ namespace GHelperLogic.IO
 		
 		static GHubSettingsFileReader()
 		{
-			#if DEBUG
+			#if DEBUG 
 				GHubSettingsFile = new MemoryStream(Properties.Resources.DummyGHUBSettings, true);
 			
-			#elif RELEASE
+			#elif RELEASE || DEBUGRELEASE
 				GHubSettingsFile = new FileStream(
 						DefaultFilePath.ToString()!,
 						FileMode.Open,

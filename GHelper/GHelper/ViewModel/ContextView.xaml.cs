@@ -17,8 +17,7 @@ namespace GHelper.ViewModel
 			new PropertyMetadata(null)
 		);
 
-		public static Image DefaultPosterImage { get ; }
-			= CreateSingleColorImage(Color.Chartreuse, new Size(1024, 1024)).Result;
+		public static Image DefaultPosterImage { get ; } = new ();
 
 		public Context Context
 		{

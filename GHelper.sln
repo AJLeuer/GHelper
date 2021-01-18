@@ -5,34 +5,44 @@ VisualStudioVersion = 16.0.30803.129
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "GHelper (Package)", "GHelper\GHelper (Package)\GHelper (Package).wapproj", "{29807E19-72A1-4757-9379-CBE17E70D50A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHelper", "GHelper\GHelper\GHelper.csproj", "{4A4E09CE-7600-4B22-8444-6D31B1000148}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHelper", "GHelper\GHelper\GHelper.csproj", "{4A4E09CE-7600-4B22-8444-6D31B1000148}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHelperTest", "GHelperTest\GHelperTest.csproj", "{6C637B2A-3FB6-452C-83DB-A310327078CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHelperTest", "GHelperTest\GHelperTest.csproj", "{6C637B2A-3FB6-452C-83DB-A310327078CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHelperLogic", "GHelperLogic\GHelperLogic.csproj", "{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHelperLogic", "GHelperLogic\GHelperLogic.csproj", "{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		DebugRelease|x64 = DebugRelease|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{29807E19-72A1-4757-9379-CBE17E70D50A}.Debug|x64.ActiveCfg = Debug|x64
 		{29807E19-72A1-4757-9379-CBE17E70D50A}.Debug|x64.Build.0 = Debug|x64
 		{29807E19-72A1-4757-9379-CBE17E70D50A}.Debug|x64.Deploy.0 = Debug|x64
+		{29807E19-72A1-4757-9379-CBE17E70D50A}.DebugRelease|x64.ActiveCfg = DebugRelease|x64
+		{29807E19-72A1-4757-9379-CBE17E70D50A}.DebugRelease|x64.Build.0 = DebugRelease|x64
+		{29807E19-72A1-4757-9379-CBE17E70D50A}.DebugRelease|x64.Deploy.0 = DebugRelease|x64
 		{29807E19-72A1-4757-9379-CBE17E70D50A}.Release|x64.ActiveCfg = Release|x64
 		{29807E19-72A1-4757-9379-CBE17E70D50A}.Release|x64.Build.0 = Release|x64
 		{29807E19-72A1-4757-9379-CBE17E70D50A}.Release|x64.Deploy.0 = Release|x64
 		{4A4E09CE-7600-4B22-8444-6D31B1000148}.Debug|x64.ActiveCfg = Debug|x64
 		{4A4E09CE-7600-4B22-8444-6D31B1000148}.Debug|x64.Build.0 = Debug|x64
+		{4A4E09CE-7600-4B22-8444-6D31B1000148}.DebugRelease|x64.ActiveCfg = DebugRelease|x64
+		{4A4E09CE-7600-4B22-8444-6D31B1000148}.DebugRelease|x64.Build.0 = DebugRelease|x64
 		{4A4E09CE-7600-4B22-8444-6D31B1000148}.Release|x64.ActiveCfg = Release|x64
 		{4A4E09CE-7600-4B22-8444-6D31B1000148}.Release|x64.Build.0 = Release|x64
 		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.DebugRelease|x64.ActiveCfg = DebugRelease|Any CPU
+		{6C637B2A-3FB6-452C-83DB-A310327078CC}.DebugRelease|x64.Build.0 = DebugRelease|Any CPU
 		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|x64.ActiveCfg = Release|Any CPU
 		{6C637B2A-3FB6-452C-83DB-A310327078CC}.Release|x64.Build.0 = Release|Any CPU
 		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Debug|x64.Build.0 = Debug|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.DebugRelease|x64.ActiveCfg = DebugRelease|Any CPU
+		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.DebugRelease|x64.Build.0 = DebugRelease|Any CPU
 		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x64.ActiveCfg = Release|Any CPU
 		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
