@@ -1,3 +1,5 @@
+##### Overview
+
 This project is an attempt to create a simple desktop app - with the working name of _GHelper_ -
 that can fill in some of the missing functionality of Logitech's G Hub application.
 
@@ -11,6 +13,16 @@ are not limited to:
 
 _Disclaimer: the developer of this software is not affiliated with Logitech International S.A._
 
+##### Building & Running
+
+Building the application will require the following:
+* A PC running Windows 10, version 1803 or later
+* Visual Studio 2019 Visual Studio 2019, version 16.9 Preview with requisite workloads for WinUI 3 detailed [here](https://docs.microsoft.com/en-us/windows/apps/winui/winui3/).
+
+When running from Visual Studio, if you don't have Logitech G Hub installed (or you just want to play it safe), set the solution configuration to **Debug**.
+This will load a dummy version of G Hub's JSON state file instead of the actual one on your file system.
+
+##### Logitech G Hub Notes
 
 (The following section is for notes and
 observations about things discovered in the process of attempting to 
