@@ -1,4 +1,5 @@
-﻿using GHelperLogic.Model;
+﻿using Windows.UI.Core;
+using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -54,6 +55,21 @@ namespace GHelper.ViewModel
 			if (Context?.PosterURL != null)
 			{
 				poster = new Image { Source = new BitmapImage(Context.PosterURL) };
+			}
+		}
+
+		private Visibility posterImageVisibility
+		{
+			get 
+			{
+				if (this.Poster == DefaultPosterImage)
+				{
+					return Visibility.Collapsed;
+				}
+				else
+				{
+					return Visibility.Visible;
+				}
 			}
 		}
 	}

@@ -5,7 +5,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:utility="using:GHelper.View.Utility">
     
-    <Image Width="64" utility:Margin.Right="16" Source="{x:Bind Poster.Source}"/>
+    <Image Width="64" utility:Margin.Right="16" Source="{x:Bind Poster.Source}"
+           Visibility="{x:Bind posterImageVisibility}"/>
     <TextBlock Text="{x:Bind Context.DisplayName}" VerticalAlignment="Center" />
     
 </StackPanel>
