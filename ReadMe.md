@@ -4,11 +4,15 @@ that can fill in some of the missing functionality of Logitech's G Hub applicati
 Some of the things that G Hub cannot currently do, but that I hope for G Helper to be able to do, include but
 are not limited to:
 * Deleting an application profile
+* Renaming a profile
 * Setting custom application and profile images
 * Providing a more clear and obvious way for the user to see which profile is currently active for a given application
 * Allowing the user to see (and possibly edit) application and profile metadata that is stored by G Hub behind the scenes but not exposed through G Hub's UI
 
-(For the time being, this ReadMe is being used mainly to store notes and
+_Disclaimer: the developer of this software is not affiliated with Logitech International S.A._
+
+
+(The following section is for notes and
 observations about things discovered in the process of attempting to 
 reverse-engineer GHub's behavior)
 
