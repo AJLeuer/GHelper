@@ -1,5 +1,4 @@
-﻿using Windows.UI.Core;
-using GHelperLogic.Model;
+﻿using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;

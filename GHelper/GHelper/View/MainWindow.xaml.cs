@@ -9,8 +9,8 @@ namespace GHelper.View
 		public ObservableCollection<Context>? Contexts { get; set; }
 
 		public MainWindow()
-        {
-            this.InitializeComponent();
-        }
+		{
+			this.InitializeComponent();
+		}
 	}
 }
