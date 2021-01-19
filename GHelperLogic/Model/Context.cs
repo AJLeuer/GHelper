@@ -36,7 +36,8 @@ namespace GHelperLogic.Model
 			AdditionalData = context.AdditionalData;
 		}
 
-		[JsonIgnore] public Collection<Profile> Profiles { get; set; } = new Collection<Profile>();
+		[JsonIgnore] 
+		public Collection<Profile> Profiles { get; } = new ();
 
 		[JsonIgnore]
 		public Guid? ID
@@ -98,6 +99,7 @@ namespace GHelperLogic.Model
 		public static readonly string DesktopContextDefaultName = "APPLICATION_NAME_DESKTOP";
 		public static readonly string DesktopContextFriendlyName = "Desktop";
 
+		[JsonIgnore]
 		public override string DisplayName { get { return DesktopContextFriendlyName; } }
 
 		public DesktopContext(Context desktopContext) :

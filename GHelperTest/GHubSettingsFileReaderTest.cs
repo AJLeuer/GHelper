@@ -49,6 +49,20 @@ namespace GHelperTest
 		}
 		
 		[Test]
+		public static void ShouldDeserializeDesktopContexts()
+		{
+			Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
+			
+			Assert.AreEqual(
+				typeof(DesktopContext), 
+				contexts[1].GetType());
+
+			Assert.AreNotEqual(
+				typeof(DesktopContext),
+				contexts[0].GetType());
+		}
+		
+		[Test]
 		public static void ShouldDeserializeAllProfiles()
 		{
 			Collection<Profile> profiles = settingsFileReader!.ReadData(TestSettingsFile).profiles;
@@ -67,6 +81,15 @@ namespace GHelperTest
 			Assert.AreEqual(
 				Color.FromArgb(0x00, 0xFF, 0x40),
 				profiles[2].CategoryColors![1].Hex);
+		}
+		
+		[Test]
+		public static void ShouldDeserializeDefaultProfiles()
+		{
+			Collection<Profile> profiles = settingsFileReader!.ReadData(TestSettingsFile).profiles;
+			
+			Assert.AreEqual(typeof(DefaultProfile), profiles[3].GetType());
+			Assert.AreNotEqual(typeof(DefaultProfile), profiles[1].GetType());
 		}
 		
 		[Test]

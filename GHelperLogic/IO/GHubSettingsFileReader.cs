@@ -18,7 +18,7 @@ namespace GHelperLogic.IO
 				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileDirectoryName + 
 				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileName);
 
-		private static Stream GHubSettingsFile;
+		private static readonly Stream GHubSettingsFile;
 		
 		static GHubSettingsFileReader()
 		{
@@ -48,7 +48,7 @@ namespace GHelperLogic.IO
 		{
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
 			JToken? profilesJSON = parsedSettingsFile["profiles"]?["profiles"];
-			Collection<Profile> profiles = JsonConvert.DeserializeObject<Collection<Profile>>(profilesJSON!.ToString());
+			Collection<Profile> profiles = JsonConvert.DeserializeObject<Collection<Profile>>(profilesJSON!.ToString(), new ProfileJSONConverter())!;
 			return profiles;
 		}
 
