@@ -6,6 +6,7 @@ using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NodaTime;
+using SixLabors.ImageSharp;
 
 namespace GHelperLogic.Model
 {
@@ -90,8 +91,20 @@ namespace GHelperLogic.Model
 		[JsonProperty("version")]
 		public UInt16? Version { get; set; }
 		
+		[JsonProperty("isCustom")]
+		public bool? IsCustom { get; set; }
+	    
+		[JsonConverter(typeof(PosterImageJSONConverter))]
+		[JsonProperty("poster")]
+		public Image? Poster { get; set; }
+		
 		[JsonExtensionData]
 		public IDictionary<string, JToken>? AdditionalData { get; set; }
+
+		public bool HasPoster()
+		{
+			return ((PosterURL != null) || (IsCustom == true));
+		}
 	}
 
 	public class DesktopContext : Context
