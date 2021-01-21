@@ -15,13 +15,13 @@
             
             <DataTemplate x:Key="ContextTemplate" x:DataType="model:Context">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
-                    <view:ContextView Context="{Binding}"/>
+                    <view:ContextView Context="{x:Bind}"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="model:Profile">
                 <TreeViewItem>
-                    <view:ProfileView Profile="{Binding}"/>
+                    <view:ProfileView Profile="{x:Bind}"/>
                 </TreeViewItem>
             </DataTemplate>
             
