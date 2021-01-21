@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 
-namespace GHelper.ViewModel
+namespace GHelper.View
 {
 	public partial class ContextView : StackPanel
 	{

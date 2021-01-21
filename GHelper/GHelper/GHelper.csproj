@@ -28,4 +28,8 @@
       <Link>ReadMe.md</Link>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModel" />
+  </ItemGroup>
 </Project>

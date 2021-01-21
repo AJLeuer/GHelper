@@ -3,7 +3,7 @@ using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace GHelper.Utility
+namespace GHelper.View.Utility
 {
 	public class GHubItemTemplateSelector : DataTemplateSelector
 	{

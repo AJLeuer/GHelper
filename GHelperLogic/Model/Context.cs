@@ -37,7 +37,7 @@ namespace GHelperLogic.Model
 		}
 
 		[JsonIgnore] 
-		public Collection<Profile> Profiles { get; } = new ();
+		public ObservableCollection<Profile> Profiles { get; } = new ();
 
 		[JsonIgnore]
 		public Guid? ID

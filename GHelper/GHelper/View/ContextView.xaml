@@ -1,6 +1,6 @@
 ﻿<StackPanel Orientation="Horizontal"
             Padding="12"
-            x:Class="GHelper.ViewModel.ContextView"
+            x:Class="GHelper.View.ContextView"
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:utility="using:GHelper.View.Utility">
