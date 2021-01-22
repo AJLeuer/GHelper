@@ -79,5 +79,15 @@ namespace GHelperTest.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TestImage {
+            get {
+                object obj = ResourceManager.GetObject("TestImage", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

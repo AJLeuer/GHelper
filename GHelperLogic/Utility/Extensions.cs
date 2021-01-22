@@ -2,7 +2,7 @@
 
 namespace GHelperLogic.Utility
 {
-	public static class StreamExtensions
+	public static class Extensions
 	{
 		public static (Stream, Stream) Duplicate(this Stream stream)
 		{

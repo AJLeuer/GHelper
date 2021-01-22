@@ -5,6 +5,9 @@ using System.IO;
 using System.Linq;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
+using GHelperLogic.Utility;
+using GHelperLogic.Utility.Wrappers;
+using Moq;
 using NUnit.Framework;
 using SixLabors.ImageSharp;
 using Color = System.Drawing.Color;
@@ -24,6 +27,8 @@ namespace GHelperTest
 			settingsFileReader = new GHubSettingsFileReader();
 			TestSettingsFile = 
 				new MemoryStream(Properties.Resources.ExampleGHUBSettings, false);
+			
+			TestHelpers.StubImageFileHTTPResponses();
 		}
 
 		[TearDown]
@@ -135,6 +140,20 @@ namespace GHelperTest
 				Assert.IsTrue(contexts[0].HasPoster);
 				Assert.IsTrue(contexts[0].IsCustom);
 				Assert.AreEqual(new Size(256),contexts[0].Poster.Size());
+			}
+		}
+
+		public static class TestHelpers
+		{
+			public static void StubImageFileHTTPResponses()
+			{
+				var stubPosterImageFile = new MemoryStream(Properties.Resources.TestImage);
+				var clientMock = new Mock<WebClientInterface> { CallBase = false };
+				clientMock.Setup(
+					(WebClientInterface webClient) =>
+						webClient.OpenRead(It.IsAny<Uri>())).Returns(stubPosterImageFile);
+				
+				IOHelper.Client = clientMock.Object;
 			}
 		}
 	}
