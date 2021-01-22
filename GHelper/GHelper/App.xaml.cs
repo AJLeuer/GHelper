@@ -15,7 +15,7 @@ namespace GHelper
 	public partial class App : Application
 	{
 		private readonly Reference<MainWindow> window = new Reference<MainWindow>();
-		private readonly ContextController ContextController;
+		private readonly ApplicationController applicationController;
 		
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -25,7 +25,7 @@ namespace GHelper
 		{
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
-			ContextController = new ContextController(window);
+			applicationController = new ApplicationController(window);
 		}
 
 		/// <summary>
@@ -36,7 +36,7 @@ namespace GHelper
 		protected override void OnLaunched(LaunchActivatedEventArgs args)
 		{
 			window.Referent = new MainWindow();
-			ContextController.Start();
+			applicationController.Start();
 			window.Referent!.Activate();
 		}
 

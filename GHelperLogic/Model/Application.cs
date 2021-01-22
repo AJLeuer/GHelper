@@ -13,29 +13,29 @@ namespace GHelperLogic.Model
 {
 	/// <summary>
 	/// Represents the concept referred to as "Game" within the GHUB app, and as an "application"
-	/// within its JSON configuration/state file. A single Context can be associated with one or more Profiles.
+	/// within its JSON configuration/state file. A single Application can be associated with one or more Profiles.
 	/// </summary>
-	public class Context
+	public class Application
 	{
-		public Context() { }
+		public Application() { }
 
-		public Context(Context context)
+		public Application(Application application)
 		{
-			Profiles = context.Profiles;
-			ApplicationFolder = context.ApplicationFolder;
-			ApplicationID = context.ApplicationID;
-			ApplicationPath = context.ApplicationPath;
-			CategoryColors = context.CategoryColors;
-			Commands = context.Commands;
-			DatabaseID = context.DatabaseID;
-			IsInstalled = context.IsInstalled;
-			LastRunTime = context.LastRunTime;
+			Profiles = application.Profiles;
+			ApplicationFolder = application.ApplicationFolder;
+			ApplicationID = application.ApplicationID;
+			ApplicationPath = application.ApplicationPath;
+			CategoryColors = application.CategoryColors;
+			Commands = application.Commands;
+			DatabaseID = application.DatabaseID;
+			IsInstalled = application.IsInstalled;
+			LastRunTime = application.LastRunTime;
 			// ReSharper disable once VirtualMemberCallInConstructor
-			Name = context.Name;
-			PosterURL = context.PosterURL;
-			ProfileURL = context.ProfileURL;
-			Version = context.Version;
-			AdditionalData = context.AdditionalData;
+			Name = application.Name;
+			PosterURL = application.PosterURL;
+			ProfileURL = application.ProfileURL;
+			Version = application.Version;
+			AdditionalData = application.AdditionalData;
 		}
 
 		[JsonConverter(typeof(PathJSONConverter))]
@@ -86,9 +86,9 @@ namespace GHelperLogic.Model
 		{
 			get
 			{
-				//If this is a context with a custom poster (and the poster bitmap was, therefore, serialized into the JSON)
+				//If this is a application with a custom poster (and the poster bitmap was, therefore, serialized into the JSON)
 				//... then it will have already been deserialized and stored into the 'poster' field
-				//However if this is not a custom context and it has a posterURL available
+				//However if this is not a custom application and it has a posterURL available
 				//... then on the first call to get Poster we initialize it by grabbing the image file from the URL
 				//So basically Poster is used to store poster images that can be retrieved in two very different ways.
 				
@@ -129,29 +129,29 @@ namespace GHelperLogic.Model
 		}
 	}
 
-	public class DesktopContext : Context
+	public class DesktopApplication : Application
 	{
-		public static readonly string DesktopContextDefaultName = "APPLICATION_NAME_DESKTOP";
-		public static readonly string DesktopContextFriendlyName = "Desktop";
+		public static readonly string DesktopApplicationDefaultName = "APPLICATION_NAME_DESKTOP";
+		public static readonly string DesktopApplicationFriendlyName = "Desktop";
 
 		[JsonIgnore]
-		public override string DisplayName { get { return DesktopContextFriendlyName; } }
+		public override string DisplayName { get { return DesktopApplicationFriendlyName; } }
 
-		public DesktopContext(Context desktopContext) :
-			base(desktopContext)
+		public DesktopApplication(Application desktopApplication) :
+			base(desktopApplication)
 		{
 		}
 	}
 
-	public static class ContextExtensions
+	public static class ApplicationExtensions
 	{
-		public static Context? GetByID(this IEnumerable<Context> contexts, Guid? id)
+		public static Application? GetByID(this IEnumerable<Application> applications, Guid? id)
 		{
-			foreach (Context context in contexts)
+			foreach (Application application in applications)
 			{
-				if ((context.ID is { } contextID) && (contextID == id))
+				if ((application.ID is { } applicationID) && (applicationID == id))
 				{
-					return context;
+					return application;
 				}
 			}
 

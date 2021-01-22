@@ -6,21 +6,21 @@ using GHelperLogic.Utility;
 
 namespace GHelper.Controller
 {
-	public class ContextController
+	public class ApplicationController
 	{
 		private readonly GHubSettingsFileReader gHubSettingsFileReader = new GHubSettingsFileReader();
-		private ObservableCollection<Context>? Contexts;
+		private ObservableCollection<Application>? Applications;
 		private readonly Reference<MainWindow> MainWindow;
 
-		public ContextController(Reference<MainWindow> mainWindow)
+		public ApplicationController(Reference<MainWindow> mainWindow)
 		{
 			MainWindow = mainWindow;
 		}
 
 		public void Start()
 		{
-			this.Contexts = new ObservableCollection<Context>(gHubSettingsFileReader.ReadData().contexts);
-			MainWindow.Referent!.Contexts = this.Contexts;
+			this.Applications = new ObservableCollection<Application>(gHubSettingsFileReader.ReadData().applications);
+			MainWindow.Referent!.Applications = this.Applications;
 		}
 	}
 }

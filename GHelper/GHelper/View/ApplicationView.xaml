@@ -1,12 +1,12 @@
 ﻿<StackPanel Orientation="Horizontal"
             Padding="12"
-            x:Class="GHelper.View.ContextView"
+            x:Class="GHelper.View.ApplicationView"
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:utility="using:GHelper.View.Utility">
     
     <Image Width="64" utility:Margin.Right="16" Source="{x:Bind Path=Poster.Source, Mode=OneWay}"
            Visibility="{x:Bind posterImageVisibility}"/>
-    <TextBlock Text="{x:Bind Context.DisplayName}" VerticalAlignment="Center" />
+    <TextBlock Text="{x:Bind Application.DisplayName}" VerticalAlignment="Center" />
     
 </StackPanel>

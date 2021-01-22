@@ -34,14 +34,14 @@ namespace GHelperLogic.IO
 			#endif
 		}
 
-		public (Collection<Context> contexts, Collection<Profile> profiles) ReadData(Stream? settingsFile = null)
+		public (Collection<Application> applications, Collection<Profile> profiles) ReadData(Stream? settingsFile = null)
 		{
 			settingsFile ??= GHubSettingsFile;
 			(Stream firstSettingsFileCopy, Stream secondSettingsFileCopy) = settingsFile.Duplicate();
-			Collection<Context> contexts = ReadContexts(firstSettingsFileCopy);
+			Collection<Application> applications = ReadApplications(firstSettingsFileCopy);
 			Collection<Profile> profiles = ReadProfiles(secondSettingsFileCopy);
-			associateProfilesToContexts(contexts, profiles);
-			return (contexts, profiles);
+			associateProfilesToApplications(applications, profiles);
+			return (applications, profiles);
 		}
 
 		private static Collection<Profile> ReadProfiles(Stream settingsFile)
@@ -52,25 +52,25 @@ namespace GHelperLogic.IO
 			return profiles;
 		}
 
-		private static Collection<Context> ReadContexts(Stream settingsFile)
+		private static Collection<Application> ReadApplications(Stream settingsFile)
 		{
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
-			JToken? contextsJSON = parsedSettingsFile["applications"]?["applications"];
-			Collection<Context> contexts = JsonConvert.DeserializeObject<Collection<Context>>(contextsJSON!.ToString(), new ContextJSONConverter())!;
-			return contexts;
+			JToken? applicationsJSON = parsedSettingsFile["applications"]?["applications"];
+			Collection<Application> applications = JsonConvert.DeserializeObject<Collection<Application>>(applicationsJSON!.ToString(), new ApplicationJSONConverter())!;
+			return applications;
 		}
 
-		private static void associateProfilesToContexts(Collection<Context> contexts, Collection<Profile> profiles)
+		private static void associateProfilesToApplications(Collection<Application> applications, Collection<Profile> profiles)
 		{
 			foreach (Profile profile in profiles)
 			{
 				if (profile.ApplicationID != null)
 				{
-					Context? context = contexts.GetByID(profile.ApplicationID);
-					if (context != null)
+					Application? application = applications.GetByID(profile.ApplicationID);
+					if (application != null)
 					{
-						profile.Context = context;
-						context.Profiles.Add(profile);
+						profile.Application = application;
+						application.Profiles.Add(profile);
 					}
 				}
 			}

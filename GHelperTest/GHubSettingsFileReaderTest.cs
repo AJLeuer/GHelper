@@ -37,35 +37,35 @@ namespace GHelperTest
 		}
 
 		[Test]
-		public static void ShouldDeserializeAllContexts()
+		public static void ShouldDeserializeAllApplications()
 		{
-			Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
+			Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
 			
-			Assert.AreEqual(3, contexts.Count);
+			Assert.AreEqual(3, applications.Count);
 		}
 
 		[Test]
-		public static void ShouldDeserializeContextProperties()
+		public static void ShouldDeserializeApplicationProperties()
 		{
-			Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
+			Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
 			
 			Assert.AreEqual(
 				Guid.Parse("420fd454-0c36-499d-bde4-146823b16147"), 
-				contexts[1].ApplicationID);
+				applications[1].ApplicationID);
 		}
 		
 		[Test]
-		public static void ShouldDeserializeDesktopContexts()
+		public static void ShouldDeserializeDesktopApplications()
 		{
-			Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
+			Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
 			
 			Assert.AreEqual(
-				typeof(DesktopContext), 
-				contexts[1].GetType());
+				typeof(DesktopApplication), 
+				applications[1].GetType());
 
 			Assert.AreNotEqual(
-				typeof(DesktopContext),
-				contexts[0].GetType());
+				typeof(DesktopApplication),
+				applications[0].GetType());
 		}
 		
 		[Test]
@@ -99,25 +99,25 @@ namespace GHelperTest
 		}
 		
 		[Test]
-		public static void ShouldMatchContextsWithProfiles()
+		public static void ShouldMatchApplicationsWithProfiles()
 		{
-			(Collection<Context> contexts, Collection<Profile> profiles) 
+			(Collection<Application> applications, Collection<Profile> profiles) 
 				= settingsFileReader!.ReadData(TestSettingsFile);
 
-			Context? bg3Context = contexts.FirstOrDefault((Context context) => context.Name == "Baldur's Gate 3");
+			Application? bg3Application = applications.FirstOrDefault((Application application) => application.Name == "Baldur's Gate 3");
 			IEnumerable<Profile> bg3Profiles 
-				= profiles.Where((Profile profile) => profile.Context?.Name == "Baldur's Gate 3");
+				= profiles.Where((Profile profile) => profile.Application?.Name == "Baldur's Gate 3");
 			
-			Assert.AreEqual(2, bg3Context!.Profiles.Count);
+			Assert.AreEqual(2, bg3Application!.Profiles.Count);
 			Assert.AreEqual(2, bg3Profiles.Count());
 		}
 		
 				
 		[TestFixture]
-		public static class CustomGameTests
+		public static class CustomApplicationTests
 		{
 			[SetUp]
-			public static void SetupCustomGameTests()
+			public static void SetupCustomApplicationTests()
 			{
 				settingsFileReader = new GHubSettingsFileReader();
 				TestSettingsFile = 
@@ -126,19 +126,19 @@ namespace GHelperTest
 			
 			
 			[TearDown]
-			public static void TearDownCustomGameTests()
+			public static void TearDownCustomApplicationTests()
 			{
 				TestSettingsFile.Close();
 			}
 
 			[Test]
-			public static void ShouldDeserializePosterDataOfCustomContexts()
+			public static void ShouldDeserializePosterDataOfCustomApplications()
 			{
-				Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
+				Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
 				
-				Assert.IsTrue(contexts[0].HasPoster);
-				Assert.IsTrue(contexts[0].IsCustom);
-				Assert.AreEqual(new Size(256),contexts[0].Poster.Size());
+				Assert.IsTrue(applications[0].HasPoster);
+				Assert.IsTrue(applications[0].IsCustom);
+				Assert.AreEqual(new Size(256),applications[0].Poster.Size());
 			}
 		}
 

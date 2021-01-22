@@ -13,7 +13,7 @@ namespace GHelperLogic.Model
 	    
 	    public Profile(Profile profile)
 	    {
-		    Context = profile.Context;
+		    Application = profile.Application;
 		    ActiveForApplication = profile.ActiveForApplication;
 		    ApplicationFolder = profile.ApplicationFolder;
 		    ApplicationID = profile.ApplicationID;
@@ -34,7 +34,7 @@ namespace GHelperLogic.Model
 	    }
 
 	    [JsonIgnore]
-	    public Context? Context { get; set; }
+	    public Application? Application { get; set; }
 	    
 	    [JsonIgnore]
 	    public virtual string? DisplayName

@@ -13,9 +13,9 @@
            IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
         <SplitView.Resources>
             
-            <DataTemplate x:Key="ContextTemplate" x:DataType="model:Context">
+            <DataTemplate x:Key="ApplicationTemplate" x:DataType="model:Application">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
-                    <view:ContextView Context="{x:Bind}"/>
+                    <view:ApplicationView Application="{x:Bind}"/>
                 </TreeViewItem>
             </DataTemplate>
             
@@ -27,7 +27,7 @@
             
             <utility:GHubItemTemplateSelector
                 x:Key="GHubItemTemplateSelector"
-                ContextTemplate="{StaticResource ContextTemplate}"
+                ApplicationTemplate="{StaticResource ApplicationTemplate}"
                 ProfileTemplate="{StaticResource ProfileTemplate}" />
             
         </SplitView.Resources>
@@ -39,7 +39,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="GHub Games" Margin="24,8,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                <TreeView Grid.Row="1" ItemsSource="{x:Bind Contexts}"  
+                <TreeView Grid.Row="1" ItemsSource="{x:Bind Applications}"  
                           ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}">
                 </TreeView>
             </Grid>

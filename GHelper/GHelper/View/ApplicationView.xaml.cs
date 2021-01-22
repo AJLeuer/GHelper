@@ -2,25 +2,26 @@
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Application = GHelperLogic.Model.Application;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.View
 {
-	public partial class ContextView : StackPanel
+	public partial class ApplicationView : StackPanel
 	{
-		public static readonly DependencyProperty ContextProperty = DependencyProperty.Register(
-			nameof (ContextView.Context),
-			typeof (Context),
-			typeof (ContextView),
+		public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
+			nameof (ApplicationView.Application),
+			typeof (Application),
+			typeof (ApplicationView),
 			new PropertyMetadata(null)
 		);
 
 		public static Image DefaultPosterImage { get ; } = new ();
 
-		public Context Context
+		public Application Application
 		{
-			get { return (Context) GetValue(ContextProperty); }
-			set { SetValue(ContextProperty, value); }
+			get { return (Application) GetValue(ApplicationProperty); }
+			set { SetValue(ApplicationProperty, value); }
 		}
 
 		public Image Poster
@@ -31,7 +32,7 @@ namespace GHelper.View
 				{
 					return poster;
 				}
-				else if (Context.HasPoster == false)
+				else if (Application.HasPoster == false)
 				{
 					return DefaultPosterImage;
 				}
@@ -45,16 +46,16 @@ namespace GHelper.View
 
 		private Image? poster = null;
 
-		public ContextView()
+		public ApplicationView()
 		{
 			this.InitializeComponent();
 		}
 
 		private void retrievePosterImage()
 		{
-			if (Context.Poster != null)
+			if (Application.Poster != null)
 			{
-				poster = new Image { Source = Context.Poster.ConvertToWindowsBitmapImage() };
+				poster = new Image { Source = Application.Poster.ConvertToWindowsBitmapImage() };
 			}
 		}
 
