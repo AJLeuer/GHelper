@@ -2,7 +2,6 @@
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Imaging;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.View
@@ -39,7 +38,7 @@ namespace GHelper.View
 				else
 				{
 					retrievePosterImage();
-					return poster!;
+					return poster ?? DefaultPosterImage;
 				}
 			}
 		}
@@ -53,13 +52,9 @@ namespace GHelper.View
 
 		private void retrievePosterImage()
 		{
-			if ((Context.IsCustom == true) && (Context.Poster != null))
+			if (Context.Poster != null)
 			{
 				poster = new Image { Source = Context.Poster.ConvertToWindowsBitmapImage() };
-			}
-			else if (Context.PosterURL != null)
-			{
-				poster = new Image { Source = new BitmapImage(Context.PosterURL) };
 			}
 		}
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using GHelperLogic.IO;
 using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;
@@ -93,7 +94,7 @@ namespace GHelperLogic.Model
 				
 				if ((poster == null) && (PosterURL != null))
 				{
-					poster = Utility.IOHelper.LoadFromURL(PosterURL);
+					poster = IOHelper.LoadFromURL(PosterURL);
 				}
 				return poster;
 			}

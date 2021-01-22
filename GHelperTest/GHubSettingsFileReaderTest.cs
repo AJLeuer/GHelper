@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
-using GHelperLogic.Utility;
 using GHelperLogic.Utility.Wrappers;
 using Moq;
 using NUnit.Framework;

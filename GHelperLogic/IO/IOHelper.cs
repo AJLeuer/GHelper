@@ -4,7 +4,7 @@ using System.Net;
 using GHelperLogic.Utility.Wrappers;
 using SixLabors.ImageSharp;
 
-namespace GHelperLogic.Utility
+namespace GHelperLogic.IO
 {
 	public static class IOHelper
 	{
@@ -12,7 +12,7 @@ namespace GHelperLogic.Utility
 
 		public static Image? LoadFromURL(Uri imageFileURL)
 		{
-			Image? image = null;
+			Image? image = default;
 
 			try
 			{
@@ -21,7 +21,7 @@ namespace GHelperLogic.Utility
 					image = Image.Load(imageFile);
 				}
 			}
-			catch (SystemException exception) { }
+			catch (SystemException) {}
 
 			return image;
 		}
