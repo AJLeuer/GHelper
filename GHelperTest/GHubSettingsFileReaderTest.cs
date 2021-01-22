@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
 using NUnit.Framework;
+using SixLabors.ImageSharp;
+using Color = System.Drawing.Color;
 
 namespace GHelperTest
 {
+	[TestFixture]
 	public static class GHubSettingsFileReaderTest
 	{
 		private static GHubSettingsFileReader? settingsFileReader;
@@ -104,6 +106,36 @@ namespace GHelperTest
 			
 			Assert.AreEqual(2, bg3Context!.Profiles.Count);
 			Assert.AreEqual(2, bg3Profiles.Count());
+		}
+		
+				
+		[TestFixture]
+		public static class CustomGameTests
+		{
+			[SetUp]
+			public static void SetupCustomGameTests()
+			{
+				settingsFileReader = new GHubSettingsFileReader();
+				TestSettingsFile = 
+					new MemoryStream(Properties.Resources.ExampleCustomGameGHUBSettings, false);
+			}
+			
+			
+			[TearDown]
+			public static void TearDownCustomGameTests()
+			{
+				TestSettingsFile.Close();
+			}
+
+			[Test]
+			public static void ShouldDeserializePosterDataOfCustomContexts()
+			{
+				Collection<Context> contexts = settingsFileReader!.ReadData(TestSettingsFile).contexts;
+				
+				Assert.IsTrue(contexts[0].HasPoster);
+				Assert.IsTrue(contexts[0].IsCustom);
+				Assert.AreEqual(new Size(256),contexts[0].Poster.Size());
+			}
 		}
 	}
 }

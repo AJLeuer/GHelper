@@ -37,21 +37,6 @@ namespace GHelperLogic.Model
 			AdditionalData = context.AdditionalData;
 		}
 
-		[JsonIgnore] 
-		public ObservableCollection<Profile> Profiles { get; } = new ();
-
-		[JsonIgnore]
-		public Guid? ID
-		{
-			get => this.ApplicationID;
-		}
-
-		[JsonIgnore]
-		public virtual string? DisplayName
-		{
-			get { return this.Name; }
-		}
-
 		[JsonConverter(typeof(PathJSONConverter))]
 		[JsonProperty("applicationFolder")]
 		public IPath? ApplicationFolder { get; set; }
@@ -101,9 +86,25 @@ namespace GHelperLogic.Model
 		[JsonExtensionData]
 		public IDictionary<string, JToken>? AdditionalData { get; set; }
 
-		public bool HasPoster()
+		[JsonIgnore] 
+		public ObservableCollection<Profile> Profiles { get; } = new ();
+
+		[JsonIgnore]
+		public Guid? ID
 		{
-			return ((PosterURL != null) || (IsCustom == true));
+			get => this.ApplicationID;
+		}
+
+		[JsonIgnore]
+		public virtual string? DisplayName
+		{
+			get { return this.Name; }
+		}
+		
+		[JsonIgnore]
+		public bool HasPoster
+		{
+			get { return ((PosterURL != null) || (IsCustom == true)); }
 		}
 	}
 

@@ -32,7 +32,7 @@ namespace GHelper.View
 				{
 					return poster;
 				}
-				else if (Context.HasPoster() == false)
+				else if (Context.HasPoster == false)
 				{
 					return DefaultPosterImage;
 				}
