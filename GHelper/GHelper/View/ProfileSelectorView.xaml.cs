@@ -4,12 +4,12 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace GHelper.View
 {
-	public partial class ProfileView : StackPanel 
+	public partial class ProfileSelectorView : StackPanel 
     {
 	    public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register(
-		    nameof (ProfileView.Profile),
+		    nameof (ProfileSelectorView.Profile),
 		    typeof (Profile),
-		    typeof (ProfileView),
+		    typeof (ProfileSelectorView),
 		    new PropertyMetadata(null)
 	    );
 	    
@@ -19,7 +19,7 @@ namespace GHelper.View
 		    set { SetValue(ProfileProperty, value); }
 	    }
 
-	    public ProfileView()
+	    public ProfileSelectorView()
 	    {
 		    InitializeComponent();
 	    }

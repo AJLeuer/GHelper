@@ -1,5 +1,4 @@
 ﻿using GHelper.Utility;
-using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Application = GHelperLogic.Model.Application;
@@ -7,12 +6,12 @@ using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.View
 {
-	public partial class ApplicationView : StackPanel
+	public partial class ApplicationSelectorView : StackPanel
 	{
 		public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
-			nameof (ApplicationView.Application),
+			nameof (ApplicationSelectorView.Application),
 			typeof (Application),
-			typeof (ApplicationView),
+			typeof (ApplicationSelectorView),
 			new PropertyMetadata(null)
 		);
 
@@ -46,7 +45,7 @@ namespace GHelper.View
 
 		private Image? poster = null;
 
-		public ApplicationView()
+		public ApplicationSelectorView()
 		{
 			this.InitializeComponent();
 		}

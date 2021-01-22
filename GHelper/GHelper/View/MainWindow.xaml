@@ -15,13 +15,13 @@
             
             <DataTemplate x:Key="ApplicationTemplate" x:DataType="model:Application">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
-                    <view:ApplicationView Application="{x:Bind}"/>
+                    <view:ApplicationSelectorView Application="{x:Bind}"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="model:Profile">
                 <TreeViewItem>
-                    <view:ProfileView Profile="{x:Bind}"/>
+                    <view:ProfileSelectorView Profile="{x:Bind}"/>
                 </TreeViewItem>
             </DataTemplate>
             
@@ -31,6 +31,7 @@
                 ProfileTemplate="{StaticResource ProfileTemplate}" />
             
         </SplitView.Resources>
+        
         <SplitView.Pane>
             <Grid>
                 <Grid.RowDefinitions>
@@ -44,15 +45,8 @@
                 </TreeView>
             </Grid>
         </SplitView.Pane>
-
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Margin="12,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
-            <TextBlock Grid.Row="1" Margin="12,12,0,0" Style="{StaticResource BodyTextBlockStyle}" />
-        </Grid>
+        
+        <ContentControl Content="{x:Bind ContentControlView}"></ContentControl>
         
     </SplitView>
 </Window>
