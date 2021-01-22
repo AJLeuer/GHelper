@@ -1,12 +1,15 @@
-﻿using GHelper.Utility;
+﻿using System;
+using GHelper.Utility;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
+using WinRT;
 using Application = GHelperLogic.Model.Application;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.View
 {
-	public partial class ApplicationSelectorView : StackPanel
+	public partial class ApplicationSelectorView : StackPanel, SelectableItem
 	{
 		public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
 			nameof (ApplicationSelectorView.Application),
@@ -45,9 +48,12 @@ namespace GHelper.View
 
 		private Image? poster = null;
 
+		public event EventHandler? Selected;
+
 		public ApplicationSelectorView()
 		{
 			this.InitializeComponent();
+			this.PointerReleased += new PointerEventHandler(HandleSelected);
 		}
 
 		private void retrievePosterImage()
@@ -71,6 +77,11 @@ namespace GHelper.View
 					return Visibility.Visible;
 				}
 			}
+		}
+		
+		public void HandleSelected(object sender, PointerRoutedEventArgs e)
+		{
+			Selected?.Invoke(sender, e.As<EventArgs>());
 		}
 	}
 }

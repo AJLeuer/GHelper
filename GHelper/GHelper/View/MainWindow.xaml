@@ -46,7 +46,7 @@
             </Grid>
         </SplitView.Pane>
         
-        <ContentControl Content="{x:Bind ContentControlView}"></ContentControl>
+        <ContentControl x:Name="GHubDataDisplay"></ContentControl>
         
     </SplitView>
 </Window>
