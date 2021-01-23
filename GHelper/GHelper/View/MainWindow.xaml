@@ -40,8 +40,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="GHub Games" Margin="24,8,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                <TreeView Grid.Row="1" ItemsSource="{x:Bind Applications}"  
-                          ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}">
+                <TreeView Grid.Row="1" 
+                          ItemsSource="{x:Bind Applications}"  
+                          ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}"
+                          SelectionChanged="SendNotificationsThatSelectedGHubRecordChanged">
                 </TreeView>
             </Grid>
         </SplitView.Pane>

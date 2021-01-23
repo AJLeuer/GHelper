@@ -2,11 +2,10 @@
 using GHelper.Utility;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using Application = GHelperLogic.Model.Application;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
-namespace GHelper.View
+namespace GHelper.View 
 {
 	public partial class ApplicationSelectorView : StackPanel, SelectableItem
 	{
@@ -52,8 +51,6 @@ namespace GHelper.View
 		public ApplicationSelectorView()
 		{
 			this.InitializeComponent();
-			this.PointerReleased += (sender, e) => HandleSelected(sender, e);
-			this.Tapped += (sender, e) => HandleSelected(sender, e);
 		}
 
 		private void retrievePosterImage()
@@ -78,15 +75,10 @@ namespace GHelper.View
 				}
 			}
 		}
-
-		public void HandleSelected(object sender, PointerRoutedEventArgs eventInfo)
+		
+		public void NotifySelected(object? sender, EventArgs eventInfo)
 		{
-			Selected?.Invoke(sender, new EventArgs());
-		}
-
-		public void HandleSelected( object sender, TappedRoutedEventArgs eventInfo)
-		{
-			Selected?.Invoke(sender, new EventArgs());
+			this.Selected?.Invoke(sender, eventInfo);
 		}
 	}
 }
