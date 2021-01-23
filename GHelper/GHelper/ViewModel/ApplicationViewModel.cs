@@ -51,8 +51,6 @@ namespace GHelper.ViewModel
 
 		public string? DisplayName => Application.DisplayName;
 
-		public event GHubRecordSelectedEvent? GHubRecordSelected;
-
 		public ApplicationViewModel(Application application)
 		{
 			this.Application = application;

@@ -4,12 +4,10 @@
     x:Class="GHelper.View.ProfileView">
     
     <StackPanel Orientation="Vertical">
-        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
+        <TextBlock Text="{x:Bind Profile.DisplayName, Mode=OneWay}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Profile.Profile.ApplicationID, Mode=OneWay}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Profile.Profile.ActiveForApplication.ToString(), Mode=OneWay}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Profile.Profile.PosterURL, Mode=TwoWay}" HorizontalAlignment="Center"/>
     </StackPanel>
     
 </UserControl>

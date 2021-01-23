@@ -43,7 +43,7 @@
                 <TreeView Grid.Row="1" 
                           ItemsSource="{x:Bind Applications}"  
                           ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}"
-                          SelectionChanged="SendNotificationsThatSelectedGHubRecordChanged">
+                          SelectionChanged="HandleSelectedGHubRecordChanged">
                 </TreeView>
             </Grid>
         </SplitView.Pane>

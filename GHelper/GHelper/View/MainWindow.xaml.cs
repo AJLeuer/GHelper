@@ -22,30 +22,32 @@ namespace GHelper.View
 
 		private void ApplicationSelected(ApplicationViewModel application)
 		{
+			application.NotifySelected();
 			GHubDataDisplay.Content = ApplicationView;
 		}
 
 		private void ProfileSelected(ProfileViewModel profile)
 		{
+			profile.NotifySelected();
+			ProfileView.Profile = profile;
 			GHubDataDisplay.Content = ProfileView;
 		}
 
-		private void SendNotificationsThatSelectedGHubRecordChanged(TreeView sender, TreeViewSelectionChangedEventArgs info)
+		private void HandleSelectedGHubRecordChanged(TreeView sender, TreeViewSelectionChangedEventArgs info)
 		{
 			object? selectedItem = sender.SelectedItem;
 			
-			switch (selectedItem)
+			if (selectedItem is GHubRecordViewModel gHubRecord)
 			{
-				case ApplicationViewModel application:
-					//somehow get the viewmodel, which has to notify its ApplicationSelectorView that it was selected
-					//todo remove below line:
-					ApplicationSelected(application);
-					break;
-				case ProfileViewModel profile:
-					//somehow get the viewmodel, which has to notify its ProfileSelectorView that it was selected
-					//todo remove below line:
-					ProfileSelected(profile);
-					break;
+				switch (gHubRecord)
+				{
+					case ApplicationViewModel application:
+						ApplicationSelected(application);
+						break;
+					case ProfileViewModel profile:
+						ProfileSelected(profile);
+						break;
+				}	
 			}
 		}
 	}

@@ -8,8 +8,6 @@ namespace GHelper.ViewModel
 		
 		public string? DisplayName => Profile.DisplayName;
 
-		public event GHubRecordSelectedEvent? GHubRecordSelected;
-
 		public ProfileViewModel(Profile profile)
 		{
 			this.Profile = profile;

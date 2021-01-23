@@ -1,8 +1,13 @@
 ﻿namespace GHelper.ViewModel
 {
-	public interface GHubRecordViewModel
+	public abstract class GHubRecordViewModel
 	{
 		event GHubRecordSelectedEvent? GHubRecordSelected;
+
+		public void NotifySelected()
+		{
+			GHubRecordSelected?.Invoke(this);
+		}
 	}
 	
 	public delegate void GHubRecordSelectedEvent(GHubRecordViewModel viewModel);
