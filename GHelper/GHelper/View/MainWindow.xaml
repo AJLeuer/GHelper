@@ -46,13 +46,7 @@
             </Grid>
         </SplitView.Pane>
         
-        <ContentControl x:Name="GHubDataDisplay">
-            <ContentControl.Resources>
-                <view:ApplicationView x:Name="ApplicationView"/>
-                <view:ProfileView x:Name="ProfileView"/>
-            </ContentControl.Resources>
-
-        </ContentControl>
+        <ContentControl x:Name="GHubDataDisplay"/>
         
     </SplitView>
 </Window>

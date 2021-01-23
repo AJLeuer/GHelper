@@ -3,7 +3,6 @@ using GHelper.Utility;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using WinRT;
 using Application = GHelperLogic.Model.Application;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 

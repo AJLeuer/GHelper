@@ -4,13 +4,12 @@
     x:Class="GHelper.View.ProfileView">
     
     <StackPanel Orientation="Vertical">
-        <TextBlock>The is a profile</TextBlock>
-        <TextBlock>The is a profile</TextBlock>
-        <TextBlock>The is a profile</TextBlock>
-        <TextBlock>The is a profile</TextBlock>
-        <TextBlock>The is a profile</TextBlock>
-        <TextBlock>The is a profile</TextBlock>
-        <TextBlock>The is a profile</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is a profile</TextBlock>
     </StackPanel>
     
 </UserControl>

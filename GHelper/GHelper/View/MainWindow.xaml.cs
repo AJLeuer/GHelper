@@ -12,6 +12,9 @@ namespace GHelper.View
 
 		public GHubRecord? CurrentDisplayedItem { get; private set; } = null;
 
+		private ApplicationView ApplicationView { get; set; } = new();
+		private ProfileView ProfileView { get; set; } = new();
+
 		public MainWindow()
 		{
 			this.InitializeComponent();

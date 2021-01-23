@@ -5,12 +5,12 @@
     
     
     <StackPanel Orientation="Vertical">
-        <TextBlock>The is an application</TextBlock>
-        <TextBlock>The is an application</TextBlock>
-        <TextBlock>The is an application</TextBlock>
-        <TextBlock>The is an application</TextBlock>
-        <TextBlock>The is an application</TextBlock>
-        <TextBlock>The is an application</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
+        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
     </StackPanel>
     
 </UserControl>
