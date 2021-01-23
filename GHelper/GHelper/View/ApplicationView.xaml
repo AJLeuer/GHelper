@@ -5,12 +5,10 @@
     
     
     <StackPanel Orientation="Vertical">
-        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
-        <TextBlock HorizontalAlignment="Center">This is an application</TextBlock>
+        <TextBlock Text="{x:Bind Application.DisplayName, Mode=TwoWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Application.Application.ApplicationID, Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Application.Application.PosterURL, Mode=TwoWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Application.Application.LastRunTime.ToString(), Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
     </StackPanel>
     
 </UserControl>

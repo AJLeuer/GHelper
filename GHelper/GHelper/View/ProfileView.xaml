@@ -4,10 +4,10 @@
     x:Class="GHelper.View.ProfileView">
     
     <StackPanel Orientation="Vertical">
-        <TextBlock Text="{x:Bind Profile.DisplayName, Mode=OneWay}" HorizontalAlignment="Center"/>
-        <TextBlock Text="{x:Bind Profile.Profile.ApplicationID, Mode=OneWay}" HorizontalAlignment="Center"/>
-        <TextBlock Text="{x:Bind Profile.Profile.ActiveForApplication.ToString(), Mode=OneWay}" HorizontalAlignment="Center"/>
-        <TextBlock Text="{x:Bind Profile.Profile.PosterURL, Mode=TwoWay}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Profile.DisplayName, Mode=TwoWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Profile.Profile.ApplicationID, Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Profile.Profile.ActiveForApplication.ToString(), Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Profile.Profile.PosterURL, Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
     </StackPanel>
     
 </UserControl>

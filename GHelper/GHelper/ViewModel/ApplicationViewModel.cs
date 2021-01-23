@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GHelper.Utility;
@@ -49,7 +50,11 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public string? DisplayName => Application.DisplayName;
+		public string? DisplayName
+		{
+			get => Application.DisplayName;
+			set => Application.Name = value;
+		}
 
 		public ApplicationViewModel(Application application)
 		{

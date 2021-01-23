@@ -6,7 +6,11 @@ namespace GHelper.ViewModel
 	{
 		public Profile Profile { get; set; }
 		
-		public string? DisplayName => Profile.DisplayName;
+		public string? DisplayName
+		{
+			get => Profile.DisplayName;
+			set => Profile.Name = value;
+		}
 
 		public ProfileViewModel(Profile profile)
 		{

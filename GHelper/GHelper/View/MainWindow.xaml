@@ -14,14 +14,14 @@
         <SplitView.Resources>
             
             <DataTemplate x:Key="ApplicationTemplate" x:DataType="viewModel:ApplicationViewModel">
-                <TreeViewItem ItemsSource="{x:Bind Profiles}">
-                    <view:ApplicationSelectorView Application="{x:Bind}"/>
+                <TreeViewItem ItemsSource="{x:Bind Path=Profiles, Mode=OneWay}">
+                    <view:ApplicationSelectorView Application="{x:Bind Mode=OneWay}"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="viewModel:ProfileViewModel">
                 <TreeViewItem>
-                    <view:ProfileSelectorView Profile="{x:Bind}" />
+                    <view:ProfileSelectorView Profile="{x:Bind Mode=OneWay}" />
                 </TreeViewItem>
             </DataTemplate>
             
@@ -41,14 +41,14 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="GHub Games" Margin="24,8,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                 <TreeView Grid.Row="1" 
-                          ItemsSource="{x:Bind Applications}"  
+                          ItemsSource="{x:Bind Path=Applications, Mode=OneWay}"  
                           ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}"
                           SelectionChanged="HandleSelectedGHubRecordChanged">
                 </TreeView>
             </Grid>
         </SplitView.Pane>
         
-        <ContentControl x:Name="GHubDataDisplay"/>
+        <ContentControl x:Name="GHubDataDisplay" HorizontalAlignment="Center"/>
         
     </SplitView>
 </Window>

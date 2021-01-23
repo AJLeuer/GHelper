@@ -23,6 +23,7 @@ namespace GHelper.View
 		private void ApplicationSelected(ApplicationViewModel application)
 		{
 			application.NotifySelected();
+			ApplicationView.Application = application;
 			GHubDataDisplay.Content = ApplicationView;
 		}
 
@@ -50,5 +51,7 @@ namespace GHelper.View
 				}	
 			}
 		}
+		
+		
 	}
 }
