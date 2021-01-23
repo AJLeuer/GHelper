@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using GHelper.ViewModel;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -9,7 +10,7 @@ namespace GHelper.View
 {
 	public sealed partial class MainWindow : Window
 	{
-		public ObservableCollection<Application>? Applications { get; set; }
+		public ObservableCollection<ApplicationViewModel>? Applications { get; set; }
 
 		public GHubRecord? CurrentDisplayedItem { get; private set; } = null;
 

@@ -4,22 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="using:GHelperLogic.Model"
     xmlns:view="using:GHelper.View"
     xmlns:utility="using:GHelper.View.Utility"
+    xmlns:viewModel="using:GHelper.ViewModel"
     mc:Ignorable="d">
 
     <SplitView PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"
            IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
         <SplitView.Resources>
             
-            <DataTemplate x:Key="ApplicationTemplate" x:DataType="model:Application">
+            <DataTemplate x:Key="ApplicationTemplate" x:DataType="viewModel:ApplicationViewModel">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
                     <view:ApplicationSelectorView Application="{x:Bind}" Selected="ApplicationSelected"/>
                 </TreeViewItem>
             </DataTemplate>
             
-            <DataTemplate x:Key="ProfileTemplate" x:DataType="model:Profile">
+            <DataTemplate x:Key="ProfileTemplate" x:DataType="viewModel:ProfileViewModel">
                 <TreeViewItem>
                     <view:ProfileSelectorView Profile="{x:Bind}" Selected="ProfileSelected"/>
                 </TreeViewItem>

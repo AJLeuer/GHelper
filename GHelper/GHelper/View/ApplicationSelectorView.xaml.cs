@@ -1,8 +1,7 @@
 ﻿using System;
-using GHelper.Utility;
+using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Application = GHelperLogic.Model.Application;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.View 
@@ -11,40 +10,22 @@ namespace GHelper.View
 	{
 		public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
 			nameof (ApplicationSelectorView.Application),
-			typeof (Application),
+			typeof (ApplicationViewModel),
 			typeof (ApplicationSelectorView),
 			new PropertyMetadata(null)
 		);
-
-		public static Image DefaultPosterImage { get ; } = new ();
-
-		public Application Application
+		
+		public ApplicationViewModel Application
 		{
-			get { return (Application) GetValue(ApplicationProperty); }
+			get { return (ApplicationViewModel) GetValue(ApplicationProperty); }
 			set { SetValue(ApplicationProperty, value); }
 		}
 
 		public Image Poster
 		{
-			get
-			{
-				if (poster != null)
-				{
-					return poster;
-				}
-				else if (Application.HasPoster == false)
-				{
-					return DefaultPosterImage;
-				}
-				else
-				{
-					retrievePosterImage();
-					return poster ?? DefaultPosterImage;
-				}
-			}
+			get { return Application.Poster; }
 		}
 
-		private Image? poster = null;
 
 		public event EventHandler? Selected;
 
@@ -53,19 +34,12 @@ namespace GHelper.View
 			this.InitializeComponent();
 		}
 
-		private void retrievePosterImage()
-		{
-			if (Application.Poster != null)
-			{
-				poster = new Image { Source = Application.Poster.ConvertToWindowsBitmapImage() };
-			}
-		}
 
 		private Visibility posterImageVisibility
 		{
 			get 
 			{
-				if (this.Poster == DefaultPosterImage)
+				if (this.Poster == ApplicationViewModel.DefaultPosterImage)
 				{
 					return Visibility.Collapsed;
 				}

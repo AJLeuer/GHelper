@@ -1,8 +1,7 @@
 ﻿using System;
-using GHelperLogic.Model;
+using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Application = GHelperLogic.Model.Application;
 
 namespace GHelper.View.Utility
 {
@@ -13,11 +12,11 @@ namespace GHelper.View.Utility
 
 		protected override DataTemplate? SelectTemplateCore(object item)
 		{
-			if (item is Application)
+			if (item is ApplicationViewModel)
 			{
 				return ApplicationTemplate;
 			}
-			else if (item is Profile)
+			else if (item is ProfileViewModel)
 			{
 				return ProfileTemplate;
 			}

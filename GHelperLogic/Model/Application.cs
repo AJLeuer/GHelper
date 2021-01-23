@@ -108,7 +108,7 @@ namespace GHelperLogic.Model
 		public IDictionary<string, JToken>? AdditionalData { get; set; }
 
 		[JsonIgnore] 
-		public ObservableCollection<Profile> Profiles { get; } = new ();
+		public Collection<Profile> Profiles { get; } = new ();
 
 		[JsonIgnore]
 		public Guid? ID

@@ -1,5 +1,5 @@
 ﻿using System;
-using GHelperLogic.Model;
+using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -10,16 +10,16 @@ namespace GHelper.View
 
 	    public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register(
 		    nameof (ProfileSelectorView.Profile),
-		    typeof (Profile),
+		    typeof (ProfileViewModel),
 		    typeof (ProfileSelectorView),
 		    new PropertyMetadata(null)
 	    );
 
 	    public event EventHandler? Selected;
 	    
-	    public Profile Profile
+	    public ProfileViewModel Profile
 	    {
-		    get { return (Profile) GetValue(ProfileProperty); }
+		    get { return (ProfileViewModel) GetValue(ProfileProperty); }
 		    set { SetValue(ProfileProperty, value); }
 	    }
 
