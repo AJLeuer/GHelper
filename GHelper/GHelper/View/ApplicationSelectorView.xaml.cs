@@ -1,12 +1,11 @@
-﻿using System;
-using GHelper.ViewModel;
+﻿using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.View 
 {
-	public partial class ApplicationSelectorView : StackPanel, SelectableItem
+	public partial class ApplicationSelectorView : StackPanel
 	{
 		public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
 			nameof (ApplicationSelectorView.Application),
@@ -25,9 +24,6 @@ namespace GHelper.View
 		{
 			get { return Application.Poster; }
 		}
-
-
-		public event EventHandler? Selected;
 
 		public ApplicationSelectorView()
 		{
@@ -48,11 +44,6 @@ namespace GHelper.View
 					return Visibility.Visible;
 				}
 			}
-		}
-		
-		public void NotifySelected(object? sender, EventArgs eventInfo)
-		{
-			this.Selected?.Invoke(sender, eventInfo);
 		}
 	}
 }

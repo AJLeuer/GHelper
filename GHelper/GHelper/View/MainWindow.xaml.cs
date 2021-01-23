@@ -1,10 +1,8 @@
-using System;
 using System.Collections.ObjectModel;
 using GHelper.ViewModel;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Application = GHelperLogic.Model.Application;
 
 namespace GHelper.View
 {
@@ -22,12 +20,12 @@ namespace GHelper.View
 			this.InitializeComponent();
 		}
 
-		private void ApplicationSelected(object? sender, EventArgs eventInfo)
+		private void ApplicationSelected(ApplicationViewModel application)
 		{
 			GHubDataDisplay.Content = ApplicationView;
 		}
 
-		private void ProfileSelected(object? sender, EventArgs eventInfo)
+		private void ProfileSelected(ProfileViewModel profile)
 		{
 			GHubDataDisplay.Content = ProfileView;
 		}
@@ -38,15 +36,15 @@ namespace GHelper.View
 			
 			switch (selectedItem)
 			{
-				case Application application:
+				case ApplicationViewModel application:
 					//somehow get the viewmodel, which has to notify its ApplicationSelectorView that it was selected
 					//todo remove below line:
-					ApplicationSelected(application, new EventArgs());
+					ApplicationSelected(application);
 					break;
-				case Profile profile:
+				case ProfileViewModel profile:
 					//somehow get the viewmodel, which has to notify its ProfileSelectorView that it was selected
 					//todo remove below line:
-					ProfileSelected(profile, new EventArgs());
+					ProfileSelected(profile);
 					break;
 			}
 		}

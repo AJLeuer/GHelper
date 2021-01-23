@@ -15,13 +15,13 @@
             
             <DataTemplate x:Key="ApplicationTemplate" x:DataType="viewModel:ApplicationViewModel">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
-                    <view:ApplicationSelectorView Application="{x:Bind}" Selected="ApplicationSelected"/>
+                    <view:ApplicationSelectorView Application="{x:Bind}"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="viewModel:ProfileViewModel">
                 <TreeViewItem>
-                    <view:ProfileSelectorView Profile="{x:Bind}" Selected="ProfileSelected"/>
+                    <view:ProfileSelectorView Profile="{x:Bind}" />
                 </TreeViewItem>
             </DataTemplate>
             

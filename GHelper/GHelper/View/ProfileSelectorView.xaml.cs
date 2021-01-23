@@ -1,11 +1,10 @@
-﻿using System;
-using GHelper.ViewModel;
+﻿using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 namespace GHelper.View
 {
-	public partial class ProfileSelectorView : StackPanel, SelectableItem 
+	public partial class ProfileSelectorView : StackPanel
     {
 
 	    public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register(
@@ -14,8 +13,6 @@ namespace GHelper.View
 		    typeof (ProfileSelectorView),
 		    new PropertyMetadata(null)
 	    );
-
-	    public event EventHandler? Selected;
 	    
 	    public ProfileViewModel Profile
 	    {
@@ -27,10 +24,6 @@ namespace GHelper.View
 	    {
 		    InitializeComponent();
 	    }
-
-	    public void NotifySelected(object? sender, EventArgs eventInfo)
-	    {
-		    this.Selected?.Invoke(sender, eventInfo);
-	    }
+	    
     }
 }

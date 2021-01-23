@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GHelper.Utility;
 using GHelperLogic.Model;
@@ -7,7 +7,7 @@ using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.ViewModel
 {
-	public class ApplicationViewModel
+	public class ApplicationViewModel : GHubRecordViewModel
 	{
 		public static Image DefaultPosterImage { get ; } = new ();
 
@@ -50,6 +50,8 @@ namespace GHelper.ViewModel
 		}
 
 		public string? DisplayName => Application.DisplayName;
+
+		public event GHubRecordSelectedEvent? GHubRecordSelected;
 
 		public ApplicationViewModel(Application application)
 		{

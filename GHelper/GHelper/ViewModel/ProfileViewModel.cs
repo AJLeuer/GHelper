@@ -2,11 +2,13 @@
 
 namespace GHelper.ViewModel
 {
-	public class ProfileViewModel
+	public class ProfileViewModel : GHubRecordViewModel
 	{
 		public Profile Profile { get; set; }
 		
 		public string? DisplayName => Profile.DisplayName;
+
+		public event GHubRecordSelectedEvent? GHubRecordSelected;
 
 		public ProfileViewModel(Profile profile)
 		{
