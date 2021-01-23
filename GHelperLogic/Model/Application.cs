@@ -15,7 +15,7 @@ namespace GHelperLogic.Model
 	/// Represents the concept referred to as "Game" within the GHUB app, and as an "application"
 	/// within its JSON configuration/state file. A single Application can be associated with one or more Profiles.
 	/// </summary>
-	public class Application
+	public class Application : GHubRecord
 	{
 		public Application() { }
 

@@ -7,7 +7,7 @@ using WinRT;
 
 namespace GHelper.View
 {
-	public abstract partial class ProfileSelectorView : StackPanel, SelectableItem 
+	public partial class ProfileSelectorView : StackPanel, SelectableItem 
     {
 
 	    public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register(
@@ -25,15 +25,20 @@ namespace GHelper.View
 		    set { SetValue(ProfileProperty, value); }
 	    }
 
-	    protected ProfileSelectorView()
+	    public ProfileSelectorView()
 	    {
 		    InitializeComponent();
-		    this.PointerReleased += new PointerEventHandler(HandleSelected);
+		    this.PointerReleased += (sender, e) => HandleSelected(sender, e);
 	    }
 	    
-	    public void HandleSelected(object sender, PointerRoutedEventArgs e)
+	    public void HandleSelected( object sender, PointerRoutedEventArgs eventInfo)
 	    {
-		    Selected?.Invoke(sender, e.As<EventArgs>());
+		    Selected?.Invoke(sender, new EventArgs());
+	    }
+
+	    public void HandleSelected( object sender, TappedRoutedEventArgs eventInfo)
+	    {
+		    Selected?.Invoke(sender, new EventArgs());
 	    }
     }
 }

@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GHelperLogic.Model
 {
-	public class Profile 
+	public class Profile : GHubRecord
     {
 	    public Profile() {}
 	    

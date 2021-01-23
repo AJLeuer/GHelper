@@ -53,7 +53,8 @@ namespace GHelper.View
 		public ApplicationSelectorView()
 		{
 			this.InitializeComponent();
-			this.PointerReleased += new PointerEventHandler(HandleSelected);
+			this.PointerReleased += (sender, e) => HandleSelected(sender, e);
+			this.Tapped += (sender, e) => HandleSelected(sender, e);
 		}
 
 		private void retrievePosterImage()
@@ -78,10 +79,15 @@ namespace GHelper.View
 				}
 			}
 		}
-		
-		public void HandleSelected(object sender, PointerRoutedEventArgs e)
+
+		public void HandleSelected(object sender, PointerRoutedEventArgs eventInfo)
 		{
-			Selected?.Invoke(sender, e.As<EventArgs>());
+			Selected?.Invoke(sender, new EventArgs());
+		}
+
+		public void HandleSelected( object sender, TappedRoutedEventArgs eventInfo)
+		{
+			Selected?.Invoke(sender, new EventArgs());
 		}
 	}
 }

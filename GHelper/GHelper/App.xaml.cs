@@ -1,6 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Windows.ApplicationModel;
-using GHelper.Controller;
+using GHelper.Service;
 using GHelper.View;
 using GHelperLogic.Utility;
 
@@ -15,7 +15,7 @@ namespace GHelper
 	public partial class App : Application
 	{
 		private readonly Reference<MainWindow> window = new Reference<MainWindow>();
-		private readonly ApplicationController applicationController;
+		private readonly ApplicationService applicationService;
 		
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -25,7 +25,7 @@ namespace GHelper
 		{
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
-			applicationController = new ApplicationController(window);
+			applicationService = new ApplicationService(window);
 		}
 
 		/// <summary>
@@ -36,7 +36,7 @@ namespace GHelper
 		protected override void OnLaunched(LaunchActivatedEventArgs args)
 		{
 			window.Referent = new MainWindow();
-			applicationController.Start();
+			applicationService.Start();
 			window.Referent!.Activate();
 		}
 

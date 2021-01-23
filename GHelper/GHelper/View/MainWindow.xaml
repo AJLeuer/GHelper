@@ -15,13 +15,13 @@
             
             <DataTemplate x:Key="ApplicationTemplate" x:DataType="model:Application">
                 <TreeViewItem ItemsSource="{x:Bind Profiles}">
-                    <view:ApplicationSelectorView Application="{x:Bind}"/>
+                    <view:ApplicationSelectorView Application="{x:Bind}" Selected="ApplicationSelected"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="model:Profile">
                 <TreeViewItem>
-                    <view:ProfileSelectorView Profile="{x:Bind}"/>
+                    <view:ProfileSelectorView Profile="{x:Bind}" Selected="ProfileSelected"/>
                 </TreeViewItem>
             </DataTemplate>
             
@@ -46,7 +46,13 @@
             </Grid>
         </SplitView.Pane>
         
-        <ContentControl x:Name="GHubDataDisplay"></ContentControl>
+        <ContentControl x:Name="GHubDataDisplay">
+            <ContentControl.Resources>
+                <view:ApplicationView x:Name="ApplicationView"/>
+                <view:ProfileView x:Name="ProfileView"/>
+            </ContentControl.Resources>
+
+        </ContentControl>
         
     </SplitView>
 </Window>

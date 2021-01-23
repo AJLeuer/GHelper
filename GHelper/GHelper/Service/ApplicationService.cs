@@ -4,22 +4,23 @@ using GHelperLogic.IO;
 using GHelperLogic.Model;
 using GHelperLogic.Utility;
 
-namespace GHelper.Controller
+namespace GHelper.Service
 {
-	public class ApplicationController
+	public class ApplicationService
 	{
 		private readonly GHubSettingsFileReader gHubSettingsFileReader = new GHubSettingsFileReader();
 		private ObservableCollection<Application>? Applications;
 		private readonly Reference<MainWindow> MainWindow;
 
-		public ApplicationController(Reference<MainWindow> mainWindow)
+		public ApplicationService(Reference<MainWindow> mainWindow)
 		{
 			MainWindow = mainWindow;
 		}
 
 		public void Start()
 		{
-			this.Applications = new ObservableCollection<Application>(gHubSettingsFileReader.ReadData().applications);
+			Collection<Application> applications = gHubSettingsFileReader.ReadData().applications;
+			this.Applications = new ObservableCollection<Application>(applications);
 			MainWindow.Referent!.Applications = this.Applications;
 		}
 	}
