@@ -31,7 +31,7 @@ namespace GHelper.View
 		}
 
 
-		private Visibility posterImageVisibility
+		public Visibility PosterImageVisibility
 		{
 			get 
 			{

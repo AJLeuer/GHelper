@@ -5,9 +5,9 @@
     
     
     <StackPanel Orientation="Vertical">
-        <TextBlock Text="{x:Bind Application.DisplayName, Mode=TwoWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Application.DisplayName, Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
         <TextBlock Text="{x:Bind Application.Application.ApplicationID, Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
-        <TextBlock Text="{x:Bind Application.Application.PosterURL, Mode=TwoWay, FallbackValue=''}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{x:Bind Application.Application.PosterURL, Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
         <TextBlock Text="{x:Bind Application.Application.LastRunTime.ToString(), Mode=OneWay, FallbackValue=''}" HorizontalAlignment="Center"/>
     </StackPanel>
     

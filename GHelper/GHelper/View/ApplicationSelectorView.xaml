@@ -5,8 +5,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:utility="using:GHelper.View.Utility">
     
-    <Image Width="64" utility:Margin.Right="16" Source="{x:Bind Path=Poster.Source, Mode=OneWay}"
-           Visibility="{x:Bind posterImageVisibility}"/>
-    <TextBlock Text="{x:Bind Application.DisplayName}" VerticalAlignment="Center" />
+    <Image Width="64" utility:Margin.Right="16" 
+           Source="{x:Bind Path=Poster.Source, Mode=OneWay}" Visibility="{x:Bind Path=PosterImageVisibility, Mode=OneWay}"/>
+    <TextBlock Text="{x:Bind Path=Application.DisplayName, Mode=OneWay}" VerticalAlignment="Center" />
     
 </StackPanel>
