@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using NDepend.Path;
 
 namespace GHelperLogic.Utility
 {
@@ -17,6 +18,12 @@ namespace GHelperLogic.Utility
 			secondCopy.Position = 0;
 			
 			return (firstCopy, secondCopy);
+		}
+
+		public static void CreateContainingDirectoryIfNeeded(this IFilePath filePath)
+		{
+			var file = new FileInfo(filePath.ToString()!);
+			file.Directory?.Create();
 		}
 	}
 }

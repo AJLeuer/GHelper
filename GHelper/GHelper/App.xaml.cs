@@ -23,6 +23,8 @@ namespace GHelper
 		/// </summary>
 		public App()
 		{
+			LogManager.Start();
+			LogManager.Log("Initializing GHelper application.");
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
 			applicationService = new ApplicationService(window);
@@ -35,6 +37,7 @@ namespace GHelper
 		/// <param name="args">Details about the launch request and process.</param>
 		protected override void OnLaunched(LaunchActivatedEventArgs args)
 		{
+			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow();
 			applicationService.Start();
 			window.Referent!.Activate();
@@ -50,6 +53,8 @@ namespace GHelper
 		private void OnSuspending(object sender, SuspendingEventArgs e)
 		{
 			// Save application state and stop any background activity
+			LogManager.Log("Suspending GHelper application.");
+			LogManager.Stop();
 		}
 	}
 }

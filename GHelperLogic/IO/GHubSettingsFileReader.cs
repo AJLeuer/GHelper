@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using GHelperLogic.Model;
 using GHelperLogic.Utility;
 using GHelperLogic.Utility.JSONConverter;
-using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,12 +10,6 @@ namespace GHelperLogic.IO
 {
 	public class GHubSettingsFileReader
 	{
-		public static IFilePath DefaultFilePath { get ; } =
-			PathHelpers.ToAbsoluteFilePath(
-				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileDirectoryName + 
-				Path.DirectorySeparatorChar + Properties.Resources.GHubConfigFileName);
-
 		private static readonly Stream GHubSettingsFile;
 		
 		static GHubSettingsFileReader()
@@ -27,7 +19,7 @@ namespace GHelperLogic.IO
 			
 			#elif RELEASE || DEBUGRELEASE
 				GHubSettingsFile = new FileStream(
-						DefaultFilePath.ToString()!,
+						Properties.Configuration.DefaultFilePath.ToString()!,
 						FileMode.Open,
 						FileAccess.ReadWrite);
 

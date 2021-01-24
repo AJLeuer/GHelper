@@ -130,4 +130,10 @@
   <data name="DummyGHUBSettings_backup" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>DummyGHUBSettings.backup.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="GHelperAppDataDirectoryName" xml:space="preserve">
+    <value>GHelper</value>
+  </data>
+  <data name="GHelperLogFileName" xml:space="preserve">
+    <value>Log.log</value>
+  </data>
 </root>
