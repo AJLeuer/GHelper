@@ -1,14 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using GHelper.Annotations;
 using GHelper.Utility;
 using GHelperLogic.Model;
+using Microsoft.UI.Xaml.Media;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 
 namespace GHelper.ViewModel
 {
-	public class ApplicationViewModel : GHubRecordViewModel
+	public class ApplicationViewModel : GHubRecordViewModel, INotifyPropertyChanged
 	{
 		public static Image DefaultPosterImage { get ; } = new ();
 
@@ -26,11 +29,21 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public Application Application { get ; set ; }
-		
-		private Image? poster = null;
+		private Application? application;
 
-		public Image Poster 
+		public Application? Application
+		{
+			get => application;
+			set
+			{
+				application = value;
+				OnPropertyChanged(nameof(Application));
+			}
+		}
+
+		private Image? poster;
+
+		public Image Poster
 		{
 			get
 			{
@@ -38,7 +51,7 @@ namespace GHelper.ViewModel
 				{
 					return poster;
 				}
-				else if (Application.HasPoster == false)
+				else if (Application?.HasPoster == false)
 				{
 					return DefaultPosterImage;
 				}
@@ -52,9 +65,10 @@ namespace GHelper.ViewModel
 
 		public string? DisplayName
 		{
-			get => Application.DisplayName;
-			set => Application.Name = value;
+			get => Application?.DisplayName;
 		}
+
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public ApplicationViewModel(Application application)
 		{
@@ -64,17 +78,20 @@ namespace GHelper.ViewModel
 		private void createProfileViewModelsFromApplicationProfiles()
 		{
 			profiles = new ObservableCollection<ProfileViewModel>();
-			
-			foreach (Profile profile in Application.Profiles)
+
+			if (Application?.Profiles != null)
 			{
-				var profileViewModel = new ProfileViewModel(profile);
-				profiles.Add(profileViewModel);
+				foreach (Profile profile in Application.Profiles)
+				{
+					var profileViewModel = new ProfileViewModel(profile);
+					profiles.Add(profileViewModel);
+				}
 			}
 		}
 		
 		private void retrievePosterImage()
 		{
-			if (Application.Poster != null)
+			if (Application?.Poster != null)
 			{
 				poster = new Image { Source = Application.Poster.ConvertToWindowsBitmapImage() };
 			}
@@ -91,6 +108,13 @@ namespace GHelper.ViewModel
 			}
 
 			return applicationViewModels;
+		}
+
+
+		[NotifyPropertyChangedInvocator]
+		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }
