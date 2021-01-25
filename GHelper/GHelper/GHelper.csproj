@@ -25,8 +25,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\..\Licenses\Windows Community Toolkit License.md">
+      <Link>Licenses\Windows Community Toolkit License.md</Link>
+    </Content>
     <Content Include="..\..\ReadMe.md">
       <Link>ReadMe.md</Link>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Libraries" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Libraries\HeaderedContentControl.xaml" />
   </ItemGroup>
 </Project>

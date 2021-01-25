@@ -3,11 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="GHelper.View.ProfileView">
     
-    <StackPanel Orientation="Vertical">
-        <TextBlock Text="{x:Bind Profile.DisplayName,                             Mode=OneWay, FallbackValue=''}"/>
-        <TextBlock Text="{x:Bind Profile.Profile.ApplicationID,                   Mode=OneWay, FallbackValue=''}"/>
-        <TextBlock Text="{x:Bind Profile.Profile.ActiveForApplication.ToString(), Mode=OneWay, FallbackValue=''}"/>
-        <TextBlock Text="{x:Bind Profile.Profile.PosterURL,                       Mode=OneWay, FallbackValue=''}"/>
+    <StackPanel Orientation="Vertical" Spacing="24">
+        <ToggleSwitch Header="Currently Active"    OffContent="Inactive" OnContent="Active" IsOn="{x:Bind Profile.ActiveForApplication, Mode=TwoWay}" Style="{StaticResource StandardToggleSwitch}"/>
+        <TextBox      Header="Name"                Text="{x:Bind Profile.DisplayName,       Mode=OneWay, FallbackValue=''}"                           Style="{StaticResource ResourceKey=StandardTextBox}"/>
+        <TextBox      Header="Profile ID"          Text="{x:Bind Profile.Profile.ID,        Mode=OneWay, FallbackValue=''}"                           Style="{StaticResource ResourceKey=ImmutableMonoSpacedTextBox}"/>
+        <TextBox      Header="Poster Image Source" Text="{x:Bind Profile.Profile.PosterURL, Mode=OneWay, FallbackValue=''}"                           Style="{StaticResource ResourceKey=ImmutableMonoSpacedTextBox}"/>
     </StackPanel>
     
 </UserControl>

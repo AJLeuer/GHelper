@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using GHelper.Annotations;
 using GHelper.Utility;
 using GHelperLogic.Model;
-using Microsoft.UI.Xaml.Media;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 

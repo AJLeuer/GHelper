@@ -9,6 +9,38 @@
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+            <Style TargetType="ToggleSwitch" x:Key="StandardToggleSwitch">
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Foreground="Gray"  Text="{Binding}"></TextBlock>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="TextBox" x:Key="StandardTextBox">
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Foreground="Gray"  Text="{Binding}"></TextBlock>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="TextBox" x:Key="ImmutableTextBox" BasedOn="{StaticResource StandardTextBox}">
+                <Setter Property="IsReadOnly"      Value="True"/>
+                <Setter Property="BorderThickness" Value="0" />
+            </Style>
+            <Style TargetType="TextBox" x:Key="ImmutableMonoSpacedTextBox" BasedOn="{StaticResource ImmutableTextBox}">
+                <Setter Property="FontFamily" Value="Courier New"/>
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Foreground="Gray" FontFamily="Segoe UI" Text="{Binding}"></TextBlock>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

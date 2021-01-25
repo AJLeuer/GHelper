@@ -24,6 +24,19 @@ namespace GHelper.ViewModel
 			get => Profile?.DisplayName;
 		}
 
+		public bool ActiveForApplication
+		{
+			get { return Profile?.ActiveForApplication ?? false; }
+			set
+			{
+				if (Profile != null)
+				{
+					Profile.ActiveForApplication = value;
+				}
+				OnPropertyChanged(nameof(ActiveForApplication));
+			}
+		}
+
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public ProfileViewModel(Profile profile)
