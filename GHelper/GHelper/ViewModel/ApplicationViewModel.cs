@@ -67,6 +67,25 @@ namespace GHelper.ViewModel
 			get => Application?.DisplayName;
 		}
 
+		public string InstallState 
+		{
+			get
+			{
+				if (Application is DesktopApplication)
+				{
+					return "Installed";
+				}
+				if ((Application == null) || (Application.IsInstalled == null) || (Application.IsInstalled == false))
+				{
+					return "Not Installed";
+				}
+				else
+				{
+					return "Installed";
+				}
+			}
+		}
+
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		public ApplicationViewModel(Application application)
