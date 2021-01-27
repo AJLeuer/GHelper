@@ -4,17 +4,16 @@
     x:Class="GHelper.View.RecordViewControls">
     
     <StackPanel>
-        <Button Background="Red">
+        <Button>
             <Button.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>
                         <ResourceDictionary x:Key="Default">
-                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBackgroundPointerOver">
-                                <GradientStop Color="#bfd5407a" Offset="0.0"/>
-                                <GradientStop Color="DarkMagenta" Offset="1.0"/>
-                            </LinearGradientBrush>
-                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="DarkMagenta"/>
-
+                            <SolidColorBrush Color="#d50051" x:Key="ButtonBackground"/>
+                            
+                            <SolidColorBrush Color="#ff0061" x:Key="ButtonBackgroundPointerOver"/>
+                            
+                            <SolidColorBrush Color="#98003a" x:Key="ButtonBackgroundPressed"/>
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
