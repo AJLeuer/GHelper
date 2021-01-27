@@ -12,14 +12,5 @@ namespace GHelper.ViewModel
 		{
 			get => GHubRecord?.DisplayName;
 		}
-		
-		event GHubRecordSelectedEvent? GHubRecordSelected;
-
-		public void NotifySelected()
-		{
-			GHubRecordSelected?.Invoke(this);
-		}
 	}
-	
-	public delegate void GHubRecordSelectedEvent(GHubRecordViewModel viewModel);
 }

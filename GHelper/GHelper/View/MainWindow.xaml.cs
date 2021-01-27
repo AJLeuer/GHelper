@@ -22,14 +22,12 @@ namespace GHelper.View
 
 		private void ApplicationSelected(ApplicationViewModel application)
 		{
-			application.NotifySelected();
 			ApplicationView.Application = application;
 			GHubDataDisplay.Content = ApplicationView;
 		}
 
 		private void ProfileSelected(ProfileViewModel profile)
 		{
-			profile.NotifySelected();
 			ProfileView.Profile = profile;
 			GHubDataDisplay.Content = ProfileView;
 		}
@@ -51,7 +49,5 @@ namespace GHelper.View
 				}	
 			}
 		}
-		
-		
 	}
 }
