@@ -13,7 +13,11 @@
         <view:RecordViewControls Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
        
         <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
-            <TextBox Header="Name"              Text="{x:Bind Application.DisplayName,                        Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}"/>
+            <TextBox Header="Name" Text="{x:Bind Application.DisplayName, Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" LostFocus="HandleNameChange" >
+                <TextBox.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Enter" Invoked="HandleNameChange"/>
+                </TextBox.KeyboardAccelerators>
+            </TextBox>
             <TextBox Header="Application ID"    Text="{x:Bind Application.Application.ApplicationID,          Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
             <TextBox Header="Path"              Text="{x:Bind Application.Application.ApplicationPath,        Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
             <TextBox Header="Install State"     Text="{x:Bind Application.InstallState,                       Mode=OneWay}"                   Style="{StaticResource ImmutableTextBox}"/>

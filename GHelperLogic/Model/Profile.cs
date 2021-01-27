@@ -35,26 +35,9 @@ namespace GHelperLogic.Model
 
 	    [JsonIgnore]
 	    public Application? Application { get; set; }
-	    
-	    [JsonIgnore]
-	    public virtual string? DisplayName
-	    {
-		    get { return this.Name; }
-	    }
-	    
+
 	    [JsonProperty("activeForApplication")]
 	    public bool? ActiveForApplication { get; set; }
-	    
-	    [JsonConverter(typeof(PathJSONConverter))]
-	    [JsonProperty("applicationFolder")]
-	    public IPath? ApplicationFolder { get; set; }
-	    
-	    [JsonProperty("applicationId")]
-	    public Guid? ApplicationID { get; set; }
-	    
-	    [JsonConverter(typeof(PathJSONConverter))]
-	    [JsonProperty("applicationPath")]
-	    public IPath? ApplicationPath { get; set; }
 
 	    [JsonProperty("assignments")]
 	    public Assignment[]? Assignments { get; set; }
@@ -64,34 +47,16 @@ namespace GHelperLogic.Model
 	    
 	    [JsonProperty("commands")]
 	    public Command[]? Commands { get; set; }
-	    
-	    [JsonProperty("databaseId")]
-	    public Guid? DatabaseID { get; set; }
-	    
-	    [JsonProperty("isInstalled")]
-	    public Boolean? IsInstalled { get; set; }
 
 	    [JsonProperty("id")]
 	    public Guid? ID { get; set; }
 
 	    [JsonProperty("lightingCard")]
 	    public Guid? LightingCard { get; set; }
-	    
-	    [JsonProperty("name")]
-	    public string? Name { get; set; }
-	    
-	    [JsonProperty("posterUrl")]
-	    public Uri? PosterURL { get; set; }
-	    
-	    [JsonProperty("profileUrl")]
-	    public Uri? ProfileURL { get; set; }
-	    
+
 	    [JsonProperty("syncLightingCard")]
 	    public Guid? SyncLightingCard { get; set; }
-	    
-	    [JsonProperty("version")]
-	    public UInt16? Version { get; set; }
-	    
+
 	    [JsonExtensionData]
 	    public IDictionary<string, JToken>? AdditionalData { get; set; }
     }

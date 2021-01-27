@@ -7,9 +7,14 @@ namespace GHelper.ViewModel
 {
 	public class ProfileViewModel : GHubRecordViewModel, INotifyPropertyChanged
 	{
+		protected override GHubRecord? GHubRecord 
+		{
+			get { return this.Profile; }
+		}
+		
 		private Profile? profile;
 
-		public Profile? Profile
+		public Profile? Profile 
 		{
 			get => profile;
 			set
@@ -19,9 +24,16 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public string? DisplayName
+		public override string Name 
 		{
-			get => Profile?.DisplayName;
+			set
+			{
+				if (Profile != null)
+				{
+					Profile.Name = value;
+					OnPropertyChanged(nameof(DisplayName));
+				}
+			}
 		}
 
 		public bool ActiveForApplication

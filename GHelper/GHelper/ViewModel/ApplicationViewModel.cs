@@ -28,15 +28,32 @@ namespace GHelper.ViewModel
 			}
 		}
 
+		protected override GHubRecord? GHubRecord 
+		{
+			get { return this.Application; }
+		}
+
 		private Application? application;
 
-		public Application? Application
+		public Application? Application 
 		{
 			get => application;
 			set
 			{
 				application = value;
 				OnPropertyChanged(nameof(Application));
+			}
+		}
+		
+		public override string Name 
+		{
+			set
+			{
+				if (Application != null)
+				{
+					Application.Name = value;
+					OnPropertyChanged(nameof(DisplayName));
+				}
 			}
 		}
 
@@ -60,11 +77,6 @@ namespace GHelper.ViewModel
 					return poster ?? DefaultPosterImage;
 				}
 			}
-		}
-
-		public string? DisplayName
-		{
-			get => Application?.DisplayName;
 		}
 
 		public string InstallState 

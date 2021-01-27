@@ -52,6 +52,7 @@
                 <Setter Property="Spacing" Value="24"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
             </Style>
+            <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

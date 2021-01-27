@@ -38,45 +38,16 @@ namespace GHelperLogic.Model
 			AdditionalData = application.AdditionalData;
 		}
 
-		[JsonConverter(typeof(PathJSONConverter))]
-		[JsonProperty("applicationFolder")]
-		public IPath? ApplicationFolder { get; set; }
-		
-		[JsonProperty("applicationId")]
-		public Guid? ApplicationID { get; set; }
-		
-		[JsonConverter(typeof(PathJSONConverter))]
-		[JsonProperty("applicationPath")]
-		public IPath? ApplicationPath { get; set; }
-		
 		[JsonProperty("categoryColors")]
 		public CategoryColor[]? CategoryColors { get; set; }
 		
 		[JsonProperty("commands")]
 		public Command[]? Commands { get; set; }
-		
-		[JsonProperty("databaseId")]
-		public Guid? DatabaseID { get; set; }
-		
-		[JsonProperty("isInstalled")]
-		public Boolean? IsInstalled { get; set; }
-		
+
 		[JsonConverter(typeof(DateTimeJSONConverter))]
 		[JsonProperty("lastRunTime")]
 		public LocalDateTime? LastRunTime { get; set; }
-		
-		[JsonProperty("name")]
-		public string? Name { get; set; }
-		
-		[JsonProperty("posterUrl")]
-		public Uri? PosterURL { get; set; }
-		
-		[JsonProperty("profileUrl")]
-		public Uri? ProfileURL { get; set; }
-		
-		[JsonProperty("version")]
-		public UInt16? Version { get; set; }
-		
+
 		[JsonProperty("isCustom")]
 		public bool? IsCustom { get; set; }
 
@@ -116,12 +87,6 @@ namespace GHelperLogic.Model
 			get => this.ApplicationID;
 		}
 
-		[JsonIgnore]
-		public virtual string? DisplayName
-		{
-			get { return this.Name; }
-		}
-		
 		[JsonIgnore]
 		public bool HasPoster
 		{

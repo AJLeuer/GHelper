@@ -1,10 +1,11 @@
 ﻿using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 
 namespace GHelper.View
 {
-	public partial class ApplicationView : UserControl 
+	public partial class ApplicationView : UserControl, RecordView 
     {
 	    public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
 		    nameof (ApplicationSelectorView.Application),
@@ -19,9 +20,34 @@ namespace GHelper.View
 		    set { SetValue(ApplicationProperty, value); }
 	    }
 	    
-        public ApplicationView()
+	    public GHubRecordViewModel GHubRecord
+	    {
+		    get { return Application; }
+	    }
+
+	    public ApplicationView()
         {
 	        InitializeComponent();
+        }
+
+	    void RecordView.SaveRecord()
+	    {
+		    
+	    }
+	    
+	    void RecordView.HandleUserEdit()
+	    {
+		    
+	    }
+
+	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
+        {
+	        RecordView.ChangeName(this, sender, routedEventInfo);
+        }
+
+        private void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
+        {
+	        RecordView.ChangeName(this, sender, eventInfo);
         }
     }
 }
