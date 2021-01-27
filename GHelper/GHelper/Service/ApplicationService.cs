@@ -16,10 +16,7 @@ namespace GHelper.Service
 		public ApplicationService(Reference<MainWindow> mainWindow)
 		{
 			MainWindow = mainWindow;
-			if (MainWindow.Referent is not null)
-			{
-				MainWindow.Referent.GHubRecordSaved += this.Save();
-			}
+
 		}
 
 		public void Start()
@@ -27,11 +24,20 @@ namespace GHelper.Service
 			Collection<Application> applications = gHubSettingsFileReader.ReadData().applications;
 			this.Applications = new ObservableCollection<ApplicationViewModel>(ApplicationViewModel.CreateFromCollection(applications));
 			MainWindow.Referent!.Applications = this.Applications;
+			RegisterForNotifications();
 		}
 
-		private GHubRecordSavedEvent Save()
+		private void Save()
 		{
-			throw new System.NotImplementedException();
+			//todo
+		}
+
+		private void RegisterForNotifications()
+		{
+			if (MainWindow.Referent is not null)
+			{
+				MainWindow.Referent!.RegisterForSaveNotification(this.Save);
+			}
 		}
 	}
 }

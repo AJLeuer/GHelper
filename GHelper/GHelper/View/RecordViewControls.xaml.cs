@@ -1,5 +1,5 @@
-﻿using Windows.UI;
-using GHelper.ViewModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
@@ -8,10 +8,9 @@ namespace GHelper.View
 {
 	public partial class RecordViewControls : UserControl
 	{
-		private static Color SaveButtonEnabledBackgroundColor { get; } = new Windows.UI.ViewManagement.UISettings().GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
-		private static Color SaveButtonInactiveBackgroundColor { get; } = new Windows.UI.ViewManagement.UISettings().GetColorValue(Windows.UI.ViewManagement.UIColorType.Background);
-        
-	    public RecordViewControls()
+		public Collection<Action> GHubRecordSavedCallbacks = new();
+
+		public RecordViewControls()
         {
             InitializeComponent();
         }
@@ -27,6 +26,19 @@ namespace GHelper.View
 
 	        SaveButton.Background = defaultButton.Background;
 	        SaveButton.Style = defaultButton.Style;
+        }
+
+        public void RegisterForSaveNotification(Action saveFunction)
+        {
+	        GHubRecordSavedCallbacks.Add(saveFunction);
+        }
+
+        private void SendRecordSavedNotification(object sender, RoutedEventArgs e)
+        {
+	        foreach (Action callBack in GHubRecordSavedCallbacks)
+	        {
+		        callBack?.Invoke();
+	        }
         }
 	}
 }

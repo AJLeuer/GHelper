@@ -1,4 +1,5 @@
-﻿using GHelper.ViewModel;
+﻿using System;
+using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -29,16 +30,14 @@ namespace GHelper.View
 		    get { return Application; }
 	    }
 
-	    public event GHubRecordSavedEvent? GHubRecordSaved;
-
 	    public ApplicationView()
         {
 	        InitializeComponent();
         }
-
-	    void RecordView.SendRecordSavedNotification()
+	    
+	    public void RegisterForSaveNotification(Action saveFunction)
 	    {
-		    GHubRecordSaved?.Invoke();
+		    RecordViewControls.RegisterForSaveNotification(saveFunction);
 	    }
 
 	    void RecordView.SendRecordChangedNotification()

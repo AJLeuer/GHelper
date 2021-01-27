@@ -1,4 +1,5 @@
-﻿using GHelper.ViewModel;
+﻿using System;
+using GHelper.ViewModel;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 
@@ -8,10 +9,8 @@ namespace GHelper.View
 	{
 		public GHubRecordViewModel? GHubRecord { get; }
 
-		event GHubRecordSavedEvent? GHubRecordSaved;
-
-		protected void SendRecordSavedNotification();
-
+		void RegisterForSaveNotification(Action saveFunction);
+		
 		protected void SendRecordChangedNotification();
 
 		public static void ChangeName(RecordView recordView, object sender)

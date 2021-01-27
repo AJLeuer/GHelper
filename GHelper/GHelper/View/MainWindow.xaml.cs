@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using GHelper.ViewModel;
 using GHelperLogic.Model;
@@ -14,15 +15,10 @@ namespace GHelper.View
 
 		private ApplicationView ApplicationView { get; set; } = new();
 		private ProfileView ProfileView { get; set; } = new();
-		
-		public event GHubRecordSavedEvent? GHubRecordSaved;
-
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
-			ApplicationView.GHubRecordSaved += this.GHubRecordSaved;
-			ProfileView.GHubRecordSaved += this.GHubRecordSaved;
 		}
 
 		private void ApplicationSelected(ApplicationViewModel application)
@@ -53,6 +49,12 @@ namespace GHelper.View
 						break;
 				}	
 			}
+		}
+
+		public void RegisterForSaveNotification(Action saveFunction)
+		{
+			ProfileView.RegisterForSaveNotification(saveFunction);
+			ApplicationView.RegisterForSaveNotification(saveFunction);
 		}
 	}
 }
