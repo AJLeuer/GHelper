@@ -1,5 +1,4 @@
 ﻿using GHelper.ViewModel;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 
@@ -8,11 +7,14 @@ namespace GHelper.View
 	public interface RecordView
 	{
 		public GHubRecordViewModel? GHubRecord { get; }
-		
-		protected void SaveRecord();
-		protected void HandleUserEdit();
 
-		public static void ChangeName(RecordView recordView, object sender, RoutedEventArgs routedEventInfo)
+		event GHubRecordSavedEvent? GHubRecordSaved;
+
+		protected void SendRecordSavedNotification();
+
+		protected void SendRecordChangedNotification();
+
+		public static void ChangeName(RecordView recordView, object sender)
 		{
 			if (sender is TextBox textBox)
 			{
@@ -20,7 +22,7 @@ namespace GHelper.View
 			}
 		}
 
-		public static void ChangeName(RecordView recordView, KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
+		public static void ChangeName(RecordView recordView, KeyboardAcceleratorInvokedEventArgs eventInfo)
 		{
 			if (eventInfo.Element is TextBox textBox)
 			{
@@ -35,9 +37,11 @@ namespace GHelper.View
 				if (recordView.GHubRecord != null)
 				{
 					recordView.GHubRecord.Name = textBox.Text;
-					recordView.HandleUserEdit();
+					recordView.SendRecordChangedNotification();
 				}
 			}
 		}
 	}
+
+	public delegate void GHubRecordSavedEvent();
 }

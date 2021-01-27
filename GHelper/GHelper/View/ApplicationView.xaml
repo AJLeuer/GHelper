@@ -10,7 +10,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <view:RecordViewControls Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
+        <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
        
         <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
             <TextBox Header="Name" Text="{x:Bind Application.DisplayName, Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" LostFocus="HandleNameChange" >

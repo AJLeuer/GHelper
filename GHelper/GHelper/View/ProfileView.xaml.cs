@@ -17,37 +17,48 @@ namespace GHelper.View
 		public ProfileViewModel Profile
 		{
 			get { return (ProfileViewModel) GetValue(ProfileProperty); }
-			set { SetValue(ProfileProperty, value); }
+			set
+			{
+				SetValue(ProfileProperty, value);
+				ResetAppearance();
+			}
 		}
 
 		public GHubRecordViewModel GHubRecord
 		{
 			get { return Profile; }
 		}
-		
-	    public ProfileView()
+
+		public event GHubRecordSavedEvent? GHubRecordSaved;
+
+		public ProfileView()
         {
             InitializeComponent();
         }
 
-	    void RecordView.SaveRecord()
+	    void RecordView.SendRecordSavedNotification()
 	    {
-		    
+		    GHubRecordSaved?.Invoke();
 	    }
 
-	    void RecordView.HandleUserEdit()
+	    void RecordView.SendRecordChangedNotification()
 	    {
-		    
+		    RecordViewControls.NotifyOfUserChange();
 	    }
 
 	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
 		{
-			RecordView.ChangeName(this, sender, routedEventInfo);
+			RecordView.ChangeName(this, sender);
 		}
 
 	    private void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
 	    {
-		    RecordView.ChangeName(this, sender, eventInfo);
+		    RecordView.ChangeName(this, eventInfo);
+	    }
+	    
+	    private void ResetAppearance()
+	    {
+		    RecordViewControls.ResetAppearance();
 	    }
 	}
 }

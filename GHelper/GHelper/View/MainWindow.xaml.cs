@@ -14,10 +14,15 @@ namespace GHelper.View
 
 		private ApplicationView ApplicationView { get; set; } = new();
 		private ProfileView ProfileView { get; set; } = new();
+		
+		public event GHubRecordSavedEvent? GHubRecordSaved;
+
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
+			ApplicationView.GHubRecordSaved += this.GHubRecordSaved;
+			ProfileView.GHubRecordSaved += this.GHubRecordSaved;
 		}
 
 		private void ApplicationSelected(ApplicationViewModel application)

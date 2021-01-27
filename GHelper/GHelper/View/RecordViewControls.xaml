@@ -6,14 +6,14 @@
     
     <StackPanel Orientation="Horizontal" >
         
-        <Button x:Name="SaveButton" Width="128" utility:Margin.Right="8" Style="{StaticResource ButtonRevealStyle}">
+        <Button x:Name="SaveButton" Width="128" utility:Margin.Right="8" Style="{StaticResource SaveButtonStyle}" >
             <StackPanel Orientation="Vertical">
                 <SymbolIcon Symbol="Save"/>
                 <TextBlock>Save</TextBlock>
             </StackPanel>
         </Button>
         
-        <Button x:Name="DeleteButton" Width="128" utility:Margin.Left="8">
+        <Button Width="128" utility:Margin.Left="8">
             <Button.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>

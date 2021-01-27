@@ -17,37 +17,48 @@ namespace GHelper.View
 	    public ApplicationViewModel Application
 	    {
 		    get { return (ApplicationViewModel) GetValue(ApplicationProperty); }
-		    set { SetValue(ApplicationProperty, value); }
+		    set
+		    {
+			    SetValue(ApplicationProperty, value);
+			    ResetAppearance();
+		    }
 	    }
-	    
+
 	    public GHubRecordViewModel GHubRecord
 	    {
 		    get { return Application; }
 	    }
+
+	    public event GHubRecordSavedEvent? GHubRecordSaved;
 
 	    public ApplicationView()
         {
 	        InitializeComponent();
         }
 
-	    void RecordView.SaveRecord()
+	    void RecordView.SendRecordSavedNotification()
 	    {
-		    
+		    GHubRecordSaved?.Invoke();
 	    }
-	    
-	    void RecordView.HandleUserEdit()
+
+	    void RecordView.SendRecordChangedNotification()
 	    {
-		    
+		    RecordViewControls.NotifyOfUserChange();
 	    }
 
 	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
         {
-	        RecordView.ChangeName(this, sender, routedEventInfo);
+	        RecordView.ChangeName(this, sender);
         }
 
-        private void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
+	    private void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
         {
-	        RecordView.ChangeName(this, sender, eventInfo);
+	        RecordView.ChangeName(this, eventInfo);
         }
+
+	    private void ResetAppearance()
+	    {
+		    RecordViewControls.ResetAppearance();
+	    }
     }
 }
