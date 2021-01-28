@@ -18,10 +18,12 @@ namespace GHelperLogic.Utility.JSONConverter
 		public override LocalDateTime ReadJson(JsonReader reader, Type objectType, LocalDateTime existingValue, bool hasExistingValue, JsonSerializer serializer)
 		{
 			var gHUBDateTimePattern = LocalDateTimePattern.Create("yyyyMMdd'T'HHmmss.FFFFFF", CultureInfo.CurrentCulture);
-			
-			return reader.Value != null 
-				? gHUBDateTimePattern.Parse(reader.Value.ToString()!).GetValueOrThrow() 
-				: throw new ArgumentException("Could not parse JSON for timestamp.");
+
+			if (reader.Value == null)
+			{
+				return new LocalDateTime();
+			}
+			return gHUBDateTimePattern.Parse(reader.Value.ToString()!).GetValueOrThrow();
 		}
 	}
 }

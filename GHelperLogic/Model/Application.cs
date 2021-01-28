@@ -38,14 +38,14 @@ namespace GHelperLogic.Model
 			AdditionalData = application.AdditionalData;
 		}
 
-		[JsonProperty("categoryColors")]
+		[JsonProperty("categoryColors", NullValueHandling=NullValueHandling.Ignore)]
 		public CategoryColor[]? CategoryColors { get; set; }
 		
-		[JsonProperty("commands")]
+		[JsonProperty("commands", NullValueHandling=NullValueHandling.Ignore)]
 		public Command[]? Commands { get; set; }
 
 		[JsonConverter(typeof(DateTimeJSONConverter))]
-		[JsonProperty("lastRunTime")]
+		[JsonProperty("lastRunTime", NullValueHandling=NullValueHandling.Ignore)]
 		public LocalDateTime? LastRunTime { get; set; }
 		
 		[JsonProperty("isCustom", NullValueHandling=NullValueHandling.Ignore)]

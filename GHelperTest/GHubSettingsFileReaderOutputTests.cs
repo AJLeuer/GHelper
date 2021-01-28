@@ -48,8 +48,39 @@ namespace GHelperTest
 
 			JObject originalGHubSettingsFileJSON = ConvertToJSONObject(originalGHubSettingsFile);
 			JObject reSerializedGHubSettingsFileJSON = ConvertToJSONObject(reSerializedGHubSettingsFile);
-			
+
 			Assert.AreEqual(originalGHubSettingsFileJSON, reSerializedGHubSettingsFileJSON);
+		}
+		
+		[TestFixture]
+		public static class CustomApplicationTests
+		{
+			[SetUp]
+			public static void SetupCustomApplicationTests()
+			{
+				settingsFileReaderWriter = new GHubSettingsFileReaderWriter();
+				TestSettingsFile = 
+					new MemoryStream(Properties.Resources.ExampleCustomGameGHUBSettings, false);
+			}
+			
+			
+			[TearDown]
+			public static void TearDownCustomApplicationTests()
+			{
+				TestSettingsFile.Close();
+			}
+
+			[Test]
+			public static void ShouldSerializePosterDataOfCustomApplications()
+			{
+				var (testSettingsFileOriginal, testSettingsFileDuplicate) = TestSettingsFile.Duplicate();
+				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.DeserializeData(testSettingsFileOriginal)!;
+
+				string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);
+				GHubSettingsFile reDeserializedGHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(reSerializedGHubSettingsFile);
+
+				Assert.True(reDeserializedGHubSettingsFile.Applications?.Applications?[0].Poster != null);
+			}
 		}
 
 		private static JObject ConvertToJSONObject(string jsonString)

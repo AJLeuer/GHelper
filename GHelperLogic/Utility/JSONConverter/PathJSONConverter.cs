@@ -15,9 +15,11 @@ namespace GHelperLogic.Utility.JSONConverter
 
 		public override IPath ReadJson(JsonReader reader, Type objectType, IPath? existingValue, bool hasExistingValue, JsonSerializer serializer)
 		{
-			return reader.Value != null 
-				? PathHelpers.ToAbsoluteFilePath(reader.Value.ToString()) 
-				: throw new ArgumentException("Could not parse JSON for file path.");
+			if (reader.Value == null)
+			{
+				return null!;
+			}
+			return PathHelpers.ToAbsoluteFilePath(reader.Value.ToString()) ;
 		}
 	}
 }

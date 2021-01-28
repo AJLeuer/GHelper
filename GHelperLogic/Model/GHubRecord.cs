@@ -14,26 +14,26 @@ namespace GHelperLogic.Model
 		public Guid? ApplicationID { get; set; }
 		
 		[JsonConverter(typeof(PathJSONConverter))]
-		[JsonProperty("applicationFolder")]
+		[JsonProperty("applicationFolder", NullValueHandling=NullValueHandling.Ignore)]
 		public IPath? ApplicationFolder { get; set; }
 		
 		[JsonConverter(typeof(PathJSONConverter))]
 		[JsonProperty("applicationPath")]
 		public IPath? ApplicationPath { get; set; }
 
-		[JsonProperty("databaseId")]
+		[JsonProperty("databaseId", NullValueHandling=NullValueHandling.Ignore)]
 		public Guid? DatabaseID { get; set; }
 		
-		[JsonProperty("isInstalled")]
+		[JsonProperty("isInstalled", NullValueHandling=NullValueHandling.Ignore)]
 		public Boolean? IsInstalled { get; set; }
 
-		[JsonProperty("posterUrl")]
+		[JsonProperty("posterUrl", NullValueHandling=NullValueHandling.Ignore)]
 		public Uri? PosterURL { get; set; }
 		
-		[JsonProperty("profileUrl")]
+		[JsonProperty("profileUrl", NullValueHandling=NullValueHandling.Ignore)]
 		public Uri? ProfileURL { get; set; }
 
-		[JsonProperty("version")]
+		[JsonProperty("version", NullValueHandling=NullValueHandling.Ignore)]
 		public UInt16? Version { get; set; }
 		
 		[JsonIgnore]
