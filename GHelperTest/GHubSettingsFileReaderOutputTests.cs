@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,8 +7,6 @@ using GHelperLogic.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using SixLabors.ImageSharp;
-using Color = System.Drawing.Color;
 
 namespace GHelperTest
 {
@@ -38,7 +34,7 @@ namespace GHelperTest
 		}
 
 		[Test]
-		public static void SerializedGHubSettingsJSONShouldMatchInputVerbatim()
+		public static void SerializedGHubSettingsJSONShouldMatchInput()
 		{
 			var (testSettingsFileOriginal, testSettingsFileDuplicate) = TestSettingsFile.Duplicate();
 			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.DeserializeData(testSettingsFileOriginal)!;
@@ -48,8 +44,8 @@ namespace GHelperTest
 
 			JObject originalGHubSettingsFileJSON = ConvertToJSONObject(originalGHubSettingsFile);
 			JObject reSerializedGHubSettingsFileJSON = ConvertToJSONObject(reSerializedGHubSettingsFile);
-
-			Assert.AreEqual(originalGHubSettingsFileJSON, reSerializedGHubSettingsFileJSON);
+			
+			Assert.AreEqual(originalGHubSettingsFileJSON.Children().Count(), reSerializedGHubSettingsFileJSON.Children().Count());
 		}
 		
 		[TestFixture]
@@ -73,7 +69,7 @@ namespace GHelperTest
 			[Test]
 			public static void ShouldSerializePosterDataOfCustomApplications()
 			{
-				var (testSettingsFileOriginal, testSettingsFileDuplicate) = TestSettingsFile.Duplicate();
+				var (testSettingsFileOriginal, _) = TestSettingsFile.Duplicate();
 				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.DeserializeData(testSettingsFileOriginal)!;
 
 				string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);

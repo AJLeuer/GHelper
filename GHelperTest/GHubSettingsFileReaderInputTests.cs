@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using GHelperLogic.IO;
@@ -37,7 +36,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeAllApplications()
 		{
-			Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
+			ICollection<Application> applications = settingsFileReader!.GetApplicationsData(TestSettingsFile).applications!;
 			
 			Assert.AreEqual(3, applications.Count);
 		}
@@ -45,31 +44,31 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeApplicationProperties()
 		{
-			Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
+			ICollection<Application> applications = settingsFileReader!.GetApplicationsData(TestSettingsFile).applications!;
 			
 			Assert.AreEqual(
 				Guid.Parse("420fd454-0c36-499d-bde4-146823b16147"), 
-				applications[1].ApplicationID);
+				applications.ElementAt(1).ApplicationID);
 		}
 		
 		[Test]
 		public static void ShouldDeserializeDesktopApplications()
 		{
-			Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
+			ICollection<Application> applications = settingsFileReader!.GetApplicationsData(TestSettingsFile).applications!;
 			
 			Assert.AreEqual(
 				typeof(DesktopApplication), 
-				applications[1].GetType());
+				applications.ElementAt(1).GetType());
 
 			Assert.AreNotEqual(
 				typeof(DesktopApplication),
-				applications[0].GetType());
+				applications.ElementAt(0).GetType());
 		}
 		
 		[Test]
 		public static void ShouldDeserializeAllProfiles()
 		{
-			Collection<Profile> profiles = settingsFileReader!.ReadData(TestSettingsFile).profiles;
+			ICollection<Profile> profiles = settingsFileReader!.GetApplicationsData(TestSettingsFile).profiles!;
 			
 			Assert.AreEqual(5, profiles.Count);
 		}
@@ -77,37 +76,40 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeProfileProperties()
 		{
-			Collection<Profile> profiles = settingsFileReader!.ReadData(TestSettingsFile).profiles;
+			ICollection<Profile> profiles = settingsFileReader!.GetApplicationsData(TestSettingsFile).profiles!;
 			
 			Assert.AreEqual(
 				"Horizon Zero Dawn Complete Edition", 
-				profiles[2].Name);
+				profiles.ElementAt(2).Name);
 			Assert.AreEqual(
 				Color.FromArgb(0x00, 0xFF, 0x40),
-				profiles[2].CategoryColors![1].Hex);
+				profiles.ElementAt(2).CategoryColors![1].Hex);
 		}
 		
 		[Test]
 		public static void ShouldDeserializeDefaultProfiles()
 		{
-			Collection<Profile> profiles = settingsFileReader!.ReadData(TestSettingsFile).profiles;
+			ICollection<Profile> profiles = settingsFileReader!.GetApplicationsData(TestSettingsFile).profiles!;
 			
-			Assert.AreEqual(typeof(DefaultProfile), profiles[3].GetType());
-			Assert.AreNotEqual(typeof(DefaultProfile), profiles[1].GetType());
+			Assert.AreEqual(typeof(DefaultProfile), profiles.ElementAt(3).GetType());
+			Assert.AreNotEqual(typeof(DefaultProfile), profiles.ElementAt(1).GetType());
 		}
 		
 		[Test]
 		public static void ShouldMatchApplicationsWithProfiles()
 		{
-			(Collection<Application> applications, Collection<Profile> profiles) 
-				= settingsFileReader!.ReadData(TestSettingsFile);
+			(ICollection<Application>? applications, ICollection<Profile> profiles) 
+				= settingsFileReader!.GetApplicationsData(TestSettingsFile)!;
 
-			Application? bg3Application = applications.FirstOrDefault((Application application) => application.Name == "Baldur's Gate 3");
-			IEnumerable<Profile> bg3Profiles 
-				= profiles.Where((Profile profile) => profile.Application?.Name == "Baldur's Gate 3");
+			if (applications != null)
+			{
+				Application? bg3Application = applications.FirstOrDefault((Application application) => application.Name == "Baldur's Gate 3");
+				IEnumerable<Profile> bg3Profiles 
+					= profiles?.Where((Profile profile) => profile.Application?.Name == "Baldur's Gate 3") ?? Array.Empty<Profile>();
 			
-			Assert.AreEqual(2, bg3Application!.Profiles.Count);
-			Assert.AreEqual(2, bg3Profiles.Count());
+				Assert.AreEqual(2, bg3Application!.Profiles.Count);
+				Assert.AreEqual(2, bg3Profiles.Count());
+			}
 		}
 		
 				
@@ -132,11 +134,11 @@ namespace GHelperTest
 			[Test]
 			public static void ShouldDeserializePosterDataOfCustomApplications()
 			{
-				Collection<Application> applications = settingsFileReader!.ReadData(TestSettingsFile).applications;
+				ICollection<Application> applications = settingsFileReader!.GetApplicationsData(TestSettingsFile).applications!;
 				
-				Assert.IsTrue(applications[0].HasPoster);
-				Assert.IsTrue(applications[0].IsCustom);
-				Assert.AreEqual(new Size(256),applications[0].Poster.Size());
+				Assert.IsTrue(applications.ElementAt(0).HasPoster);
+				Assert.IsTrue(applications.ElementAt(0).IsCustom);
+				Assert.AreEqual(new Size(256),applications.ElementAt(0).Poster.Size());
 			}
 		}
 	}

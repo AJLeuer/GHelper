@@ -1,7 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.IO;
 using GHelperLogic.Model;
-using GHelperLogic.Utility;
 using GHelperLogic.Utility.JSONConverter;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -26,13 +25,14 @@ namespace GHelperLogic.IO
 			#endif
 		}
 
-		public (Collection<Application> applications, Collection<Profile> profiles) ReadData(Stream? settingsFile = null)
+		public (ICollection<Application>? applications, ICollection<Profile>? profiles) GetApplicationsData(Stream? settingsFile = null)
 		{
 			settingsFile ??= GHubSettingsFile;
-			(Stream firstSettingsFileCopy, Stream secondSettingsFileCopy) = settingsFile.Duplicate();
-			Collection<Application> applications = ReadApplications(firstSettingsFileCopy);
-			Collection<Profile> profiles = ReadProfiles(secondSettingsFileCopy);
-			associateProfilesToApplications(applications, profiles);
+			GHubSettingsFile gHubSettingsFile = DeserializeData(settingsFile);
+			
+			ICollection<Application>? applications = gHubSettingsFile.Applications?.Applications;
+			ICollection<Profile>? profiles = gHubSettingsFile.Profiles?.Profiles;
+			
 			return (applications, profiles);
 		}
 
@@ -41,41 +41,12 @@ namespace GHelperLogic.IO
 			settingsFile ??= GHubSettingsFile;
 			JObject parsedSettingsFile = readSettingsFile(settingsFile);
 			GHubSettingsFile gHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter(), new ProfileJSONConverter())!;
+
+			gHubSettingsFile.AssociateProfilesToApplications();
+
 			return gHubSettingsFile;
 		}
-
-		private static Collection<Profile> ReadProfiles(Stream settingsFile)
-		{
-			JObject parsedSettingsFile = readSettingsFile(settingsFile);
-			JToken? profilesJSON = parsedSettingsFile["profiles"]?["profiles"];
-			Collection<Profile> profiles = JsonConvert.DeserializeObject<Collection<Profile>>(profilesJSON!.ToString(), new ProfileJSONConverter())!;
-			return profiles;
-		}
-
-		private static Collection<Application> ReadApplications(Stream settingsFile)
-		{
-			JObject parsedSettingsFile = readSettingsFile(settingsFile);
-			JToken? applicationsJSON = parsedSettingsFile["applications"]?["applications"];
-			Collection<Application> applications = JsonConvert.DeserializeObject<Collection<Application>>(applicationsJSON!.ToString(), new ApplicationJSONConverter())!;
-			return applications;
-		}
-
-		private static void associateProfilesToApplications(Collection<Application> applications, Collection<Profile> profiles)
-		{
-			foreach (Profile profile in profiles)
-			{
-				if (profile.ApplicationID != null)
-				{
-					Application? application = applications.GetByID(profile.ApplicationID);
-					if (application != null)
-					{
-						profile.Application = application;
-						application.Profiles.Add(profile);
-					}
-				}
-			}
-		}
-
+		
 		private static JObject readSettingsFile(Stream settingsFile)
 		{
 			using TextReader reader = new StreamReader(settingsFile);

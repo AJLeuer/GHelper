@@ -16,6 +16,26 @@ namespace GHelperLogic.Model
 		
 		[JsonExtensionData]
 		public IDictionary<string, JToken>? AdditionalData { get; set; }
+		
+		public void AssociateProfilesToApplications()
+		{
+			ICollection<Application>? applications = Applications?.Applications;
+			ICollection<Profile>? profiles = Profiles?.Profiles;
+			
+			if (profiles != null)
+				foreach (Profile profile in profiles)
+				{
+					if (profile.ApplicationID != null)
+					{
+						Application? application = applications?.GetByID(profile.ApplicationID);
+						if (application != null)
+						{
+							profile.Application = application;
+							application.Profiles.Add(profile);
+						}
+					}
+				}
+		}
 	}
 
 	public class ApplicationList

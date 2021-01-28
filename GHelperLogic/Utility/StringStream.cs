@@ -49,7 +49,6 @@ namespace GHelperLogic.Utility
 		public override void Write(byte[] buffer, int offset, int count)
 		{
 			memory.Write(buffer, offset, count);
-			return;
 		}
 		
 		public override bool CanRead  => memory.CanRead;
@@ -68,7 +67,7 @@ namespace GHelperLogic.Utility
 		
 		public override string ToString()
 		{
-			return System.Text.Encoding.UTF8.GetString(memory.GetBuffer(), 0, (int) memory.Length);
+			return Encoding.UTF8.GetString(memory.GetBuffer(), 0, (int) memory.Length);
 		}
 		
 		public override int ReadByte()

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using GHelperLogic.IO;
 using GHelperLogic.Utility.JSONConverter;
-using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NodaTime;
@@ -54,9 +52,6 @@ namespace GHelperLogic.Model
 		[JsonConverter(typeof(PosterImageJSONConverter))]
 		[JsonProperty("poster", NullValueHandling=NullValueHandling.Ignore)]
 		public Image? Poster { get; set; }
-
-		[JsonIgnore]
-		private Image? poster;
 
 		[JsonExtensionData]
 		public IDictionary<string, JToken>? AdditionalData { get; set; }

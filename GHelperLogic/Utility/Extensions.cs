@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using Microsoft.VisualBasic;
 using NDepend.Path;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace GHelperLogic.Utility

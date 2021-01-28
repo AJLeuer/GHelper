@@ -142,16 +142,18 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public static IEnumerable<ApplicationViewModel> CreateFromCollection(IEnumerable<Application> applications)
+		public static IEnumerable<ApplicationViewModel> CreateFromCollection(IEnumerable<Application>? applications)
 		{
 			var applicationViewModels = new Collection<ApplicationViewModel>();
 
-			foreach (Application application in applications)
+			if (applications != null)
 			{
-				var applicationViewModel = new ApplicationViewModel(application);
-				applicationViewModels.Add(applicationViewModel);
+				foreach (Application application in applications)
+				{
+					var applicationViewModel = new ApplicationViewModel(application);
+					applicationViewModels.Add(applicationViewModel);
+				}
 			}
-
 			return applicationViewModels;
 		}
 

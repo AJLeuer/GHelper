@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GHelper.View;
 using GHelper.ViewModel;
@@ -20,7 +21,7 @@ namespace GHelper.Service
 
 		public void Start()
 		{
-			Collection<Application> applications = gHubSettingsFileReaderWriter.ReadData().applications;
+			ICollection<Application>? applications = gHubSettingsFileReaderWriter.GetApplicationsData().applications;
 			this.Applications = new ObservableCollection<ApplicationViewModel>(ApplicationViewModel.CreateFromCollection(applications));
 			MainWindow.Referent!.Applications = this.Applications;
 			RegisterForNotifications();
