@@ -47,30 +47,13 @@ namespace GHelperLogic.Model
 		[JsonConverter(typeof(DateTimeJSONConverter))]
 		[JsonProperty("lastRunTime")]
 		public LocalDateTime? LastRunTime { get; set; }
-
-		[JsonProperty("isCustom")]
+		
+		[JsonProperty("isCustom", NullValueHandling=NullValueHandling.Ignore)]
 		public bool? IsCustom { get; set; }
 
 		[JsonConverter(typeof(PosterImageJSONConverter))]
-		[JsonProperty("poster")]
-		public Image? Poster
-		{
-			get
-			{
-				//If this is a application with a custom poster (and the poster bitmap was, therefore, serialized into the JSON)
-				//... then it will have already been deserialized and stored into the 'poster' field
-				//However if this is not a custom application and it has a posterURL available
-				//... then on the first call to get Poster we initialize it by grabbing the image file from the URL
-				//So basically Poster is used to store poster images that can be retrieved in two very different ways.
-				
-				if ((poster == null) && (PosterURL != null))
-				{
-					poster = IOHelper.LoadFromURL(PosterURL);
-				}
-				return poster;
-			}
-			set { poster = value; }
-		}
+		[JsonProperty("poster", NullValueHandling=NullValueHandling.Ignore)]
+		public Image? Poster { get; set; }
 
 		[JsonIgnore]
 		private Image? poster;
