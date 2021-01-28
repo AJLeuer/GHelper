@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using GHelper.View;
 using GHelper.ViewModel;
 using GHelperLogic.IO;
@@ -9,19 +9,18 @@ namespace GHelper.Service
 {
 	public class ApplicationService
 	{
-		private readonly GHubSettingsFileReader gHubSettingsFileReader = new GHubSettingsFileReader();
+		private readonly GHubSettingsFileReaderWriter gHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter();
 		private ObservableCollection<ApplicationViewModel>? Applications;
 		private readonly Reference<MainWindow> MainWindow;
 
 		public ApplicationService(Reference<MainWindow> mainWindow)
 		{
 			MainWindow = mainWindow;
-
 		}
 
 		public void Start()
 		{
-			Collection<Application> applications = gHubSettingsFileReader.ReadData().applications;
+			Collection<Application> applications = gHubSettingsFileReaderWriter.ReadData().applications;
 			this.Applications = new ObservableCollection<ApplicationViewModel>(ApplicationViewModel.CreateFromCollection(applications));
 			MainWindow.Referent!.Applications = this.Applications;
 			RegisterForNotifications();

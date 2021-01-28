@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using GHelperLogic.Model;
 using Newtonsoft.Json;
 
@@ -22,8 +23,10 @@ namespace GHelperLogic.Utility.JSONConverter
 
 		public override Application ReadJson(JsonReader reader, Type objectType, Application? existingValue, bool hasExistingValue, JsonSerializer serializer)
 		{
-			serializer.Converters.Clear();
+			//storing Application converters to avoid infinite recursion
+			Collection<JsonConverter<Application>> storedConverters = serializer.Converters.Store<Application>();
 			Application application = serializer.Deserialize<Application>(reader)!;
+			serializer.Converters.Replace(storedConverters);
 			application = DetermineApplicationType(application);
 
 			return application;

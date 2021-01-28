@@ -5,8 +5,6 @@ using System.IO;
 using System.Linq;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
-using GHelperLogic.Utility.Wrappers;
-using Moq;
 using NUnit.Framework;
 using SixLabors.ImageSharp;
 using Color = System.Drawing.Color;
@@ -14,20 +12,20 @@ using Color = System.Drawing.Color;
 namespace GHelperTest
 {
 	[TestFixture]
-	public static class GHubSettingsFileReaderTest
+	public static class GHubSettingsFileReaderInputTests
 	{
-		private static GHubSettingsFileReader? settingsFileReader;
+		private static GHubSettingsFileReaderWriter? settingsFileReader;
 		private static Stream TestSettingsFile = 
 			new MemoryStream(Properties.Resources.ExampleGHUBSettings, false);
 		
 		[SetUp]
 		public static void Setup()
 		{
-			settingsFileReader = new GHubSettingsFileReader();
+			settingsFileReader = new GHubSettingsFileReaderWriter();
 			TestSettingsFile = 
 				new MemoryStream(Properties.Resources.ExampleGHUBSettings, false);
 			
-			TestHelpers.StubImageFileHTTPResponses();
+			GHubSettingsFileReaderOutputTests.TestHelpers.StubImageFileHTTPResponses();
 		}
 
 		[TearDown]
@@ -119,7 +117,7 @@ namespace GHelperTest
 			[SetUp]
 			public static void SetupCustomApplicationTests()
 			{
-				settingsFileReader = new GHubSettingsFileReader();
+				settingsFileReader = new GHubSettingsFileReaderWriter();
 				TestSettingsFile = 
 					new MemoryStream(Properties.Resources.ExampleCustomGameGHUBSettings, false);
 			}
@@ -139,20 +137,6 @@ namespace GHelperTest
 				Assert.IsTrue(applications[0].HasPoster);
 				Assert.IsTrue(applications[0].IsCustom);
 				Assert.AreEqual(new Size(256),applications[0].Poster.Size());
-			}
-		}
-
-		public static class TestHelpers
-		{
-			public static void StubImageFileHTTPResponses()
-			{
-				var stubPosterImageFile = new MemoryStream(Properties.Resources.TestImage);
-				var clientMock = new Mock<WebClientInterface> { CallBase = false };
-				clientMock.Setup(
-					(WebClientInterface webClient) =>
-						webClient.OpenRead(It.IsAny<Uri>())).Returns(stubPosterImageFile);
-				
-				IOHelper.Client = clientMock.Object;
 			}
 		}
 	}

@@ -8,11 +8,11 @@ using Newtonsoft.Json.Linq;
 
 namespace GHelperLogic.IO
 {
-	public class GHubSettingsFileReader
+	public class GHubSettingsFileReaderWriter
 	{
 		private static readonly Stream GHubSettingsFile;
 		
-		static GHubSettingsFileReader()
+		static GHubSettingsFileReaderWriter()
 		{
 			#if DEBUG 
 				GHubSettingsFile = new MemoryStream(Properties.Resources.DummyGHUBSettings, true);
@@ -34,6 +34,14 @@ namespace GHelperLogic.IO
 			Collection<Profile> profiles = ReadProfiles(secondSettingsFileCopy);
 			associateProfilesToApplications(applications, profiles);
 			return (applications, profiles);
+		}
+
+		public GHubSettingsFile DeserializeData(Stream? settingsFile = null)
+		{
+			settingsFile ??= GHubSettingsFile;
+			JObject parsedSettingsFile = readSettingsFile(settingsFile);
+			GHubSettingsFile gHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter(), new ProfileJSONConverter())!;
+			return gHubSettingsFile;
 		}
 
 		private static Collection<Profile> ReadProfiles(Stream settingsFile)
