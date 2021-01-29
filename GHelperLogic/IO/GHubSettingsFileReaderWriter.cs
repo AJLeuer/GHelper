@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Reflection;
 using GHelperLogic.Model;
 using GHelperLogic.Utility.JSONConverter;
@@ -69,7 +69,7 @@ namespace GHelperLogic.IO
 
 		private static JObject parseSettingsFile(Stream settingsFileStream)
 		{
-			using TextReader reader = new StreamReader(settingsFileStream);
+			using TextReader reader = new StreamReader(stream: settingsFileStream, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
 			using JsonReader settingsFileReader = new JsonTextReader(reader);
 			JObject parsedSettingsFile = JObject.Load(settingsFileReader);
 			return parsedSettingsFile;
