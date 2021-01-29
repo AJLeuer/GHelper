@@ -18,7 +18,7 @@ namespace GHelperLogic.Model
 		public IPath? ApplicationFolder { get; set; }
 		
 		[JsonConverter(typeof(PathJSONConverter))]
-		[JsonProperty("applicationPath")]
+		[JsonProperty("applicationPath", NullValueHandling=NullValueHandling.Ignore)]
 		public IPath? ApplicationPath { get; set; }
 
 		[JsonProperty("databaseId", NullValueHandling=NullValueHandling.Ignore)]

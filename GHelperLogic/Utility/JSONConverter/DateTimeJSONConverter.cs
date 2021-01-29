@@ -9,21 +9,22 @@ namespace GHelperLogic.Utility.JSONConverter
 {
 	public class DateTimeJSONConverter : JsonConverter<LocalDateTime>
 	{
+		private const  string                GHubStandardDateTimeFormat = "yyyyMMdd'T'HHmmss.FFFFFF";
+		private static LocalDateTimePattern  GHUBDateTimePattern        = LocalDateTimePattern.Create(GHubStandardDateTimeFormat, CultureInfo.CurrentCulture);
+
 		public override void WriteJson(JsonWriter writer, LocalDateTime value, JsonSerializer serializer)
 		{
-			JToken instantJSON = value.ToString();
+			JToken instantJSON = GHUBDateTimePattern.Format(value);
 			instantJSON.WriteTo(writer);
 		}
 
 		public override LocalDateTime ReadJson(JsonReader reader, Type objectType, LocalDateTime existingValue, bool hasExistingValue, JsonSerializer serializer)
 		{
-			var gHUBDateTimePattern = LocalDateTimePattern.Create("yyyyMMdd'T'HHmmss.FFFFFF", CultureInfo.CurrentCulture);
-
 			if (reader.Value == null)
 			{
 				return new LocalDateTime();
 			}
-			return gHUBDateTimePattern.Parse(reader.Value.ToString()!).GetValueOrThrow();
+			return GHUBDateTimePattern.Parse(reader.Value.ToString()!).GetValueOrThrow();
 		}
 	}
 }
