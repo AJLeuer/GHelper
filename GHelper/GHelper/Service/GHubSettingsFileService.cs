@@ -10,10 +10,9 @@ namespace GHelper.Service
 {
 	public class GHubSettingsFileService
 	{
-		private readonly GHubSettingsFileReaderWriter                gHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter();
-		private          GHubSettingsFile?                           GHubSettingsFile;
-		private          ObservableCollection<ApplicationViewModel>? Applications;
-		private readonly Reference<MainWindow>                       MainWindow;
+		private readonly GHubSettingsFileReaderWriter GHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter();
+		private          GHubSettingsFileViewModel?   GHubSettingsFileViewModel;
+		private readonly Reference<MainWindow>        MainWindow;
 
 		public GHubSettingsFileService(Reference<MainWindow> mainWindow)
 		{
@@ -22,16 +21,15 @@ namespace GHelper.Service
 
 		public void Start()
 		{
-			GHubSettingsFile = gHubSettingsFileReaderWriter.Read();
-			ICollection<Application>? applications = GHubSettingsFile?.Applications?.Applications;
-			Applications = new ObservableCollection<ApplicationViewModel>(ApplicationViewModel.CreateFromCollection(applications));
-			MainWindow.Referent!.Applications = this.Applications;
+			GHubSettingsFile gHubSettingsFile = GHubSettingsFileReaderWriter.Read();
+			GHubSettingsFileViewModel = new GHubSettingsFileViewModel(gHubSettingsFile);
+			MainWindow.Referent!.Applications = GHubSettingsFileViewModel.Applications;
 			RegisterForNotifications();
 		}
 
 		private void Save()
 		{
-			gHubSettingsFileReaderWriter.Write(settingsFileObject: GHubSettingsFile);
+			GHubSettingsFileReaderWriter.Write(settingsFileObject: GHubSettingsFileViewModel?.GHubSettingsFile);
 		}
 
 		private void RegisterForNotifications()

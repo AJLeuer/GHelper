@@ -11,14 +11,5 @@ namespace GHelperLogic.Utility
 		{
 			Referent = referent!;
 		}
-
-		public static implicit operator T (Reference<T> reference)
-		{
-			return reference!.Referent!;
-		}
-		
-		public static implicit operator Reference<T> (T referent) {
-			return new Reference<T>(referent);
-		}
 	}
 }
