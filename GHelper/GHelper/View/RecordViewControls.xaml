@@ -6,7 +6,7 @@
     
     <StackPanel Orientation="Horizontal" >
         
-        <Button x:Name="SaveButton" Width="128" utility:Margin.Right="8" Style="{StaticResource SaveButtonStyle}" Click="SendRecordSavedNotification">
+        <Button x:Name="SaveButton" Width="128" utility:Margin.Right="8" Style="{StaticResource SaveButtonStyle}" Click="Save">
             <StackPanel Orientation="Vertical">
                 <SymbolIcon Symbol="Save"/>
                 <TextBlock>Save</TextBlock>

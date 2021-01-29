@@ -33,7 +33,13 @@ namespace GHelper.View
 	        GHubRecordSavedCallbacks.Add(saveFunction);
         }
 
-        private void SendRecordSavedNotification(object sender, RoutedEventArgs e)
+        private void Save(object sender, RoutedEventArgs _)
+        {
+	        ResetAppearance();
+	        SendRecordSavedNotification();
+        }
+
+        private void SendRecordSavedNotification()
         {
 	        foreach (Action callBack in GHubRecordSavedCallbacks)
 	        {
