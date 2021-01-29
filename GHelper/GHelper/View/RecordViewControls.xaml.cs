@@ -8,7 +8,7 @@ namespace GHelper.View
 {
 	public partial class RecordViewControls : UserControl
 	{
-		public Collection<Action> GHubRecordSavedCallbacks = new();
+		public readonly Collection<Action> GHubRecordSavedCallbacks = new();
 
 		public RecordViewControls()
         {
@@ -17,12 +17,12 @@ namespace GHelper.View
 
         public void NotifyOfUserChange()
         {
-	        SaveButton.Background = Application.Current.Resources["SystemAccentColorBrush"] as SolidColorBrush;
+	        SaveButton.Background = Application.Current.Resources[Properties.Resources.SystemAccentColorBrush] as SolidColorBrush;
         }
 
         public void ResetAppearance()
         {
-	        var defaultButton = new Button { Style = Application.Current.Resources["SaveButtonStyle"] as Style };
+	        var defaultButton = new Button { Style = Application.Current.Resources[Properties.Resources.SaveButtonStyle] as Style };
 
 	        SaveButton.Background = defaultButton.Background;
 	        SaveButton.Style = defaultButton.Style;
