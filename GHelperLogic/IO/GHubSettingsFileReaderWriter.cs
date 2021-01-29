@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using GHelperLogic.Model;
 using GHelperLogic.Utility.JSONConverter;
 using Newtonsoft.Json;
@@ -25,29 +24,18 @@ namespace GHelperLogic.IO
 			#endif
 		}
 
-		public (ICollection<Application>? applications, ICollection<Profile>? profiles) GetApplicationsData(Stream? settingsFile = null)
+		public GHubSettingsFile Read(Stream? settingsFile = null)
 		{
 			settingsFile ??= GHubSettingsFile;
-			GHubSettingsFile gHubSettingsFile = DeserializeData(settingsFile);
-			
-			ICollection<Application>? applications = gHubSettingsFile.Applications?.Applications;
-			ICollection<Profile>? profiles = gHubSettingsFile.Profiles?.Profiles;
-			
-			return (applications, profiles);
-		}
-
-		public GHubSettingsFile DeserializeData(Stream? settingsFile = null)
-		{
-			settingsFile ??= GHubSettingsFile;
-			JObject parsedSettingsFile = readSettingsFile(settingsFile);
+			JObject parsedSettingsFile = parseSettingsFile(settingsFile);
 			GHubSettingsFile gHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter(), new ProfileJSONConverter())!;
 
 			gHubSettingsFile.AssociateProfilesToApplications();
 
 			return gHubSettingsFile;
 		}
-		
-		private static JObject readSettingsFile(Stream settingsFile)
+
+		private static JObject parseSettingsFile(Stream settingsFile)
 		{
 			using TextReader reader = new StreamReader(settingsFile);
 			using JsonReader settingsFileReader = new JsonTextReader(reader);

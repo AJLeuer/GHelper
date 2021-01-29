@@ -8,20 +8,22 @@ using GHelperLogic.Utility;
 
 namespace GHelper.Service
 {
-	public class ApplicationService
+	public class GHubSettingsFileService
 	{
-		private readonly GHubSettingsFileReaderWriter gHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter();
-		private ObservableCollection<ApplicationViewModel>? Applications;
-		private readonly Reference<MainWindow> MainWindow;
+		private readonly GHubSettingsFileReaderWriter                gHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter();
+		private          GHubSettingsFile?                           GHubSettingsFile;
+		private          ObservableCollection<ApplicationViewModel>? Applications;
+		private readonly Reference<MainWindow>                       MainWindow;
 
-		public ApplicationService(Reference<MainWindow> mainWindow)
+		public GHubSettingsFileService(Reference<MainWindow> mainWindow)
 		{
 			MainWindow = mainWindow;
 		}
 
 		public void Start()
 		{
-			ICollection<Application>? applications = gHubSettingsFileReaderWriter.GetApplicationsData().applications;
+			GHubSettingsFile = gHubSettingsFileReaderWriter.Read();
+			ICollection<Application>? applications = GHubSettingsFile?.Applications?.Applications;
 			this.Applications = new ObservableCollection<ApplicationViewModel>(ApplicationViewModel.CreateFromCollection(applications));
 			MainWindow.Referent!.Applications = this.Applications;
 			RegisterForNotifications();

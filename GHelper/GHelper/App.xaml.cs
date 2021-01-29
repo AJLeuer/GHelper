@@ -15,7 +15,7 @@ namespace GHelper
 	public partial class App : Application
 	{
 		private readonly Reference<MainWindow> window = new Reference<MainWindow>();
-		private readonly ApplicationService applicationService;
+		private readonly GHubSettingsFileService gHubSettingsFileService;
 		
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -27,7 +27,7 @@ namespace GHelper
 			LogManager.Log("Initializing GHelper application.");
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
-			applicationService = new ApplicationService(window);
+			gHubSettingsFileService = new GHubSettingsFileService(window);
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace GHelper
 		{
 			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow();
-			applicationService.Start();
+			gHubSettingsFileService.Start();
 			window.Referent!.Activate();
 		}
 

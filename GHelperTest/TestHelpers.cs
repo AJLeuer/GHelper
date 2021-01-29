@@ -6,7 +6,7 @@ using Moq;
 
 namespace GHelperTest
 {
-	public static partial class GHubSettingsFileReaderOutputTests
+	public static partial class GHubSettingsFileWriterTests
 	{
 		public static class TestHelpers
 		{

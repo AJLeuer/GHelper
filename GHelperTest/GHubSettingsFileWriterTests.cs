@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace GHelperTest
 {
 	[TestFixture]
-	public static partial class GHubSettingsFileReaderOutputTests
+	public static partial class GHubSettingsFileWriterTests
 	{
 		private static GHubSettingsFileReaderWriter? settingsFileReaderWriter;
 		private static MemoryStream TestSettingsFile = 
@@ -37,7 +37,7 @@ namespace GHelperTest
 		public static void SerializedGHubSettingsJSONShouldMatchInput()
 		{
 			var (testSettingsFileOriginal, testSettingsFileDuplicate) = TestSettingsFile.Duplicate();
-			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.DeserializeData(testSettingsFileOriginal)!;
+			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal)!;
 
 			string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);
 			string originalGHubSettingsFile = Encoding.UTF8.GetString(testSettingsFileDuplicate.ToArray(), 0 , (int) TestSettingsFile.Length);
@@ -70,7 +70,7 @@ namespace GHelperTest
 			public static void ShouldSerializePosterDataOfCustomApplications()
 			{
 				var (testSettingsFileOriginal, _) = TestSettingsFile.Duplicate();
-				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.DeserializeData(testSettingsFileOriginal)!;
+				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal)!;
 
 				string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);
 				GHubSettingsFile reDeserializedGHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(reSerializedGHubSettingsFile);
