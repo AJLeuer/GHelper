@@ -39,7 +39,7 @@ namespace GHelperTest
 			var (testSettingsFileOriginal, testSettingsFileDuplicate) = TestSettingsFile.Duplicate();
 			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal)!;
 
-			string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);
+			string reSerializedGHubSettingsFile = settingsFileReaderWriter?.Serialize(gHubSettingsFile)!;
 			string originalGHubSettingsFile = Encoding.UTF8.GetString(testSettingsFileDuplicate.ToArray(), 0 , (int) TestSettingsFile.Length);
 
 			JObject originalGHubSettingsFileJSON = ConvertToJSONObject(originalGHubSettingsFile);

@@ -24,14 +24,14 @@ namespace GHelper.Service
 		{
 			GHubSettingsFile = gHubSettingsFileReaderWriter.Read();
 			ICollection<Application>? applications = GHubSettingsFile?.Applications?.Applications;
-			this.Applications = new ObservableCollection<ApplicationViewModel>(ApplicationViewModel.CreateFromCollection(applications));
+			Applications = new ObservableCollection<ApplicationViewModel>(ApplicationViewModel.CreateFromCollection(applications));
 			MainWindow.Referent!.Applications = this.Applications;
 			RegisterForNotifications();
 		}
 
 		private void Save()
 		{
-			//todo
+			gHubSettingsFileReaderWriter.Write(settingsFileObject: GHubSettingsFile);
 		}
 
 		private void RegisterForNotifications()
