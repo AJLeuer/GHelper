@@ -34,25 +34,25 @@ namespace GHelperLogic.Model
 	    [JsonIgnore]
 	    public Application? Application { get; set; }
 
-	    [JsonProperty("activeForApplication")]
+	    [JsonProperty("activeForApplication", NullValueHandling=NullValueHandling.Ignore)]
 	    public bool? ActiveForApplication { get; set; }
 
 	    [JsonProperty("assignments")]
 	    public Assignment[]? Assignments { get; set; }
 	    
-	    [JsonProperty("categoryColors")]
+	    [JsonProperty("categoryColors", NullValueHandling=NullValueHandling.Ignore)]
 	    public CategoryColor[]? CategoryColors { get; set; }
 	    
-	    [JsonProperty("commands")]
+	    [JsonProperty("commands", NullValueHandling=NullValueHandling.Ignore)]
 	    public Command[]? Commands { get; set; }
 
 	    [JsonProperty("id")]
 	    public Guid? ID { get; set; }
 
-	    [JsonProperty("lightingCard")]
+	    [JsonProperty("lightingCard", NullValueHandling=NullValueHandling.Ignore)]
 	    public Guid? LightingCard { get; set; }
 
-	    [JsonProperty("syncLightingCard")]
+	    [JsonProperty("syncLightingCard", NullValueHandling=NullValueHandling.Ignore)]
 	    public Guid? SyncLightingCard { get; set; }
 
 	    [JsonExtensionData]

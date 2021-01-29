@@ -1,5 +1,6 @@
 using System.IO;
 using System.Reflection;
+using System.Text;
 using GHelperLogic.Model;
 using GHelperLogic.Utility.JSONConverter;
 using Newtonsoft.Json;
@@ -21,10 +22,9 @@ namespace GHelperLogic.IO
 														FileAccess.ReadWrite);
 
 			#elif RELEASE || DEBUGRELEASE
-				GHubSettingsFile = new FileStream(
-						Properties.Configuration.DefaultFilePath.ToString()!,
-						FileMode.Open,
-						FileAccess.ReadWrite);
+				GHubSettingsFileStream = new FileStream(Properties.Configuration.DefaultFilePath.ToString()!,
+														FileMode.Open,
+														FileAccess.ReadWrite);
 
 			#endif
 		}
@@ -45,7 +45,7 @@ namespace GHelperLogic.IO
 			settingsFileStream ??= GHubSettingsFileStream;
 			settingsFileObject ??= GHubSettingsFileObject;
 
-			using (StreamWriter settingsFileWriter = new (settingsFileStream))
+			using (StreamWriter settingsFileWriter = new (stream: settingsFileStream, encoding: new UTF8Encoding(), bufferSize: -1, leaveOpen: true))
 			{
 				//discard the old contents of the file
 				settingsFileStream.SetLength(0); 
