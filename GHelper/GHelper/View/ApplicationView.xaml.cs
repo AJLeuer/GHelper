@@ -22,6 +22,7 @@ namespace GHelper.View
 		    {
 			    SetValue(ApplicationProperty, value);
 			    ResetAppearance();
+			    DetermineNameViewStyle();
 		    }
 	    }
 
@@ -34,7 +35,7 @@ namespace GHelper.View
         {
 	        InitializeComponent();
         }
-	    
+
 	    public void RegisterForSaveNotification(Action saveFunction)
 	    {
 		    RecordViewControls.RegisterForSaveNotification(saveFunction);
@@ -58,6 +59,21 @@ namespace GHelper.View
 	    private void ResetAppearance()
 	    {
 		    RecordViewControls.ResetAppearance();
+	    }
+
+	    private void DetermineNameViewStyle()
+	    {
+		    Style editableTextBox = (Microsoft.UI.Xaml.Application.Current.Resources[Properties.Resources.StandardTextBox] as Style)!;
+		    Style immutableTextBox = (Microsoft.UI.Xaml.Application.Current.Resources[Properties.Resources.ImmutableTextBox] as Style)!;
+
+		    if ((Application.Application?.IsCustom != null) && (Application.Application?.IsCustom == true))
+		    {
+			    NameView.Style = editableTextBox;
+		    }
+		    else
+		    {
+			    NameView.Style = immutableTextBox;
+		    }
 	    }
     }
 }

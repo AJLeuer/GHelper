@@ -19,7 +19,7 @@ namespace GHelper.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,11 +61,29 @@ namespace GHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ImmutableTextBox.
+        /// </summary>
+        internal static string ImmutableTextBox {
+            get {
+                return ResourceManager.GetString("ImmutableTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SaveButtonStyle.
         /// </summary>
         internal static string SaveButtonStyle {
             get {
                 return ResourceManager.GetString("SaveButtonStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StandardTextBox.
+        /// </summary>
+        internal static string StandardTextBox {
+            get {
+                return ResourceManager.GetString("StandardTextBox", resourceCulture);
             }
         }
         

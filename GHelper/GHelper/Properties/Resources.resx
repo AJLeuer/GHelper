@@ -123,4 +123,10 @@
   <data name="SystemAccentColorBrush" xml:space="preserve">
     <value>SystemAccentColorBrush</value>
   </data>
+  <data name="StandardTextBox" xml:space="preserve">
+      <value>StandardTextBox</value>
+  </data>
+  <data name="ImmutableTextBox" xml:space="preserve">
+      <value>ImmutableTextBox</value>
+  </data>
 </root>
