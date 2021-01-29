@@ -16,13 +16,12 @@ namespace GHelperLogic.IO
 		static GHubSettingsFileReaderWriter()
 		{
 			#if DEBUG
-				string settingFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, @"Properties\DummyGHUBSettings.json");
-				GHubSettingsFileStream = new FileStream(settingFilePath,
-														FileMode.Open,
-														FileAccess.ReadWrite);
+				GHubSettingsFileStream = new FileStream(Properties.Configuration.DummyDebugGHubSettingsFilePath.ToString()!,
+				                                        FileMode.Open,
+				                                        FileAccess.ReadWrite);
 
 			#elif RELEASE || DEBUGRELEASE
-				GHubSettingsFileStream = new FileStream(Properties.Configuration.DefaultFilePath.ToString()!,
+				GHubSettingsFileStream = new FileStream(Properties.Configuration.DefaultGHubSettingsFilePath.ToString()!,
 														FileMode.Open,
 														FileAccess.ReadWrite);
 

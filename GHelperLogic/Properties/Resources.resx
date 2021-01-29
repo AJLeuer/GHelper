@@ -136,4 +136,7 @@
   <data name="GHelperLogFileName" xml:space="preserve">
     <value>Log.log</value>
   </data>
+  <data name="DummyGHUBSettingsRelativePath" xml:space="preserve">
+      <value>Properties\DummyGHUBSettings.json</value>
+  </data>
 </root>
