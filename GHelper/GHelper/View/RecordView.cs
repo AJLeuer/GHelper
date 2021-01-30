@@ -10,6 +10,7 @@ namespace GHelper.View
 		public GHubRecordViewModel? GHubRecord { get; }
 
 		void RegisterForSaveNotification(Action saveFunction);
+		void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction);
 		
 		protected void SendRecordChangedNotification();
 
@@ -41,6 +42,4 @@ namespace GHelper.View
 			}
 		}
 	}
-
-	public delegate void GHubRecordSavedEvent();
 }

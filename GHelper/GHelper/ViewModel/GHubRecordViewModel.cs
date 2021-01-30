@@ -4,7 +4,7 @@ namespace GHelper.ViewModel
 {
 	public abstract class GHubRecordViewModel
 	{
-		protected abstract GHubRecord? GHubRecord { get;}
+		public abstract GHubRecord? GHubRecord { get;}
 		
 		public abstract string Name { set; } 
 		

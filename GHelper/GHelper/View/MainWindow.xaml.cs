@@ -10,8 +10,7 @@ namespace GHelper.View
 {
 	public sealed partial class MainWindow : Window
 	{
-		public  Reference<ObservableCollection<ApplicationViewModel>>? Applications { get; set; }
-		private ObservableCollection<ApplicationViewModel>?            applications { get { return Applications?.Referent; } }
+		public ObservableCollection<ApplicationViewModel>?	Applications { get; set; }
 
 		public GHubRecord? CurrentDisplayedItem { get; private set; } = null;
 
@@ -57,6 +56,12 @@ namespace GHelper.View
 		{
 			ProfileView.RegisterForSaveNotification(saveFunction);
 			ApplicationView.RegisterForSaveNotification(saveFunction);
+		}
+
+		public void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction)
+		{
+			ProfileView.RegisterForDeleteNotification(deleteFunction);
+			ApplicationView.RegisterForDeleteNotification(deleteFunction);
 		}
 	}
 }

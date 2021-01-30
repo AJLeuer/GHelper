@@ -19,10 +19,12 @@ namespace GHelperLogic.Model
 		
 		public void AssociateProfilesToApplications()
 		{
+			ClearAssociations();
 			ICollection<Application>? applications = Applications?.Applications;
 			ICollection<Profile>? profiles = Profiles?.Profiles;
-			
+
 			if (profiles != null)
+			{
 				foreach (Profile profile in profiles)
 				{
 					if (profile.ApplicationID != null)
@@ -35,28 +37,64 @@ namespace GHelperLogic.Model
 						}
 					}
 				}
+			}
+
 		}
+
+		private void ClearAssociations()
+		{
+			ClearApplicationAssociations();
+			ClearProfileAssociations();
+		}
+		
+		private void ClearApplicationAssociations()
+		{
+			ICollection<Application>? applications = Applications?.Applications;
+
+			if (applications != null)
+			{
+				foreach (Application application in applications)
+				{
+					application.Profiles.Clear();
+				}
+			}
+		}
+
+		private void ClearProfileAssociations()
+		{
+			ICollection<Profile>? profiles = Profiles?.Profiles;
+
+			if (profiles != null)
+			{
+				foreach (Profile profile in profiles)
+				{
+					profile.Application = null;
+				}
+			}
+		}
+		
+		
 	}
 
 	public class ApplicationList
 	{
 		[JsonProperty("applications")]
-		public Application[]? Applications { get; set; }
+		public Collection<Application>? Applications { get; set; }
 		
 		public static implicit operator ApplicationList (Collection<Application> applications)
 		{
-			return new ApplicationList { Applications = applications.ToArray() };
+			return new ApplicationList { Applications = applications };
 		}
 	}
 
 	public class ProfileList
 	{
 		[JsonProperty("profiles")]
-		public Profile[]? Profiles { get; set; }
+		public Collection<Profile>? Profiles { get; set; }
 		
 		public static implicit operator ProfileList (Collection<Profile> profiles)
 		{
-			return new ProfileList { Profiles = profiles.ToArray() };
+			return new ProfileList { Profiles = profiles };
 		}
 	}
 }

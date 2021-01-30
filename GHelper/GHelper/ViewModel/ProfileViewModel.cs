@@ -7,7 +7,7 @@ namespace GHelper.ViewModel
 {
 	public class ProfileViewModel : GHubRecordViewModel, INotifyPropertyChanged
 	{
-		protected override GHubRecord? GHubRecord 
+		public override GHubRecord? GHubRecord 
 		{
 			get { return this.Profile; }
 		}

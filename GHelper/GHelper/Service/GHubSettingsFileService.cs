@@ -32,11 +32,18 @@ namespace GHelper.Service
 			GHubSettingsFileReaderWriter.Write(settingsFileObject: GHubSettingsFileViewModel?.GHubSettingsFile);
 		}
 
+		private void Delete(GHubRecordViewModel recordViewModel)
+		{
+			GHubSettingsFileViewModel?.Delete(recordViewModel);
+			Save();
+		}
+
 		private void RegisterForNotifications()
 		{
 			if (MainWindow.Referent is not null)
 			{
 				MainWindow.Referent!.RegisterForSaveNotification(this.Save);
+				MainWindow.Referent!.RegisterForDeleteNotification(this.Delete);
 			}
 		}
 	}

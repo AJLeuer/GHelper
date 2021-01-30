@@ -29,7 +29,7 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		protected override GHubRecord? GHubRecord 
+		public override GHubRecord? GHubRecord 
 		{
 			get { return this.Application; }
 		}

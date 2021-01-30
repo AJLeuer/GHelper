@@ -41,6 +41,16 @@ namespace GHelper.View
 		    RecordViewControls.RegisterForSaveNotification(saveFunction);
 	    }
 
+	    public void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction)
+	    {
+		    Action delete = () =>
+		    {
+			    deleteFunction(this.GHubRecord);
+		    };
+		    
+		    RecordViewControls.RegisterForDeleteNotification(delete);
+	    }
+
 	    void RecordView.SendRecordChangedNotification()
 	    {
 		    RecordViewControls.NotifyOfUserChange();
