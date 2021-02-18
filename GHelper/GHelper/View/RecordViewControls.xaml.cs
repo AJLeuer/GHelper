@@ -54,7 +54,7 @@ namespace GHelper.View
         {
 	        foreach (Action callBack in GHubRecordSavedCallbacks)
 	        {
-		        callBack?.Invoke();
+		        callBack.Invoke();
 	        }
         }
 

@@ -8,7 +8,7 @@ namespace GHelper.View
 	public partial class ApplicationSelectorView : StackPanel
 	{
 		public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
-			nameof (ApplicationSelectorView.Application),
+			nameof (Application),
 			typeof (ApplicationViewModel),
 			typeof (ApplicationSelectorView),
 			new PropertyMetadata(null)

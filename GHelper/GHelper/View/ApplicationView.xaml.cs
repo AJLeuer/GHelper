@@ -6,12 +6,12 @@ using Microsoft.UI.Xaml.Input;
 
 namespace GHelper.View
 {
-	public partial class ApplicationView : UserControl, RecordView 
-    {
+	public partial class ApplicationView : UserControl, IApplicationView
+	{
 	    public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
-		    nameof (ApplicationSelectorView.Application),
+		    nameof (Application),
 		    typeof (ApplicationViewModel),
-		    typeof (ApplicationSelectorView),
+		    typeof (ApplicationView),
 		    new PropertyMetadata(null)
 	    );
 		
@@ -31,9 +31,11 @@ namespace GHelper.View
 		    get { return Application; }
 	    }
 
-	    public ApplicationView()
+	    public ApplicationView(Action saveFunction, Action<GHubRecordViewModel> deleteFunction)
         {
 	        InitializeComponent();
+	        RegisterForSaveNotification(saveFunction);
+	        RegisterForDeleteNotification(deleteFunction);
         }
 
 	    public void RegisterForSaveNotification(Action saveFunction)
@@ -56,34 +58,24 @@ namespace GHelper.View
 		    RecordViewControls.NotifyOfUserChange();
 	    }
 
-	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
+	    protected void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
         {
 	        RecordView.ChangeName(this, sender);
         }
 
-	    private void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
+	    protected void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
         {
 	        RecordView.ChangeName(this, eventInfo);
         }
 
-	    private void ResetAppearance()
+	    public void ResetAppearance()
 	    {
 		    RecordViewControls.ResetAppearance();
 	    }
 
-	    private void DetermineNameViewStyle()
+	    public void DetermineNameViewStyle()
 	    {
-		    Style editableTextBox = (Microsoft.UI.Xaml.Application.Current.Resources[Properties.Resources.StandardTextBox] as Style)!;
-		    Style immutableTextBox = (Microsoft.UI.Xaml.Application.Current.Resources[Properties.Resources.ImmutableTextBox] as Style)!;
-
-		    if ((Application.Application?.IsCustom != null) && (Application.Application?.IsCustom == true))
-		    {
-			    NameView.Style = editableTextBox;
-		    }
-		    else
-		    {
-			    NameView.Style = immutableTextBox;
-		    }
+		    IApplicationView.DetermineNameViewStyle(Application, NameTextBox);
 	    }
-    }
+	}
 }

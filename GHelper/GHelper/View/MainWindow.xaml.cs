@@ -11,10 +11,10 @@ namespace GHelper.View
 	{
 		public ObservableCollection<ApplicationViewModel>?	Applications { get; set; }
 
-		public GHubRecord? CurrentDisplayedItem { get; private set; } = null;
+		public  GHubRecord?                 CurrentDisplayedItem { get; private set; } = null;
+		private Action                      SaveFunction         { get; set; }
+		private Action<GHubRecordViewModel> DeleteFunction       { get; set; } 
 
-		private ApplicationView ApplicationView { get; set; } = new();
-		private ProfileView ProfileView { get; set; } = new();
 
 		public MainWindow()
 		{
@@ -23,14 +23,12 @@ namespace GHelper.View
 
 		private void ApplicationSelected(ApplicationViewModel application)
 		{
-			ApplicationView.Application = application;
-			GHubDataDisplay.Content = ApplicationView;
+			GHubDataDisplay.Content = RecordView.CreateViewForViewModel(application, SaveFunction, DeleteFunction);
 		}
 
 		private void ProfileSelected(ProfileViewModel profile)
 		{
-			ProfileView.Profile = profile;
-			GHubDataDisplay.Content = ProfileView;
+			GHubDataDisplay.Content = RecordView.CreateViewForViewModel(profile, SaveFunction, DeleteFunction);
 		}
 
 		private void HandleSelectedGHubRecordChanged(TreeView sender, TreeViewSelectionChangedEventArgs info)
@@ -53,14 +51,12 @@ namespace GHelper.View
 
 		public void RegisterForSaveNotification(Action saveFunction)
 		{
-			ProfileView.RegisterForSaveNotification(saveFunction);
-			ApplicationView.RegisterForSaveNotification(saveFunction);
+			SaveFunction = saveFunction;
 		}
 
 		public void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction)
 		{
-			ProfileView.RegisterForDeleteNotification(deleteFunction);
-			ApplicationView.RegisterForDeleteNotification(deleteFunction);
+			DeleteFunction = deleteFunction;
 		}
 	}
 }

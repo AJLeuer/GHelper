@@ -8,7 +8,7 @@ namespace GHelper.View
     {
 
 	    public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register(
-		    nameof (ProfileSelectorView.Profile),
+		    nameof (Profile),
 		    typeof (ProfileViewModel),
 		    typeof (ProfileSelectorView),
 		    new PropertyMetadata(null)

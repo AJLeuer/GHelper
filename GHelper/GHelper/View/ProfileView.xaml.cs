@@ -9,9 +9,9 @@ namespace GHelper.View
 	public partial class ProfileView : UserControl, RecordView
 	{
 		public static readonly DependencyProperty ProfileProperty = DependencyProperty.Register(
-			nameof (ProfileSelectorView.Profile),
+			nameof (Profile),
 			typeof (ProfileViewModel),
-			typeof (ProfileSelectorView),
+			typeof (ProfileView),
 			new PropertyMetadata(null)
 		);
 	    
@@ -30,9 +30,11 @@ namespace GHelper.View
 			get { return Profile; }
 		}
 
-		public ProfileView()
+		public ProfileView(Action saveFunction, Action<GHubRecordViewModel> deleteFunction)
         {
             InitializeComponent();
+            RegisterForSaveNotification(saveFunction);
+            RegisterForDeleteNotification(deleteFunction);
         }
 
 		public void RegisterForSaveNotification(Action saveFunction)
