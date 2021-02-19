@@ -43,7 +43,7 @@
                 </Setter>
             </Style>
             <Style TargetType="view:RecordViewControls" x:Key="RecordViewControlsStyle">
-                <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                 <Setter Property="VerticalAlignment" Value="Top"></Setter>
                 <Setter Property="Margin" Value="0,0,0,48"/>
             </Style>

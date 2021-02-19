@@ -29,7 +29,7 @@ namespace GHelper.View
 			}
 		}
 		
-		public        GHubRecordViewModel? GHubRecord { get; }
+		public GHubRecordViewModel? GHubRecord { get; }
 
 		void RegisterForSaveNotification(Action saveFunction);
 		void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction);
