@@ -5,7 +5,7 @@ using GHelperLogic.Model;
 
 namespace GHelper.ViewModel
 {
-	public class ProfileViewModel : GHubRecordViewModel, INotifyPropertyChanged
+	public class ProfileViewModel : GHubRecordViewModel
 	{
 		public override GHubRecord? GHubRecord 
 		{
@@ -49,7 +49,7 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public event PropertyChangedEventHandler? PropertyChanged;
+		public override event PropertyChangedEventHandler? PropertyChanged;
 
 		public ProfileViewModel(Profile profile)
 		{

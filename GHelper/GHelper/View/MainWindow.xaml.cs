@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using GHelper.ViewModel;
-using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 

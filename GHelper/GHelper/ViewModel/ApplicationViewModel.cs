@@ -11,7 +11,7 @@ using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.ViewModel
 {
-	public class ApplicationViewModel : GHubRecordViewModel, INotifyPropertyChanged
+	public class ApplicationViewModel : GHubRecordViewModel
 	{
 		public static Image DefaultPosterImage { get ; } = new ();
 
@@ -99,7 +99,7 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public event PropertyChangedEventHandler? PropertyChanged;
+		public override event PropertyChangedEventHandler? PropertyChanged;
 
 		public ApplicationViewModel(Application application)
 		{

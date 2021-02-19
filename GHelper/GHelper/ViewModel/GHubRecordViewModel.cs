@@ -1,8 +1,9 @@
-﻿using GHelperLogic.Model;
+﻿using System.ComponentModel;
+using GHelperLogic.Model;
 
 namespace GHelper.ViewModel
 {
-	public abstract class GHubRecordViewModel
+	public abstract class GHubRecordViewModel : INotifyPropertyChanged
 	{
 		public abstract GHubRecord? GHubRecord { get;}
 		
@@ -12,5 +13,6 @@ namespace GHelper.ViewModel
 		{
 			get => GHubRecord?.DisplayName;
 		}
+		public abstract event PropertyChangedEventHandler? PropertyChanged;
 	}
 }
