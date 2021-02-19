@@ -1,13 +1,16 @@
-﻿<UserControl     
+<UserControl     
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="using:GHelper.View"
     x:Class="GHelper.View.DesktopApplicationView">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="384"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition MinHeight="128"/>
+            <RowDefinition Height="Auto"/>  
         </Grid.RowDefinitions>
         
         <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>

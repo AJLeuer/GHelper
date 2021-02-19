@@ -7,12 +7,13 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="384"/>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition MinHeight="128"/>
+            <RowDefinition Height="Auto"/>            
         </Grid.RowDefinitions>
         
         <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>

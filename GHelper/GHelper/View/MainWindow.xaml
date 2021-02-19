@@ -48,7 +48,7 @@
             </Grid>
         </SplitView.Pane>
         
-        <ContentControl x:Name="GHubDataDisplay" Margin="48,48,48,48"/>
+        <ContentControl x:Name="GHubDataDisplay" Margin="48,48,48,0"/>
         
     </SplitView>
 </Window>
