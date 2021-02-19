@@ -52,8 +52,7 @@
                 <Setter Property="Spacing" Value="24"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
             </Style>
-            <Style x:Key="SaveButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}" >
-            </Style>
+            <Style x:Key="StandardButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}" />
             <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"/>
         </ResourceDictionary>
     </Application.Resources>

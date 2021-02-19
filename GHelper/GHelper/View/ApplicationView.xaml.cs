@@ -67,6 +67,11 @@ namespace GHelper.View
         {
 	        RecordView.ChangeName(this, eventInfo);
         }
+	    
+	    private void SetNewCustomImage(object sender, RoutedEventArgs routedEventInfo)
+	    {
+
+	    }
 
 	    public void ResetAppearance()
 	    {

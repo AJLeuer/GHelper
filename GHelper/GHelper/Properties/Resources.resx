@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SaveButtonStyle" xml:space="preserve">
-    <value>SaveButtonStyle</value>
+  <data name="StandardButtonStyle" xml:space="preserve">
+    <value>StandardButtonStyle</value>
   </data>
   <data name="SystemAccentColorBrush" xml:space="preserve">
     <value>SystemAccentColorBrush</value>
   </data>
   <data name="StandardTextBox" xml:space="preserve">
-      <value>StandardTextBox</value>
+    <value>StandardTextBox</value>
   </data>
   <data name="ImmutableTextBox" xml:space="preserve">
-      <value>ImmutableTextBox</value>
+    <value>ImmutableTextBox</value>
   </data>
 </root>

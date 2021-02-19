@@ -23,7 +23,7 @@ namespace GHelper.View
 
 		public void ResetAppearance()
         {
-	        var defaultButton = new Button { Style = Application.Current.Resources[Properties.Resources.SaveButtonStyle] as Style };
+	        var defaultButton = new Button { Style = Application.Current.Resources[Properties.Resources.StandardButtonStyle] as Style };
 
 	        SaveButton.Background = defaultButton.Background;
 	        SaveButton.Style = defaultButton.Style;

@@ -9,7 +9,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="384"/>
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="128"/>
@@ -32,8 +31,14 @@
         </StackPanel>
         
         <StackPanel Grid.Row="1" Grid.Column="1" utility:Margin.Left="32" Orientation="Vertical">
-            <TextBlock Text="Image" utility:Margin.Bottom="16" Foreground="Gray"/>
-            <Image Source="{x:Bind Application.Poster.Source, Mode=OneWay}" Width="220" ></Image>
+            <TextBlock Text="Poster" utility:Margin.Bottom="16" Foreground="Gray"/>
+            <Image Source="{x:Bind Application.Poster.Source, Mode=OneWay}" Width="220" utility:Margin.Bottom="16"></Image>
+            <Button x:Name="SetCustomPosterImageButton" Width="192" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Click="SetNewCustomImage">
+                <StackPanel Orientation="Vertical">
+                    <SymbolIcon Symbol="BrowsePhotos"/>
+                    <TextBlock>Choose Custom Image...</TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
         
     </Grid>
