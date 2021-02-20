@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using GHelper.Annotations;
 using GHelperLogic.Model;
 
-namespace GHelper.ViewModel
+namespace GHelper.ViewModel 
 {
 	public class ProfileViewModel : GHubRecordViewModel
 	{
@@ -54,6 +54,13 @@ namespace GHelper.ViewModel
 		public ProfileViewModel(Profile profile)
 		{
 			this.Profile = profile;
+			SaveBackup();
+		}
+		
+		public override void RestoreInitialState()
+		{
+			base.RestoreInitialState();
+			OnPropertyChanged(nameof(Profile));
 		}
 
 		[NotifyPropertyChangedInvocator]

@@ -9,8 +9,8 @@
     xmlns:viewModel="using:GHelper.ViewModel"
     mc:Ignorable="d">
 
-    <SplitView PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"
-           IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
+    <SplitView x:Name="MainView" PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"
+               IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
         <SplitView.Resources>
             
             <DataTemplate x:Key="ApplicationTemplate" x:DataType="viewModel:ApplicationViewModel">

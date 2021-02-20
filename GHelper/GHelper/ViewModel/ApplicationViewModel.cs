@@ -9,7 +9,7 @@ using GHelperLogic.Model;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
 
-namespace GHelper.ViewModel
+namespace GHelper.ViewModel 
 {
 	public class ApplicationViewModel : GHubRecordViewModel
 	{
@@ -104,8 +104,15 @@ namespace GHelper.ViewModel
 		public ApplicationViewModel(Application application)
 		{
 			this.Application = application;
+			SaveBackup();
 		}
-
+		
+		public override void RestoreInitialState()
+		{
+			base.RestoreInitialState();
+			OnPropertyChanged(nameof(Application));
+		}
+		
 		private void createProfileViewModelsFromApplicationProfiles()
 		{
 			profiles = new ObservableCollection<ProfileViewModel>();

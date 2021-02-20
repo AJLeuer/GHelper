@@ -11,24 +11,37 @@ namespace GHelperLogic.Model
 	    
 	    public Profile(Profile profile)
 	    {
-		    Application = profile.Application;
-		    ActiveForApplication = profile.ActiveForApplication;
-		    ApplicationFolder = profile.ApplicationFolder;
-		    ApplicationID = profile.ApplicationID;
-		    ApplicationPath = profile.ApplicationPath;
-		    Assignments = profile.Assignments;
-		    CategoryColors = profile.CategoryColors;
-		    Commands = profile.Commands;
-		    DatabaseID = profile.DatabaseID;
-		    IsInstalled = profile.IsInstalled;
-		    ID = profile.ID;
-		    LightingCard = profile.LightingCard;
-		    Name = profile.Name;
-		    PosterURL = profile.PosterURL;
-		    ProfileURL = profile.ProfileURL;
-		    SyncLightingCard = profile.SyncLightingCard;
-		    Version = profile.Version;
-		    AdditionalData = profile.AdditionalData;
+			CopyStateFrom(profile);
+	    }
+
+	    public override GHubRecord Clone()
+	    {
+		    return new Profile(this);
+	    }
+
+	    public sealed override void CopyStateFrom(GHubRecord otherRecord)
+	    {
+		    if (otherRecord is Profile otherProfile)
+		    {
+			    Application = otherProfile.Application;
+			    ActiveForApplication = otherProfile.ActiveForApplication;
+			    ApplicationFolder = otherProfile.ApplicationFolder;
+			    ApplicationID = otherProfile.ApplicationID;
+			    ApplicationPath = otherProfile.ApplicationPath;
+			    Assignments = otherProfile.Assignments;
+			    CategoryColors = otherProfile.CategoryColors;
+			    Commands = otherProfile.Commands;
+			    DatabaseID = otherProfile.DatabaseID;
+			    IsInstalled = otherProfile.IsInstalled;
+			    ID = otherProfile.ID;
+			    LightingCard = otherProfile.LightingCard;
+			    Name = otherProfile.Name;
+			    PosterURL = otherProfile.PosterURL;
+			    ProfileURL = otherProfile.ProfileURL;
+			    SyncLightingCard = otherProfile.SyncLightingCard;
+			    Version = otherProfile.Version;
+			    AdditionalData = otherProfile.AdditionalData;
+		    }
 	    }
 
 	    [JsonIgnore]

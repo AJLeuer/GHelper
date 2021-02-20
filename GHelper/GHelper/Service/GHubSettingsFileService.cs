@@ -19,10 +19,15 @@ namespace GHelper.Service
 
 		public void Start()
 		{
+			Load();
+			RegisterForNotifications();
+		}
+
+		private void Load()
+		{
 			GHubSettingsFile gHubSettingsFile = GHubSettingsFileReaderWriter.Read();
 			GHubSettingsFileViewModel = new GHubSettingsFileViewModel(gHubSettingsFile);
 			MainWindow.Referent!.Applications = GHubSettingsFileViewModel.Applications;
-			RegisterForNotifications();
 		}
 
 		private void Save()

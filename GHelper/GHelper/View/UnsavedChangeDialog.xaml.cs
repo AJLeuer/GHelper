@@ -2,9 +2,9 @@
 
 namespace GHelper.View
 {
-    public sealed partial class UnsavedChangeModal : ContentDialog
+    public partial class UnsavedChangeDialog : ContentDialog
     {
-        public UnsavedChangeModal()
+        public UnsavedChangeDialog()
         {
             this.InitializeComponent();
         }

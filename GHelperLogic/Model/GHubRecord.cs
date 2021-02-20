@@ -1,11 +1,12 @@
 ﻿using System;
+using GHelper.Utility;
 using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;
 
 namespace GHelperLogic.Model
 {
-	public abstract class GHubRecord
+	public abstract class GHubRecord : ICloneable<GHubRecord>
 	{
 		[JsonProperty("name")]
 		public string? Name { get; set; }
@@ -41,5 +42,8 @@ namespace GHelperLogic.Model
 		{
 			get { return this.Name; }
 		}
+
+		public abstract GHubRecord Clone();
+		public abstract void CopyStateFrom(GHubRecord otherRecord);
 	}
 }

@@ -19,21 +19,34 @@ namespace GHelperLogic.Model
 
 		public Application(Application application)
 		{
-			Profiles = application.Profiles;
-			ApplicationFolder = application.ApplicationFolder;
-			ApplicationID = application.ApplicationID;
-			ApplicationPath = application.ApplicationPath;
-			CategoryColors = application.CategoryColors;
-			Commands = application.Commands;
-			DatabaseID = application.DatabaseID;
-			IsInstalled = application.IsInstalled;
-			LastRunTime = application.LastRunTime;
-			// ReSharper disable once VirtualMemberCallInConstructor
-			Name = application.Name;
-			PosterURL = application.PosterURL;
-			ProfileURL = application.ProfileURL;
-			Version = application.Version;
-			AdditionalData = application.AdditionalData;
+			CopyStateFrom(application);
+		}
+
+		public override GHubRecord Clone()
+		{
+			return new Application(this);
+		}
+
+		public sealed override void CopyStateFrom(GHubRecord otherRecord)
+		{
+			if (otherRecord is Application otherApplication)
+			{
+				Profiles = otherApplication.Profiles;
+				ApplicationFolder = otherApplication.ApplicationFolder;
+				ApplicationID = otherApplication.ApplicationID;
+				ApplicationPath = otherApplication.ApplicationPath;
+				CategoryColors = otherApplication.CategoryColors;
+				Commands = otherApplication.Commands;
+				DatabaseID = otherApplication.DatabaseID;
+				IsInstalled = otherApplication.IsInstalled;
+				LastRunTime = otherApplication.LastRunTime;
+				// ReSharper disable once VirtualMemberCallInConstructor
+				Name = otherApplication.Name;
+				PosterURL = otherApplication.PosterURL;
+				ProfileURL = otherApplication.ProfileURL;
+				Version = otherApplication.Version;
+				AdditionalData = otherApplication.AdditionalData;
+			}
 		}
 
 		[JsonProperty("categoryColors", NullValueHandling=NullValueHandling.Ignore)]
@@ -57,7 +70,7 @@ namespace GHelperLogic.Model
 		public IDictionary<string, JToken>? AdditionalData { get; set; }
 
 		[JsonIgnore] 
-		public Collection<Profile> Profiles { get; } = new ();
+		public Collection<Profile> Profiles { get; private set; } = new ();
 
 		[JsonIgnore]
 		public Guid? ID
