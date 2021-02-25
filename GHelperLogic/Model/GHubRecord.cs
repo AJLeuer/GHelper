@@ -72,12 +72,14 @@ namespace GHelperLogic.Model
 			{
 				return true;
 			}
+			
 			return Name == other.Name && Nullable.Equals(ApplicationID, other.ApplicationID) && Equals(ApplicationFolder, other.ApplicationFolder) && Equals(ApplicationPath, other.ApplicationPath) && Nullable.Equals(DatabaseID, other.DatabaseID) && IsInstalled == other.IsInstalled && Equals(PosterURL, other.PosterURL) && Equals(ProfileURL, other.ProfileURL) && Version == other.Version;
 		}
 
 		public override bool Equals(object? obj)
 		{
-			if (ReferenceEquals(null, obj))
+			
+			if (obj is not GHubRecord)
 			{
 				return false;
 			}
@@ -87,10 +89,6 @@ namespace GHelperLogic.Model
 				return true;
 			}
 
-			if (obj.GetType() != this.GetType())
-			{
-				return false;
-			}
 			return Equals((GHubRecord) obj);
 		}
 

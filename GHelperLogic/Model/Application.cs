@@ -91,12 +91,13 @@ namespace GHelperLogic.Model
 			{
 				return true;
 			}
+			
 			return base.Equals(other) && Equals(CategoryColors, other.CategoryColors) && Equals(Commands, other.Commands) && Nullable.Equals(LastRunTime, other.LastRunTime) && IsCustom == other.IsCustom && Equals(Poster, other.Poster) && Equals(AdditionalData, other.AdditionalData) && Profiles.Equals(other.Profiles);
 		}
 
 		public override bool Equals(object? obj)
 		{
-			if (ReferenceEquals(null, obj))
+			if (obj is not Application)
 			{
 				return false;
 			}
@@ -106,11 +107,6 @@ namespace GHelperLogic.Model
 				return true;
 			}
 
-			if (obj.GetType() != this.GetType())
-			{
-				return false;
-			}
-			
 			return Equals((Application) obj);
 		}
 
