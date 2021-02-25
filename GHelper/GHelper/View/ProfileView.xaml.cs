@@ -70,7 +70,7 @@ namespace GHelper.View
 
 	    private void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
 	    {
-		    RecordView.ChangeName(this, eventInfo);
+		    RecordView.ChangeName(this, eventInfo.Element);
 	    }
 	    
 	    private void ResetAppearance()

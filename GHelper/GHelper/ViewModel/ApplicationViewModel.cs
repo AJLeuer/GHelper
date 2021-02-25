@@ -88,7 +88,7 @@ namespace GHelper.ViewModel
 				{
 					return "Installed";
 				}
-				if ((Application == null) || (Application.IsInstalled == null) || (Application.IsInstalled == false))
+				if (Application?.IsInstalled == null || (Application.IsInstalled == false))
 				{
 					return "Not Installed";
 				}

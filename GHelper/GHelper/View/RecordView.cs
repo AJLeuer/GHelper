@@ -44,14 +44,6 @@ namespace GHelper.View
 			}
 		}
 
-		protected static void ChangeName(RecordView recordView, KeyboardAcceleratorInvokedEventArgs eventInfo)
-		{
-			if (eventInfo.Element is TextBox textBox)
-			{
-				ChangeName(recordView, textBox);
-			}
-		}
-
 		protected static void ChangeName(RecordView recordView, TextBox textBox)
 		{
 			if (textBox.Text != recordView.GHubRecord?.DisplayName)
