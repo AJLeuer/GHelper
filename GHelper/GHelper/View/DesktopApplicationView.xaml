@@ -16,7 +16,7 @@
         <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
        
         <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
-            <TextBox x:Name="NameTextBox" Header="Name" Text="{x:Bind Application.DisplayName, Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" LostFocus="HandleNameChange" >
+            <TextBox x:Name="NameTextBox" Header="Name" Text="{x:Bind Application.DisplayName, Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" KeyUp="HandleNameChange" >
                 <TextBox.KeyboardAccelerators>
                     <KeyboardAccelerator Key="Enter" Invoked="HandleNameChange"/>
                 </TextBox.KeyboardAccelerators>
