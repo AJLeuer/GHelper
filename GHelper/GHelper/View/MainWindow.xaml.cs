@@ -1,6 +1,5 @@
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
@@ -84,23 +83,10 @@ namespace GHelper.View
 
 		private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord, TreeViewNode selectedNode)
 		{
-			if (DisplayedRecord != null)
-			{
-				DisplayedRecord.PropertyChanged -= HandleDisplayedRecordModified;
-			}
-
 			DisplayedRecord = gHubRecord;
-			DisplayedRecord.PropertyChanged += HandleDisplayedRecordModified;
 			LastSelectedRecord = selectedNode;
 
 			GHubDataDisplay.Content = RecordView.CreateViewForViewModel(gHubRecord, SaveFunction!, DeleteFunction!);
-		}
-
-		private void HandleDisplayedRecordModified(object? sender, PropertyChangedEventArgs eventInfo)
-		{
-			if (sender is GHubRecordViewModel)
-			{
-			}
 		}
 	}
 }
