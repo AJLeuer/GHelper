@@ -34,7 +34,7 @@ namespace GHelper.ViewModel
 		
 		public abstract event PropertyChangedEventHandler? PropertyChanged;
 
-		protected void SaveBackup()
+		public void SaveBackup()
 		{
 			GHubRecordBackup = GHubRecord?.Clone();
 		}

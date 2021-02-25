@@ -5,17 +5,17 @@ using GHelperLogic.Model;
 
 namespace GHelper.ViewModel
 {
-	public class GHubSettingsFileViewModel
+	public class GHubViewModel
 	{
 		public GHubSettingsFile                           GHubSettingsFile { get; }
-		public ObservableCollection<ApplicationViewModel> Applications     { get; } = new();
+		public ObservableCollection<ApplicationViewModel> Applications     { get; } = new ();
 
-		public GHubSettingsFileViewModel(GHubSettingsFile gHubSettingsFile)
+		public GHubViewModel(GHubSettingsFile gHubSettingsFile)
 		{
 			GHubSettingsFile = gHubSettingsFile;
 			InitializeApplications();
 		}
-		
+
 		public void Delete(GHubRecordViewModel recordViewModel)
 		{
 			if (recordViewModel.GHubRecord is Application application)
@@ -27,6 +27,19 @@ namespace GHelper.ViewModel
 				DeleteProfile(profile);
 			}
 			InitializeApplications();
+		}
+
+		public void SetInitialRecordStates()
+		{
+			foreach (ApplicationViewModel application in Applications)
+			{
+				application.SaveBackup();
+
+				foreach (ProfileViewModel profile in application.Profiles)
+				{
+					profile.SaveBackup();
+				}
+			}
 		}
 
 		private void DeleteApplication(Application application)
