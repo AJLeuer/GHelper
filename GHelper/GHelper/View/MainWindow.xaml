@@ -40,7 +40,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="GHub Games" Margin="24,8,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                <TreeView Grid.Row="1" 
+                <TreeView Grid.Row="1"
+                          x:Name="TreeView"
                           ItemsSource="{x:Bind Path=Applications, Mode=OneWay}"  
                           ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}"
                           SelectionChanged="HandleSelectedGHubRecordChanged">

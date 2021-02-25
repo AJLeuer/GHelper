@@ -10,10 +10,13 @@ namespace GHelper.View
 {
 	public sealed partial class MainWindow : Window
 	{
-		public  ObservableCollection<ApplicationViewModel>? Applications    { get;  set; }
-		private Action?                                     SaveFunction    { get;  set; }
-		private Action<GHubRecordViewModel>?                DeleteFunction  { get;  set; }
-		public  GHubRecordViewModel?                        DisplayedRecord { get ; set ; }
+		public  ObservableCollection<ApplicationViewModel>? Applications     { get; set; }
+		private Action?                                     SaveFunction     { get; set; }
+		private Action<GHubRecordViewModel>?                DeleteFunction   { get; set; }
+		public  GHubRecordViewModel?                        DisplayedRecord  { get; set; }
+		private TreeViewNode?                               LastSelectedRecord { get; set; }
+
+		private ushort SelectionProgrammaticResetLoops = 0;
 
 
 		public MainWindow()
@@ -31,32 +34,46 @@ namespace GHelper.View
 			DeleteFunction = deleteFunction;
 		}
 		
-		private async void HandleSelectedGHubRecordChanged(TreeView sender, TreeViewSelectionChangedEventArgs info)
+		private async void HandleSelectedGHubRecordChanged(TreeView treeView, TreeViewSelectionChangedEventArgs info)
 		{
-			if (sender.SelectedItem is GHubRecordViewModel gHubRecord)
+			if (SelectionProgrammaticResetLoops > 0)
 			{
-				if (DisplayedRecord?.State == State.Modified)
-				{
-					ContentDialogResult dialogResult = await DisplaySaveDialog();
-
-					switch (dialogResult)
-					{
-						// user elected to save
-						case ContentDialogResult.Primary:
-							SaveFunction?.Invoke();
-							break;
-						// user doesn't want to save their changes
-						case ContentDialogResult.Secondary:
-							DisplayedRecord?.RestoreInitialState();
-							break;
-						// user doesn't actually want to change the viewed record
-						case ContentDialogResult.None:
-							return;
-					}
-				}
-				
-				ChangeDisplayedRecord(gHubRecord);
+				SelectionProgrammaticResetLoops--;
+				return;
 			}
+			
+			if (treeView.SelectedItem is GHubRecordViewModel gHubRecord)
+			{
+				await HandleSelectedGHubRecordChanged(gHubRecord);
+			}
+		}
+
+		private async Task HandleSelectedGHubRecordChanged(GHubRecordViewModel gHubRecord)
+		{
+			if (DisplayedRecord?.State == State.Modified)
+			{
+				ContentDialogResult dialogResult = await DisplaySaveDialog();
+
+				switch (dialogResult)
+				{
+					// user elected to save
+					case ContentDialogResult.Primary:
+						SaveFunction?.Invoke();
+						break;
+					// user doesn't want to save their changes
+					case ContentDialogResult.Secondary:
+						DisplayedRecord?.RestoreInitialState();
+						break;
+					// user doesn't actually want to change the viewed record
+					case ContentDialogResult.None:
+						// this is so stupid
+						SelectionProgrammaticResetLoops = 2;
+						TreeView.SelectedNode = LastSelectedRecord;
+						return;
+				}
+			}
+				
+			ChangeDisplayedRecord(gHubRecord, TreeView.SelectedNode);
 		}
 
 		private async Task<ContentDialogResult> DisplaySaveDialog()
@@ -65,16 +82,17 @@ namespace GHelper.View
             return await deleteFileDialog.ShowAsync().AsTask();
 		}
 
-		private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord)
+		private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord, TreeViewNode selectedNode)
 		{
 			if (DisplayedRecord != null)
 			{
 				DisplayedRecord.PropertyChanged -= HandleDisplayedRecordModified;
 			}
-			
+
 			DisplayedRecord = gHubRecord;
 			DisplayedRecord.PropertyChanged += HandleDisplayedRecordModified;
-			
+			LastSelectedRecord = selectedNode;
+
 			GHubDataDisplay.Content = RecordView.CreateViewForViewModel(gHubRecord, SaveFunction!, DeleteFunction!);
 		}
 
