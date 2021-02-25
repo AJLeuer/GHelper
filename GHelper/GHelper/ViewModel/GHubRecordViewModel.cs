@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using GHelperLogic.Model;
 
 namespace GHelper.ViewModel
@@ -26,7 +28,13 @@ namespace GHelper.ViewModel
 			if ((GHubRecord != null) && (GHubRecordBackup != null))
 			{
 				GHubRecord.CopyStateFrom(GHubRecordBackup);
+				foreach (PropertyInfo property in this.GetType().GetProperties())
+				{
+					OnPropertyChanged(property.Name);
+				}
 			}
 		}
+
+		protected abstract void OnPropertyChanged([CallerMemberName] string? propertyName = null);
 	}
 }
