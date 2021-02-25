@@ -15,8 +15,6 @@ namespace GHelper.View
 		private Action<GHubRecordViewModel>?                DeleteFunction  { get;  set; }
 		public  GHubRecordViewModel?                        DisplayedRecord { get ; set ; }
 
-		private ViewState displayedRecordState = ViewState.Unchanged;
-
 
 		public MainWindow()
 		{
@@ -37,24 +35,24 @@ namespace GHelper.View
 		{
 			if (sender.SelectedItem is GHubRecordViewModel gHubRecord)
 			{
-				if (displayedRecordState == ViewState.Modified)
+				if (DisplayedRecord?.State == State.Modified)
 				{
 					ContentDialogResult dialogResult = await DisplaySaveDialog();
 
-					 switch (dialogResult)
-					 {
-					 	// user elected to save
-					 	case ContentDialogResult.Primary:
-					 		SaveFunction?.Invoke();
-					 		break;
-					 	// user doesn't want to save their changes
-					 	case ContentDialogResult.Secondary:
-					 		DisplayedRecord?.RestoreInitialState();
-					 		break;
-					 	// user doesn't actually want to change the viewed record
-					 	case ContentDialogResult.None:
-					 		return;
-					 }
+					switch (dialogResult)
+					{
+						// user elected to save
+						case ContentDialogResult.Primary:
+							SaveFunction?.Invoke();
+							break;
+						// user doesn't want to save their changes
+						case ContentDialogResult.Secondary:
+							DisplayedRecord?.RestoreInitialState();
+							break;
+						// user doesn't actually want to change the viewed record
+						case ContentDialogResult.None:
+							return;
+					}
 				}
 				
 				ChangeDisplayedRecord(gHubRecord);
@@ -75,7 +73,6 @@ namespace GHelper.View
 			}
 			
 			DisplayedRecord = gHubRecord;
-			displayedRecordState = ViewState.Unchanged;
 			DisplayedRecord.PropertyChanged += HandleDisplayedRecordModified;
 			
 			GHubDataDisplay.Content = RecordView.CreateViewForViewModel(gHubRecord, SaveFunction!, DeleteFunction!);
@@ -85,14 +82,7 @@ namespace GHelper.View
 		{
 			if (sender is GHubRecordViewModel)
 			{
-				displayedRecordState = ViewState.Modified;
 			}
 		}
-	}
-
-	public enum ViewState
-	{
-		Unchanged,
-		Modified
 	}
 }

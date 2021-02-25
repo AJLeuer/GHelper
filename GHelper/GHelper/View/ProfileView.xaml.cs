@@ -25,6 +25,7 @@ namespace GHelper.View
 			{
 				SetValue(ProfileProperty, value);
 				ResetAppearance();
+				Profile.PropertyChanged += RecordViewControls.NotifyOfUserChange;
 			}
 		}
 
@@ -40,7 +41,6 @@ namespace GHelper.View
             InitializeComponent();
             RegisterForSaveNotification(saveFunction);
             RegisterForDeleteNotification(deleteFunction);
-            this.PropertyChanged += RecordViewControls.NotifyOfUserChange;
         }
 
 		public void RegisterForSaveNotification(Action saveFunction)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using GHelperLogic.Utility;
 using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
@@ -6,7 +7,8 @@ using Newtonsoft.Json;
 
 namespace GHelperLogic.Model
 {
-	public abstract class GHubRecord : ICloneable<GHubRecord>
+	[SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
+	public abstract class GHubRecord : ICloneable<GHubRecord>, IEquatable<GHubRecord>
 	{
 		[JsonProperty("name")]
 		public string? Name { get; set; }
@@ -44,6 +46,79 @@ namespace GHelperLogic.Model
 		}
 
 		public abstract GHubRecord Clone();
-		public abstract void CopyStateFrom(GHubRecord otherRecord);
+
+		public virtual void CopyStateFrom(GHubRecord otherRecord)
+		{
+			Name = otherRecord.Name;
+			ApplicationID = otherRecord.ApplicationID;
+			ApplicationFolder = otherRecord.ApplicationFolder;
+			ApplicationPath = otherRecord.ApplicationPath;
+			DatabaseID = otherRecord.DatabaseID;
+			IsInstalled = otherRecord.IsInstalled;
+			PosterURL = otherRecord.PosterURL;
+			ProfileURL = otherRecord.ProfileURL;
+			Version = otherRecord.Version;
+		}
+		
+		#region EqualityMembers
+		public bool Equals(GHubRecord? other)
+		{
+			if (ReferenceEquals(null, other))
+			{
+				return false;
+			}
+
+			if (ReferenceEquals(this, other))
+			{
+				return true;
+			}
+			return Name == other.Name && Nullable.Equals(ApplicationID, other.ApplicationID) && Equals(ApplicationFolder, other.ApplicationFolder) && Equals(ApplicationPath, other.ApplicationPath) && Nullable.Equals(DatabaseID, other.DatabaseID) && IsInstalled == other.IsInstalled && Equals(PosterURL, other.PosterURL) && Equals(ProfileURL, other.ProfileURL) && Version == other.Version;
+		}
+
+		public override bool Equals(object? obj)
+		{
+			if (ReferenceEquals(null, obj))
+			{
+				return false;
+			}
+
+			if (ReferenceEquals(this, obj))
+			{
+				return true;
+			}
+
+			if (obj.GetType() != this.GetType())
+			{
+				return false;
+			}
+			return Equals((GHubRecord) obj);
+		}
+
+		public override int GetHashCode()
+		{
+			var hashCode = new HashCode();
+			hashCode.Add(Name);
+			hashCode.Add(ApplicationID);
+			hashCode.Add(ApplicationFolder);
+			hashCode.Add(ApplicationPath);
+			hashCode.Add(DatabaseID);
+			hashCode.Add(IsInstalled);
+			hashCode.Add(PosterURL);
+			hashCode.Add(ProfileURL);
+			hashCode.Add(Version);
+			return hashCode.ToHashCode();
+		}
+
+		public static bool operator == (GHubRecord? left, GHubRecord? right)
+		{
+			return Equals(left, right);
+		}
+
+		public static bool operator != (GHubRecord? left, GHubRecord? right)
+		{
+			return !Equals(left, right);
+		}
+
+		#endregion
 	}
 }

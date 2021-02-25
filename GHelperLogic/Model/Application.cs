@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using GHelperLogic.Utility.JSONConverter;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -13,7 +14,8 @@ namespace GHelperLogic.Model
 	/// Represents the concept referred to as "Game" within the GHUB app, and as an "application"
 	/// within its JSON configuration/state file. A single Application can be associated with one or more Profiles.
 	/// </summary>
-	public class Application : GHubRecord
+	[SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
+	public class Application : GHubRecord, IEquatable<Application>
 	{
 		public Application() { }
 
@@ -31,21 +33,14 @@ namespace GHelperLogic.Model
 		{
 			if (otherRecord is Application otherApplication)
 			{
-				Profiles = otherApplication.Profiles;
-				ApplicationFolder = otherApplication.ApplicationFolder;
-				ApplicationID = otherApplication.ApplicationID;
-				ApplicationPath = otherApplication.ApplicationPath;
+				base.CopyStateFrom(otherRecord);
 				CategoryColors = otherApplication.CategoryColors;
 				Commands = otherApplication.Commands;
-				DatabaseID = otherApplication.DatabaseID;
-				IsInstalled = otherApplication.IsInstalled;
 				LastRunTime = otherApplication.LastRunTime;
-				// ReSharper disable once VirtualMemberCallInConstructor
-				Name = otherApplication.Name;
-				PosterURL = otherApplication.PosterURL;
-				ProfileURL = otherApplication.ProfileURL;
-				Version = otherApplication.Version;
+				IsCustom = otherApplication.IsCustom;
+				Poster = otherApplication.Poster;
 				AdditionalData = otherApplication.AdditionalData;
+				Profiles = otherApplication.Profiles;
 			}
 		}
 
@@ -83,6 +78,69 @@ namespace GHelperLogic.Model
 		{
 			get { return ((PosterURL != null) || (IsCustom == true)); }
 		}
+
+		#region EqualityMembers
+		public bool Equals(Application? other)
+		{
+			if (ReferenceEquals(null, other))
+			{
+				return false;
+			}
+
+			if (ReferenceEquals(this, other))
+			{
+				return true;
+			}
+			return base.Equals(other) && Equals(CategoryColors, other.CategoryColors) && Equals(Commands, other.Commands) && Nullable.Equals(LastRunTime, other.LastRunTime) && IsCustom == other.IsCustom && Equals(Poster, other.Poster) && Equals(AdditionalData, other.AdditionalData) && Profiles.Equals(other.Profiles);
+		}
+
+		public override bool Equals(object? obj)
+		{
+			if (ReferenceEquals(null, obj))
+			{
+				return false;
+			}
+
+			if (ReferenceEquals(this, obj))
+			{
+				return true;
+			}
+
+			if (obj.GetType() != this.GetType())
+			{
+				return false;
+			}
+			
+			return Equals((Application) obj);
+		}
+
+		public override int GetHashCode()
+		{
+			var hashCode = new HashCode();
+			hashCode.Add(base.GetHashCode());
+			hashCode.Add(CategoryColors);
+			hashCode.Add(Commands);
+			hashCode.Add(LastRunTime);
+			hashCode.Add(IsCustom);
+			hashCode.Add(Poster);
+			hashCode.Add(AdditionalData);
+			hashCode.Add(Profiles);
+			hashCode.Add(ID);
+			hashCode.Add(HasPoster);
+			return hashCode.ToHashCode();
+		}
+
+		public static bool operator == (Application? left, Application? right)
+		{
+			return Equals(left, right);
+		}
+
+		public static bool operator != (Application? left, Application? right)
+		{
+			return !Equals(left, right);
+		}
+		
+		#endregion
 	}
 
 	public class DesktopApplication : Application

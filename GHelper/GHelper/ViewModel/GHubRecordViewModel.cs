@@ -16,6 +16,22 @@ namespace GHelper.ViewModel
 		{
 			get => GHubRecord?.DisplayName;
 		}
+
+		public State State
+		{
+			get
+			{
+				if (GHubRecord == GHubRecordBackup)
+				{
+					return State.Unchanged;
+				}
+				else
+				{
+					return State.Modified;
+				}
+			}
+		}
+		
 		public abstract event PropertyChangedEventHandler? PropertyChanged;
 
 		protected void SaveBackup()
@@ -36,5 +52,11 @@ namespace GHelper.ViewModel
 		}
 
 		protected abstract void OnPropertyChanged([CallerMemberName] string? propertyName = null);
+	}
+	
+	public enum State
+	{
+		Unchanged,
+		Modified
 	}
 }
