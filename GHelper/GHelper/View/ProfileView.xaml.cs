@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using GHelper.Annotations;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -29,12 +32,15 @@ namespace GHelper.View
 		{
 			get { return Profile; }
 		}
-
+		
+		public event PropertyChangedEventHandler? PropertyChanged;
+		
 		public ProfileView(Action saveFunction, Action<GHubRecordViewModel> deleteFunction)
         {
             InitializeComponent();
             RegisterForSaveNotification(saveFunction);
             RegisterForDeleteNotification(deleteFunction);
+            this.PropertyChanged += RecordViewControls.NotifyOfUserChange;
         }
 
 		public void RegisterForSaveNotification(Action saveFunction)
@@ -54,7 +60,7 @@ namespace GHelper.View
 
 		void RecordView.SendRecordChangedNotification()
 	    {
-		    RecordViewControls.NotifyOfUserChange();
+		    OnPropertyChanged(nameof(GHubRecord));
 	    }
 
 	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
@@ -70,6 +76,12 @@ namespace GHelper.View
 	    private void ResetAppearance()
 	    {
 		    RecordViewControls.ResetAppearance();
+	    }
+	    
+	    [NotifyPropertyChangedInvocator]
+	    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+	    {
+		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	    }
 	}
 }

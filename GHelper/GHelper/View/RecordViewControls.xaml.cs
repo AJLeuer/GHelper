@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
@@ -15,11 +16,11 @@ namespace GHelper.View
         {
             InitializeComponent();
         }
-
-		public void NotifyOfUserChange()
-        {
-	        SaveButton.Background = Application.Current.Resources[Properties.Resources.SystemAccentColorBrush] as SolidColorBrush;
-        }
+		
+		public void NotifyOfUserChange(object? sender, PropertyChangedEventArgs eventInfo)
+		{
+			SaveButton.Background = Application.Current.Resources[Properties.Resources.SystemAccentColorBrush] as SolidColorBrush;
+		}
 
 		public void ResetAppearance()
         {

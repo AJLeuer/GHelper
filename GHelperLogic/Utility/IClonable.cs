@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GHelper.Utility
+﻿namespace GHelperLogic.Utility
 {
 	public interface ICloneable<T>
 	{

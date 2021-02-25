@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using GHelper.Utility;
 using GHelperLogic.Model;
 
 namespace GHelper.ViewModel

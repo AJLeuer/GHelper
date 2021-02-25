@@ -1,5 +1,5 @@
 ﻿using System;
-using GHelper.Utility;
+using GHelperLogic.Utility;
 using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;

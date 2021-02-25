@@ -1,13 +1,14 @@
-﻿using GHelper.ViewModel;
+﻿using System.ComponentModel;
+using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 namespace GHelper.View
 {
-	public interface IApplicationView : RecordView
+	public interface IApplicationView : RecordView, INotifyPropertyChanged
 	{
 		ApplicationViewModel Application { get ; set; }
-		
+
 		protected static void DetermineNameViewStyle(ApplicationViewModel application, TextBox textBoxToStyle)
 		{
 			Style editableTextBox = (Microsoft.UI.Xaml.Application.Current.Resources[Properties.Resources.StandardTextBox] as Style)!;

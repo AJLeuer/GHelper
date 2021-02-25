@@ -2,7 +2,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -61,8 +60,7 @@ namespace GHelper.View
 				ChangeDisplayedRecord(gHubRecord);
 			}
 		}
-		
-				
+
 		private async Task<ContentDialogResult> DisplaySaveDialog()
 		{
             ContentDialog deleteFileDialog = new UnsavedChangeDialog { XamlRoot = MainView.XamlRoot };
