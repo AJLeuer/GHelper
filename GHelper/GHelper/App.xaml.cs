@@ -39,9 +39,9 @@ namespace GHelper
 		{
 			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow();
+			window.Referent.Activate();
 			gHubSettingsFileService.Start();
-			window.Referent!.Activate();
-			await window.Referent!.DisplayGHubRunningDialogIfNeeded();
+			await window.Referent.DisplayGHubRunningDialogIfNeeded();
 		}
 
 		/// <summary>

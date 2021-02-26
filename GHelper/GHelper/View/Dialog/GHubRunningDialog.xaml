@@ -11,6 +11,5 @@
     SecondaryButtonText="Close G Helper"
     SecondaryButtonClick="QuitApp"
     DefaultButton="Primary">
-    
 
 </ContentDialog>

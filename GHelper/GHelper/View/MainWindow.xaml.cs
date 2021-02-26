@@ -1,6 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using GHelper.Annotations;
 using GHelper.Properties;
 using GHelper.View.Dialog;
 using GHelper.ViewModel;
@@ -9,14 +12,26 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace GHelper.View
 {
-	public sealed partial class MainWindow : Window
+	public sealed partial class MainWindow : Window, INotifyPropertyChanged
 	{
-		public static readonly string                                      AppName = Resources.ApplicationName;
-		public                 ObservableCollection<ApplicationViewModel>? Applications       { get; set; }
-		private                Action?                                     SaveFunction       { get; set; }
-		private                Action<GHubRecordViewModel>?                DeleteFunction     { get; set; }
-		public                 GHubRecordViewModel?                        DisplayedRecord    { get; set; }
-		private                TreeViewNode?                               LastSelectedRecord { get; set; }
+		public static readonly string AppName = Resources.ApplicationName;
+
+		private ObservableCollection<ApplicationViewModel>? applications;
+
+		public ObservableCollection<ApplicationViewModel>? Applications
+		{
+			get => applications;
+			set
+			{
+				applications = value;
+				OnPropertyChanged(nameof(Applications));
+			}
+		}
+
+		private Action?                      SaveFunction       { get; set; }
+		private Action<GHubRecordViewModel>? DeleteFunction     { get; set; }
+		public  GHubRecordViewModel?         DisplayedRecord    { get; set; }
+		private TreeViewNode?                LastSelectedRecord { get; set; }
 
 
 		private ushort SelectionProgrammaticResetLoops = 0;
@@ -97,6 +112,14 @@ namespace GHelper.View
 			LastSelectedRecord = selectedNode;
 
 			GHubDataDisplay.Content = RecordView.CreateViewForViewModel(gHubRecord, SaveFunction!, DeleteFunction!);
+		}
+
+		public event PropertyChangedEventHandler? PropertyChanged;
+
+		[NotifyPropertyChangedInvocator]
+		private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }
