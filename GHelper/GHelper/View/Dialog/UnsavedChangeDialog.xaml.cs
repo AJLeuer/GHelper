@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 
-namespace GHelper.View
+namespace GHelper.View.Dialog
 {
     public partial class UnsavedChangeDialog : ContentDialog
     {

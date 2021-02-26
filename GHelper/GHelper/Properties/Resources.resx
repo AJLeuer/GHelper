@@ -129,4 +129,10 @@
   <data name="ImmutableTextBox" xml:space="preserve">
     <value>ImmutableTextBox</value>
   </data>
+  <data name="LogitechGHubProcessName" xml:space="preserve">
+    <value>lghub</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>G Helper</value>
+  </data>
 </root>

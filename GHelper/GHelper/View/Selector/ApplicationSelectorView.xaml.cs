@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Image = Microsoft.UI.Xaml.Controls.Image;
 
-namespace GHelper.View 
+namespace GHelper.View.Selector 
 {
 	public partial class ApplicationSelectorView : StackPanel
 	{

@@ -61,11 +61,29 @@ namespace GHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to G Helper.
+        /// </summary>
+        internal static string ApplicationName {
+            get {
+                return ResourceManager.GetString("ApplicationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ImmutableTextBox.
         /// </summary>
         internal static string ImmutableTextBox {
             get {
                 return ResourceManager.GetString("ImmutableTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lghub.
+        /// </summary>
+        internal static string LogitechGHubProcessName {
+            get {
+                return ResourceManager.GetString("LogitechGHubProcessName", resourceCulture);
             }
         }
         

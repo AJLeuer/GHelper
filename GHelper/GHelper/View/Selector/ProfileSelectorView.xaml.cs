@@ -2,7 +2,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace GHelper.View
+namespace GHelper.View.Selector
 {
 	public partial class ProfileSelectorView : StackPanel
     {

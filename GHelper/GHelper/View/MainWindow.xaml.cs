@@ -1,6 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using GHelper.Properties;
+using GHelper.View.Dialog;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -9,11 +12,13 @@ namespace GHelper.View
 {
 	public sealed partial class MainWindow : Window
 	{
-		public  ObservableCollection<ApplicationViewModel>? Applications     { get; set; }
-		private Action?                                     SaveFunction     { get; set; }
-		private Action<GHubRecordViewModel>?                DeleteFunction   { get; set; }
-		public  GHubRecordViewModel?                        DisplayedRecord  { get; set; }
-		private TreeViewNode?                               LastSelectedRecord { get; set; }
+		public static readonly string                                      AppName = Resources.ApplicationName;
+		public                 ObservableCollection<ApplicationViewModel>? Applications       { get; set; }
+		private                Action?                                     SaveFunction       { get; set; }
+		private                Action<GHubRecordViewModel>?                DeleteFunction     { get; set; }
+		public                 GHubRecordViewModel?                        DisplayedRecord    { get; set; }
+		private                TreeViewNode?                               LastSelectedRecord { get; set; }
+
 
 		private ushort SelectionProgrammaticResetLoops = 0;
 
@@ -21,6 +26,12 @@ namespace GHelper.View
 		public MainWindow()
 		{
 			this.InitializeComponent();
+		}
+
+		public async Task DisplayGHubRunningDialog()
+		{
+			GHubRunningDialog gHubRunningDialog = new () { XamlRoot = MainView.XamlRoot };
+			await gHubRunningDialog.DisplayIfNeeded();
 		}
 
 		public void RegisterForSaveNotification(Action saveFunction)

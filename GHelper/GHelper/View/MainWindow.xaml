@@ -1,27 +1,35 @@
 <Window
+    
     x:Class="GHelper.View.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:view="using:GHelper.View"
     xmlns:utility="using:GHelper.View.Utility"
     xmlns:viewModel="using:GHelper.ViewModel"
-    mc:Ignorable="d">
+    xmlns:selector="using:GHelper.View.Selector"
+    xmlns:view="using:GHelper.View"
+    mc:Ignorable="d"
+    
+    Title="{x:Bind view:MainWindow.AppName}">
 
-    <SplitView x:Name="MainView" PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"
-               IsPaneOpen="True" OpenPaneLength="384" CompactPaneLength="256" DisplayMode="Inline">
+    <SplitView x:Name="MainView" 
+               PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"
+               IsPaneOpen="True" 
+               OpenPaneLength="384" 
+               CompactPaneLength="256" 
+               DisplayMode="Inline">
         <SplitView.Resources>
             
             <DataTemplate x:Key="ApplicationTemplate" x:DataType="viewModel:ApplicationViewModel">
                 <TreeViewItem ItemsSource="{x:Bind Path=Profiles, Mode=OneWay}">
-                    <view:ApplicationSelectorView Application="{x:Bind Mode=OneWay}"/>
+                    <selector:ApplicationSelectorView Application="{x:Bind Mode=OneWay}"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="viewModel:ProfileViewModel">
                 <TreeViewItem>
-                    <view:ProfileSelectorView Profile="{x:Bind Mode=OneWay}" />
+                    <selector:ProfileSelectorView Profile="{x:Bind Mode=OneWay}" />
                 </TreeViewItem>
             </DataTemplate>
             
@@ -39,7 +47,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="GHub Games" Margin="24,8,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                <TextBlock Grid.Row="0" Text="G Hub Games" Margin="24,8,0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                 <TreeView Grid.Row="1"
                           x:Name="TreeView"
                           ItemsSource="{x:Bind Path=Applications, Mode=OneWay}"  
