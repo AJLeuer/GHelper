@@ -137,6 +137,9 @@
     <value>Log.log</value>
   </data>
   <data name="DummyGHUBSettingsRelativePath" xml:space="preserve">
-      <value>Properties\DummyGHUBSettings.json</value>
+    <value>Properties\DummyGHUBSettings.json</value>
+  </data>
+  <data name="GHubIconCacheDirectoryName" xml:space="preserve">
+    <value>icon_cache</value>
   </data>
 </root>

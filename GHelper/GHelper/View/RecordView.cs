@@ -2,7 +2,6 @@
 using GHelper.ViewModel;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 
 namespace GHelper.View
 {

@@ -134,16 +134,27 @@ namespace GHelper.ViewModel
 			//However if this is not a custom application and it has a posterURL available
 			//... then on the first call to get Poster we initialize it by grabbing the image file from the URL
 			//So basically Poster is used to store poster images that can be retrieved in two very different ways.
+			//Update 25 Feb 2021: A new GHub update has made this situation even more complicated. Now there are 3 different
+			//ways a poster could potentially be stored. The new method is a field "posterPath" which directs to a cached file
+			//in the GHub AppData directory.
 
 			if (Application?.HasPoster != null && Application.HasPoster)
 			{
 				if (Application.IsCustom == true)
 				{
-					poster = new Image { Source = Application?.Poster?.ConvertToWindowsBitmapImage()  };
+					if (Application.Poster != null)
+					{
+						poster = new Image { Source = Application?.Poster?.ConvertToWindowsBitmapImage()  };
+					}
+					else if (Application.PosterPath != null)
+					{
+						SixLabors.ImageSharp.Image? posterImage = ImageIOHelper.LoadFromFilePath(Application?.PosterPath!);
+						poster = new Image { Source = posterImage?.ConvertToWindowsBitmapImage() };
+					}
 				}
 				else if (Application?.PosterURL != null)
 				{
-					SixLabors.ImageSharp.Image? posterImage = IOHelper.LoadFromURL(Application?.PosterURL!);
+					SixLabors.ImageSharp.Image? posterImage = ImageIOHelper.LoadFromHTTPURL(Application?.PosterURL!);
 					poster = new Image { Source = posterImage?.ConvertToWindowsBitmapImage()  };
 				}
 			}

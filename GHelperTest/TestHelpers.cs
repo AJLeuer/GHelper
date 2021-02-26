@@ -18,7 +18,7 @@ namespace GHelperTest
 				                 (WebClientInterface webClient) =>
 					                 webClient.OpenRead(It.IsAny<Uri>())).Returns(stubPosterImageFile);
 				
-				IOHelper.Client = clientMock.Object;
+				ImageIOHelper.Client = clientMock.Object;
 			}
 		}
 	}

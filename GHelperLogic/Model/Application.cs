@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using GHelperLogic.Utility.JSONConverter;
+using NDepend.Path;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NodaTime;
@@ -39,6 +40,7 @@ namespace GHelperLogic.Model
 				LastRunTime = otherApplication.LastRunTime;
 				IsCustom = otherApplication.IsCustom;
 				Poster = otherApplication.Poster;
+				PosterPath = otherApplication.PosterPath;
 				AdditionalData = otherApplication.AdditionalData;
 				Profiles = otherApplication.Profiles;
 			}
@@ -60,6 +62,10 @@ namespace GHelperLogic.Model
 		[JsonConverter(typeof(PosterImageJSONConverter))]
 		[JsonProperty("poster", NullValueHandling=NullValueHandling.Ignore)]
 		public Image? Poster { get; set; }
+		
+		[JsonConverter(typeof(PathJSONConverter))]
+		[JsonProperty("posterPath", NullValueHandling=NullValueHandling.Ignore)]
+		public IPath? PosterPath { get; set; }
 
 		[JsonExtensionData]
 		public IDictionary<string, JToken>? AdditionalData { get; set; }
@@ -76,7 +82,7 @@ namespace GHelperLogic.Model
 		[JsonIgnore]
 		public bool HasPoster
 		{
-			get { return ((PosterURL != null) || (IsCustom == true)); }
+			get { return ((PosterURL != null) || (Poster != null)) || (PosterPath != null); }
 		}
 
 		#region EqualityMembers
@@ -92,7 +98,7 @@ namespace GHelperLogic.Model
 				return true;
 			}
 			
-			return base.Equals(other) && Equals(CategoryColors, other.CategoryColors) && Equals(Commands, other.Commands) && Nullable.Equals(LastRunTime, other.LastRunTime) && IsCustom == other.IsCustom && Equals(Poster, other.Poster) && Equals(AdditionalData, other.AdditionalData) && Profiles.Equals(other.Profiles);
+			return base.Equals(other) && Equals(CategoryColors, other.CategoryColors) && Equals(Commands, other.Commands) && Nullable.Equals(LastRunTime, other.LastRunTime) && IsCustom == other.IsCustom && Equals(Poster, other.Poster) && Equals(AdditionalData, other.AdditionalData) && Profiles.Equals(other.Profiles) && Nullable.Equals(PosterPath, other.PosterPath);
 		}
 
 		public override bool Equals(object? obj)
@@ -119,6 +125,7 @@ namespace GHelperLogic.Model
 			hashCode.Add(LastRunTime);
 			hashCode.Add(IsCustom);
 			hashCode.Add(Poster);
+			hashCode.Add(PosterPath);
 			hashCode.Add(AdditionalData);
 			hashCode.Add(Profiles);
 			hashCode.Add(ID);
