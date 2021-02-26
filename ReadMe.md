@@ -33,5 +33,12 @@ reverse-engineer GHub's behavior)
 * `C:\ProgramData\LGHUB\depots\73248\core\applications` is where most of the image files served from `localhost` appear to be stored.
 * `C:\ProgramData\LGHUB\current.json` may hold the list of images available to be served locally. It's possible it'll have to be edited to allow adding new images.
 * Alternatively, for custom games with custom poster images G HUB also seems to take the approach 
-  of serializing entire image files into strings and sticking that data into
+  of serializing entire image files into base64 strings and sticking that data into
   its JSON. So we may also be able to try this approach.
+
+
+##### Todos
+* U̶n̶i̶f̶y̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶o̶f̶ ̶p̶o̶s̶t̶e̶r̶ ̶i̶m̶a̶g̶e̶ ̶l̶o̶c̶a̶t̶i̶o̶n̶ ̶f̶o̶r̶ ̶b̶o̶t̶h̶ ̶s̶t̶a̶n̶d̶a̶r̶d̶ ̶a̶n̶d̶ ̶c̶u̶s̶t̶o̶m̶ ̶a̶p̶p̶l̶i̶c̶a̶t̶i̶o̶n̶s̶
+  - Done
+* Ensure one profile of an application is always active when user changes "Active" state of a profile
+* Implement setting custom poster images

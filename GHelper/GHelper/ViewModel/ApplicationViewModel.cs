@@ -80,6 +80,25 @@ namespace GHelper.ViewModel
 			}
 		}
 
+		public string PosterPath
+		{
+			get
+			{
+				if (Application?.PosterPath?.ToString() is {} posterPath)
+				{
+					return posterPath;
+				}
+				else if (Application?.PosterURL != null)
+				{
+					return Application.PosterURL.ToString();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+
 		public string InstallState 
 		{
 			get 

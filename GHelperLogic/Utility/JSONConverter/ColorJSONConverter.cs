@@ -15,9 +15,9 @@ namespace GHelperLogic.Utility.JSONConverter
 
 		public override Color ReadJson(JsonReader reader, Type objectType, Color existingValue, bool hasExistingValue, JsonSerializer serializer)
 		{
-			if (reader.Value is {} colorJSON)
+			if (reader.Value?.ToString() is {} colorJSON)
 			{
-				return ColorTranslator.FromHtml(colorJSON.ToString()!);
+				return ColorTranslator.FromHtml(colorJSON);
 			}
 
 			return default;
