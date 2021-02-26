@@ -11,7 +11,7 @@
     xmlns:view="using:GHelper.View"
     mc:Ignorable="d"
     
-    Title="{x:Bind view:MainWindow.AppName}">
+    Title="{x:Bind view:MainWindow.AppName, Mode=OneTime}">
 
     <SplitView x:Name="MainView" 
                PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"

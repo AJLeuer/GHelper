@@ -35,10 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Libraries" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Page Remove="Libraries\HeaderedContentControl.xaml" />
   </ItemGroup>
 
