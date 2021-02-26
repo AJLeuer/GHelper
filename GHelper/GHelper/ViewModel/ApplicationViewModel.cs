@@ -80,7 +80,7 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public string PosterPath
+		public string PosterPath 
 		{
 			get
 			{
@@ -141,11 +141,12 @@ namespace GHelper.ViewModel
 				foreach (Profile profile in Application.Profiles)
 				{
 					var profileViewModel = new ProfileViewModel(profile);
+					profileViewModel.PropertyChanged += HandleProfilePropertyChanged;
 					profiles.Add(profileViewModel);
 				}
 			}
 		}
-		
+
 		private void retrievePosterImage()
 		{
 			//If this is a application with a custom poster (and the poster bitmap was, therefore, serialized into the JSON)
@@ -179,6 +180,37 @@ namespace GHelper.ViewModel
 			}
 		}
 
+		private void HandleProfilePropertyChanged(object? sender, PropertyChangedEventArgs eventInfo)
+		{
+			if (sender is ProfileViewModel profile)
+			{
+				HandleProfileSetActiveForApplication(profile, eventInfo);
+			}
+		}
+
+		private void HandleProfileSetActiveForApplication(ProfileViewModel profileWithChangedActiveState, PropertyChangedEventArgs eventInfo)
+		{
+			// We only care about the Profile if the user set it to be active. We don't handle setting ActiveForApplication to false.
+			if ((eventInfo.PropertyName == nameof(ProfileViewModel.ActiveForApplication)) && (profileWithChangedActiveState.ActiveForApplication == true))
+			{
+				foreach (ProfileViewModel profile in this.Profiles)
+				{
+					if (profile == profileWithChangedActiveState)
+					{
+						continue;
+					}
+
+					profile.ActiveForApplication = false;
+				}
+			}
+		}
+
+		[NotifyPropertyChangedInvocator]
+		protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
 		public static IEnumerable<ApplicationViewModel> CreateFromCollection(IEnumerable<Application>? applications)
 		{
 			var applicationViewModels = new Collection<ApplicationViewModel>();
@@ -192,13 +224,6 @@ namespace GHelper.ViewModel
 				}
 			}
 			return applicationViewModels;
-		}
-
-
-		[NotifyPropertyChangedInvocator]
-		protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

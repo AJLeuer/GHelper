@@ -40,5 +40,7 @@ reverse-engineer GHub's behavior)
 ##### Todos
 * U̶n̶i̶f̶y̶ ̶d̶i̶s̶p̶l̶a̶y̶ ̶o̶f̶ ̶p̶o̶s̶t̶e̶r̶ ̶i̶m̶a̶g̶e̶ ̶l̶o̶c̶a̶t̶i̶o̶n̶ ̶f̶o̶r̶ ̶b̶o̶t̶h̶ ̶s̶t̶a̶n̶d̶a̶r̶d̶ ̶a̶n̶d̶ ̶c̶u̶s̶t̶o̶m̶ ̶a̶p̶p̶l̶i̶c̶a̶t̶i̶o̶n̶s̶
   - Done
-* Ensure one profile of an application is always active when user changes "Active" state of a profile
+* E̶n̶s̶u̶r̶e̶ ̶o̶n̶l̶y̶ ̶o̶n̶e̶ ̶p̶r̶o̶f̶i̶l̶e̶ ̶o̶f̶ ̶a̶n̶ ̶a̶p̶p̶l̶i̶c̶a̶t̶i̶o̶n̶ ̶i̶s̶ ̶a̶l̶w̶a̶y̶s̶ ̶a̶c̶t̶i̶v̶e̶ ̶w̶h̶e̶n̶ ̶u̶s̶e̶r̶ ̶c̶h̶a̶n̶g̶e̶s̶ ̶"̶A̶c̶t̶i̶v̶e̶"̶ ̶s̶t̶a̶t̶e̶ ̶o̶f̶ ̶a̶ ̶p̶r̶o̶f̶i̶l̶e̶
+  - Done
+* If user sets all profiles to inactive, set the first one back to active (maybe)
 * Implement setting custom poster images
