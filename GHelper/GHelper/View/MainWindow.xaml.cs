@@ -1,6 +1,5 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using GHelper.Properties;
 using GHelper.View.Dialog;

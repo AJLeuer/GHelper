@@ -2,8 +2,7 @@
     x:Class="GHelper.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:view="using:GHelper.View"
-    xmlns:system="using:System">
+    xmlns:view="using:GHelper.View">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using GHelper.Service;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
