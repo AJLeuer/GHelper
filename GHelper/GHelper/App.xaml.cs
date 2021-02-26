@@ -41,7 +41,7 @@ namespace GHelper
 			window.Referent = new MainWindow();
 			gHubSettingsFileService.Start();
 			window.Referent!.Activate();
-			await window.Referent!.DisplayGHubRunningDialog();
+			await window.Referent!.DisplayGHubRunningDialogIfNeeded();
 		}
 
 		/// <summary>

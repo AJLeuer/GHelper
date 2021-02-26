@@ -27,7 +27,7 @@ namespace GHelper.View
 			this.InitializeComponent();
 		}
 
-		public async Task DisplayGHubRunningDialog()
+		public async Task DisplayGHubRunningDialogIfNeeded()
 		{
 			GHubRunningDialog gHubRunningDialog = new () { XamlRoot = MainView.XamlRoot };
 			await gHubRunningDialog.DisplayIfNeeded();
