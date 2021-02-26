@@ -1,8 +1,10 @@
 ﻿<StackPanel Orientation="Horizontal"
     x:Class="GHelper.View.Selector.ProfileSelectorView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:utility="using:GHelper.View.Utility">
     
-    <TextBlock Text="{x:Bind Path=Profile.DisplayName, Mode=OneWay}" />
+    <TextBlock Text="{x:Bind Path=Profile.DisplayName, Mode=OneWay}" utility:Margin.Top="6" utility:Margin.Right="24"/>
+    <ToggleSwitch FlowDirection="LeftToRight" HeaderPlacement="Left" OffContent="" OnContent="" IsOn="{x:Bind Profile.ActiveForApplication, Mode=TwoWay}"/>
     
 </StackPanel>

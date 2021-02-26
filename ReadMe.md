@@ -44,3 +44,6 @@ reverse-engineer GHub's behavior)
   - Done
 * If user sets all profiles to inactive, set the first one back to active (maybe)
 * Implement setting custom poster images
+* DefaultProfiles don't really work (can't change their name and actually display the result)
+* Confirm before deleting
+* Delete on delete key
