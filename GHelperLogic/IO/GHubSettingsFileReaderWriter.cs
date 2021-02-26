@@ -9,22 +9,34 @@ namespace GHelperLogic.IO
 {
 	public class GHubSettingsFileReaderWriter
 	{
-		private static readonly Stream            GHubSettingsFileStream;
-		private static          GHubSettingsFile? GHubSettingsFileObject;
-		
-		static GHubSettingsFileReaderWriter()
+		private Stream? gHubSettingsFileStream;
+		public  Stream GHubSettingsFileStream
 		{
-			#if DEBUG
-				GHubSettingsFileStream = new FileStream(Properties.Configuration.DummyDebugGHubSettingsFilePath.ToString()!,
-				                                        FileMode.Open,
-				                                        FileAccess.ReadWrite);
+			get
+			{
+				if (gHubSettingsFileStream == null)
+				{
+					initializeGHubSettingsFileStream();
+				}
+				return gHubSettingsFileStream!;
+			}
+		}
 
-			#elif RELEASE || DEBUGRELEASE
-				GHubSettingsFileStream = new FileStream(Properties.Configuration.DefaultGHubSettingsFilePath.ToString()!,
-														FileMode.Open,
-														FileAccess.ReadWrite);
+		private GHubSettingsFile? GHubSettingsFileObject;
 
-			#endif
+		public State CheckSettingsFileAvailability(Stream? settingsFileStream = null)
+		{
+			try
+			{
+				settingsFileStream ??= GHubSettingsFileStream;
+				if (settingsFileStream.CanRead)
+				{
+					return State.Available;
+				}
+			}
+			catch (IOException) {}
+			
+			return State.Unavailable;
 		}
 
 		public GHubSettingsFile Read(Stream? settingsFileStream = null)
@@ -70,6 +82,27 @@ namespace GHelperLogic.IO
 			using JsonReader settingsFileReader = new JsonTextReader(reader);
 			JObject parsedSettingsFile = JObject.Load(settingsFileReader);
 			return parsedSettingsFile;
+		}
+
+		private void initializeGHubSettingsFileStream()
+		{
+			#if DEBUG
+				gHubSettingsFileStream = new FileStream(Properties.Configuration.DummyDebugGHubSettingsFilePath.ToString()!,
+				                                        FileMode.Open,
+				                                        FileAccess.ReadWrite);
+
+			#elif RELEASE || DEBUGRELEASE
+				gHubSettingsFileStream = new FileStream(Properties.Configuration.DefaultGHubSettingsFilePath.ToString()!,
+														FileMode.Open,
+														FileAccess.ReadWrite);
+
+			#endif
+		}
+
+		public enum State
+		{
+			Available,
+			Unavailable
 		}
 	}
 }

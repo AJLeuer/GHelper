@@ -16,6 +16,11 @@ namespace GHelper.Service
 		{
 			MainWindow = mainWindow;
 		}
+		
+		public GHubSettingsFileReaderWriter.State CheckSettingsFileAvailability()
+		{
+			return GHubSettingsFileReaderWriter.CheckSettingsFileAvailability();
+		}
 
 		public void Start()
 		{

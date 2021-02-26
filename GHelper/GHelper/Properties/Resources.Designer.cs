@@ -70,6 +70,15 @@ namespace GHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to settings.json.
+        /// </summary>
+        internal static string GHubConfigFileName {
+            get {
+                return ResourceManager.GetString("GHubConfigFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ImmutableTextBox.
         /// </summary>
         internal static string ImmutableTextBox {

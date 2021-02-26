@@ -38,10 +38,11 @@ namespace GHelper
 		protected override async void OnLaunched(LaunchActivatedEventArgs args)
 		{
 			LogManager.Log("Launching GHelper application.");
-			window.Referent = new MainWindow();
+			window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};
 			window.Referent.Activate();
-			gHubSettingsFileService.Start();
+			await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
 			await window.Referent.DisplayGHubRunningDialogIfNeeded();
+			gHubSettingsFileService.Start();
 		}
 
 		/// <summary>

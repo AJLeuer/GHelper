@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using GHelper.Annotations;
 using GHelper.Properties;
+using GHelper.Service;
 using GHelper.View.Dialog;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
@@ -28,10 +29,11 @@ namespace GHelper.View
 			}
 		}
 
-		private Action?                      SaveFunction       { get; set; }
-		private Action<GHubRecordViewModel>? DeleteFunction     { get; set; }
-		public  GHubRecordViewModel?         DisplayedRecord    { get; set; }
-		private TreeViewNode?                LastSelectedRecord { get; set; }
+		private Action?                      SaveFunction            { get;  set; }
+		private Action<GHubRecordViewModel>? DeleteFunction          { get;  set; }
+		public  GHubRecordViewModel?         DisplayedRecord         { get;  set; }
+		private TreeViewNode?                LastSelectedRecord      { get;  set; }
+		public  GHubSettingsFileService?     GHubSettingsFileService { get ; set ; }
 
 
 		private ushort SelectionProgrammaticResetLoops = 0;
@@ -46,6 +48,13 @@ namespace GHelper.View
 		{
 			GHubRunningDialog gHubRunningDialog = new () { XamlRoot = MainView.XamlRoot };
 			await gHubRunningDialog.DisplayIfNeeded();
+		}
+		
+		
+		public async Task DisplayGHubSettingsFileNotFoundDialogIfNeeded()
+		{
+			GHubSettingsFileNotFoundDialog fileNotFoundDialog = new (GHubSettingsFileService) { XamlRoot = MainView.XamlRoot };
+			await fileNotFoundDialog.DisplayIfNeeded();
 		}
 
 		public void RegisterForSaveNotification(Action saveFunction)

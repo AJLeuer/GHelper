@@ -135,4 +135,7 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>G Helper</value>
   </data>
+  <data name="GHubConfigFileName" xml:space="preserve">
+    <value>settings.json</value>
+  </data>
 </root>
