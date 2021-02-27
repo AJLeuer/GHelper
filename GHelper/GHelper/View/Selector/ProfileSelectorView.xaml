@@ -10,6 +10,6 @@
     </StackPanel.Resources>
     
     <TextBlock Text="{x:Bind Path=Profile.DisplayName, Mode=OneWay}" utility:Margin.Right="24"/>
-    <Ellipse Fill="{StaticResource SystemAccentColor}" Height="10" Width="10" Visibility="{x:Bind  Profile.ActiveForApplication, Converter={StaticResource ProfileSelectorBooleanToVisibilityConverter}, Mode=OneWay}" />
+    <Ellipse Fill="{StaticResource SystemAccentColor}" Height="6" Width="6" Visibility="{x:Bind  Profile.ActiveForApplication, Converter={StaticResource ProfileSelectorBooleanToVisibilityConverter}, Mode=OneWay}" />
     
 </StackPanel>
