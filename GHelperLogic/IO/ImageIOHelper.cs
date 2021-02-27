@@ -42,5 +42,18 @@ namespace GHelperLogic.IO
 
 			return image;
 		}
+		
+		public static Image? LoadFromStream(Stream imageFileStream)
+		{
+			Image? image = default;
+
+			try
+			{
+				image = Image.Load(imageFileStream);
+			}
+			catch (SystemException) {}
+
+			return image;
+		}
 	}
 }

@@ -1,23 +1,28 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using GHelper.Annotations;
+using GHelper.Service;
 using GHelper.Utility;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
-using Image = Microsoft.UI.Xaml.Controls.Image;
+using Microsoft.UI.Xaml.Media;
+using NDepend.Path;
+using Image = SixLabors.ImageSharp.Image;
+using WindowsImage = Microsoft.UI.Xaml.Controls.Image;
 
 
 namespace GHelper.ViewModel 
 {
 	public class ApplicationViewModel : GHubRecordViewModel
 	{
-		public static Image DefaultPosterImage { get ; } = new ();
+		public static WindowsImage DefaultPosterImage { get ; } = new ();
 
 		private ObservableCollection<ProfileViewModel>? profiles;
 
-		public ObservableCollection<ProfileViewModel> Profiles
+		public ObservableCollection<ProfileViewModel> Profiles 
 		{
 			get
 			{
@@ -58,24 +63,24 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		private Image? poster;
+		private WindowsImage? poster;
 
-		public Image Poster
+		public ImageSource Poster
 		{
 			get
 			{
 				if (poster != null)
 				{
-					return poster;
+					return poster.Source;
 				}
 				else if (Application?.HasPoster == false)
 				{
-					return DefaultPosterImage;
+					return DefaultPosterImage.Source;
 				}
 				else
 				{
 					retrievePosterImage();
-					return poster ?? DefaultPosterImage;
+					return poster?.Source ?? DefaultPosterImage.Source;
 				}
 			}
 		}
@@ -131,7 +136,34 @@ namespace GHelper.ViewModel
 			base.RestoreInitialState();
 			OnPropertyChanged(nameof(Application));
 		}
-		
+
+		public void SetNewCustomPosterImage(Image customPoster)
+		{
+			if (Application is not null)
+			{
+				if (Application.IsCustom == true)
+				{
+					SetNewCustomPosterImageForCustomApplications(customPoster);
+				}
+			}
+		}
+
+		private void SetNewCustomPosterImageForCustomApplications(Image customPoster)
+		{
+			if (Application is not null)
+			{
+				try
+				{
+					IFilePath imageSavedPath = GHubImageCacheService.SavePosterImage(customPoster);
+					Application.PosterPath = imageSavedPath;
+					retrievePosterImage();
+					OnPropertyChanged(nameof(Poster));
+					OnPropertyChanged(nameof(PosterPath));
+				}
+				catch (IOException) {}
+			}
+		}
+
 		private void createProfileViewModelsFromApplicationProfiles()
 		{
 			profiles = new ObservableCollection<ProfileViewModel>();
@@ -164,18 +196,18 @@ namespace GHelper.ViewModel
 				{
 					if (Application.Poster != null)
 					{
-						poster = new Image { Source = Application?.Poster?.ConvertToWindowsBitmapImage()  };
+						poster = new WindowsImage { Source = Application?.Poster?.ConvertToWindowsBitmapImage()  };
 					}
 					else if (Application.PosterPath != null)
 					{
-						SixLabors.ImageSharp.Image? posterImage = ImageIOHelper.LoadFromFilePath(Application?.PosterPath!);
-						poster = new Image { Source = posterImage?.ConvertToWindowsBitmapImage() };
+						Image? posterImage = ImageIOHelper.LoadFromFilePath(Application?.PosterPath!);
+						poster = new WindowsImage { Source = posterImage?.ConvertToWindowsBitmapImage() };
 					}
 				}
 				else if (Application?.PosterURL != null)
 				{
-					SixLabors.ImageSharp.Image? posterImage = ImageIOHelper.LoadFromHTTPURL(Application?.PosterURL!);
-					poster = new Image { Source = posterImage?.ConvertToWindowsBitmapImage()  };
+					Image? posterImage = ImageIOHelper.LoadFromHTTPURL(Application?.PosterURL!);
+					poster = new WindowsImage { Source = posterImage?.ConvertToWindowsBitmapImage()  };
 				}
 			}
 		}

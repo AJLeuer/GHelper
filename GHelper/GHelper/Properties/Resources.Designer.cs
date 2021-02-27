@@ -70,6 +70,60 @@ namespace GHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .bmp.
+        /// </summary>
+        internal static string FileExtensionBMP {
+            get {
+                return ResourceManager.GetString("FileExtensionBMP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .jpeg.
+        /// </summary>
+        internal static string FileExtensionJPEG {
+            get {
+                return ResourceManager.GetString("FileExtensionJPEG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .jpg.
+        /// </summary>
+        internal static string FileExtensionJPEGAlternate {
+            get {
+                return ResourceManager.GetString("FileExtensionJPEGAlternate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .png.
+        /// </summary>
+        internal static string FileExtensionPNG {
+            get {
+                return ResourceManager.GetString("FileExtensionPNG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .tga.
+        /// </summary>
+        internal static string FileExtensionTGA {
+            get {
+                return ResourceManager.GetString("FileExtensionTGA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .tiff.
+        /// </summary>
+        internal static string FileExtensionTIFF {
+            get {
+                return ResourceManager.GetString("FileExtensionTIFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to settings.json.
         /// </summary>
         internal static string GHubConfigFileName {

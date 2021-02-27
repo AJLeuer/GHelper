@@ -1,7 +1,6 @@
 ﻿using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Image = Microsoft.UI.Xaml.Controls.Image;
 
 namespace GHelper.View.Selector 
 {
@@ -20,22 +19,16 @@ namespace GHelper.View.Selector
 			set { SetValue(ApplicationProperty, value); }
 		}
 
-		public Image Poster
-		{
-			get { return Application.Poster; }
-		}
-
 		public ApplicationSelectorView()
 		{
 			this.InitializeComponent();
 		}
 
-
 		public Visibility PosterImageVisibility
 		{
 			get 
 			{
-				if (this.Poster == ApplicationViewModel.DefaultPosterImage)
+				if (Application.Application?.HasPoster == false)
 				{
 					return Visibility.Collapsed;
 				}

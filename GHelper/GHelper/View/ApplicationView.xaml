@@ -32,8 +32,8 @@
         
         <StackPanel Grid.Row="1" Grid.Column="1" utility:Margin.Left="32" Orientation="Vertical">
             <TextBlock Text="Poster" utility:Margin.Bottom="16" Foreground="Gray"/>
-            <Image Source="{x:Bind Application.Poster.Source, Mode=OneWay}" Width="220" utility:Margin.Bottom="16"></Image>
-            <Button x:Name="SetCustomPosterImageButton" Width="192" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Click="SetNewCustomImage">
+            <Image Source="{x:Bind Application.Poster, Mode=OneWay}" Width="220" utility:Margin.Bottom="16"></Image>
+            <Button x:Name="SetCustomPosterImageButton" Width="192" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Click="SetNewCustomPosterImage">
                 <StackPanel Orientation="Vertical">
                     <SymbolIcon Symbol="BrowsePhotos"/>
                     <TextBlock>Choose Custom Image...</TextBlock>

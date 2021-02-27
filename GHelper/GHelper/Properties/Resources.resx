@@ -138,4 +138,22 @@
   <data name="GHubConfigFileName" xml:space="preserve">
     <value>settings.json</value>
   </data>
+  <data name="FileExtensionBMP" xml:space="preserve">
+    <value>.bmp</value>
+  </data>
+  <data name="FileExtensionJPEG" xml:space="preserve">
+    <value>.jpeg</value>
+  </data>
+  <data name="FileExtensionJPEGAlternate" xml:space="preserve">
+    <value>.jpg</value>
+  </data>
+  <data name="FileExtensionPNG" xml:space="preserve">
+    <value>.png</value>
+  </data>
+  <data name="FileExtensionTIFF" xml:space="preserve">
+    <value>.tiff</value>
+  </data>
+  <data name="FileExtensionTGA" xml:space="preserve">
+    <value>.tga</value>
+  </data>
 </root>

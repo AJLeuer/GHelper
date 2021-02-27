@@ -6,7 +6,7 @@
             xmlns:utility="using:GHelper.View.Utility">
 
     <Image Width="64" utility:Margin.Right="16"
-           Source="{x:Bind Path=Poster.Source, Mode=OneWay}" Visibility="{x:Bind Path=PosterImageVisibility, Mode=OneWay}" />
+           Source="{x:Bind Path=Application.Poster, Mode=OneWay}" Visibility="{x:Bind Path=PosterImageVisibility, Mode=OneWay}" />
     <TextBlock Text="{x:Bind Path=Application.DisplayName, Mode=OneWay}" VerticalAlignment="Center" />
     
 </StackPanel>
