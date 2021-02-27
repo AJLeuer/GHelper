@@ -12,11 +12,14 @@ namespace GHelper.View
 		public readonly Collection<Action> GHubRecordSavedCallbacks   = new();
 		public readonly Collection<Action> GHubRecordDeletedCallbacks = new();
 
+		public event Action? UserClickedSaveButton;
+		public event Action? UserClickedDeleteButton;
+
 		public RecordViewControls()
         {
             InitializeComponent();
         }
-		
+
 		public void NotifyOfUserChange(object? sender, PropertyChangedEventArgs eventInfo)
 		{
 			SaveButton.Background = Application.Current.Resources[Properties.Resources.SystemAccentColorBrush] as SolidColorBrush;
@@ -30,41 +33,16 @@ namespace GHelper.View
 	        SaveButton.Style = defaultButton.Style;
         }
 
-        public void RegisterForSaveNotification(Action saveFunction)
-        {
-	        GHubRecordSavedCallbacks.Add(saveFunction);
-        }
-
-        public void RegisterForDeleteNotification(Action deleteFunction)
-        {
-	        GHubRecordDeletedCallbacks.Add(deleteFunction);
-        }
-
-        private void Save(object sender, RoutedEventArgs _)
+		private void Save(object sender, RoutedEventArgs _)
         {
 	        ResetAppearance();
-	        SendRecordSavedNotifications();
+			UserClickedSaveButton?.Invoke();
         }
 
         private void Delete(object sender, RoutedEventArgs eventInfo)
         {
-	        SendRecordDeletedNotifications();
+	        UserClickedDeleteButton?.Invoke();
         }
-
-        private void SendRecordSavedNotifications()
-        {
-	        foreach (Action callBack in GHubRecordSavedCallbacks)
-	        {
-		        callBack.Invoke();
-	        }
-        }
-
-        private void SendRecordDeletedNotifications()
-        {
-	        foreach (Action callBack in GHubRecordDeletedCallbacks)
-	        {
-		        callBack.Invoke();
-	        }
-        }
+        
 	}
 }

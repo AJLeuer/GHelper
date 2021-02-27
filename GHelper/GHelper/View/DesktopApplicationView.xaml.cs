@@ -1,7 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using GHelper.Annotations;
+using GHelper.Event;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -34,31 +34,19 @@ namespace GHelper.View
         {
             get { return Application; }
         }
-        
+
+        public event UserSavedEvent?         UserSaved;
+        public event UserDeletedRecordEvent? UserDeletedRecord;
+
         public event PropertyChangedEventHandler? PropertyChanged;
         
-        public DesktopApplicationView(Action saveFunction, Action<GHubRecordViewModel> deleteFunction)
+        public DesktopApplicationView()
         {
             this.InitializeComponent();
-            RegisterForSaveNotification(saveFunction);
-            RegisterForDeleteNotification(deleteFunction);
+            RecordViewControls.UserClickedSaveButton += () => { UserSaved?.Invoke(); };
+            RecordViewControls.UserClickedDeleteButton += () => { UserDeletedRecord?.Invoke(GHubRecord); };
         }
-        
-        public void RegisterForSaveNotification(Action saveFunction)
-        {
-            RecordViewControls.RegisterForSaveNotification(saveFunction);
-        }
-        
-        public void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction)
-        {
-            Action delete = () =>
-            {
-                deleteFunction(this.GHubRecord);
-            };
-		    
-            RecordViewControls.RegisterForDeleteNotification(delete);
-        }
-        
+
         void RecordView.SendRecordChangedNotification()
         {
             OnPropertyChanged(nameof(GHubRecord));

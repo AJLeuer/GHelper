@@ -1,4 +1,5 @@
 ﻿using System;
+using GHelper.Event;
 using GHelper.ViewModel;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml.Controls;
@@ -7,20 +8,20 @@ namespace GHelper.View
 {
 	public interface RecordView
 	{
-		public static RecordView CreateViewForViewModel(GHubRecordViewModel gHubRecordViewModel, Action saveFunction, Action<GHubRecordViewModel> deleteFunction)
+		public static RecordView CreateViewForViewModel(GHubRecordViewModel gHubRecordViewModel)
 		{
 			switch (gHubRecordViewModel)
 			{
 				case ProfileViewModel profileViewModel:
-					return new ProfileView(saveFunction, deleteFunction) { Profile = profileViewModel };
+					return new ProfileView { Profile = profileViewModel };
 				
 				case ApplicationViewModel applicationViewModel:
 					switch (applicationViewModel.Application)
 					{
 						case DesktopApplication:
-							return new DesktopApplicationView(saveFunction, deleteFunction) { Application = applicationViewModel };
+							return new DesktopApplicationView { Application = applicationViewModel };
 						default:
-							return new ApplicationView(saveFunction, deleteFunction) { Application = applicationViewModel };
+							return new ApplicationView { Application = applicationViewModel };
 					}
 					
 				default:
@@ -28,11 +29,10 @@ namespace GHelper.View
 			}
 		}
 		
-		public GHubRecordViewModel? GHubRecord { get; }
+		public GHubRecordViewModel?          GHubRecord { get; }
+		public event UserSavedEvent?         UserSaved;
+		public event UserDeletedRecordEvent? UserDeletedRecord;
 
-		void RegisterForSaveNotification(Action saveFunction);
-		void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction);
-		
 		protected void SendRecordChangedNotification();
 
 		public static void ChangeName(RecordView recordView, object sender)

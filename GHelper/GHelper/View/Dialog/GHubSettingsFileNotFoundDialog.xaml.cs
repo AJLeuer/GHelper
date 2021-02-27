@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using GHelper.Service;
 using GHelperLogic.IO;
-using GHelperLogic.Properties;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 

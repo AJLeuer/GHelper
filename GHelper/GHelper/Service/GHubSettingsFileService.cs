@@ -51,8 +51,8 @@ namespace GHelper.Service
 		{
 			if (MainWindow.Referent is not null)
 			{
-				MainWindow.Referent!.RegisterForSaveNotification(this.Save);
-				MainWindow.Referent!.RegisterForDeleteNotification(this.Delete);
+				MainWindow.Referent!.UserSaved += this.Save;
+				MainWindow.Referent!.UserDeletedRecord += this.Delete;
 			}
 		}
 	}

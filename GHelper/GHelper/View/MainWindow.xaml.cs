@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using GHelper.Annotations;
+using GHelper.Event;
 using GHelper.Properties;
 using GHelper.Service;
 using GHelper.View.Dialog;
@@ -29,15 +30,16 @@ namespace GHelper.View
 			}
 		}
 
-		private Action?                      SaveFunction            { get;  set; }
-		private Action<GHubRecordViewModel>? DeleteFunction          { get;  set; }
 		public  GHubRecordViewModel?         DisplayedRecord         { get;  set; }
 		private TreeViewNode?                LastSelectedRecord      { get;  set; }
 		public  GHubSettingsFileService?     GHubSettingsFileService { get ; set ; }
 
+		private ushort                            SelectionProgrammaticResetLoops = 0; 
+		
+		public event PropertyChangedEventHandler? PropertyChanged;
 
-		private ushort SelectionProgrammaticResetLoops = 0;
-
+		public event UserSavedEvent? UserSaved;
+		public event UserDeletedRecordEvent? UserDeletedRecord;
 
 		public MainWindow()
 		{
@@ -57,16 +59,6 @@ namespace GHelper.View
 			await fileNotFoundDialog.DisplayIfNeeded();
 		}
 
-		public void RegisterForSaveNotification(Action saveFunction)
-		{
-			SaveFunction = saveFunction;
-		}
-
-		public void RegisterForDeleteNotification(Action<GHubRecordViewModel> deleteFunction)
-		{
-			DeleteFunction = deleteFunction;
-		}
-		
 		private async void HandleSelectedGHubRecordChanged(TreeView treeView, TreeViewSelectionChangedEventArgs info)
 		{
 			if (SelectionProgrammaticResetLoops > 0)
@@ -91,7 +83,7 @@ namespace GHelper.View
 				{
 					// user elected to save
 					case ContentDialogResult.Primary:
-						SaveFunction?.Invoke();
+						UserSaved?.Invoke();
 						break;
 					// user doesn't want to save their changes
 					case ContentDialogResult.Secondary:
@@ -120,10 +112,12 @@ namespace GHelper.View
 			DisplayedRecord = gHubRecord;
 			LastSelectedRecord = selectedNode;
 
-			GHubDataDisplay.Content = RecordView.CreateViewForViewModel(gHubRecord, SaveFunction!, DeleteFunction!);
+			RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
+			view.UserSaved += this.UserSaved;
+			view.UserDeletedRecord += this.UserDeletedRecord;
+			GHubDataDisplay.Content = view;
 		}
-
-		public event PropertyChangedEventHandler? PropertyChanged;
+		
 
 		[NotifyPropertyChangedInvocator]
 		private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
