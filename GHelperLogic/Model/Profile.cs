@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
@@ -29,7 +29,7 @@ namespace GHelperLogic.Model
 	    public CategoryColor[]? CategoryColors { get; set; }
 	    
 	    [JsonProperty("commands", NullValueHandling=NullValueHandling.Ignore)]
-	    public Command[]? Commands { get; set; }
+	    public Collection<Command>? Commands { get; set; }
 
 	    [JsonProperty("id")]
 	    public Guid? ID { get; set; }
