@@ -44,7 +44,7 @@ namespace GHelperLogic.IO
 			settingsFileStream ??= GHubSettingsFileStream;
 			JObject parsedSettingsFile = parseSettingsFile(settingsFileStream);
 			
-			GHubSettingsFileObject = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter(), new ProfileJSONConverter())!;
+			GHubSettingsFileObject = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter())!;
 			GHubSettingsFileObject.AssociateProfilesToApplications();
 
 			return GHubSettingsFileObject;

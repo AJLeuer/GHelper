@@ -85,16 +85,7 @@ namespace GHelperTest
 				Color.FromArgb(0x00, 0xFF, 0x40),
 				profiles.ElementAt(2).CategoryColors![1].Hex);
 		}
-		
-		[Test]
-		public static void ShouldDeserializeDefaultProfiles()
-		{
-			ICollection<Profile> profiles = settingsFileReader!.Read(TestSettingsFile).Profiles?.Profiles!;
 
-			Assert.AreEqual(typeof(DefaultProfile), profiles.ElementAt(3).GetType());
-			Assert.AreNotEqual(typeof(DefaultProfile), profiles.ElementAt(1).GetType());
-		}
-		
 		[Test]
 		public static void ShouldMatchApplicationsWithProfiles()
 		{

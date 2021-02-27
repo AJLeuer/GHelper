@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -9,6 +10,9 @@ namespace GHelperLogic.Model
 	[SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
 	public class Profile : GHubRecord, IEquatable<Profile>
 	{
+		public static readonly string DefaultProfileDefaultName  = "PROFILE_NAME_DEFAULT";
+		public static readonly string DefaultProfileFriendlyName = "Default";
+		
 	    public Profile() {}
 	    
 	    public Profile(Profile profile)
@@ -39,10 +43,25 @@ namespace GHelperLogic.Model
 
 	    [JsonProperty("syncLightingCard", NullValueHandling=NullValueHandling.Ignore)]
 	    public Guid? SyncLightingCard { get; set; }
+	    
+	    [JsonIgnore]
+	    public override string? DisplayName
+	    {
+		    get
+		    {
+			    if (this.Name == DefaultProfileDefaultName)
+			    {
+				    return DefaultProfileFriendlyName;
+			    }
+			    else
+			    {
+				    return base.DisplayName;
+			    }
+		    }
+	    }
 
 	    [JsonExtensionData]
 	    public IDictionary<string, JToken>? AdditionalData { get; set; }
-	    
 	    
 	    public override GHubRecord Clone()
 	    {
@@ -126,23 +145,7 @@ namespace GHelperLogic.Model
 	    #endregion
     }
 
-	public class DefaultProfile : Profile
-	{
-		public static readonly string DefaultProfileDefaultName = "PROFILE_NAME_DEFAULT";
-		public static readonly string DefaultProfileFriendlyName = "Default";
-
-		public DefaultProfile(Profile profile) : base(profile)
-		{
-		}
-
-		[JsonIgnore]
-		public override string DisplayName
-		{
-			get { return DefaultProfileFriendlyName; }
-		}
-	}
-
-    public class Assignment
+	public class Assignment
     {
 	    [JsonProperty("cardId")]
 	    public Guid? CardID { get; set; }
