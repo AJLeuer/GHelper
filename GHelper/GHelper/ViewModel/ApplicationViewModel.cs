@@ -47,6 +47,21 @@ namespace GHelper.ViewModel
 				OnPropertyChanged(nameof(Application));
 			}
 		}
+
+		public string? ApplicationType
+		{
+			get
+			{
+				if ((Application is not null) && (Application.GetType().IsSubclassOf(typeof(Application))))
+				{
+					return Application?.GetType().Name.ConvertPascalCaseToSentence();
+				}
+				else
+				{
+					return Properties.Resources.StandardApplicationTypeName;
+				}
+			}
+		}
 		
 		public override string Name 
 		{

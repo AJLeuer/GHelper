@@ -12,5 +12,16 @@ namespace GHelper.Utility
 				collection.Add(item);
 			}
 		}
+
+		public static string ConvertPascalCaseToSentence(this string input)
+		{
+			string output = System.Text.RegularExpressions.Regex.Replace(
+			                                                             input,
+			                                                             "([^^])([A-Z])",
+			                                                             "$1 $2"
+			                                                            );
+
+			return output;
+		}
 	}
 }

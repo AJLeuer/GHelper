@@ -71,8 +71,6 @@ namespace GHelperLogic.Model
 				}
 			}
 		}
-		
-		
 	}
 
 	public class ApplicationList

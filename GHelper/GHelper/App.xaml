@@ -33,7 +33,7 @@
                 <Setter Property="BorderThickness" Value="0" />
             </Style>
             <Style TargetType="TextBox" x:Key="ImmutableMonoSpacedTextBox" BasedOn="{StaticResource ImmutableTextBox}">
-                <Setter Property="FontFamily" Value="Courier New"/>
+                <Setter Property="FontFamily" Value="Consolas"/>
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
                         <DataTemplate>

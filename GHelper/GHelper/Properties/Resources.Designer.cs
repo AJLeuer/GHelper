@@ -151,6 +151,15 @@ namespace GHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Standard Application.
+        /// </summary>
+        internal static string StandardApplicationTypeName {
+            get {
+                return ResourceManager.GetString("StandardApplicationTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to StandardButtonStyle.
         /// </summary>
         internal static string StandardButtonStyle {

@@ -156,4 +156,7 @@
   <data name="FileExtensionTGA" xml:space="preserve">
     <value>.tga</value>
   </data>
+  <data name="StandardApplicationTypeName" xml:space="preserve">
+    <value>Standard Application</value>
+  </data>
 </root>
