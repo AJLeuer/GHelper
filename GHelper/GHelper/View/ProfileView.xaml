@@ -13,11 +13,7 @@
         <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
         
         <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
-            <TextBox Header="Name" Text="{x:Bind Profile.DisplayName, Mode=OneWay, FallbackValue=''}" Style="{StaticResource ResourceKey=StandardTextBox}" KeyUp="HandleNameChange">
-                <TextBox.KeyboardAccelerators>
-                    <KeyboardAccelerator Key="Enter" Invoked="HandleNameChange"/>
-                </TextBox.KeyboardAccelerators>
-            </TextBox>
+            <TextBox Header="Name" Text="{x:Bind Profile.DisplayName, Mode=OneWay, FallbackValue=''}" Style="{StaticResource ResourceKey=StandardTextBox}" KeyUp="HandleNameChange"/>
             <ToggleSwitch Header="Currently Active"    OffContent="Inactive" OnContent="Active" IsOn="{x:Bind Profile.ActiveForApplication, Mode=TwoWay}" Style="{StaticResource StandardToggleSwitch}"/>
             <TextBox      Header="Profile ID"          Text="{x:Bind Profile.Profile.ID,        Mode=OneWay, FallbackValue=''}"                           Style="{StaticResource ResourceKey=ImmutableMonoSpacedTextBox}"/>
         </StackPanel>

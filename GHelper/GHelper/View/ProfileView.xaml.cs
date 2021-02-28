@@ -5,7 +5,6 @@ using GHelper.Event;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 
 namespace GHelper.View
 {
@@ -55,11 +54,6 @@ namespace GHelper.View
 			RecordView.ChangeName(this, sender);
 		}
 
-	    private void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
-	    {
-		    RecordView.ChangeName(this, eventInfo.Element);
-	    }
-	    
 	    private void ResetAppearance()
 	    {
 		    RecordViewControls.ResetAppearance();
