@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using NodaTime;
 using SixLabors.ImageSharp;
 
-namespace GHelperLogic.Model
+namespace GHelperLogic.Model 
 {
 	/// <summary>
 	/// Represents the concept referred to as "Game" within the GHUB app, and as an "application"
@@ -57,7 +57,7 @@ namespace GHelperLogic.Model
 		public LocalDateTime? LastRunTime { get; set; }
 		
 		[JsonProperty("isCustom", NullValueHandling=NullValueHandling.Ignore)]
-		public bool? IsCustom { get; set; }
+		public virtual bool? IsCustom { get; set; }
 
 		[JsonConverter(typeof(PosterImageJSONConverter))]
 		[JsonProperty("poster", NullValueHandling=NullValueHandling.Ignore)]
@@ -156,6 +156,21 @@ namespace GHelperLogic.Model
 
 		public DesktopApplication(Application desktopApplication) :
 			base(desktopApplication)
+		{
+		}
+	}
+
+	public class CustomApplication : Application
+	{
+		[JsonProperty("isCustom", NullValueHandling = NullValueHandling.Ignore)]
+		public override bool? IsCustom
+		{
+			get { return true;} 
+			set {}
+		}
+		
+		public CustomApplication(Application customApplication) :
+			base(customApplication)
 		{
 		}
 	}

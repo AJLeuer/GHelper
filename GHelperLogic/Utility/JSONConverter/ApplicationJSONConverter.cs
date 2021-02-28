@@ -31,6 +31,10 @@ namespace GHelperLogic.Utility.JSONConverter
 			{
 				application = new DesktopApplication(application);
 			}
+			else if (application.IsCustom == true)
+			{
+				application = new CustomApplication(application);
+			}
 
 			return application;
 		}

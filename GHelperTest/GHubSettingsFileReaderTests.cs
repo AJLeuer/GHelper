@@ -8,7 +8,7 @@ using NUnit.Framework;
 using SixLabors.ImageSharp;
 using Color = System.Drawing.Color;
 
-namespace GHelperTest
+namespace GHelperTest 
 {
 	[TestFixture]
 	public static class GHubSettingsFileReaderTests
@@ -38,7 +38,7 @@ namespace GHelperTest
 		{
 			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).Applications?.Applications!;
 			
-			Assert.AreEqual(3, applications.Count);
+			Assert.AreEqual(4, applications.Count);
 		}
 
 		[Test]
@@ -63,6 +63,20 @@ namespace GHelperTest
 			Assert.AreNotEqual(
 				typeof(DesktopApplication),
 				applications.ElementAt(0).GetType());
+		}
+		
+		[Test]
+		public static void ShouldDeserializeCustomApplications()
+		{
+			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).Applications?.Applications!;
+
+			Assert.AreEqual(
+			                typeof(CustomApplication), 
+			                applications.ElementAt(3).GetType());
+
+			Assert.AreNotEqual(
+			                   typeof(CustomApplication),
+			                   applications.ElementAt(0).GetType());
 		}
 		
 		[Test]

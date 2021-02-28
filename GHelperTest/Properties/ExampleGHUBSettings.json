@@ -95,6 +95,14 @@
                 "name": "Call of Duty: Modern Warfare 2019",
                 "posterUrl": "http://127.0.0.1:9180/core/applications/call_of_duty_modern_warfare_2019_poster.jpg",
                 "profileUrl": "http://127.0.0.1:9180/core/applications/call_of_duty_modern_warfare_2019_profile.jpg"
+            },
+            {
+                "applicationId": "9f417aa2-c547-4b0c-95ef-d1f8f8cffb60",
+                "applicationPath": "C:\\Games\\Galaxy Games\\Cyberpunk 2077\\bin\\x64\\Cyberpunk2077.exe",
+                "isCustom": true,
+                "isInstalled": true,
+                "name": "Cyberpunk 2077",
+                "posterPath": "C:\\Users\\Adam\\AppData\\Local\\LGHUB\\icon_cache\\825eadc4063a4945abb20023f2d7b862.png"
             }
         ]
     },
