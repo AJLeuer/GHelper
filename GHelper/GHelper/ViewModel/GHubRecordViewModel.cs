@@ -10,8 +10,8 @@ namespace GHelper.ViewModel
 		public abstract GHubRecord? GHubRecord { get;}
 		protected GHubRecord? GHubRecordBackup { get; set; }
 		
-		public abstract string Name { set; } 
-		
+		public abstract string? Name { get; set; }
+
 		public string? DisplayName
 		{
 			get => GHubRecord?.DisplayName;

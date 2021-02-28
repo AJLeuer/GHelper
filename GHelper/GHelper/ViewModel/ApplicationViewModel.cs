@@ -64,8 +64,9 @@ namespace GHelper.ViewModel
 			}
 		}
 		
-		public override string Name 
+		public override string? Name
 		{
+			get => Application?.Name;
 			set
 			{
 				if (Application != null)

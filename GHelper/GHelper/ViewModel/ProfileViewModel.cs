@@ -24,8 +24,9 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public override string Name 
+		public override string? Name
 		{
+			get => Profile?.Name;
 			set
 			{
 				if (Profile != null)

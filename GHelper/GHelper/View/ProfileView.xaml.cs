@@ -5,6 +5,7 @@ using GHelper.Event;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 
 namespace GHelper.View
 {
@@ -63,6 +64,16 @@ namespace GHelper.View
 	    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 	    {
 		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	    }
+
+	    private void ShowEditableName(UIElement uiElement, GettingFocusEventArgs eventInfo)
+	    {
+		    NameDisplay.Text = Profile.Name;
+	    }
+
+	    private void ShowDisplayName(UIElement uiElement, LosingFocusEventArgs eventInfo)
+	    {
+		    NameDisplay.Text = Profile.DisplayName;
 	    }
 	}
 }
