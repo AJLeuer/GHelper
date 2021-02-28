@@ -49,4 +49,5 @@ reverse-engineer GHub's behavior)
   - Done
 * Confirm before deleting
 * Delete on delete key
-* Show Application type in record view
+* S̶h̶o̶w̶ ̶A̶p̶p̶l̶i̶c̶a̶t̶i̶o̶n̶ ̶t̶y̶p̶e̶ ̶i̶n̶ ̶r̶e̶c̶o̶r̶d̶ ̶v̶i̶e̶w̶
+  - Done
