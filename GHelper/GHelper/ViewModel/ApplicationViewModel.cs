@@ -4,10 +4,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using GHelper.Annotations;
+using GHelper.Service;
 using GHelper.Utility;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
+using GHelperLogic.Utility;
 using Microsoft.UI.Xaml.Media;
+using Optional;
+using Optional.Unsafe;
 using Image = SixLabors.ImageSharp.Image;
 using WindowsImage = Microsoft.UI.Xaml.Controls.Image;
 
@@ -153,6 +157,17 @@ namespace GHelper.ViewModel
 
 		public virtual void SetNewCustomPosterImage(Image customPoster)
 		{
+			if (Application is not null && Application.Name is not null)
+			{
+				Option<Uri> potentialNewPosterURL = GHubImageStorageService.GHubProgramDataImageStorageService.SavePosterImage(customPoster, Application.Name.DuplicateWithoutWhitespaces());
+				
+				if (potentialNewPosterURL.ValueOrDefault() is { } newPosterURL)
+				{
+					Application.PosterURL = newPosterURL;
+					Application.ProfileURL = newPosterURL;
+					// Todo: need to somehow inform user that the new poster won't be viewable until they logout and log back in again
+				}
+			}
 		}
 
 		private void createProfileViewModelsFromApplicationProfiles()

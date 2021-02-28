@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using NDepend.Path;
 using Newtonsoft.Json;
 using System.Linq;
+using Optional;
 
 namespace GHelperLogic.Utility
 {
@@ -53,6 +55,23 @@ namespace GHelperLogic.Utility
 				jsonConverters.Add(converter);
 			}
 		}
+
+		public static Option<T> ToOption<T>(T? value)
+		{
+			if (value is null)
+			{
+				return Option.None<T>();
+			}
+			else
+			{
+				return Option.Some<T>(value);
+			}
+		}
 		
+		public static string DuplicateWithoutWhitespaces(this string source)
+		{
+			string duplicate = new (source);
+			return string.IsNullOrEmpty(duplicate) ? duplicate : new string(duplicate.Where(x => !char.IsWhiteSpace(x)).ToArray());
+		}
 	}
 }

@@ -1,8 +1,9 @@
-﻿using System.IO;
-using GHelper.Annotations;
+﻿using GHelper.Annotations;
 using GHelper.Service;
 using GHelperLogic.Model;
 using NDepend.Path;
+using Optional;
+using Optional.Unsafe;
 using Image = SixLabors.ImageSharp.Image;
 
 namespace GHelper.ViewModel
@@ -18,15 +19,16 @@ namespace GHelper.ViewModel
 		{
 			if (Application is not null)
 			{
-				try
+
+				Option<IFilePath> potentialSavedImagePath = GHubImageStorageService.GHubImageCacheService.SavePosterImage(customPoster);
+
+				if (potentialSavedImagePath.HasValue && potentialSavedImagePath.ValueOrDefault() is  { } savedImagePath)
 				{
-					IFilePath imageSavedPath = GHubImageCacheService.SavePosterImage(customPoster);
-					Application.PosterPath = imageSavedPath;
+					Application.PosterPath = savedImagePath;
 					retrievePosterImage();
 					OnPropertyChanged(nameof(Poster));
 					OnPropertyChanged(nameof(PosterPath));
 				}
-				catch (IOException) {}
 			}
 		}
 	}
