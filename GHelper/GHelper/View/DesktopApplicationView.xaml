@@ -15,18 +15,7 @@
         
         <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
        
-        <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
-            <TextBox x:Name="NameTextBox" Header="Name" Text="{x:Bind Application.DisplayName, Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" KeyUp="HandleNameChange" >
-                <TextBox.KeyboardAccelerators>
-                    <KeyboardAccelerator Key="Enter" Invoked="HandleNameChange"/>
-                </TextBox.KeyboardAccelerators>
-            </TextBox>
-            <TextBox Header="Application ID"    Text="{x:Bind Application.Application.ApplicationID,          Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
-            <TextBox Header="Path"              Text="{x:Bind Application.Application.ApplicationPath,        Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
-            <TextBox Header="Install State"     Text="{x:Bind Application.InstallState,                       Mode=OneWay}"                   Style="{StaticResource ImmutableTextBox}"/>
-            <TextBox Header="Poster Image Path" Text="{x:Bind Application.Application.PosterURL,              Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
-            <TextBox Header="Last Run Time"     Text="{x:Bind Application.Application.LastRunTime.ToString(), Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
-        </StackPanel>
+        <view:ApplicationDataView Grid.Row="1" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" />
     </Grid>
 
     

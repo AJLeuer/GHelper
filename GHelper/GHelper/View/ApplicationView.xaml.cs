@@ -31,7 +31,6 @@ namespace GHelper.View
 		    {
 			    SetValue(ApplicationProperty, value);
 			    ResetAppearance();
-			    DetermineNameViewStyle();
 			    Application.PropertyChanged += RecordViewControls.NotifyOfUserChange;
 		    }
 	    }
@@ -62,11 +61,6 @@ namespace GHelper.View
 	        RecordView.ChangeName(this, sender);
         }
 
-	    protected void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
-        {
-	        RecordView.ChangeName(this, eventInfo.Element);
-        }
-	    
 	    private async void SetNewCustomPosterImage(object sender, RoutedEventArgs routedEventInfo)
 	    {
 		    StorageFile? imageStorageFile = await FileDialog.ChooseFile(location: PickerLocationId.PicturesLibrary, filteredFileTypes: new [] { Properties.Resources.FileExtensionPNG, Properties.Resources.FileExtensionBMP, Properties.Resources.FileExtensionJPEG, Properties.Resources.FileExtensionJPEGAlternate, Properties.Resources.FileExtensionTGA });
@@ -86,10 +80,6 @@ namespace GHelper.View
 		    RecordViewControls.ResetAppearance();
 	    }
 
-	    public void DetermineNameViewStyle()
-	    {
-		    IApplicationView.DetermineNameViewStyle(Application, NameTextBox);
-	    }
 	    
 	    [NotifyPropertyChangedInvocator]
 	    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

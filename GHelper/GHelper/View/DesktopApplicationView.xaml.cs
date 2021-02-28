@@ -25,7 +25,6 @@ namespace GHelper.View
             {
                 SetValue(ApplicationProperty, value);
                 ResetAppearance();
-                DetermineNameViewStyle();
                 Application.PropertyChanged += RecordViewControls.NotifyOfUserChange;
             }
         }
@@ -51,27 +50,12 @@ namespace GHelper.View
         {
             OnPropertyChanged(nameof(GHubRecord));
         }
-        
-        protected void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
-        {
-            RecordView.ChangeName(this, sender);
-        }
-
-        protected void HandleNameChange(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs eventInfo)
-        {
-            RecordView.ChangeName(this, eventInfo.Element);
-        }
 
         public void ResetAppearance()
         {
             RecordViewControls.ResetAppearance();
         }
 
-        public void DetermineNameViewStyle()
-        {
-            IApplicationView.DetermineNameViewStyle(Application, NameTextBox);
-        }
-        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
