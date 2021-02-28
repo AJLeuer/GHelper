@@ -5,7 +5,6 @@ using GHelper.Event;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 
 namespace GHelper.View
 {

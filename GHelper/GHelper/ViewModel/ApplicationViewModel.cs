@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -111,7 +112,7 @@ namespace GHelper.ViewModel
 				}
 				else
 				{
-					return "";
+					return String.Empty;
 				}
 			}
 		}
@@ -122,15 +123,15 @@ namespace GHelper.ViewModel
 			{
 				if (Application is DesktopApplication)
 				{
-					return "Installed";
+					return nameof(GHelper.ViewModel.InstallState.Installed);
 				}
-				if (Application?.IsInstalled == null || (Application.IsInstalled == false))
+				else if (Application?.IsInstalled == null || (Application.IsInstalled == false))
 				{
-					return "Not Installed";
+					return nameof(GHelper.ViewModel.InstallState.NotInstalled).ConvertPascalCaseToSentence();
 				}
 				else 
 				{
-					return "Installed";
+					return nameof(GHelper.ViewModel.InstallState.Installed);
 				}
 			}
 		}
@@ -263,5 +264,11 @@ namespace GHelper.ViewModel
 
 			return applicationViewModel;
 		}
+	}
+
+	public enum InstallState
+	{
+		Installed,
+		NotInstalled
 	}
 }

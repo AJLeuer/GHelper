@@ -10,7 +10,6 @@ using GHelper.ViewModel;
 using GHelperLogic.IO;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using Image = SixLabors.ImageSharp.Image;
 
 namespace GHelper.View
