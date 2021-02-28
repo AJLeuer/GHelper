@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
 using GHelper.Annotations;
-using GHelper.Service;
 using GHelper.Utility;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml.Media;
-using NDepend.Path;
 using Image = SixLabors.ImageSharp.Image;
 using WindowsImage = Microsoft.UI.Xaml.Controls.Image;
 
@@ -137,31 +134,8 @@ namespace GHelper.ViewModel
 			OnPropertyChanged(nameof(Application));
 		}
 
-		public void SetNewCustomPosterImage(Image customPoster)
+		public virtual void SetNewCustomPosterImage(Image customPoster)
 		{
-			if (Application is not null)
-			{
-				if (Application.IsCustom == true)
-				{
-					SetNewCustomPosterImageForCustomApplications(customPoster);
-				}
-			}
-		}
-
-		private void SetNewCustomPosterImageForCustomApplications(Image customPoster)
-		{
-			if (Application is not null)
-			{
-				try
-				{
-					IFilePath imageSavedPath = GHubImageCacheService.SavePosterImage(customPoster);
-					Application.PosterPath = imageSavedPath;
-					retrievePosterImage();
-					OnPropertyChanged(nameof(Poster));
-					OnPropertyChanged(nameof(PosterPath));
-				}
-				catch (IOException) {}
-			}
 		}
 
 		private void createProfileViewModelsFromApplicationProfiles()
@@ -179,7 +153,7 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		private void retrievePosterImage()
+		protected void retrievePosterImage()
 		{
 			//If this is a application with a custom poster (and the poster bitmap was, therefore, serialized into the JSON)
 			//... then it will have already been deserialized and stored into the 'poster' field
@@ -251,11 +225,28 @@ namespace GHelper.ViewModel
 			{
 				foreach (Application application in applications)
 				{
-					var applicationViewModel = new ApplicationViewModel(application);
+					ApplicationViewModel applicationViewModel = CreateApplicationViewModelForApplicationModel(application);
 					applicationViewModels.Add(applicationViewModel);
 				}
 			}
 			return applicationViewModels;
+		}
+
+		private static ApplicationViewModel CreateApplicationViewModelForApplicationModel(Application application)
+		{
+			ApplicationViewModel applicationViewModel;
+			
+			switch (application)
+			{
+				case CustomApplication customApplication:
+					applicationViewModel = new CustomApplicationViewModel(customApplication);
+					break;
+				default:
+					applicationViewModel = new ApplicationViewModel(application);
+					break;
+			}
+
+			return applicationViewModel;
 		}
 	}
 }

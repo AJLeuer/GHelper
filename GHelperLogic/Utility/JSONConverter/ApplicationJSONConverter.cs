@@ -20,12 +20,12 @@ namespace GHelperLogic.Utility.JSONConverter
 			Collection<JsonConverter<Application>> storedConverters = serializer.Converters.Store<Application>();
 			Application application = serializer.Deserialize<Application>(reader)!;
 			serializer.Converters.Replace(storedConverters);
-			application = DetermineApplicationType(application);
+			application = CreateApplicationWithCorrectType(application);
 
 			return application;
 		}
 
-		private static Application DetermineApplicationType(Application application)
+		private static Application CreateApplicationWithCorrectType(Application application)
 		{
 			if (application.Name == DesktopApplication.DesktopApplicationDefaultName)
 			{
