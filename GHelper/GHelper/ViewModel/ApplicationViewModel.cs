@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using GHelper.Annotations;
 using GHelper.Service;
@@ -97,7 +98,7 @@ namespace GHelper.ViewModel
 				}
 				else
 				{
-					retrievePosterImage();
+					RetrievePosterImage();
 					return poster?.Source ?? DefaultPosterImage.Source;
 				}
 			}
@@ -151,22 +152,35 @@ namespace GHelper.ViewModel
 		
 		public override void RestoreInitialState()
 		{
+			RestorePosterIfNeeded();
 			base.RestoreInitialState();
 			OnPropertyChanged(nameof(Application));
 		}
 
+		protected virtual void RestorePosterIfNeeded()
+		{
+			if (GHubRecordBackup is Application applicationBackup)
+			{
+				if ((applicationBackup.Poster is not null) && (Application?.Poster != applicationBackup.Poster))
+				{
+					SetNewCustomPosterImage(applicationBackup.Poster);
+				}
+			}
+		}
+
 		public virtual void SetNewCustomPosterImage(Image customPoster)
 		{
-			if (Application is not null && Application.Name is not null)
+			if ((Application is not null) && (Application.Name is not null) && (Application.PosterURL is not null))
 			{
-				Option<Uri> potentialNewPosterURL = GHubImageStorageService.GHubProgramDataImageStorageService.SavePosterImage(customPoster, Application.Name.DuplicateWithoutWhitespaces());
-				
-				if (potentialNewPosterURL.ValueOrDefault() is { } newPosterURL)
+				try
 				{
-					Application.PosterURL = newPosterURL;
-					Application.ProfileURL = newPosterURL;
-					// Todo: need to somehow inform user that the new poster won't be viewable until they logout and log back in again
+					GHubImageStorageService.GHubProgramDataImageStorageService.SavePosterImage(customPoster, Path.GetFileName(Application.PosterURL.ToString()));
+					Application.LoadApplicationPosterImage(Application);
+					RetrievePosterImage();
+					OnPropertyChanged(nameof(Poster));
+					OnPropertyChanged(nameof(PosterPath));
 				}
+				catch (IOException) {}
 			}
 		}
 
@@ -185,36 +199,11 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		protected void retrievePosterImage()
+		protected void RetrievePosterImage()
 		{
-			//If this is a application with a custom poster (and the poster bitmap was, therefore, serialized into the JSON)
-			//... then it will have already been deserialized and stored into the 'poster' field
-			//However if this is not a custom application and it has a posterURL available
-			//... then on the first call to get Poster we initialize it by grabbing the image file from the URL
-			//So basically Poster is used to store poster images that can be retrieved in two very different ways.
-			//Update 25 Feb 2021: A new GHub update has made this situation even more complicated. Now there are 3 different
-			//ways a poster could potentially be stored. The new method is a field "posterPath" which directs to a cached file
-			//in the GHub AppData directory.
-
 			if (Application?.HasPoster != null && Application.HasPoster)
 			{
-				if (Application.IsCustom == true)
-				{
-					if (Application.Poster != null)
-					{
-						poster = new WindowsImage { Source = Application?.Poster?.ConvertToWindowsBitmapImage()  };
-					}
-					else if (Application.PosterPath != null)
-					{
-						Image? posterImage = ImageIOHelper.LoadFromFilePath(Application?.PosterPath!);
-						poster = new WindowsImage { Source = posterImage?.ConvertToWindowsBitmapImage() };
-					}
-				}
-				else if (Application?.PosterURL != null)
-				{
-					Image? posterImage = ImageIOHelper.LoadFromHTTPURL(Application?.PosterURL!);
-					poster = new WindowsImage { Source = posterImage?.ConvertToWindowsBitmapImage()  };
-				}
+				poster = new WindowsImage { Source = Application?.Poster?.ConvertToWindowsBitmapImage() };
 			}
 		}
 

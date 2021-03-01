@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using GHelperLogic.IO;
 using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;
@@ -82,7 +83,44 @@ namespace GHelperLogic.Model
 		[JsonIgnore]
 		public bool HasPoster
 		{
-			get { return ((PosterURL != null) || (Poster != null)) || (PosterPath != null); }
+			get { return ((PosterURL != null) || (PosterPath != null) || (Poster != null)); }
+		}
+		
+		public bool ShouldSerializePoster()
+		{
+			// Newer versions of G Hub store poster images for custom applications in a cache
+			// directory, and if the user of G Helper set a custom image for a custom application we'll have already stored 
+			// it in that directory, so no need to serialize it into JSON too. If a user happens to be using an older version
+			// of G Hub, once they update it'll find the image in the cache by reading the PosterPath property, which we've also
+			// already set. The only downside is they won't be able to see their new custom image until they upgrade G Hub.
+			return false;
+		}
+
+		public static void LoadApplicationPosterImage(Application application)
+		{
+			// If this is a application with a custom poster (and the poster bitmap was, therefore, serialized into the JSON)
+			// ... then it will have already been deserialized and stored into the 'poster' field
+			// However if this is not a custom application and it has a posterURL available
+			// ... then on the first call to get Poster we initialize it by grabbing the image file from the URL
+			// So basically Poster is used to store poster images that can be retrieved in two very different ways.
+			// Update 25 Feb 2021: A new GHub update has made this situation even more complicated. Now there are 3 different
+			// ways a poster could potentially be stored. The new method is a field "posterPath" which directs to a cached file
+			// in the GHub AppData directory.
+
+			if (application.HasPoster)
+			{
+				if (application.IsCustom == true)
+				{
+					if (application.PosterPath != null)
+					{
+						application.Poster = ImageIOHelper.LoadFromFilePath(application.PosterPath);
+					}
+				}
+				else if (application.PosterURL != null)
+				{
+					application.Poster = ImageIOHelper.LoadFromHTTPURL(application.PosterURL!);
+				}
+			}
 		}
 
 		#region EqualityMembers

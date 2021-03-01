@@ -13,64 +13,40 @@ namespace GHelperLogic.IO
 	{
 		public static class DefaultApplicationImagesIO
 		{
-			public static Option<IFilePath> SavePosterImage(Image image, string imageFileName)
+			public static void SavePosterImage(Image image, string imageFileName)
 			{
-				imageFileName += Properties.Resources.FileExtensionPNG;
-				
-				if (FindCurrentImageStorageDirectory().ValueOrDefault() is  { } imageStorageDirectory)
+				if (FindCurrentImageStorageDirectory().ValueOrDefault() is  { } imageStorageDirectoryPath)
 				{
-					try
-					{
-						IAbsoluteDirectoryPath imageStorageDirectoryPath =
-							PathHelpers.ToAbsoluteDirectoryPath(imageStorageDirectory.FullName);
+					IFilePath destinationImageFilePath = imageStorageDirectoryPath.GetChildFileWithName(imageFileName);
 
-						IFilePath destinationImageFilePath =
-							imageStorageDirectoryPath.GetChildFileWithName(imageFileName);
-
-						destinationImageFilePath = PathHelpers.ToAbsoluteFilePath(Utility.Utilities.AddIndexToFileNameIfNeeded(destinationImageFilePath.ToString()!));
-
-						using FileStream posterFileStream = new (path: destinationImageFilePath.ToString()!,
-						                                         mode: FileMode.Create);
-						image.SaveAsPng(posterFileStream);
-
-						return Option.Some(destinationImageFilePath);
-					}
-					catch (Exception)
-					{
-						return Option.None<IFilePath>();
-					}
-				}
-				else
-				{
-					return Option.None<IFilePath>();
+					using FileStream posterFileStream = new (path: destinationImageFilePath.ToString()!,
+					                                         mode: FileMode.Create);
+					image.SaveAsPng(posterFileStream);
 				}
 			}
 			
-			private static Option<DirectoryInfo> FindCurrentImageStorageDirectory()
+			private static Option<IAbsoluteDirectoryPath> FindCurrentImageStorageDirectory()
 			{
 				try
 				{
-					DirectoryInfo startingDirectory = new (Properties.Configuration.GHubProgramDataDepotsDirectoryPath.ToString()!);
+					DirectoryInfo startingDirectory = Properties.Configuration.GHubProgramDataDepotsDirectoryPath.DirectoryInfo;
 
 					startingDirectory = GetMostRecentlyCreatedSubdirectory(parentDirectory: startingDirectory);
 
-					IAbsoluteDirectoryPath? imageStorageDirectoryPath =
-						PathHelpers.ToAbsoluteDirectoryPath(Path.Combine(startingDirectory.FullName,
-						                                                 Properties.Resources.GHubProgramDataImagesStorageRelativePath));
+					IAbsoluteDirectoryPath? imageStorageDirectoryPath = PathHelpers.ToAbsoluteDirectoryPath(Path.Combine(startingDirectory.FullName, Properties.Resources.GHubProgramDataImagesStorageRelativePath));
 
-					if (imageStorageDirectoryPath?.DirectoryInfo != null)
+					if (imageStorageDirectoryPath?.Exists is true)
 					{
-						Option<DirectoryInfo> imageStorageDirectory = Option.Some(imageStorageDirectoryPath.DirectoryInfo);
-						return imageStorageDirectory;
+						return Option.Some(imageStorageDirectoryPath);
 					}
 					else
 					{
-						return Option.None<DirectoryInfo>();
+						return Option.None<IAbsoluteDirectoryPath>();
 					}
 				}
 				catch (Exception)
 				{
-					return Option.None<DirectoryInfo>();
+					return Option.None<IAbsoluteDirectoryPath>();
 				}
 			}
 

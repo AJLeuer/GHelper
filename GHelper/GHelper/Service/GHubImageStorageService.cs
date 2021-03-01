@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using GHelperLogic.IO;
+using GHelperLogic.Utility;
 using NDepend.Path;
 using Optional;
 using Optional.Unsafe;
@@ -19,8 +20,7 @@ namespace GHelper.Service
 
 				try
 				{
-					IFilePath destinationImageFilePath = GHelperLogic.Properties.Configuration.IconCacheDirectoryPath
-						.GetChildFileWithName(imageFileName);
+					IFilePath destinationImageFilePath = GHelperLogic.Properties.Configuration.IconCacheDirectoryPath.GetChildFileWithName(imageFileName);
 					using FileStream posterFileStream = new (path: destinationImageFilePath.ToString()!,
 					                                         mode: FileMode.Create);
 					poster.SaveAsPng(posterFileStream);
@@ -28,33 +28,25 @@ namespace GHelper.Service
 				}
 				catch (Exception)
 				{
+					LogManager.Log("Unabled to save custom poster image to AppData image cache");
 					return Option.None<IFilePath>();
 				}
 			}
 		}
-		
-		
-		
+
 		public static class GHubProgramDataImageStorageService
 		{
-			public static Option<Uri> SavePosterImage(Image poster, string imageFileName)
+			public static void SavePosterImage(Image poster, string imageFileName)
 			{
-				Option<IFilePath> potentialImageFilePath = GHubProgramDataIO.DefaultApplicationImagesIO.SavePosterImage(image: poster, imageFileName: imageFileName);
-
-				if (potentialImageFilePath.ValueOrDefault() is { } imageFilePath)
+				try
 				{
-					return Option.Some(DeterminePosterURLForSavedImageFile(imageFilePath));
+					GHubProgramDataIO.DefaultApplicationImagesIO.SavePosterImage(image: poster, imageFileName: imageFileName);
 				}
-				else
+				catch (Exception)
 				{
-					return Option.None<Uri>();
+					LogManager.Log("Unabled to save custom poster image to ProgramData");
+					throw new IOException();
 				}
-			}
-
-			private static Uri DeterminePosterURLForSavedImageFile(IFilePath savedImagePath)
-			{
-				savedImagePath = PathHelpers.ToAbsoluteFilePath(savedImagePath.ToString()!);
-				return new Uri(GHelperLogic.Properties.Resources.PosterURLStandardPrefix + savedImagePath.FileName);
 			}
 		}
 

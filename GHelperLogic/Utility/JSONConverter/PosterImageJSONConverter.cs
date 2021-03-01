@@ -1,24 +1,21 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Png;
 
 namespace GHelperLogic.Utility.JSONConverter
 {
 	public class PosterImageJSONConverter : JsonConverter<Image>
 	{
+		public override bool CanWrite
+		{
+			// See comment in Application.ShouldSerializePoster() for why we don't want to serialize this property
+			get => false;
+		}
+
 		public override void WriteJson(JsonWriter writer, Image? value, JsonSerializer serializer)
 		{
-			using var imageStream = new MemoryStream();
-			value.Save(imageStream, PngFormat.Instance);
-			
-			imageStream.Position = 0;
-			byte[] imageBytes = imageStream.ToArray();
-			
-			JToken imageBase64JSON = Convert.ToBase64String(imageBytes);
-			imageBase64JSON.WriteTo(writer);
+			throw new NotImplementedException();
 		}
 
 		public override Image ReadJson(JsonReader reader, Type objectType, Image? existingValue, bool hasExistingValue, JsonSerializer serializer)
