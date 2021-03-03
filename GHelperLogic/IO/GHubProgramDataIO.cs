@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using GHelperLogic.Utility;
 using NDepend.Path;
 using Optional;
 using Optional.Unsafe;
@@ -17,7 +18,9 @@ namespace GHelperLogic.IO
 			{
 				if (FindCurrentImageStorageDirectory().ValueOrDefault() is  { } imageStorageDirectoryPath)
 				{
-					IFilePath destinationImageFilePath = imageStorageDirectoryPath.GetChildFileWithName(imageFileName);
+					IAbsoluteFilePath destinationImageFilePath = imageStorageDirectoryPath.GetChildFileWithName(imageFileName);
+					
+					Utilities.TakeOwnershipOf(file: destinationImageFilePath);
 
 					using FileStream posterFileStream = new (path: destinationImageFilePath.ToString()!,
 					                                         mode: FileMode.Create);

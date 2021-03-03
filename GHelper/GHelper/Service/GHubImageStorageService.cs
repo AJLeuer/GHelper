@@ -26,9 +26,10 @@ namespace GHelper.Service
 					poster.SaveAsPng(posterFileStream);
 					return Option.Some(destinationImageFilePath);
 				}
-				catch (Exception)
+				catch (Exception exception)
 				{
 					LogManager.Log("Unabled to save custom poster image to AppData image cache");
+					LogManager.Log(exception);
 					return Option.None<IFilePath>();
 				}
 			}
@@ -42,9 +43,10 @@ namespace GHelper.Service
 				{
 					GHubProgramDataIO.DefaultApplicationImagesIO.SavePosterImage(image: poster, imageFileName: imageFileName);
 				}
-				catch (Exception)
+				catch (Exception exception)
 				{
 					LogManager.Log("Unabled to save custom poster image to ProgramData");
+					LogManager.Log(exception);
 					throw new IOException();
 				}
 			}

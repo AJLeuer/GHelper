@@ -170,7 +170,7 @@ namespace GHelper.ViewModel
 
 		public virtual void SetNewCustomPosterImage(Image customPoster)
 		{
-			if ((Application is not null) && (Application.Name is not null) && (Application.PosterURL is not null))
+			if ((Application?.Name is not null) && (Application?.PosterURL is not null))
 			{
 				try
 				{
