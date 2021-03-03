@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Security.AccessControl;
-using System.Security.Principal;
 using NDepend.Path;
 
 namespace GHelperLogic.Utility
@@ -10,9 +8,14 @@ namespace GHelperLogic.Utility
 	{
 		public static void TakeOwnershipOf(IAbsoluteFilePath file)
 		{
+			IAbsoluteFilePath gHelperExecutablePath = PathHelpers.ToAbsoluteFilePath(System.Reflection.Assembly.GetEntryAssembly()!.Location);
+			IDirectoryPath executingDirectory = gHelperExecutablePath.ParentDirectoryPath;
+			string filePermissionsUtilityExecutableFullPath = Path.Combine(executingDirectory.ToString()!, Properties.Resources.FilePermissionsUtilityExecutableName); 
+			
 			var filePermissionsUtilityStartInfo = new ProcessStartInfo
 			                                      {
-				                                      FileName = Properties.Resources.FilePermissionsUtilityExecutableName,
+				                                      UseShellExecute = true,
+				                                      FileName = filePermissionsUtilityExecutableFullPath,
 				                                      Arguments = file.ToString()!,
 				                                      Verb = Properties.Resources.ElevatedPermissionsVerb
 			                                      };
@@ -20,20 +23,6 @@ namespace GHelperLogic.Utility
 			var filePermissionsUtilityProcess = new Process { StartInfo = filePermissionsUtilityStartInfo };
 			filePermissionsUtilityProcess.Start();   
 			filePermissionsUtilityProcess.WaitForExit();
-			
-			
-			if ((file.FileInfo is  { } fileInfo) && (WindowsIdentity.GetCurrent().User is { } currentUser))
-			{
-				// Get Currently Applied Access Control
-				FileSecurity fileSecurity = FileSystemAclExtensions.GetAccessControl(fileInfo);
-
-				//Update it, Grant Current User Full Control
-				fileSecurity.SetOwner(currentUser);
-				fileSecurity.SetAccessRule(new FileSystemAccessRule(currentUser, FileSystemRights.FullControl, AccessControlType.Allow));
-
-				//Update the Access Control on the File
-				file.FileInfo.SetAccessControl(fileSecurity);
-			}
 		}
 	}
 }

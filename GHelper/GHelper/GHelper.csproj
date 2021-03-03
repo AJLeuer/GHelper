@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows10.0.18362.0</TargetFramework>
@@ -10,6 +10,9 @@
     <Configurations>Debug;Release;DebugRelease</Configurations>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="FilePermissionsUtility.exe" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.6" />
@@ -32,6 +35,9 @@
     </Content>
     <Content Include="..\..\ReadMe.md">
       <Link>ReadMe.md</Link>
+    </Content>
+    <Content Include="FilePermissionsUtility.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
