@@ -154,4 +154,10 @@
   <data name="FileExtensionPNG" xml:space="preserve">
     <value>.png</value>
   </data>
+  <data name="FilePermissionsUtilityExecutableName" xml:space="preserve">
+    <value>FilePermissionsUtility.exe</value>
+  </data>
+  <data name="ElevatedPermissionsVerb" xml:space="preserve">
+    <value>runas</value>
+  </data>
 </root>

@@ -90,11 +90,29 @@ namespace GHelperLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to runas.
+        /// </summary>
+        public static string ElevatedPermissionsVerb {
+            get {
+                return ResourceManager.GetString("ElevatedPermissionsVerb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .png.
         /// </summary>
         public static string FileExtensionPNG {
             get {
                 return ResourceManager.GetString("FileExtensionPNG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FilePermissionsUtility.exe.
+        /// </summary>
+        public static string FilePermissionsUtilityExecutableName {
+            get {
+                return ResourceManager.GetString("FilePermissionsUtilityExecutableName", resourceCulture);
             }
         }
         

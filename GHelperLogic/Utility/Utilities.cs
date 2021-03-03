@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using NDepend.Path;
@@ -9,6 +10,18 @@ namespace GHelperLogic.Utility
 	{
 		public static void TakeOwnershipOf(IAbsoluteFilePath file)
 		{
+			var filePermissionsUtilityStartInfo = new ProcessStartInfo
+			                                      {
+				                                      FileName = Properties.Resources.FilePermissionsUtilityExecutableName,
+				                                      Arguments = file.ToString()!,
+				                                      Verb = Properties.Resources.ElevatedPermissionsVerb
+			                                      };
+
+			var filePermissionsUtilityProcess = new Process { StartInfo = filePermissionsUtilityStartInfo };
+			filePermissionsUtilityProcess.Start();   
+			filePermissionsUtilityProcess.WaitForExit();
+			
+			
 			if ((file.FileInfo is  { } fileInfo) && (WindowsIdentity.GetCurrent().User is { } currentUser))
 			{
 				// Get Currently Applied Access Control
