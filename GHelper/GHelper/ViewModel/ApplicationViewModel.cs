@@ -7,12 +7,8 @@ using System.Runtime.CompilerServices;
 using GHelper.Annotations;
 using GHelper.Service;
 using GHelper.Utility;
-using GHelperLogic.IO;
 using GHelperLogic.Model;
-using GHelperLogic.Utility;
 using Microsoft.UI.Xaml.Media;
-using Optional;
-using Optional.Unsafe;
 using Image = SixLabors.ImageSharp.Image;
 using WindowsImage = Microsoft.UI.Xaml.Controls.Image;
 

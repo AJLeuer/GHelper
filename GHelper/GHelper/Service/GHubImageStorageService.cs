@@ -4,7 +4,6 @@ using GHelperLogic.IO;
 using GHelperLogic.Utility;
 using NDepend.Path;
 using Optional;
-using Optional.Unsafe;
 using SixLabors.ImageSharp;
 
 namespace GHelper.Service
