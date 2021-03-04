@@ -8,8 +8,8 @@
 
   <Identity
     Name="GHelper"
-    Publisher="CN=Adam"
-    Version="1.0.0.0" />
+    Publisher="CN=Adam Leuer"
+    Version="1.0.6.0" />
 
   <Properties>
     <DisplayName>GHelper (Package)</DisplayName>
