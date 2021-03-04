@@ -90,6 +90,33 @@ namespace GHelperLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to runas.
+        /// </summary>
+        public static string ElevatedPermissionsVerb {
+            get {
+                return ResourceManager.GetString("ElevatedPermissionsVerb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .png.
+        /// </summary>
+        public static string FileExtensionPNG {
+            get {
+                return ResourceManager.GetString("FileExtensionPNG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FilePermissionsUtility.exe.
+        /// </summary>
+        public static string FilePermissionsUtilityExecutableName {
+            get {
+                return ResourceManager.GetString("FilePermissionsUtilityExecutableName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GHelper.
         /// </summary>
         public static string GHelperAppDataDirectoryName {
@@ -108,15 +135,6 @@ namespace GHelperLogic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LGHUB.
-        /// </summary>
-        public static string GHubConfigFileDirectoryName {
-            get {
-                return ResourceManager.GetString("GHubConfigFileDirectoryName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to settings.json.
         /// </summary>
         public static string GHubConfigFileName {
@@ -126,11 +144,47 @@ namespace GHelperLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LGHUB.
+        /// </summary>
+        public static string GHubDataDirectoryName {
+            get {
+                return ResourceManager.GetString("GHubDataDirectoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to icon_cache.
         /// </summary>
         public static string GHubIconCacheDirectoryName {
             get {
                 return ResourceManager.GetString("GHubIconCacheDirectoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to depots.
+        /// </summary>
+        public static string GHubProgramDataDepotsSubdirectoryName {
+            get {
+                return ResourceManager.GetString("GHubProgramDataDepotsSubdirectoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to core\applications.
+        /// </summary>
+        public static string GHubProgramDataImagesStorageRelativePath {
+            get {
+                return ResourceManager.GetString("GHubProgramDataImagesStorageRelativePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://127.0.0.1:9180/core/applications/.
+        /// </summary>
+        public static string PosterURLStandardPrefix {
+            get {
+                return ResourceManager.GetString("PosterURLStandardPrefix", resourceCulture);
             }
         }
     }

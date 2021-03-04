@@ -6,10 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "GHelper (Package)", "GHelper\GHelper (Package)\GHelper (Package).wapproj", "{29807E19-72A1-4757-9379-CBE17E70D50A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHelper", "GHelper\GHelper\GHelper.csproj", "{4A4E09CE-7600-4B22-8444-6D31B1000148}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96AE53D1-9524-4428-BD89-03E3A33863A2} = {96AE53D1-9524-4428-BD89-03E3A33863A2}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHelperTest", "GHelperTest\GHelperTest.csproj", "{6C637B2A-3FB6-452C-83DB-A310327078CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GHelperLogic", "GHelperLogic\GHelperLogic.csproj", "{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilePermissionsUtility", "FilePermissionsUtility\FilePermissionsUtility.csproj", "{96AE53D1-9524-4428-BD89-03E3A33863A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +50,12 @@ Global
 		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.DebugRelease|x64.Build.0 = DebugRelease|Any CPU
 		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x64.ActiveCfg = Release|Any CPU
 		{2BA1CC16-0A5C-4D7F-BDFB-123EAE0E1A95}.Release|x64.Build.0 = Release|Any CPU
+		{96AE53D1-9524-4428-BD89-03E3A33863A2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{96AE53D1-9524-4428-BD89-03E3A33863A2}.Debug|x64.Build.0 = Debug|Any CPU
+		{96AE53D1-9524-4428-BD89-03E3A33863A2}.DebugRelease|x64.ActiveCfg = Debug|Any CPU
+		{96AE53D1-9524-4428-BD89-03E3A33863A2}.DebugRelease|x64.Build.0 = Debug|Any CPU
+		{96AE53D1-9524-4428-BD89-03E3A33863A2}.Release|x64.ActiveCfg = Release|Any CPU
+		{96AE53D1-9524-4428-BD89-03E3A33863A2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

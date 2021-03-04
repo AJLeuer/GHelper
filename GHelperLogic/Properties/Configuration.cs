@@ -7,10 +7,17 @@ namespace GHelperLogic.Properties
 {
     public static class Configuration
     {
+	    public static IAbsoluteDirectoryPath GHubProgramDataDirectoryPath { get; } =
+		    PathHelpers.ToAbsoluteDirectoryPath(Path.Combine(
+		                                                     Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), 
+		                                                     Resources.GHubDataDirectoryName));
+
+	    public static IAbsoluteDirectoryPath GHubProgramDataDepotsDirectoryPath { get; } =
+		    GHubProgramDataDirectoryPath.GetChildDirectoryWithName(Resources.GHubProgramDataDepotsSubdirectoryName);
 	    public static IDirectoryPath GHubAppDataDirectoryPath { get; } =
 		    PathHelpers.ToDirectoryPath(
 		        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-		        Path.DirectorySeparatorChar + Resources.GHubConfigFileDirectoryName);
+		        Path.DirectorySeparatorChar + Resources.GHubDataDirectoryName);
 
 	    public static IFilePath DefaultGHubSettingsFilePath { get ; } = GHubAppDataDirectoryPath.GetChildFileWithName(Resources.GHubConfigFileName);
 

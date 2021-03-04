@@ -362,3 +362,9 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 .idea/.idea.GHelper/.idea/
+
+GHelper/GHelper/FilePermissionsUtility.exe
+
+GHelper/GHelper/FilePermissionsUtility.exe.config
+
+GHelper/FilePermissionsUtility.exe.config

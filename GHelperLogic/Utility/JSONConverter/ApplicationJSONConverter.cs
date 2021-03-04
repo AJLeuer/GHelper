@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using GHelperLogic.IO;
 using GHelperLogic.Model;
 using Newtonsoft.Json;
+using SixLabors.ImageSharp;
 
 namespace GHelperLogic.Utility.JSONConverter
 {
@@ -19,6 +21,7 @@ namespace GHelperLogic.Utility.JSONConverter
 			//storing Application converters to avoid infinite recursion
 			Collection<JsonConverter<Application>> storedConverters = serializer.Converters.Store<Application>();
 			Application application = serializer.Deserialize<Application>(reader)!;
+			Application.LoadApplicationPosterImage(application);
 			serializer.Converters.Replace(storedConverters);
 			application = CreateApplicationWithCorrectType(application);
 
@@ -38,5 +41,6 @@ namespace GHelperLogic.Utility.JSONConverter
 
 			return application;
 		}
+		
 	}
 }

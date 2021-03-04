@@ -24,6 +24,7 @@ namespace GHelper
 			LogManager.Log("Initializing GHelper application.");
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
+			this.UnhandledException += HandleExceptions;
 			gHubSettingsFileService = new GHubSettingsFileService(window);
 		}
 
@@ -54,6 +55,14 @@ namespace GHelper
 			// Save application state and stop any background activity
 			LogManager.Log("Suspending GHelper application.");
 			LogManager.Stop();
+		}
+		
+		
+		private void HandleExceptions(object sender, UnhandledExceptionEventArgs exceptionInfo)
+		{
+			exceptionInfo.Handled = true;
+			LogManager.Log($"Exception caught in {this.GetType()}");
+			LogManager.Log(exceptionInfo.Exception);
 		}
 	}
 }
