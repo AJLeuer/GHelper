@@ -52,7 +52,7 @@ namespace GHelper.Service
 			if (MainWindow.Referent is not null)
 			{
 				MainWindow.Referent!.UserSaved += this.Save;
-				MainWindow.Referent!.UserDeletedRecord += this.Delete;
+				MainWindow.Referent!.UserConfirmedDelete += this.Delete;
 			}
 		}
 	}
