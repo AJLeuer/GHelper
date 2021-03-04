@@ -1,0 +1,16 @@
+﻿<ContentControl
+    x:Class="GHelper.View.Text.ItalicizedTextBlock"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utility="using:GHelper.View.Utility"
+    mc:Ignorable="d">
+
+    <TextBlock TextWrapping="Wrap" utility:TextBlockHelper.TrimRuns="True">
+        <Run Text="{x:Bind StartingText, Mode=OneWay}"/>
+        <Run Text="{x:Bind ItalicizedText, Mode=OneWay}" FontStyle="Italic"/>
+        <Run Text="{x:Bind FollowingText, Mode=OneWay}"/>
+    </TextBlock>
+    
+</ContentControl>

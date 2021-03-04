@@ -9,6 +9,7 @@ using GHelper.Properties;
 using GHelper.Service;
 using GHelper.Utility;
 using GHelper.View.Dialog;
+using GHelper.View.Text;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -113,12 +114,17 @@ namespace GHelper.View
 		
 		private async void DisplayDeleteDialog(GHubRecordViewModel recordViewModel)
 		{
-			string? typeName = recordViewModel.GHubRecord?.GetType().Name.ConvertPascalCaseToSentence();
-			
+			string? typeName = recordViewModel.GHubRecord?.GetType().Name.ConvertPascalCaseToSentence().ToLower();
 			var confirmDialog = new WarnUserDialog
 			                    {
 				                    XamlRoot = MainView.XamlRoot,
-				                    Title = $"Are you sure you want to delete the {typeName} {recordViewModel.DisplayName}?",
+				                    Title = new ItalicizedTextBlock
+				                            {
+					                            StartingText = $"Are you sure you want to delete the {typeName}  ", 
+					                            ItalicizedText = recordViewModel.DisplayName, 
+					                            FollowingText = "?"
+				                            },
+
 				                    PrimaryButtonText = "Delete"
 			                    };
 
