@@ -43,6 +43,7 @@ namespace GHelper.View
             this.InitializeComponent();
             RecordViewControls.UserClickedSaveButton += () => { UserSaved?.Invoke(); };
             RecordViewControls.UserClickedDeleteButton += () => { UserDeletedRecord?.Invoke(GHubRecord); };
+            RecordViewControls.DeleteButton.Visibility = Visibility.Collapsed;
         }
 
         void RecordView.SendRecordChangedNotification()

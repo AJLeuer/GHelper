@@ -12,6 +12,11 @@ namespace GHelper.View
 		public readonly Collection<Action> GHubRecordSavedCallbacks   = new();
 		public readonly Collection<Action> GHubRecordDeletedCallbacks = new();
 
+		public Button DeleteButton
+		{
+			get { return deleteButton; }
+		}
+		
 		public event Action? UserClickedSaveButton;
 		public event Action? UserClickedDeleteButton;
 
