@@ -31,9 +31,10 @@ namespace GHelper.View
             this.InitializeComponent();
         }
 
-        private void HandleNamedChanged(object sender, KeyRoutedEventArgs input)
+        private void HandleNameEdit(object sender, KeyRoutedEventArgs input)
         {
             NamedChanged?.Invoke(sender, input);
+            input.Handled = true;
         }
         
         private void DetermineNameViewStyle()

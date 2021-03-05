@@ -5,10 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    
+    KeyUp="{x:Bind Path=Application.HandleKeyboardInput}"
 
     Style="{StaticResource RecordViewStyle}">
     
-    <TextBox x:Name="NameTextBox" Header="Name" Text="{x:Bind Application.DisplayName,                        Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" KeyUp="HandleNamedChanged"/>
+    <TextBox x:Name="NameTextBox" Header="Name" Text="{x:Bind Application.DisplayName,                        Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" PreviewKeyUp="HandleNameEdit"/>
     <TextBox Header="Type"                      Text="{x:Bind Application.ApplicationType,                    Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableTextBox}"/>
     <TextBox Header="Application ID"            Text="{x:Bind Application.Application.ApplicationID,          Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
     <TextBox Header="Path"                      Text="{x:Bind Application.Application.ApplicationPath,        Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>

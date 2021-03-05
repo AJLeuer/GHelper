@@ -47,9 +47,10 @@ namespace GHelper.View
 		    OnPropertyChanged(nameof(GHubRecordViewModel));
 	    }
 
-	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
+	    private void HandleNameEdit(object sender, KeyRoutedEventArgs routedEventInfo)
 		{
 			RecordView.ChangeName(this, sender);
+			routedEventInfo.Handled = true;
 		}
 
 	    private void ResetAppearance()

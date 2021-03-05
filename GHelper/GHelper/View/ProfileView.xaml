@@ -2,7 +2,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="using:GHelper.View"
-    x:Class="GHelper.View.ProfileView">
+    x:Class="GHelper.View.ProfileView"
+    
+    KeyUp="{x:Bind Path=Profile.HandleKeyboardInput}">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -13,9 +15,9 @@
         <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
         
         <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
-            <TextBox x:Name="NameDisplay" Header="Name"                    Text="{x:Bind Profile.DisplayName, Mode=OneWay, FallbackValue=''}"                                 Style="{StaticResource ResourceKey=StandardTextBox}" KeyUp="HandleNameChange" GettingFocus="ShowEditableName" LosingFocus="ShowDisplayName"/>
-            <ToggleSwitch                 Header="Currently Active"        OffContent="Inactive" OnContent="Active" IsOn="{x:Bind Profile.ActiveForApplication, Mode=TwoWay}" Style="{StaticResource StandardToggleSwitch}"/>
-            <TextBox                      Header="Profile ID"              Text="{x:Bind Profile.Profile.ID,        Mode=OneWay, FallbackValue=''}"                           Style="{StaticResource ResourceKey=ImmutableMonoSpacedTextBox}"/>
+            <TextBox x:Name="NameDisplay" Header="Name"             Text="{x:Bind Profile.DisplayName, Mode=OneWay, FallbackValue=''}"                                 Style="{StaticResource ResourceKey=StandardTextBox}" PreviewKeyUp="HandleNameEdit" GettingFocus="ShowEditableName" LosingFocus="ShowDisplayName"/>
+            <ToggleSwitch                 Header="Currently Active" OffContent="Inactive" OnContent="Active" IsOn="{x:Bind Profile.ActiveForApplication, Mode=TwoWay}" Style="{StaticResource StandardToggleSwitch}"/>
+            <TextBox                      Header="Profile ID"       Text="{x:Bind Profile.Profile.ID,  Mode=OneWay, FallbackValue=''}"                                 Style="{StaticResource ResourceKey=ImmutableMonoSpacedTextBox}"/>
         </StackPanel>
     </Grid>
 
