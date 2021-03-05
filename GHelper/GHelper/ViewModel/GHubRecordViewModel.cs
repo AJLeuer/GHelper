@@ -64,7 +64,7 @@ namespace GHelper.ViewModel
 			UserSaved?.Invoke();
 		}
 		
-		public void FireDeletedEvent()
+		public virtual void FireDeletedEvent()
 		{
 			UserDeletedRecord?.Invoke(this);
 		}

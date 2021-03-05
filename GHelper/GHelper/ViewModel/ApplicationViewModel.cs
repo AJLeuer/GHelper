@@ -227,6 +227,14 @@ namespace GHelper.ViewModel
 				}
 			}
 		}
+		
+		public override void FireDeletedEvent()
+		{
+			if (this.Application is not DesktopApplication)
+			{
+				base.FireDeletedEvent();				
+			}
+		}
 
 		[NotifyPropertyChangedInvocator]
 		protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -267,7 +275,7 @@ namespace GHelper.ViewModel
 		}
 	}
 
-	public enum InstallState
+	public enum InstallState 
 	{
 		Installed,
 		NotInstalled
