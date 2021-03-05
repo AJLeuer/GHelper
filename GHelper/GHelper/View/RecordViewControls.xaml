@@ -13,7 +13,7 @@
             </StackPanel>
         </Button>
         
-        <Button x:Name="DeleteButton" Width="128" utility:Margin.Left="8" Click="Delete">
+        <Button x:Name="deleteButton" Width="128" utility:Margin.Left="8" Click="Delete">
             <Button.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>

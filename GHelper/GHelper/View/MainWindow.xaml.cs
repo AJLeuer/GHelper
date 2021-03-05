@@ -7,7 +7,9 @@ using GHelper.Annotations;
 using GHelper.Event;
 using GHelper.Properties;
 using GHelper.Service;
+using GHelper.Utility;
 using GHelper.View.Dialog;
+using GHelper.View.Text;
 using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -34,16 +36,18 @@ namespace GHelper.View
 		private TreeViewNode?                LastSelectedRecord      { get;  set; }
 		public  GHubSettingsFileService?     GHubSettingsFileService { get ; set ; }
 
-		private ushort                            SelectionProgrammaticResetLoops = 0; 
+		private ushort                       SelectionProgrammaticResetLoops = 0; 
 		
 		public event PropertyChangedEventHandler? PropertyChanged;
 
-		public event UserSavedEvent? UserSaved;
-		public event UserDeletedRecordEvent? UserDeletedRecord;
+		public event  UserSavedEvent?         UserSaved;
+		private event UserDeletedRecordEvent? UserPressedDelete;
+		public event  UserDeletedRecordEvent? UserConfirmedDelete;
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
+			this.UserPressedDelete += DisplayDeleteDialog;
 		}
 
 		public async Task DisplayGHubRunningDialogIfNeeded()
@@ -106,6 +110,33 @@ namespace GHelper.View
             ContentDialog deleteFileDialog = new UnsavedChangeDialog { XamlRoot = MainView.XamlRoot };
             return await deleteFileDialog.ShowAsync().AsTask();
 		}
+		
+		
+		private async void DisplayDeleteDialog(GHubRecordViewModel recordViewModel)
+		{
+			string? typeName = recordViewModel.GHubRecord?.GetType().Name.ConvertPascalCaseToSentence().ToLower();
+			var confirmDialog = new WarnUserDialog
+			                    {
+				                    XamlRoot = MainView.XamlRoot,
+				                    Title = new ItalicizedTextBlock
+				                            {
+					                            StartingText = $"Are you sure you want to delete the {typeName}  ", 
+					                            ItalicizedText = recordViewModel.DisplayName, 
+					                            FollowingText = "?"
+				                            },
+
+				                    PrimaryButtonText = "Delete"
+			                    };
+
+			ContentDialogResult dialogResult = await confirmDialog.ShowAsync().AsTask();
+			
+			switch (dialogResult)
+			{
+				case ContentDialogResult.Primary:
+					UserConfirmedDelete?.Invoke(recordViewModel);
+					break;
+			}
+		}
 
 		private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord, TreeViewNode selectedNode)
 		{
@@ -114,7 +145,7 @@ namespace GHelper.View
 
 			RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
 			view.UserSaved += this.UserSaved;
-			view.UserDeletedRecord += this.UserDeletedRecord;
+			view.UserDeletedRecord += this.UserPressedDelete;
 			GHubDataDisplay.Content = view;
 		}
 		
