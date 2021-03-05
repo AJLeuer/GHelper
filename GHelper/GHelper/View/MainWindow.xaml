@@ -22,13 +22,13 @@
         <SplitView.Resources>
             
             <DataTemplate x:Key="ApplicationTemplate" x:DataType="viewModel:ApplicationViewModel">
-                <TreeViewItem ItemsSource="{x:Bind Path=Profiles, Mode=OneWay}">
+                <TreeViewItem ItemsSource="{x:Bind Path=Profiles, Mode=OneWay}" PreviewKeyDown="{x:Bind Path=HandleKeyboardInput}">
                     <selector:ApplicationSelectorView Application="{x:Bind Mode=OneWay}"/>
                 </TreeViewItem>
             </DataTemplate>
             
             <DataTemplate x:Key="ProfileTemplate" x:DataType="viewModel:ProfileViewModel">
-                <TreeViewItem>
+                <TreeViewItem PreviewKeyDown="{x:Bind Path=HandleKeyboardInput}">
                     <selector:ProfileSelectorView Profile="{x:Bind Mode=OneWay}" />
                 </TreeViewItem>
             </DataTemplate>

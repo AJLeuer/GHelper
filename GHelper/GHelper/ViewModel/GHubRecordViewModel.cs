@@ -1,8 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Windows.System;
+using Windows.UI.Core;
 using GHelper.Event;
+using GHelper.View.Utility;
 using GHelperLogic.Model;
+using Microsoft.UI.Xaml.Input;
 
 namespace GHelper.ViewModel
 {
@@ -63,6 +67,23 @@ namespace GHelper.ViewModel
 		public void FireDeletedEvent()
 		{
 			UserDeletedRecord?.Invoke(this);
+		}
+		
+		public void HandleKeyboardInput(object sender, KeyRoutedEventArgs keyboardEventInfo)
+		{
+			switch (keyboardEventInfo.Key)
+			{
+				case VirtualKey.S:
+					if (KeyboardState.ControlKeyState == CoreVirtualKeyStates.Down)
+					{
+						FireSaveEvent();
+					}
+					break;
+				
+				case VirtualKey.Delete or VirtualKey.Back:
+					FireDeletedEvent();
+					break;
+			}
 		}
 
 		protected abstract void OnPropertyChanged([CallerMemberName] string? propertyName = null);
