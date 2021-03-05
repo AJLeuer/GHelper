@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using GHelper.Annotations;
-using GHelper.Event;
 using GHelper.View.Dialog;
 using GHelper.ViewModel;
 using GHelperLogic.IO;
@@ -36,25 +35,23 @@ namespace GHelper.View
 		    }
 	    }
 
-	    public GHubRecordViewModel GHubRecord
+	    public GHubRecordViewModel GHubRecordViewModel
 	    {
 		    get { return Application; }
 	    }
-
-	    public event UserSavedEvent?              UserSaved;
-	    public event UserDeletedRecordEvent?      UserDeletedRecord;
+	    
 	    public event PropertyChangedEventHandler? PropertyChanged;
 
 	    public ApplicationView()
         {
 	        InitializeComponent();
-	        RecordViewControls.UserClickedSaveButton += () => { UserSaved?.Invoke(); };
-	        RecordViewControls.UserClickedDeleteButton += () => { UserDeletedRecord?.Invoke(GHubRecord); };
+	        RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.FireSaveEvent(); };
+	        RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.FireDeletedEvent(); };
         }
 
 	    void RecordView.SendRecordChangedNotification()
 	    {
-		    OnPropertyChanged(nameof(GHubRecord));
+		    OnPropertyChanged(nameof(GHubRecordViewModel));
 	    }
 
 	    protected void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using GHelper.Event;
 using GHelperLogic.Model;
 
 namespace GHelper.ViewModel
@@ -32,6 +33,9 @@ namespace GHelper.ViewModel
 			}
 		}
 		
+		public event UserSavedEvent?         UserSaved;
+		public event UserDeletedRecordEvent? UserDeletedRecord;
+		
 		public abstract event PropertyChangedEventHandler? PropertyChanged;
 
 		public void SaveBackup()
@@ -49,6 +53,16 @@ namespace GHelper.ViewModel
 					OnPropertyChanged(property.Name);
 				}
 			}
+		}
+
+		public void FireSaveEvent()
+		{
+			UserSaved?.Invoke();
+		}
+		
+		public void FireDeletedEvent()
+		{
+			UserDeletedRecord?.Invoke(this);
 		}
 
 		protected abstract void OnPropertyChanged([CallerMemberName] string? propertyName = null);

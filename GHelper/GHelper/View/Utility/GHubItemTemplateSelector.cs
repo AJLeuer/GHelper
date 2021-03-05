@@ -12,17 +12,14 @@ namespace GHelper.View.Utility
 
 		protected override DataTemplate? SelectTemplateCore(object item)
 		{
-			if (item is ApplicationViewModel)
+			switch (item)
 			{
-				return ApplicationTemplate;
-			}
-			else if (item is ProfileViewModel)
-			{
-				return ProfileTemplate;
-			}
-			else
-			{
-				throw new ArgumentException("Unknown type of item passed to GHubItemTemplateSelector");
+				case ApplicationViewModel:
+					return ApplicationTemplate;
+				case ProfileViewModel:
+					return ProfileTemplate;
+				default:
+					throw new ArgumentException("Unknown type of item passed to GHubItemTemplateSelector");
 			}
 		}
 	}

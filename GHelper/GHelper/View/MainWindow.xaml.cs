@@ -144,8 +144,11 @@ namespace GHelper.View
 			LastSelectedRecord = selectedNode;
 
 			RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
-			view.UserSaved += this.UserSaved;
-			view.UserDeletedRecord += this.UserPressedDelete;
+			if (view.GHubRecordViewModel is GHubRecordViewModel viewModel)
+			{
+				viewModel.UserSaved += this.UserSaved;
+				viewModel.UserDeletedRecord += this.UserPressedDelete;
+			}
 			GHubDataDisplay.Content = view;
 		}
 		

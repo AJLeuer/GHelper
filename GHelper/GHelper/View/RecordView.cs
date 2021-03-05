@@ -1,5 +1,4 @@
 ﻿using System;
-using GHelper.Event;
 using GHelper.ViewModel;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml.Controls;
@@ -29,9 +28,7 @@ namespace GHelper.View
 			}
 		}
 		
-		public GHubRecordViewModel?          GHubRecord { get; }
-		public event UserSavedEvent?         UserSaved;
-		public event UserDeletedRecordEvent? UserDeletedRecord;
+		public GHubRecordViewModel? GHubRecordViewModel { get; }
 
 		protected void SendRecordChangedNotification();
 
@@ -45,11 +42,11 @@ namespace GHelper.View
 
 		protected static void ChangeName(RecordView recordView, TextBox textBox)
 		{
-			if (textBox.Text != recordView.GHubRecord?.DisplayName)
+			if (textBox.Text != recordView.GHubRecordViewModel?.DisplayName)
 			{
-				if (recordView.GHubRecord != null)
+				if (recordView.GHubRecordViewModel != null)
 				{
-					recordView.GHubRecord.Name = textBox.Text;
+					recordView.GHubRecordViewModel.Name = textBox.Text;
 					recordView.SendRecordChangedNotification();
 				}
 			}
