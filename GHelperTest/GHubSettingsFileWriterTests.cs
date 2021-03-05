@@ -67,7 +67,7 @@ namespace GHelperTest
 			}
 
 			[Test]
-			public static void ShouldSerializePosterDataOfCustomApplications()
+			public static void ShouldNotSerializePosterDataOfCustomApplications()
 			{
 				var (testSettingsFileOriginal, _) = TestSettingsFile.Duplicate();
 				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal)!;
@@ -75,7 +75,7 @@ namespace GHelperTest
 				string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);
 				GHubSettingsFile reDeserializedGHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(reSerializedGHubSettingsFile);
 
-				Assert.True(reDeserializedGHubSettingsFile.Applications?.Applications?[0].Poster != null);
+				Assert.Null(reDeserializedGHubSettingsFile.Applications?.Applications?[0].Poster);
 			}
 		}
 
