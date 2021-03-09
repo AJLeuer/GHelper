@@ -224,6 +224,8 @@ namespace GHelper.ViewModel
 					}
 
 					profile.ActiveForApplication = false;
+					// Have to set their backup now, or else the user would get a "Do you want to save?" message that would appear to them to be erroneous
+					profile.SaveBackup();
 				}
 			}
 		}

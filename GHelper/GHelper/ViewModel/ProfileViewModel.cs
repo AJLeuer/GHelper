@@ -44,7 +44,14 @@ namespace GHelper.ViewModel
 			{
 				if (Profile != null)
 				{
-					Profile.ActiveForApplication = value;
+					if (value == false)
+					{
+						Profile.ActiveForApplication = null;
+					}
+					else
+					{
+						Profile.ActiveForApplication = value;
+					}
 				}
 				OnPropertyChanged(nameof(ActiveForApplication));
 			}
