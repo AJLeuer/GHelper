@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GHelper.Service;
-using Microsoft.UI.Xaml.Controls;
 
 namespace GHelper.View.Dialog
 {
