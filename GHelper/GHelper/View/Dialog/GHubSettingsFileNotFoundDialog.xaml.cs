@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GHelper.Service;
 using GHelperLogic.IO;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+
 
 namespace GHelper.View.Dialog
 {
-    public partial class GHubSettingsFileNotFoundDialog : ContentDialog
+    public partial class GHubSettingsFileNotFoundDialog : ConditionalDialog
     {
         public GHubSettingsFileService? GHubSettingsFileService { get ; set ; }
 
@@ -17,19 +15,14 @@ namespace GHelper.View.Dialog
             this.GHubSettingsFileService = gHubSettingsFileService;
         }
 
-        public async Task DisplayIfNeeded()
+        public override async Task DisplayIfNeeded()
         {
             GHubSettingsFileReaderWriter.State? settingsFileState = GHubSettingsFileService?.CheckSettingsFileAvailability();
 
             if (settingsFileState == GHubSettingsFileReaderWriter.State.Unavailable)
             {
-                await ShowAsync().AsTask();
+                await this.EnqueueAndShowIfAsync();
             }
-        }
-
-        private void QuitApp(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            Application.Current.Exit();
         }
     }
 }

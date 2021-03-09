@@ -108,7 +108,7 @@ namespace GHelper.View
 		private async Task<ContentDialogResult> DisplaySaveDialog()
 		{
             ContentDialog deleteFileDialog = new UnsavedChangeDialog { XamlRoot = MainView.XamlRoot };
-            return await deleteFileDialog.ShowAsync().AsTask();
+            return await deleteFileDialog.EnqueueAndShowIfAsync();
 		}
 		
 		
@@ -128,7 +128,7 @@ namespace GHelper.View
 				                    PrimaryButtonText = "Delete"
 			                    };
 
-			ContentDialogResult dialogResult = await confirmDialog.ShowAsync().AsTask();
+			ContentDialogResult dialogResult = await confirmDialog.EnqueueAndShowIfAsync();
 			
 			switch (dialogResult)
 			{
