@@ -25,28 +25,27 @@ namespace GHelper.View
             InitializeComponent();
         }
 
-		public void NotifyOfUserChange(object? sender, PropertyChangedEventArgs eventInfo)
-		{
-			SaveButton.Background = Application.Current.Resources[Properties.Resources.SystemAccentColorBrush] as SolidColorBrush;
-		}
-
-		public void ResetAppearance()
-        {
-	        var defaultButton = new Button { Style = Application.Current.Resources[Properties.Resources.StandardButtonStyle] as Style };
-
-	        SaveButton.Background = defaultButton.Background;
-	        SaveButton.Style = defaultButton.Style;
-        }
-
 		private void Save(object sender, RoutedEventArgs _)
         {
-	        ResetAppearance();
-			UserClickedSaveButton?.Invoke();
+	        UserClickedSaveButton?.Invoke();
         }
 
         private void Delete(object sender, RoutedEventArgs eventInfo)
         {
 	        UserClickedDeleteButton?.Invoke();
+        }
+
+        public void SwitchToChangedAppearance(object? sender, PropertyChangedEventArgs eventInfo)
+        {
+	        SaveButton.Background = Application.Current.Resources[Properties.Resources.SystemAccentColorBrush] as SolidColorBrush;
+        }
+        
+        public void ResetAppearance()
+        {
+	        var defaultButton = new Button { Style = Application.Current.Resources[Properties.Resources.StandardButtonStyle] as Style };
+
+	        SaveButton.Background = defaultButton.Background;
+	        SaveButton.Style = defaultButton.Style;
         }
         
 	}

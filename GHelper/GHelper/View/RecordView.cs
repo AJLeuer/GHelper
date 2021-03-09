@@ -30,7 +30,9 @@ namespace GHelper.View
 		
 		public GHubRecordViewModel? GHubRecordViewModel { get; }
 
+		public    void ChainGHubRecordViewModelEventsToControls();
 		protected void SendRecordChangedNotification();
+
 
 		public static void ChangeName(RecordView recordView, object sender)
 		{

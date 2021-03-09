@@ -24,7 +24,7 @@ namespace GHelper.View
 			{
 				SetValue(ProfileProperty, value);
 				ResetAppearance();
-				Profile.PropertyChanged += RecordViewControls.NotifyOfUserChange;
+				ChainGHubRecordViewModelEventsToControls();
 			}
 		}
 
@@ -72,6 +72,12 @@ namespace GHelper.View
 	    private void ShowDisplayName(UIElement uiElement, LosingFocusEventArgs eventInfo)
 	    {
 		    NameDisplay.Text = Profile.DisplayName;
+	    }
+	    
+	    public void ChainGHubRecordViewModelEventsToControls()
+	    {
+		    Profile.PropertyChanged += RecordViewControls.SwitchToChangedAppearance;
+		    Profile.UserSaved += RecordViewControls.ResetAppearance;
 	    }
 	}
 }

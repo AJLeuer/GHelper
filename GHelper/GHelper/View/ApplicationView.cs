@@ -22,7 +22,7 @@ namespace GHelper.View
 			{
 				SetValue(ApplicationProperty, value);
 				ResetAppearance();
-				ChainApplicationChangedEventToControls();
+				ChainGHubRecordViewModelEventsToControls();
 			}
 		}
         
@@ -34,7 +34,7 @@ namespace GHelper.View
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected abstract void ResetAppearance();
-		protected abstract void ChainApplicationChangedEventToControls();
+		public abstract void ChainGHubRecordViewModelEventsToControls();
 
 		void RecordView.SendRecordChangedNotification()
 		{

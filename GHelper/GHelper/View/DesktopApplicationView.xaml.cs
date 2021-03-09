@@ -18,9 +18,10 @@ namespace GHelper.View
             RecordViewControls.ResetAppearance();
         }
 
-        protected override void ChainApplicationChangedEventToControls()
+        public override void ChainGHubRecordViewModelEventsToControls()
         {
-            Application.PropertyChanged += RecordViewControls.NotifyOfUserChange;
+            Application.PropertyChanged += RecordViewControls.SwitchToChangedAppearance;
+            Application.UserSaved += RecordViewControls.ResetAppearance;
         }
     }
 }
