@@ -20,7 +20,7 @@ namespace GHelper.View
 						case DesktopApplication:
 							return new DesktopApplicationView { Application = applicationViewModel };
 						default:
-							return new ApplicationView { Application = applicationViewModel };
+							return new StandardApplicationView { Application = applicationViewModel };
 					}
 					
 				default:

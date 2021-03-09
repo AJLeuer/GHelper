@@ -1,39 +1,9 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using GHelper.Annotations;
-using GHelper.ViewModel;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
 
 namespace GHelper.View
 {
-    public partial class DesktopApplicationView : UserControl, IApplicationView
+    public partial class DesktopApplicationView : ApplicationView
     {
-        
-        public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
-             nameof (Application),
-             typeof (ApplicationViewModel),
-             typeof (DesktopApplicationView),
-             new PropertyMetadata(null));
-        
-        public ApplicationViewModel Application
-        {
-            get { return (ApplicationViewModel) GetValue(ApplicationProperty); }
-            set
-            {
-                SetValue(ApplicationProperty, value);
-                ResetAppearance();
-                Application.PropertyChanged += RecordViewControls.NotifyOfUserChange;
-            }
-        }
-        
-        public GHubRecordViewModel GHubRecordViewModel
-        {
-            get { return Application; }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        
         public DesktopApplicationView()
         {
             this.InitializeComponent();
@@ -43,20 +13,14 @@ namespace GHelper.View
             RecordViewControls.DeleteButton.Visibility = Visibility.Collapsed;
         }
 
-        void RecordView.SendRecordChangedNotification()
-        {
-            OnPropertyChanged(nameof(GHubRecordViewModel));
-        }
-
-        public void ResetAppearance()
+        protected override void ResetAppearance()
         {
             RecordViewControls.ResetAppearance();
         }
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected override void ChainApplicationChangedEventToControls()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Application.PropertyChanged += RecordViewControls.NotifyOfUserChange;
         }
     }
 }

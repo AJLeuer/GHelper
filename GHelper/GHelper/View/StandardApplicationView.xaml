@@ -1,9 +1,9 @@
-<UserControl     
+<view:ApplicationView     
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="using:GHelper.View"
     xmlns:utility="using:GHelper.View.Utility"
-    x:Class="GHelper.View.ApplicationView">
+    x:Class="GHelper.View.StandardApplicationView">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,6 +31,5 @@
         </StackPanel>
         
     </Grid>
-
     
-</UserControl>
+</view:ApplicationView>

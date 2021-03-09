@@ -1,4 +1,4 @@
-<UserControl     
+<view:ApplicationView     
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="using:GHelper.View"
@@ -17,6 +17,5 @@
        
         <view:ApplicationDataView Grid.Row="1" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" />
     </Grid>
-
     
-</UserControl>
+</view:ApplicationView>

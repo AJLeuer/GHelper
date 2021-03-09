@@ -1,60 +1,35 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using GHelper.Annotations;
 using GHelper.View.Dialog;
-using GHelper.ViewModel;
 using GHelperLogic.IO;
 using GHelperLogic.Utility;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Image = SixLabors.ImageSharp.Image;
 
 namespace GHelper.View
 {
-	public partial class ApplicationView : UserControl, IApplicationView
+	public partial class StandardApplicationView : ApplicationView
 	{
-	    public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
-		    nameof (Application),
-		    typeof (ApplicationViewModel),
-		    typeof (ApplicationView),
-		    new PropertyMetadata(null)
-	    );
-
-	    public ApplicationViewModel Application
-	    {
-		    get { return (ApplicationViewModel) GetValue(ApplicationProperty); }
-		    set
-		    {
-			    SetValue(ApplicationProperty, value);
-			    ResetAppearance();
-			    Application.PropertyChanged += RecordViewControls.NotifyOfUserChange;
-		    }
-	    }
-
-	    public GHubRecordViewModel GHubRecordViewModel
-	    {
-		    get { return Application; }
-	    }
-	    
-	    public event PropertyChangedEventHandler? PropertyChanged;
-
-	    public ApplicationView()
+		public StandardApplicationView()
         {
 	        InitializeComponent();
 	        RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.FireSaveEvent(); };
 	        RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.FireDeletedEvent(); };
         }
 
-	    void RecordView.SendRecordChangedNotification()
+	    protected override void ResetAppearance()
 	    {
-		    OnPropertyChanged(nameof(GHubRecordViewModel));
+		    RecordViewControls.ResetAppearance();
 	    }
 
-	    protected void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
+	    protected override void ChainApplicationChangedEventToControls()
+	    {
+		    Application.PropertyChanged += RecordViewControls.NotifyOfUserChange;
+	    }
+
+	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
         {
 	        RecordView.ChangeName(this, sender);
         }
@@ -81,16 +56,5 @@ namespace GHelper.View
 		    }
 	    }
 
-	    public void ResetAppearance()
-	    {
-		    RecordViewControls.ResetAppearance();
-	    }
-
-	    
-	    [NotifyPropertyChangedInvocator]
-	    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-	    {
-		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	    }
 	}
 }

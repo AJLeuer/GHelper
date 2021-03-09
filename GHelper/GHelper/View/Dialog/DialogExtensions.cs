@@ -10,18 +10,15 @@ namespace GHelper.View.Dialog
 		public static async Task<ContentDialogResult> EnqueueAndShowIfAsync(this ContentDialog contentDialog)
 		{
 			TaskCompletionSource<ObjectUtils.Null> currentDialogCompletion = new ();
-			TaskCompletionSource<ObjectUtils.Null>? previousDialogCompletion = null;
-			
-			previousDialogCompletion = PreviousDialogCompletion;
+			TaskCompletionSource<ObjectUtils.Null>? previousDialogCompletion = PreviousDialogCompletion;
 			PreviousDialogCompletion = currentDialogCompletion;
 
 			if (previousDialogCompletion != null) 
 			{
 				await previousDialogCompletion.Task;
 			}
-			
-			ContentDialogResult buttonPressed = ContentDialogResult.None;
-			buttonPressed = await contentDialog.ShowAsync();
+
+			ContentDialogResult buttonPressed = await contentDialog.ShowAsync();
 
 			currentDialogCompletion.SetResult(null!);
 			return buttonPressed;
