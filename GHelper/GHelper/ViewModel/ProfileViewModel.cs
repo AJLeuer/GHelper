@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using GHelper.Annotations;
+using GHelper.Utility;
 using GHelperLogic.Model;
 
 namespace GHelper.ViewModel 
@@ -24,7 +25,15 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public override string? Name
+		public override string? Type
+		{
+			get
+			{
+				return Profile?.GetType().Name.ConvertPascalCaseToSentence();
+			}
+		}
+
+		public override string? Name 
 		{
 			get => Profile?.Name;
 			set

@@ -50,7 +50,7 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public string? ApplicationType
+		public override string? Type
 		{
 			get
 			{

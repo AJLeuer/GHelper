@@ -17,6 +17,7 @@
         <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
             <TextBox x:Name="NameDisplay" Header="Name"             Text="{x:Bind Profile.DisplayName, Mode=OneWay, FallbackValue=''}"                                 Style="{StaticResource ResourceKey=StandardTextBox}" PreviewKeyUp="HandleNameEdit" GettingFocus="ShowEditableName" LosingFocus="ShowDisplayName"/>
             <ToggleSwitch                 Header="Currently Active" OffContent="Inactive" OnContent="Active" IsOn="{x:Bind Profile.ActiveForApplication, Mode=TwoWay}" Style="{StaticResource StandardToggleSwitch}"/>
+            <TextBox                      Header="Type"             Text="{x:Bind Profile.Type, Mode=OneWay, FallbackValue=''}"                                        Style="{StaticResource ImmutableTextBox}"/>
             <TextBox                      Header="Profile ID"       Text="{x:Bind Profile.Profile.ID,  Mode=OneWay, FallbackValue=''}"                                 Style="{StaticResource ResourceKey=ImmutableMonoSpacedTextBox}"/>
         </StackPanel>
     </Grid>
