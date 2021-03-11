@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using NDepend.Path;
 using Newtonsoft.Json;
@@ -9,6 +11,19 @@ namespace GHelperLogic.Utility
 {
 	public static class Extensions
 	{
+		public static void Sort<T>(this Collection<T> source, Comparison<T> comparer)
+		{
+			List<T> sortedList = new (source);
+			sortedList.Sort(comparer);
+			
+			source.Clear();
+			
+			foreach (var sortedItem in sortedList)
+			{
+				source.Add(sortedItem);
+			}
+		}
+		
 		public static (MemoryStream, MemoryStream) Duplicate(this Stream stream)
 		{
 			var firstCopy = new MemoryStream();

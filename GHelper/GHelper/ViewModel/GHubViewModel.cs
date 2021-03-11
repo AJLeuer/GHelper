@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GHelper.Utility;
 using GHelperLogic.Model;
+using GHelperLogic.Utility;
 
 namespace GHelper.ViewModel
 {
@@ -57,6 +59,27 @@ namespace GHelper.ViewModel
 			GHubSettingsFile.AssociateProfilesToApplications();
 			ICollection<Application>? applications = GHubSettingsFile.Applications?.Applications;
 			Applications.ReplaceAll(ApplicationViewModel.CreateFromCollection(applications));
+			Applications.Sort(SortApplications);
+		}
+
+		private static int SortApplications(ApplicationViewModel first, ApplicationViewModel second)
+		{
+			if (first.Application is DesktopApplication)
+			{
+				return -1;
+			}
+			else if (second.Application is DesktopApplication)
+			{
+				return 1;
+			}
+			else if (first.Application?.Name is string firstApplicationName && second.Application?.Name is string secondApplicationName)
+			{
+				return string.Compare(firstApplicationName, secondApplicationName, StringComparison.Ordinal);
+			}
+			else
+			{
+				return 0;
+			}
 		}
 	}
 }
