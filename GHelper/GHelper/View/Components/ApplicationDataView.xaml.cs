@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 
-namespace GHelper.View
+namespace GHelper.View.Components
 {
     public sealed partial class ApplicationDataView : StackPanel
     {

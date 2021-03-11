@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="using:GHelper.View"
     xmlns:utility="using:GHelper.View.Utility"
+    xmlns:components="using:GHelper.View.Components"
     x:Class="GHelper.View.StandardApplicationView">
 
     <Grid>
@@ -17,7 +18,7 @@
         
         <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
         
-        <view:ApplicationDataView Grid.Row="1" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" NamedChanged="HandleNameChange"/>
+        <components:ApplicationDataView Grid.Row="1" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" NamedChanged="HandleNameChange"/>
         
         <StackPanel Grid.Row="1" Grid.Column="1" utility:Margin.Left="32" Orientation="Vertical">
             <TextBlock Text="Poster" utility:Margin.Bottom="16" Foreground="Gray"/>
