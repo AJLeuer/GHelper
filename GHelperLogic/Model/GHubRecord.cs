@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using GHelperLogic.Utility;
 using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GHelperLogic.Model
 {
@@ -24,6 +27,12 @@ namespace GHelperLogic.Model
 		[JsonProperty("applicationPath", NullValueHandling=NullValueHandling.Ignore)]
 		public IPath? ApplicationPath { get; set; }
 
+		[JsonProperty("categoryColors", NullValueHandling=NullValueHandling.Ignore)]
+		public CategoryColor[]? CategoryColors { get; set; }
+	    
+		[JsonProperty("commands", NullValueHandling=NullValueHandling.Ignore)]
+		public Collection<Command>? Commands { get; set; }
+
 		[JsonProperty("databaseId", NullValueHandling=NullValueHandling.Ignore)]
 		public Guid? DatabaseID { get; set; }
 		
@@ -38,6 +47,9 @@ namespace GHelperLogic.Model
 
 		[JsonProperty("version", NullValueHandling=NullValueHandling.Ignore)]
 		public UInt16? Version { get; set; }
+
+		[JsonExtensionData]
+		public IDictionary<string, JToken>? AdditionalData { get; set; }
 		
 		[JsonIgnore]
 		public virtual string? DisplayName

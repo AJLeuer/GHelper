@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GHelperLogic.Model
 {
@@ -20,20 +17,11 @@ namespace GHelperLogic.Model
 			CopyStateFrom(profile);
 	    }
 
-	    [JsonIgnore]
-	    public Application? Application { get; set; }
-
 	    [JsonProperty("activeForApplication", NullValueHandling=NullValueHandling.Ignore)]
 	    public bool? ActiveForApplication { get; set; }
 
 	    [JsonProperty("assignments")]
 	    public Assignment[]? Assignments { get; set; }
-	    
-	    [JsonProperty("categoryColors", NullValueHandling=NullValueHandling.Ignore)]
-	    public CategoryColor[]? CategoryColors { get; set; }
-	    
-	    [JsonProperty("commands", NullValueHandling=NullValueHandling.Ignore)]
-	    public Collection<Command>? Commands { get; set; }
 
 	    [JsonProperty("id")]
 	    public Guid? ID { get; set; }
@@ -43,6 +31,9 @@ namespace GHelperLogic.Model
 
 	    [JsonProperty("syncLightingCard", NullValueHandling=NullValueHandling.Ignore)]
 	    public Guid? SyncLightingCard { get; set; }
+
+	    [JsonIgnore]
+	    public Application? Application { get; set; }
 	    
 	    [JsonIgnore]
 	    public override string? DisplayName
@@ -60,9 +51,6 @@ namespace GHelperLogic.Model
 		    }
 	    }
 
-	    [JsonExtensionData]
-	    public IDictionary<string, JToken>? AdditionalData { get; set; }
-	    
 	    public override GHubRecord Clone()
 	    {
 		    return new Profile(this);

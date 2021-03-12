@@ -6,7 +6,6 @@ using GHelperLogic.IO;
 using GHelperLogic.Utility.JSONConverter;
 using NDepend.Path;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NodaTime;
 using SixLabors.ImageSharp;
 
@@ -47,12 +46,6 @@ namespace GHelperLogic.Model
 			}
 		}
 
-		[JsonProperty("categoryColors", NullValueHandling=NullValueHandling.Ignore)]
-		public CategoryColor[]? CategoryColors { get; set; }
-		
-		[JsonProperty("commands", NullValueHandling=NullValueHandling.Ignore)]
-		public Command[]? Commands { get; set; }
-
 		[JsonConverter(typeof(DateTimeJSONConverter))]
 		[JsonProperty("lastRunTime", NullValueHandling=NullValueHandling.Ignore)]
 		public LocalDateTime? LastRunTime { get; set; }
@@ -67,9 +60,6 @@ namespace GHelperLogic.Model
 		[JsonConverter(typeof(PathJSONConverter))]
 		[JsonProperty("posterPath", NullValueHandling=NullValueHandling.Ignore)]
 		public IPath? PosterPath { get; set; }
-
-		[JsonExtensionData]
-		public IDictionary<string, JToken>? AdditionalData { get; set; }
 
 		[JsonIgnore] 
 		public Collection<Profile> Profiles { get; private set; } = new ();
