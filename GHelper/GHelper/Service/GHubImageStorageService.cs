@@ -27,7 +27,7 @@ namespace GHelper.Service
 				}
 				catch (Exception exception)
 				{
-					LogManager.Log("Unabled to save custom poster image to AppData image cache");
+					LogManager.Log("Unable to save custom poster image to AppData image cache");
 					LogManager.Log(exception);
 					return Option.None<IFilePath>();
 				}
