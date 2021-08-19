@@ -81,11 +81,20 @@ namespace GHelperLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Properties\DummyGHUBSettings.db.
+        /// </summary>
+        public static string DummyGHUBSettingsDBFileRelativePath {
+            get {
+                return ResourceManager.GetString("DummyGHUBSettingsDBFileRelativePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Properties\DummyGHUBSettings.json.
         /// </summary>
-        public static string DummyGHUBSettingsRelativePath {
+        public static string DummyGHUBSettingsFileRelativePath {
             get {
-                return ResourceManager.GetString("DummyGHUBSettingsRelativePath", resourceCulture);
+                return ResourceManager.GetString("DummyGHUBSettingsFileRelativePath", resourceCulture);
             }
         }
         
@@ -131,6 +140,24 @@ namespace GHelperLogic.Properties {
         public static string GHelperLogFileName {
             get {
                 return ResourceManager.GetString("GHelperLogFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to settings.db.
+        /// </summary>
+        public static string GHubConfigDBFileName {
+            get {
+                return ResourceManager.GetString("GHubConfigDBFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DATA.
+        /// </summary>
+        public static string GHubConfigDBPrimaryTableName {
+            get {
+                return ResourceManager.GetString("GHubConfigDBPrimaryTableName", resourceCulture);
             }
         }
         

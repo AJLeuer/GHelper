@@ -20,12 +20,19 @@ namespace GHelperLogic.Properties
 		        Path.DirectorySeparatorChar + Resources.GHubDataDirectoryName);
 
 	    public static IFilePath DefaultGHubSettingsFilePath { get ; } = GHubAppDataDirectoryPath.GetChildFileWithName(Resources.GHubConfigFileName);
+	    public static IFilePath DefaultGHubSettingsDBFilePath { get ; } = GHubAppDataDirectoryPath.GetChildFileWithName(Resources.GHubConfigDBFileName);
 
 	    public static IFilePath DummyDebugGHubSettingsFilePath { get ; } =
 		    PathHelpers.ToAbsoluteFilePath(
 		        Path.Combine(
 		            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, 
-		            Resources.DummyGHUBSettingsRelativePath));
+		            Resources.DummyGHUBSettingsFileRelativePath));
+	    
+	    public static IFilePath DummyDebugGHubSettingsDBFilePath { get ; } =
+		    PathHelpers.ToAbsoluteFilePath(
+		        Path.Combine(
+		            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, 
+		            Resources.DummyGHUBSettingsDBFileRelativePath));
 
 
 	    public static IDirectoryPath IconCacheDirectoryPath { get; } =

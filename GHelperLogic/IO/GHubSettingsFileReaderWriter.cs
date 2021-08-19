@@ -7,41 +7,11 @@ using Newtonsoft.Json.Linq;
 
 namespace GHelperLogic.IO
 {
-	public class GHubSettingsFileReaderWriter
+	public class GHubSettingsFileReaderWriter : GHubSettingsIO
 	{
-		private Stream? gHubSettingsFileStream;
-		public  Stream GHubSettingsFileStream
+		public override GHubSettingsFile Read(Stream? settingsFileStream = null)
 		{
-			get
-			{
-				if (gHubSettingsFileStream == null)
-				{
-					initializeGHubSettingsFileStream();
-				}
-				return gHubSettingsFileStream!;
-			}
-		}
-
-		private GHubSettingsFile? GHubSettingsFileObject;
-
-		public State CheckSettingsFileAvailability(Stream? settingsFileStream = null)
-		{
-			try
-			{
-				settingsFileStream ??= GHubSettingsFileStream;
-				if (settingsFileStream.CanRead)
-				{
-					return State.Available;
-				}
-			}
-			catch (IOException) {}
-			
-			return State.Unavailable;
-		}
-
-		public GHubSettingsFile Read(Stream? settingsFileStream = null)
-		{
-			settingsFileStream ??= GHubSettingsFileStream;
+			settingsFileStream ??= GHubSettingsStream;
 			JObject parsedSettingsFile = parseSettingsFile(settingsFileStream);
 			
 			GHubSettingsFileObject = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter())!;
@@ -50,9 +20,9 @@ namespace GHelperLogic.IO
 			return GHubSettingsFileObject;
 		}
 
-		public void Write(Stream? settingsFileStream = null, GHubSettingsFile? settingsFileObject = null)
+		public override void Write(Stream? settingsFileStream = null, GHubSettingsFile? settingsFileObject = null)
 		{
-			settingsFileStream ??= GHubSettingsFileStream;
+			settingsFileStream ??= GHubSettingsStream;
 			settingsFileObject ??= GHubSettingsFileObject;
 
 			using (StreamWriter settingsFileWriter = new (stream: settingsFileStream, encoding: new UTF8Encoding(), bufferSize: -1, leaveOpen: true))
@@ -84,25 +54,18 @@ namespace GHelperLogic.IO
 			return parsedSettingsFile;
 		}
 
-		private void initializeGHubSettingsFileStream()
+		protected override Stream InitializeGHubSettingsFileStream()
 		{
-			#if DEBUG
-				gHubSettingsFileStream = new FileStream(Properties.Configuration.DummyDebugGHubSettingsFilePath.ToString()!,
-				                                        FileMode.Open,
-				                                        FileAccess.ReadWrite);
-
-			#elif RELEASE || DEBUGRELEASE
-				gHubSettingsFileStream = new FileStream(Properties.Configuration.DefaultGHubSettingsFilePath.ToString()!,
+			#if RELEASE || DEBUGRELEASE
+				return new FileStream(Properties.Configuration.DefaultGHubSettingsFilePath.ToString()!,
 														FileMode.Open,
 														FileAccess.ReadWrite);
 
+			#elif DEBUG
+				return new FileStream(Properties.Configuration.DummyDebugGHubSettingsFilePath.ToString()!,
+				                                        FileMode.Open,
+				                                        FileAccess.ReadWrite);
 			#endif
-		}
-
-		public enum State
-		{
-			Available,
-			Unavailable
 		}
 	}
 }

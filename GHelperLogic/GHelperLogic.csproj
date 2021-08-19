@@ -11,9 +11,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Properties\DummyGHUBSettings.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
+		<Content Include="Properties\DummyGHUBSettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Properties\DummyGHUBSettings.db">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -22,6 +25,7 @@
 	  <PackageReference Include="NodaTime" Version="3.0.3" />
 	  <PackageReference Include="Optional" Version="4.0.0" />
 	  <PackageReference Include="SixLabors.ImageSharp" Version="1.0.2" />
+	  <PackageReference Include="SqlNado" Version="1.2.3" />
 	  <PackageReference Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
 	</ItemGroup>
 

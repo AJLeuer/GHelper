@@ -8,18 +8,18 @@ namespace GHelper.Service
 {
 	public class GHubSettingsFileService
 	{
-		private readonly GHubSettingsFileReaderWriter GHubSettingsFileReaderWriter = new ();
-		private          GHubViewModel?				  GHubViewModel;
-		private readonly Reference<MainWindow>        MainWindow;
+		private readonly GHubSettingsIO        GHubSettingsIO = new GHubSettingsDatabaseIO();
+		private          GHubViewModel?        GHubViewModel;
+		private readonly Reference<MainWindow> MainWindow;
 
 		public GHubSettingsFileService(Reference<MainWindow> mainWindow)
 		{
 			MainWindow = mainWindow;
 		}
 		
-		public GHubSettingsFileReaderWriter.State CheckSettingsFileAvailability()
+		public GHubSettingsIO.State CheckSettingsFileAvailability()
 		{
-			return GHubSettingsFileReaderWriter.CheckSettingsFileAvailability();
+			return GHubSettingsIO.CheckSettingsAvailability();
 		}
 
 		public void Start()
@@ -30,14 +30,14 @@ namespace GHelper.Service
 
 		private void Load()
 		{
-			GHubSettingsFile gHubSettingsFile = GHubSettingsFileReaderWriter.Read();
+			GHubSettingsFile gHubSettingsFile = GHubSettingsIO.Read();
 			GHubViewModel = new GHubViewModel(gHubSettingsFile);
 			MainWindow.Referent!.Applications = GHubViewModel.Applications;
 		}
 
 		private void Save()
 		{
-			GHubSettingsFileReaderWriter.Write(settingsFileObject: GHubViewModel?.GHubSettingsFile);
+			GHubSettingsIO.Write(settingsFileObject: GHubViewModel?.GHubSettingsFile);
 			GHubViewModel?.SetInitialRecordStates();
 		}
 
