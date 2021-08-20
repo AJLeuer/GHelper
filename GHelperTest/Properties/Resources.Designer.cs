@@ -63,9 +63,9 @@ namespace GHelperTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] ExampleCustomGameGHUBSettings {
+        internal static byte[] ExampleJSONCustomGameGHUBSettings {
             get {
-                object obj = ResourceManager.GetObject("ExampleCustomGameGHUBSettings", resourceCulture);
+                object obj = ResourceManager.GetObject("ExampleJSONCustomGameGHUBSettings", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -73,9 +73,19 @@ namespace GHelperTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] ExampleGHUBSettings {
+        internal static byte[] ExampleJSONGHUBSettings {
             get {
-                object obj = ResourceManager.GetObject("ExampleGHUBSettings", resourceCulture);
+                object obj = ResourceManager.GetObject("ExampleJSONGHUBSettings", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ExampleSQLiteGHUBSettings {
+            get {
+                object obj = ResourceManager.GetObject("ExampleSQLiteGHUBSettings", resourceCulture);
                 return ((byte[])(obj));
             }
         }

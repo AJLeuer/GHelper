@@ -12,18 +12,18 @@ using Optional.Unsafe;
 namespace GHelperTest
 {
 	[TestFixture]
-	public static partial class GHubSettingsFileWriterTests
+	public static partial class GHubSettingsWriteTests
 	{
 		private static GHubSettingsFileReaderWriter? settingsFileReaderWriter;
 		private static MemoryStream TestSettingsFile = 
-			new MemoryStream(Properties.Resources.ExampleGHUBSettings, true);
+			new MemoryStream(Properties.Resources.ExampleJSONGHUBSettings, true);
 		
 		[SetUp]
 		public static void Setup()
 		{
 			settingsFileReaderWriter = new GHubSettingsFileReaderWriter();
 			TestSettingsFile = 
-				new MemoryStream(Properties.Resources.ExampleGHUBSettings, true);
+				new MemoryStream(Properties.Resources.ExampleJSONGHUBSettings, true);
 			
 			TestHelpers.StubImageFileHTTPResponses();
 		}
@@ -57,7 +57,7 @@ namespace GHelperTest
 			{
 				settingsFileReaderWriter = new GHubSettingsFileReaderWriter();
 				TestSettingsFile = 
-					new MemoryStream(Properties.Resources.ExampleCustomGameGHUBSettings, false);
+					new MemoryStream(Properties.Resources.ExampleJSONCustomGameGHUBSettings, false);
 			}
 			
 			

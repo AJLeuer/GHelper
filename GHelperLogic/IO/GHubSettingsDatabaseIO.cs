@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using GHelperLogic.Model;
+using GHelperLogic.Utility;
 using NDepend.Path;
 using Optional;
 using SqlNado;
@@ -39,14 +40,6 @@ namespace GHelperLogic.IO
             GHubSettingsDatabase?.Dispose();
         }
 
-        private void InitializeGHubSettingsDatabaseIfNeeded()
-        {
-            if (GHubSettingsDatabase is null)
-            {
-                GHubSettingsDatabase = new SQLiteDatabase(GBHubSettingsDBFilePath.ToString(), SQLiteOpenOptions.SQLITE_OPEN_READWRITE);
-            }
-        }
-
         public override State CheckSettingsAvailability(Stream? settingsStream = null)
         {
             try
@@ -56,7 +49,16 @@ namespace GHelperLogic.IO
             }
             catch (Exception exception) when (exception is IOException or SQLiteException) 
             {
+                LogManager.Log("Unable to open G Hub settings database.");
                 return State.Unavailable;
+            }
+
+            void InitializeGHubSettingsDatabaseIfNeeded()
+            {
+                if (GHubSettingsDatabase is null)
+                {
+                    GHubSettingsDatabase = new SQLiteDatabase(GBHubSettingsDBFilePath.ToString(), SQLiteOpenOptions.SQLITE_OPEN_READWRITE);
+                }
             }
         }
 
