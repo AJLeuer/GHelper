@@ -1,5 +1,4 @@
-﻿using System.IO;
-using GHelperLogic.Model;
+﻿using GHelperLogic.Model;
 using Optional;
 
 namespace GHelperLogic.IO
@@ -7,10 +6,10 @@ namespace GHelperLogic.IO
     public abstract class GHubSettingsIO
     {
         protected GHubSettingsFile? GHubSettingsFileObject;
-        public abstract State CheckSettingsAvailability(Stream? settingsStream = null);
+        public abstract State CheckSettingsAvailability();
 
-        public abstract Option<GHubSettingsFile> Read(Stream? settingsStream = null);
-        public abstract void                     Write(Stream? settingsStream = null, GHubSettingsFile? settingsFileObject = null);
+        public abstract Option<GHubSettingsFile> Read();
+        public abstract void                     Write(GHubSettingsFile? settingsFileObject = null);
 
         public enum State
         {
@@ -20,17 +19,17 @@ namespace GHelperLogic.IO
 
         private class DummyGHubSettingsIO : GHubSettingsIO
         {
-            public override State CheckSettingsAvailability(Stream? settingsStream = null)
+            public override State CheckSettingsAvailability()
             {
                 return State.Unavailable;
             }
 
-            public override Option<GHubSettingsFile> Read(Stream? settingsStream = null)
+            public override Option<GHubSettingsFile> Read()
             {
                 return Option.None<GHubSettingsFile>();
             }
 
-            public override void Write(Stream? settingsStream = null, GHubSettingsFile? settingsFileObject = null) { }
+            public override void Write( GHubSettingsFile? settingsFileObject = null) { }
         }
 
         /// <summary>

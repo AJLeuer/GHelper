@@ -20,9 +20,9 @@ namespace GHelperTest
 		[SetUp]
 		public static void Setup()
 		{
-			SettingsFileReader = new GHubSettingsFileReaderWriter();
 			TestSettingsFile = new MemoryStream(Properties.Resources.ExampleJSONGHUBSettings, false);
-			
+			SettingsFileReader = new GHubSettingsFileReaderWriter(gHubSettingsFileStream: TestSettingsFile);
+
 			GHubSettingsWriteTests.TestHelpers.StubImageFileHTTPResponses();
 		}
 
@@ -35,7 +35,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeAllApplications()
 		{
-			ICollection<Application> applications = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
+			ICollection<Application> applications = SettingsFileReader!.Read().ValueOrFailure().Applications?.Applications!;
 			
 			Assert.AreEqual(4, applications.Count);
 		}
@@ -43,7 +43,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeApplicationProperties()
 		{
-			ICollection<Application> applications = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
+			ICollection<Application> applications = SettingsFileReader!.Read().ValueOrFailure().Applications?.Applications!;
 
 			Assert.AreEqual(
 				Guid.Parse("420fd454-0c36-499d-bde4-146823b16147"), 
@@ -53,7 +53,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeDesktopApplications()
 		{
-			ICollection<Application> applications = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
+			ICollection<Application> applications = SettingsFileReader!.Read().ValueOrFailure().Applications?.Applications!;
 
 			Assert.AreEqual(
 				typeof(DesktopApplication), 
@@ -67,7 +67,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeCustomApplications()
 		{
-			ICollection<Application> applications = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
+			ICollection<Application> applications = SettingsFileReader!.Read().ValueOrFailure().Applications?.Applications!;
 
 			Assert.AreEqual(
 			                typeof(CustomApplication), 
@@ -81,7 +81,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeAllProfiles()
 		{
-			ICollection<Profile> profiles = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Profiles?.Profiles!;
+			ICollection<Profile> profiles = SettingsFileReader!.Read().ValueOrFailure().Profiles?.Profiles!;
 			
 			Assert.AreEqual(5, profiles.Count);
 		}
@@ -89,7 +89,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeProfileProperties()
 		{
-			ICollection<Profile> profiles = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Profiles?.Profiles!;
+			ICollection<Profile> profiles = SettingsFileReader!.Read().ValueOrFailure().Profiles?.Profiles!;
 
 			Assert.AreEqual(
 				"Horizon Zero Dawn Complete Edition", 
@@ -102,7 +102,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldMatchApplicationsWithProfiles()
 		{
-			GHubSettingsFile gHubSettingsFile = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure();
+			GHubSettingsFile gHubSettingsFile = SettingsFileReader!.Read().ValueOrFailure();
 			ICollection<Application> applications = gHubSettingsFile.Applications?.Applications!;
 			ICollection<Profile> profiles = gHubSettingsFile.Profiles?.Profiles!;
 
@@ -121,9 +121,8 @@ namespace GHelperTest
 			[SetUp]
 			public static void SetupCustomApplicationTests()
 			{
-				SettingsFileReader = new GHubSettingsFileReaderWriter();
-				TestSettingsFile = 
-					new MemoryStream(Properties.Resources.ExampleJSONCustomGameGHUBSettings, false);
+				TestSettingsFile = new MemoryStream(Properties.Resources.ExampleJSONCustomGameGHUBSettings, false);
+				SettingsFileReader = new GHubSettingsFileReaderWriter(TestSettingsFile);
 			}
 			
 			
@@ -136,7 +135,7 @@ namespace GHelperTest
 			[Test]
 			public static void ShouldDeserializePosterDataOfCustomApplications()
 			{
-				ICollection<Application> applications = SettingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
+				ICollection<Application> applications = SettingsFileReader!.Read().ValueOrFailure().Applications?.Applications!;
 
 				Assert.IsTrue(applications.ElementAt(0).HasPoster);
 				Assert.IsTrue(applications.ElementAt(0).IsCustom);

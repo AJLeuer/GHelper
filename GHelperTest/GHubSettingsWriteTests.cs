@@ -15,16 +15,14 @@ namespace GHelperTest
 	public static partial class GHubSettingsWriteTests
 	{
 		private static GHubSettingsFileReaderWriter? settingsFileReaderWriter;
-		private static MemoryStream TestSettingsFile = 
-			new MemoryStream(Properties.Resources.ExampleJSONGHUBSettings, true);
+		private static MemoryStream TestSettingsFile = new (Properties.Resources.ExampleJSONGHUBSettings, true);
 		
 		[SetUp]
 		public static void Setup()
 		{
-			settingsFileReaderWriter = new GHubSettingsFileReaderWriter();
-			TestSettingsFile = 
-				new MemoryStream(Properties.Resources.ExampleJSONGHUBSettings, true);
-			
+			TestSettingsFile = new MemoryStream(Properties.Resources.ExampleJSONGHUBSettings, true);
+			settingsFileReaderWriter = new GHubSettingsFileReaderWriter(TestSettingsFile);
+
 			TestHelpers.StubImageFileHTTPResponses();
 		}
 
@@ -38,7 +36,8 @@ namespace GHelperTest
 		public static void SerializedGHubSettingsJSONShouldMatchInput()
 		{
 			var (testSettingsFileOriginal, testSettingsFileDuplicate) = TestSettingsFile.Duplicate();
-			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal).ValueOrFailure()!;
+			GHubSettingsFileReaderWriter settingsFileReaderWriter2 = new (testSettingsFileOriginal);
+			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter2.Read().ValueOrFailure()!;
 
 			string reSerializedGHubSettingsFile = settingsFileReaderWriter?.Serialize(gHubSettingsFile)!;
 			string originalGHubSettingsFile = Encoding.UTF8.GetString(testSettingsFileDuplicate.ToArray(), 0 , (int) TestSettingsFile.Length);
@@ -55,9 +54,8 @@ namespace GHelperTest
 			[SetUp]
 			public static void SetupCustomApplicationTests()
 			{
-				settingsFileReaderWriter = new GHubSettingsFileReaderWriter();
-				TestSettingsFile = 
-					new MemoryStream(Properties.Resources.ExampleJSONCustomGameGHUBSettings, false);
+				TestSettingsFile = new MemoryStream(Properties.Resources.ExampleJSONCustomGameGHUBSettings, false);
+				settingsFileReaderWriter = new GHubSettingsFileReaderWriter(TestSettingsFile);
 			}
 			
 			
@@ -71,7 +69,8 @@ namespace GHelperTest
 			public static void ShouldNotSerializePosterDataOfCustomApplications()
 			{
 				var (testSettingsFileOriginal, _) = TestSettingsFile.Duplicate();
-				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal).ValueOrFailure()!;
+				settingsFileReaderWriter = new GHubSettingsFileReaderWriter(testSettingsFileOriginal);
+				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter.Read().ValueOrFailure()!;
 
 				string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);
 				GHubSettingsFile reDeserializedGHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(reSerializedGHubSettingsFile);

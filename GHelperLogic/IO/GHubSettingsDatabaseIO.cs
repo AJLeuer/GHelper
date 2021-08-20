@@ -9,7 +9,7 @@ using SqlNado;
 
 namespace GHelperLogic.IO
 {
-    public class GHubSettingsDatabaseIO : GHubSettingsIO
+    public class GHubSettingsDatabaseIO : GHubSettingsIO, IDisposable
     {
         private static readonly string PrimaryTableName = Properties.Resources.GHubConfigDBPrimaryTableName;
 
@@ -32,65 +32,94 @@ namespace GHelperLogic.IO
             }
         }
 
-        private          SQLiteDatabase?              GHubSettingsDatabase { get; set; } 
-        private readonly GHubSettingsFileReaderWriter GHubSettingsFileReaderWriter = new();
+        private          SQLiteDatabase?               GHubSettingsDatabase { get; set; }
+        private readonly GHubSettingsFileReaderWriter? GHubSettingsFileReaderWriter = null;
+
+        public GHubSettingsDatabaseIO()
+        {
+            InitializeGHubSettingsDatabaseIfNeeded();
+            Stream? gHubSettingsFileStream = OpenSettingsStreamFromDatabase();
+            if (gHubSettingsFileStream is not null)
+            {
+                GHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter(gHubSettingsFileStream: gHubSettingsFileStream);
+            }
+        }
         
         ~GHubSettingsDatabaseIO()
         {
+            Dispose();
+        }
+        
+        public void Dispose()
+        {
             GHubSettingsDatabase?.Dispose();
+            GHubSettingsFileReaderWriter?.Dispose();
         }
 
-        public override State CheckSettingsAvailability(Stream? settingsStream = null)
+        public override State CheckSettingsAvailability()
+        {
+            return GHubSettingsFileReaderWriter is null ? State.Unavailable : GHubSettingsFileReaderWriter.CheckSettingsAvailability();
+        }
+
+        public override Option<GHubSettingsFile> Read()
+        {
+            if ((GHubSettingsFileReaderWriter is null) || (CheckSettingsAvailability() == State.Unavailable))
+            {
+                return Option.None<GHubSettingsFile>();
+            }
+            else
+            {
+                return GHubSettingsFileReaderWriter.Read();
+            }
+        }
+
+        public override void Write( GHubSettingsFile? settingsFileObject = null)
+        {
+            throw new NotImplementedException();
+        }
+        
+        private void InitializeGHubSettingsDatabaseIfNeeded()
         {
             try
-            {
-                InitializeGHubSettingsDatabaseIfNeeded();
-                return State.Available;
-            }
-            catch (Exception exception) when (exception is IOException or SQLiteException) 
-            {
-                LogManager.Log("Unable to open G Hub settings database.");
-                return State.Unavailable;
-            }
-
-            void InitializeGHubSettingsDatabaseIfNeeded()
             {
                 if (GHubSettingsDatabase is null)
                 {
                     GHubSettingsDatabase = new SQLiteDatabase(GBHubSettingsDBFilePath.ToString(), SQLiteOpenOptions.SQLITE_OPEN_READWRITE);
                 }
             }
+            catch (Exception)
+            {
+                LogManager.Log("Unable to open G Hub settings database.");
+                throw;
+            }
         }
 
-        public override Option<GHubSettingsFile> Read(Stream? settingsStream = null)
+        private Stream? OpenSettingsStreamFromDatabase()
         {
-            if (CheckSettingsAvailability() == State.Unavailable)
+            try
             {
-                return Option.None<GHubSettingsFile>();
-            }
-            
-            SQLiteTable? data = GHubSettingsDatabase?.GetTable(PrimaryTableName);
-            IEnumerable<SQLiteRow>? rows = data?.GetRows();
+                SQLiteTable? data = GHubSettingsDatabase?.GetTable(PrimaryTableName);
+                IEnumerable<SQLiteRow>? rows = data?.GetRows();
 
-            if (rows != null)
-            {
-                foreach (SQLiteRow row in rows)
+                if (rows != null)
                 {
-                    if ((row.Values[0] as int? ?? 0) == 1)
+                    foreach (SQLiteRow row in rows)
                     {
-                        byte[] settingsFileRawData = (byte[]) row.Values[2];
-                        var settingsFileDataStream = new MemoryStream(settingsFileRawData);
-                        return GHubSettingsFileReaderWriter.Read(settingsFileDataStream);
+                        if ((row.Values[0] as int? ?? 0) == 1)
+                        {
+                            byte[] settingsFileRawData = (byte[]) row.Values[2];
+                            var settingsFileDataStream = new MemoryStream(settingsFileRawData);
+                            return settingsFileDataStream;
+                        }
                     }
                 }
             }
-
-            return Option.None<GHubSettingsFile>();
-        }
-
-        public override void Write(Stream? settingsStream = null, GHubSettingsFile? settingsFileObject = null)
-        {
-            throw new NotImplementedException();
+            catch (Exception)
+            {
+                LogManager.Log("Unable to read from G Hub settings database.");
+            }
+            
+            return null;
         }
     }
 }

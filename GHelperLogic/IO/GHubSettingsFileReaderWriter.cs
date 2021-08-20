@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using GHelperLogic.Model;
@@ -9,7 +10,7 @@ using Optional;
 
 namespace GHelperLogic.IO
 {
-	public class GHubSettingsFileReaderWriter : GHubSettingsIO
+	public class GHubSettingsFileReaderWriter : GHubSettingsIO, IDisposable
 	{
 		private static readonly IFilePath GBHubSettingsFilePath =
 			#if RELEASE || DEBUGRELEASE
@@ -29,27 +30,34 @@ namespace GHelperLogic.IO
 				return State.Unavailable;
 			}
 		}
-		
-		private Stream? gHubSettingsStream;
 
-		private Stream GHubSettingsStream
+		private Stream GHubSettingsFileStream { get;}
+
+		public GHubSettingsFileReaderWriter()
 		{
-			get
-			{
-				if (gHubSettingsStream is null)
-				{
-					gHubSettingsStream = InitializeGHubSettingsFileStream();
-				}
-				return gHubSettingsStream!;
-			}
+			GHubSettingsFileStream = InitializeDefaultGHubSettingsFileStream();
 		}
 		
-		public override State CheckSettingsAvailability(Stream? settingsStream = null)
+		public GHubSettingsFileReaderWriter(Stream gHubSettingsFileStream)
+		{
+			this.GHubSettingsFileStream = gHubSettingsFileStream;
+		}
+
+		~GHubSettingsFileReaderWriter()
+		{
+			Dispose();
+		}
+		
+		public void Dispose()
+		{
+			GHubSettingsFileStream.Dispose();
+		}
+		
+		public override State CheckSettingsAvailability()
 		{
 			try
 			{
-				settingsStream ??= GHubSettingsStream;
-				if (settingsStream.CanRead)
+				if ((GHubSettingsFileStream.CanRead) && (GHubSettingsFileStream.CanWrite))
 				{
 					return State.Available;
 				}
@@ -59,10 +67,9 @@ namespace GHelperLogic.IO
 			return State.Unavailable;
 		}
 		
-		public override Option<GHubSettingsFile> Read(Stream? settingsFileStream = null)
+		public override Option<GHubSettingsFile> Read()
 		{
-			settingsFileStream ??= GHubSettingsStream;
-			JObject parsedSettingsFile = parseSettingsFile(settingsFileStream);
+			JObject parsedSettingsFile = parseSettingsFile(GHubSettingsFileStream);
 			
 			GHubSettingsFileObject = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter())!;
 			GHubSettingsFileObject.AssociateProfilesToApplications();
@@ -70,22 +77,21 @@ namespace GHelperLogic.IO
 			return Option.Some(GHubSettingsFileObject);
 		}
 
-		public override void Write(Stream? settingsFileStream = null, GHubSettingsFile? settingsFileObject = null)
+		public override void Write(GHubSettingsFile? settingsFileObject = null)
 		{
-			settingsFileStream ??= GHubSettingsStream;
 			settingsFileObject ??= GHubSettingsFileObject;
 
-			using (StreamWriter settingsFileWriter = new (stream: settingsFileStream, encoding: new UTF8Encoding(), bufferSize: -1, leaveOpen: true))
+			using (StreamWriter settingsFileWriter = new (stream: GHubSettingsFileStream, encoding: new UTF8Encoding(), bufferSize: -1, leaveOpen: true))
 			{
 				//discard the old contents of the file
-				settingsFileStream.SetLength(0); 
+				GHubSettingsFileStream.SetLength(0); 
 				
 				string reSerializedGHubSettingsFile = Serialize(settingsFileObject);
 				
-				settingsFileStream.Position = 0;
+				GHubSettingsFileStream.Position = 0;
 				settingsFileWriter.Write(reSerializedGHubSettingsFile);
 				settingsFileWriter.Flush();
-				settingsFileStream.SetLength(settingsFileStream.Position);
+				GHubSettingsFileStream.SetLength(GHubSettingsFileStream.Position);
 			}
 		}
 
@@ -104,7 +110,7 @@ namespace GHelperLogic.IO
 			return parsedSettingsFile;
 		}
 
-		protected Stream InitializeGHubSettingsFileStream()
+		protected Stream InitializeDefaultGHubSettingsFileStream()
 		{
 			return new FileStream(GBHubSettingsFilePath.ToString()!,
 			                      FileMode.Open,
