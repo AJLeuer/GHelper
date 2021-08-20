@@ -1,5 +1,4 @@
-﻿using GHelper.Annotations;
-using GHelper.Service;
+﻿using GHelper.Service;
 using GHelperLogic.Model;
 using NDepend.Path;
 using Optional;
@@ -10,7 +9,7 @@ namespace GHelper.ViewModel
 {
 	public class CustomApplicationViewModel : ApplicationViewModel
 	{
-		public CustomApplicationViewModel([NotNull] CustomApplication application)
+		public CustomApplicationViewModel(CustomApplication application)
 			: base(application)
 		{
 		}

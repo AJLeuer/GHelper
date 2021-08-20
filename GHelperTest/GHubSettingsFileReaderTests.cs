@@ -5,6 +5,7 @@ using System.Linq;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
 using NUnit.Framework;
+using Optional.Unsafe;
 using SixLabors.ImageSharp;
 using Color = System.Drawing.Color;
 
@@ -36,7 +37,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeAllApplications()
 		{
-			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).Applications?.Applications!;
+			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
 			
 			Assert.AreEqual(4, applications.Count);
 		}
@@ -44,7 +45,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeApplicationProperties()
 		{
-			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).Applications?.Applications!;
+			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
 
 			Assert.AreEqual(
 				Guid.Parse("420fd454-0c36-499d-bde4-146823b16147"), 
@@ -54,7 +55,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeDesktopApplications()
 		{
-			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).Applications?.Applications!;
+			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
 
 			Assert.AreEqual(
 				typeof(DesktopApplication), 
@@ -68,7 +69,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeCustomApplications()
 		{
-			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).Applications?.Applications!;
+			ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
 
 			Assert.AreEqual(
 			                typeof(CustomApplication), 
@@ -82,7 +83,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeAllProfiles()
 		{
-			ICollection<Profile> profiles = settingsFileReader!.Read(TestSettingsFile).Profiles?.Profiles!;
+			ICollection<Profile> profiles = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Profiles?.Profiles!;
 			
 			Assert.AreEqual(5, profiles.Count);
 		}
@@ -90,7 +91,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldDeserializeProfileProperties()
 		{
-			ICollection<Profile> profiles = settingsFileReader!.Read(TestSettingsFile).Profiles?.Profiles!;
+			ICollection<Profile> profiles = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Profiles?.Profiles!;
 
 			Assert.AreEqual(
 				"Horizon Zero Dawn Complete Edition", 
@@ -103,7 +104,7 @@ namespace GHelperTest
 		[Test]
 		public static void ShouldMatchApplicationsWithProfiles()
 		{
-			GHubSettingsFile gHubSettingsFile = settingsFileReader!.Read(TestSettingsFile);
+			GHubSettingsFile gHubSettingsFile = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure();
 			ICollection<Application> applications = gHubSettingsFile.Applications?.Applications!;
 			ICollection<Profile> profiles = gHubSettingsFile.Profiles?.Profiles!;
 
@@ -137,7 +138,7 @@ namespace GHelperTest
 			[Test]
 			public static void ShouldDeserializePosterDataOfCustomApplications()
 			{
-				ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).Applications?.Applications!;
+				ICollection<Application> applications = settingsFileReader!.Read(TestSettingsFile).ValueOrFailure().Applications?.Applications!;
 
 				Assert.IsTrue(applications.ElementAt(0).HasPoster);
 				Assert.IsTrue(applications.ElementAt(0).IsCustom);

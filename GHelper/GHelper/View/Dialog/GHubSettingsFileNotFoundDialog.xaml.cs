@@ -17,9 +17,9 @@ namespace GHelper.View.Dialog
 
         public override async Task DisplayIfNeeded()
         {
-            GHubSettingsFileReaderWriter.State? settingsFileState = GHubSettingsFileService?.CheckSettingsFileAvailability();
+            GHubSettingsIO.State? settingsFileState = GHubSettingsFileService?.CheckSettingsFileAvailability();
 
-            if (settingsFileState == GHubSettingsFileReaderWriter.State.Unavailable)
+            if (settingsFileState == GHubSettingsIO.State.Unavailable)
             {
                 await this.EnqueueAndShowIfAsync();
             }

@@ -38,8 +38,8 @@ namespace GHelper
 			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};
 			window.Referent.Activate();
-			await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
 			await window.Referent.DisplayGHubRunningDialogIfNeeded();
+			await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
 			gHubSettingsFileService.Start();
 		}
 

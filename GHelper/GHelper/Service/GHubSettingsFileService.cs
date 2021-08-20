@@ -1,14 +1,17 @@
+using System.IO;
 using GHelper.View;
 using GHelper.ViewModel;
 using GHelperLogic.IO;
 using GHelperLogic.Model;
 using GHelperLogic.Utility;
+using Optional;
+using Optional.Unsafe;
 
 namespace GHelper.Service
 {
 	public class GHubSettingsFileService
 	{
-		private readonly GHubSettingsIO        GHubSettingsIO = new GHubSettingsDatabaseIO();
+		private readonly GHubSettingsIO        GHubSettingsIO = GHubSettingsIO.CreateAppropriateInstanceForGHubVersion();
 		private          GHubViewModel?        GHubViewModel;
 		private readonly Reference<MainWindow> MainWindow;
 
@@ -30,9 +33,17 @@ namespace GHelper.Service
 
 		private void Load()
 		{
-			GHubSettingsFile gHubSettingsFile = GHubSettingsIO.Read();
-			GHubViewModel = new GHubViewModel(gHubSettingsFile);
-			MainWindow.Referent!.Applications = GHubViewModel.Applications;
+			Option<GHubSettingsFile> gHubSettingsFile = GHubSettingsIO.Read();
+			
+			if (gHubSettingsFile.ValueOrDefault() is  { } settingsFile)
+			{
+				GHubViewModel = new GHubViewModel(settingsFile);
+				MainWindow.Referent!.Applications = GHubViewModel.Applications;
+			}
+			else
+			{
+				throw new IOException("Couldn't read from G Hub settings file.");
+			}
 		}
 
 		private void Save()

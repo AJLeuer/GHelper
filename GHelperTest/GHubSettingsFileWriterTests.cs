@@ -7,6 +7,7 @@ using GHelperLogic.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using Optional.Unsafe;
 
 namespace GHelperTest
 {
@@ -37,7 +38,7 @@ namespace GHelperTest
 		public static void SerializedGHubSettingsJSONShouldMatchInput()
 		{
 			var (testSettingsFileOriginal, testSettingsFileDuplicate) = TestSettingsFile.Duplicate();
-			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal)!;
+			GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal).ValueOrFailure()!;
 
 			string reSerializedGHubSettingsFile = settingsFileReaderWriter?.Serialize(gHubSettingsFile)!;
 			string originalGHubSettingsFile = Encoding.UTF8.GetString(testSettingsFileDuplicate.ToArray(), 0 , (int) TestSettingsFile.Length);
@@ -70,7 +71,7 @@ namespace GHelperTest
 			public static void ShouldNotSerializePosterDataOfCustomApplications()
 			{
 				var (testSettingsFileOriginal, _) = TestSettingsFile.Duplicate();
-				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal)!;
+				GHubSettingsFile gHubSettingsFile = settingsFileReaderWriter?.Read(testSettingsFileOriginal).ValueOrFailure()!;
 
 				string reSerializedGHubSettingsFile = JsonConvert.SerializeObject(gHubSettingsFile, Formatting.Indented);
 				GHubSettingsFile reDeserializedGHubSettingsFile = JsonConvert.DeserializeObject<GHubSettingsFile>(reSerializedGHubSettingsFile);
