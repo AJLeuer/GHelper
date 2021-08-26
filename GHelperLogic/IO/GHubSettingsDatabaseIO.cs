@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using GHelperLogic.Model;
@@ -11,6 +11,9 @@ namespace GHelperLogic.IO
 {
     public class GHubSettingsDatabaseIO : GHubSettingsIO, IDisposable
     {
+        private const string IDColumn = "_id";
+        private const string FileColumn = "FILE";
+        
         private static readonly string PrimaryTableName = Properties.Resources.GHubConfigDBPrimaryTableName;
 
         private static readonly IFilePath GBHubSettingsDBFilePath =
@@ -32,8 +35,22 @@ namespace GHelperLogic.IO
             }
         }
 
-        private          SQLiteDatabase?               GHubSettingsDatabase { get; set; }
-        private readonly GHubSettingsFileReaderWriter? GHubSettingsFileReaderWriter = null;
+        protected internal override GHubSettingsFile? GHubSettingsFileObject
+        {
+            get
+            {
+                return GHubSettingsFileReaderWriter?.GHubSettingsFileObject;
+            }
+            set
+            {
+                if (GHubSettingsFileReaderWriter is not null)
+                {
+                    GHubSettingsFileReaderWriter.GHubSettingsFileObject = value;
+                }
+            }
+        }
+        private           SQLiteDatabase?               GHubSettingsDatabase   { get; set; }
+        private readonly  GHubSettingsFileReaderWriter? GHubSettingsFileReaderWriter = null;
 
         public GHubSettingsDatabaseIO()
         {
@@ -73,9 +90,10 @@ namespace GHelperLogic.IO
             }
         }
 
-        public override void Write( GHubSettingsFile? settingsFileObject = null)
+        public override void Write(GHubSettingsFile? settingsFileObject = null)
         {
-            throw new NotImplementedException();
+
+            
         }
         
         private void InitializeGHubSettingsDatabaseIfNeeded()
@@ -84,7 +102,7 @@ namespace GHelperLogic.IO
             {
                 if (GHubSettingsDatabase is null)
                 {
-                    GHubSettingsDatabase = new SQLiteDatabase(GBHubSettingsDBFilePath.ToString(), SQLiteOpenOptions.SQLITE_OPEN_READWRITE);
+                    GHubSettingsDatabase = new SQLiteDatabase (GBHubSettingsDBFilePath.ToString(), SQLiteOpenOptions.SQLITE_OPEN_READWRITE);
                 }
             }
             catch (Exception)
@@ -98,17 +116,17 @@ namespace GHelperLogic.IO
         {
             try
             {
-                SQLiteTable? data = GHubSettingsDatabase?.GetTable(PrimaryTableName);
-                IEnumerable<SQLiteRow>? rows = data?.GetRows();
+                SQLiteTable? settingsData = GHubSettingsDatabase?.GetTable(PrimaryTableName);
+                IEnumerable<SQLiteRow>? rows = settingsData?.GetRows();
 
                 if (rows != null)
                 {
                     foreach (SQLiteRow row in rows)
                     {
-                        if ((row.Values[0] as int? ?? 0) == 1)
+                        if (row[IDColumn] is 1)
                         {
-                            byte[] settingsFileRawData = (byte[]) row.Values[2];
-                            var settingsFileDataStream = new MemoryStream(settingsFileRawData);
+                            byte[] settingsFileRawData = (byte[]) row[FileColumn];
+                            MemoryStream settingsFileDataStream = new (settingsFileRawData);
                             return settingsFileDataStream;
                         }
                     }
