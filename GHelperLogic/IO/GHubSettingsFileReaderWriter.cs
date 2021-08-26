@@ -31,16 +31,16 @@ namespace GHelperLogic.IO
 			}
 		}
 
-		private Stream GHubSettingsFileStream { get;}
+		protected internal Stream GHubSettingsStream { get; private set; }
 
 		public GHubSettingsFileReaderWriter()
 		{
-			GHubSettingsFileStream = InitializeDefaultGHubSettingsFileStream();
+			GHubSettingsStream = InitializeDefaultGHubSettingsFileStream();
 		}
 		
-		public GHubSettingsFileReaderWriter(Stream gHubSettingsFileStream)
+		public GHubSettingsFileReaderWriter(Stream gHubSettingsStream)
 		{
-			this.GHubSettingsFileStream = gHubSettingsFileStream;
+			this.GHubSettingsStream = gHubSettingsStream;
 		}
 
 		~GHubSettingsFileReaderWriter()
@@ -50,14 +50,14 @@ namespace GHelperLogic.IO
 		
 		public void Dispose()
 		{
-			GHubSettingsFileStream.Dispose();
+			GHubSettingsStream.Dispose();
 		}
 		
 		public override State CheckSettingsAvailability()
 		{
 			try
 			{
-				if ((GHubSettingsFileStream.CanRead) && (GHubSettingsFileStream.CanWrite))
+				if ((GHubSettingsStream.CanRead) && (GHubSettingsStream.CanWrite))
 				{
 					return State.Available;
 				}
@@ -69,7 +69,7 @@ namespace GHelperLogic.IO
 		
 		public override Option<GHubSettingsFile> Read()
 		{
-			JObject parsedSettingsFile = parseSettingsFile(GHubSettingsFileStream);
+			JObject parsedSettingsFile = parseSettingsFile(GHubSettingsStream);
 			
 			GHubSettingsFileObject = JsonConvert.DeserializeObject<GHubSettingsFile>(parsedSettingsFile.ToString(), new ApplicationJSONConverter())!;
 			GHubSettingsFileObject.AssociateProfilesToApplications();
@@ -81,17 +81,45 @@ namespace GHelperLogic.IO
 		{
 			settingsFileObject ??= GHubSettingsFileObject;
 
-			using (StreamWriter settingsFileWriter = new (stream: GHubSettingsFileStream, encoding: new UTF8Encoding(), bufferSize: -1, leaveOpen: true))
+			switch (GHubSettingsStream)
+			{
+				case FileStream:
+				{
+					WriteToFile(settingsFileObject: settingsFileObject);
+					break;
+				}
+				case MemoryStream:
+				{
+					WriteToMemory(settingsFileObject: settingsFileObject);
+					break;
+				}
+			}
+		}
+		private void WriteToFile(GHubSettingsFile? settingsFileObject)
+		{
+			using (StreamWriter settingsFileWriter = new (stream: GHubSettingsStream, encoding: new UTF8Encoding(), bufferSize: -1, leaveOpen: true))
 			{
 				//discard the old contents of the file
-				GHubSettingsFileStream.SetLength(0); 
+				GHubSettingsStream.SetLength(0); 
 				
 				string reSerializedGHubSettingsFile = Serialize(settingsFileObject);
 				
-				GHubSettingsFileStream.Position = 0;
+				GHubSettingsStream.Position = 0;
 				settingsFileWriter.Write(reSerializedGHubSettingsFile);
 				settingsFileWriter.Flush();
-				GHubSettingsFileStream.SetLength(GHubSettingsFileStream.Position);
+				GHubSettingsStream.SetLength(GHubSettingsStream.Position);
+			}
+		}
+
+		private void WriteToMemory(GHubSettingsFile? settingsFileObject)
+		{
+			GHubSettingsStream = new MemoryStream();
+			
+			using (StreamWriter settingsFileWriter = new (stream: GHubSettingsStream, encoding: new UTF8Encoding(), bufferSize: -1, leaveOpen: true))
+			{
+				string reSerializedGHubSettingsFile = Serialize(settingsFileObject);
+				settingsFileWriter.Write(reSerializedGHubSettingsFile);
+				settingsFileWriter.Flush();
 			}
 		}
 

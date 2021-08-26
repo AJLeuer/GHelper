@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using GHelperLogic.Model;
+using GHelperLogic.Model.Database;
 using GHelperLogic.Utility;
 using NDepend.Path;
 using Optional;
@@ -11,8 +12,7 @@ namespace GHelperLogic.IO
 {
     public class GHubSettingsDatabaseIO : GHubSettingsIO, IDisposable
     {
-        private const string IDColumn = "_id";
-        private const string FileColumn = "FILE";
+
         
         private static readonly string PrimaryTableName = Properties.Resources.GHubConfigDBPrimaryTableName;
 
@@ -58,7 +58,7 @@ namespace GHelperLogic.IO
             Stream? gHubSettingsFileStream = OpenSettingsStreamFromDatabase();
             if (gHubSettingsFileStream is not null)
             {
-                GHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter(gHubSettingsFileStream: gHubSettingsFileStream);
+                GHubSettingsFileReaderWriter = new GHubSettingsFileReaderWriter(gHubSettingsStream: gHubSettingsFileStream);
             }
         }
         
@@ -92,8 +92,18 @@ namespace GHelperLogic.IO
 
         public override void Write(GHubSettingsFile? settingsFileObject = null)
         {
+            GHubSettingsFileReaderWriter?.Write(settingsFileObject);
+            MemoryStream? updatedSettingsDataStream = GHubSettingsFileReaderWriter?.GHubSettingsStream as MemoryStream;
+            byte[]? updatedSettingsData = updatedSettingsDataStream?.ToArray();
 
+            SQLiteTable? settingsDataTable = GHubSettingsDatabase?.GetTable(PrimaryTableName);
+            GHubSettingsFileEntity? settingsRow = GHubSettingsFileEntity.FindSettingsFileRow(settingsDataTable);
             
+            if (settingsRow is not null)
+            {
+                settingsRow.SettingsFileData = updatedSettingsData;
+                GHubSettingsDatabase?.Save(settingsRow);
+            }
         }
         
         private void InitializeGHubSettingsDatabaseIfNeeded()
@@ -114,30 +124,13 @@ namespace GHelperLogic.IO
 
         private Stream? OpenSettingsStreamFromDatabase()
         {
-            try
-            {
-                SQLiteTable? settingsData = GHubSettingsDatabase?.GetTable(PrimaryTableName);
-                IEnumerable<SQLiteRow>? rows = settingsData?.GetRows();
-
-                if (rows != null)
-                {
-                    foreach (SQLiteRow row in rows)
-                    {
-                        if (row[IDColumn] is 1)
-                        {
-                            byte[] settingsFileRawData = (byte[]) row[FileColumn];
-                            MemoryStream settingsFileDataStream = new (settingsFileRawData);
-                            return settingsFileDataStream;
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                LogManager.Log("Unable to read from G Hub settings database.");
-            }
-            
-            return null;
+            SQLiteTable? settingsDataTable = GHubSettingsDatabase?.GetTable(PrimaryTableName);
+            GHubSettingsFileEntity? settingsRow = GHubSettingsFileEntity.FindSettingsFileRow(settingsDataTable);
+            MemoryStream? settingsFileDataStream = (settingsRow?.SettingsFileData == null) ? null : new MemoryStream(settingsRow.SettingsFileData);
+            return settingsFileDataStream;
         }
+
+
+        
     }
 }

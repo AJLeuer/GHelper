@@ -21,7 +21,7 @@ namespace GHelperTest
 		public static void Setup()
 		{
 			TestSettingsFile = new MemoryStream(Properties.Resources.ExampleJSONGHUBSettings, false);
-			SettingsFileReader = new GHubSettingsFileReaderWriter(gHubSettingsFileStream: TestSettingsFile);
+			SettingsFileReader = new GHubSettingsFileReaderWriter(gHubSettingsStream: TestSettingsFile);
 
 			GHubSettingsWriteTests.TestHelpers.StubImageFileHTTPResponses();
 		}
