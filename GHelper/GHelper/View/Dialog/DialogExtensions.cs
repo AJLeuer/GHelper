@@ -20,7 +20,7 @@ namespace GHelper.View.Dialog
 
 			ContentDialogResult buttonPressed = await contentDialog.ShowAsync();
 
-			currentDialogCompletion.SetResult(null!);
+			currentDialogCompletion.SetResult(null);
 			return buttonPressed;
 		}
 

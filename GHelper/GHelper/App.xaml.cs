@@ -38,19 +38,32 @@ namespace GHelper
 			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};
 			window.Referent.Activate();
-			await window.Referent.DisplayGHubRunningDialogIfNeeded();
-			await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
 			gHubSettingsFileService.Start();
+
+			if (window.Referent.Content is FrameworkElement frameworkElement)
+            {
+				frameworkElement.Loaded += FinishStartUp;
+            }				
 		}
 
 		/// <summary>
-		/// Invoked when application execution is being suspended.  Application state is saved
-		/// without knowing whether the application will be terminated or resumed with the contents
-		/// of memory still intact.
+		/// Performs any remaining launch tasks that require the main window to be loaded, and therefore couldn't be performed 
+		/// by OnLaunched()
 		/// </summary>
-		/// <param name="sender">The source of the suspend request.</param>
-		/// <param name="e">Details about the suspend request.</param>
-		private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void FinishStartUp(object sender, RoutedEventArgs routedEvent)
+        {
+			await window.Referent.DisplayGHubRunningDialogIfNeeded();
+			await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
+		}
+
+        /// <summary>
+        /// Invoked when application execution is being suspended.  Application state is saved
+        /// without knowing whether the application will be terminated or resumed with the contents
+        /// of memory still intact.
+        /// </summary>
+        /// <param name="sender">The source of the suspend request.</param>
+        /// <param name="e">Details about the suspend request.</param>
+        private void OnSuspending(object sender, SuspendingEventArgs e)
 		{
 			// Save application state and stop any background activity
 			LogManager.Log("Suspending GHelper application.");

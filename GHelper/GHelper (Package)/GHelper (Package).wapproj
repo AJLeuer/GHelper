@@ -4,10 +4,6 @@
     <VisualStudioVersion>15.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="DebugRelease|x64">
-      <Configuration>DebugRelease</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -23,36 +19,13 @@
   </PropertyGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
   <PropertyGroup>
-    <ProjectGuid>29807e19-72a1-4757-9379-cbe17e70d50a</ProjectGuid>
+    <ProjectGuid>1f0a8e18-bb75-40dd-8366-2f41171f7abc</ProjectGuid>
     <TargetPlatformVersion>10.0.22000.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.20348.0</TargetPlatformMinVersion>
+    <AssetTargetFallback>net5.0-windows$(TargetPlatformVersion);$(AssetTargetFallback)</AssetTargetFallback>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <AppxTargetsLocation Condition="'$(AppxTargetsLocation)'==''">$(MSBuildThisFileDirectory)build\</AppxTargetsLocation>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\GHelper\GHelper.csproj</EntryPointProjectUniqueName>
-    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxPackageDir>C:\Users\Adam\Downloads\</AppxPackageDir>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateThumbprint>8EC4AAEFE260F2806FB3666C956528C96B853303</PackageCertificateThumbprint>
-    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <PlatformTarget>x64</PlatformTarget>
-    <AppxBundle>Always</AppxBundle>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugRelease|x64'">
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <PlatformTarget>x64</PlatformTarget>
-    <AppxBundle>Always</AppxBundle>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <PlatformTarget>x64</PlatformTarget>
-    <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -60,58 +33,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Wide310x150Logo.scale-400.png" />
-    <None Include="PersonalCertificate.pfx" />
-    <None Include="GHelper %28Package%29_TemporaryKey.pfx" />
-    <Content Include="Images\LargeTile.scale-100.png" />
-    <Content Include="Images\LargeTile.scale-125.png" />
-    <Content Include="Images\LargeTile.scale-150.png" />
-    <Content Include="Images\LargeTile.scale-200.png" />
-    <Content Include="Images\LargeTile.scale-400.png" />
-    <Content Include="Images\SmallTile.scale-100.png" />
-    <Content Include="Images\SmallTile.scale-125.png" />
-    <Content Include="Images\SmallTile.scale-150.png" />
-    <Content Include="Images\SmallTile.scale-200.png" />
-    <Content Include="Images\SmallTile.scale-400.png" />
-    <Content Include="Images\SplashScreen.scale-100.png" />
-    <Content Include="Images\SplashScreen.scale-125.png" />
-    <Content Include="Images\SplashScreen.scale-150.png" />
     <Content Include="Images\SplashScreen.scale-200.png" />
     <Content Include="Images\LockScreenLogo.scale-200.png" />
-    <Content Include="Images\SplashScreen.scale-400.png" />
-    <Content Include="Images\Square150x150Logo.scale-100.png" />
-    <Content Include="Images\Square150x150Logo.scale-125.png" />
-    <Content Include="Images\Square150x150Logo.scale-150.png" />
     <Content Include="Images\Square150x150Logo.scale-200.png" />
-    <Content Include="Images\Square150x150Logo.scale-400.png" />
-    <Content Include="Images\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
-    <Content Include="Images\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
-    <Content Include="Images\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
-    <Content Include="Images\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
-    <Content Include="Images\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
-    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-16.png" />
-    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-256.png" />
-    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-32.png" />
-    <Content Include="Images\Square44x44Logo.altform-unplated_targetsize-48.png" />
-    <Content Include="Images\Square44x44Logo.scale-100.png" />
-    <Content Include="Images\Square44x44Logo.scale-125.png" />
-    <Content Include="Images\Square44x44Logo.scale-150.png" />
     <Content Include="Images\Square44x44Logo.scale-200.png" />
-    <Content Include="Images\Square44x44Logo.scale-400.png" />
-    <Content Include="Images\Square44x44Logo.targetsize-16.png" />
-    <Content Include="Images\Square44x44Logo.targetsize-24.png" />
     <Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Images\Square44x44Logo.targetsize-256.png" />
-    <Content Include="Images\Square44x44Logo.targetsize-32.png" />
-    <Content Include="Images\Square44x44Logo.targetsize-48.png" />
-    <Content Include="Images\StoreLogo.scale-100.png" />
-    <Content Include="Images\StoreLogo.scale-125.png" />
-    <Content Include="Images\StoreLogo.scale-150.png" />
-    <Content Include="Images\StoreLogo.scale-200.png" />
-    <Content Include="Images\StoreLogo.scale-400.png" />
-    <Content Include="Images\Wide310x150Logo.scale-100.png" />
-    <Content Include="Images\Wide310x150Logo.scale-125.png" />
-    <Content Include="Images\Wide310x150Logo.scale-150.png" />
+    <Content Include="Images\StoreLogo.png" />
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
@@ -121,11 +48,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.VCLibs.Desktop, Version=14.0" />
-    <!-- Needed for ucrtbased.dll when running a debug build. -->
-    <SDKReference Include="Microsoft.VCLibs, Version=14.0" Condition="'$(Configuration)' == 'Debug'" />
-    <SDKReference Include="Microsoft.VCLibs, Version=14.0" Condition="'$(Configuration)'=='DebugRelease'" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="[1.0.0-experimental1]">
+      <IncludeAssets>build</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="[1.0.0-experimental1]">
+      <IncludeAssets>build</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
-  <Import Project="$(AppxTargetsLocation)Microsoft.WinUI.AppX.targets" />
 </Project>
