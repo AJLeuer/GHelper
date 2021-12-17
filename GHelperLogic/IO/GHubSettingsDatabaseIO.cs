@@ -11,8 +11,6 @@ namespace GHelperLogic.IO
 {
     public class GHubSettingsDatabaseIO : GHubSettingsIO, IDisposable
     {
-
-        
         private static readonly string PrimaryTableName = Properties.Resources.GHubConfigDBPrimaryTableName;
 
         private static readonly IFilePath GBHubSettingsDBFilePath =

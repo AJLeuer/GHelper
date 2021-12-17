@@ -47,7 +47,8 @@ namespace GHelper.View
 		{
 			this.InitializeComponent();
 			this.UserPressedDelete += DisplayDeleteDialog;
-		}
+            this.ExtendsContentIntoTitleBar = true;
+        }
 
 		public async Task DisplayGHubRunningDialogIfNeeded()
 		{
