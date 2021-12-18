@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -79,7 +80,9 @@ namespace GHelper.View
                             TreeView.SelectedNode = LastSelectedNode;
                         }
 						return;
-				}
+                    default:
+                        return;
+                }
 			}
 				
 			ChangeDisplayedRecord(gHubRecord);

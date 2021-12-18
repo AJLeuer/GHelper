@@ -14,7 +14,7 @@
     Title="{x:Bind view:MainWindow.AppName, Mode=OneTime}">
 
     <SplitView x:Name="MainView" 
-               PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}"
+               PaneBackground="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                IsPaneOpen="True" 
                OpenPaneLength="384" 
                CompactPaneLength="256" 
