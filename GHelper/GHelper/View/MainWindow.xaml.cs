@@ -35,13 +35,10 @@ namespace GHelper.View
 		private TreeViewNode?                LastSelectedRecord      { get;  set; }
 		public  GHubSettingsFileService?     GHubSettingsFileService { get ; set ; }
 
-		private ushort                       SelectionProgrammaticResetLoops = 0; 
-		
-		public event PropertyChangedEventHandler? PropertyChanged;
-
-		public event  UserSavedEvent?         UserSaved;
-		private event UserDeletedRecordEvent? UserPressedDelete;
-		public event  UserDeletedRecordEvent? UserConfirmedDelete;
+        public event  PropertyChangedEventHandler? PropertyChanged;
+        public event  UserSavedEvent?              UserSaved;
+		private event UserDeletedRecordEvent?      UserPressedDelete;
+		public event  UserDeletedRecordEvent?      UserConfirmedDelete;
 
 		public MainWindow()
 		{
@@ -55,9 +52,8 @@ namespace GHelper.View
 			GHubRunningDialog gHubRunningDialog = new () { XamlRoot = MainView.XamlRoot };
 			await gHubRunningDialog.DisplayIfNeeded();
 		}
-		
-		
-		public async Task DisplayGHubSettingsFileNotFoundDialogIfNeeded()
+
+        public async Task DisplayGHubSettingsFileNotFoundDialogIfNeeded()
 		{
 			GHubSettingsFileNotFoundDialog fileNotFoundDialog = new (GHubSettingsFileService) { XamlRoot = MainView.XamlRoot };
 			await fileNotFoundDialog.DisplayIfNeeded();
@@ -65,13 +61,7 @@ namespace GHelper.View
 
 		private async void HandleGHubRecordSelected(TreeView treeView, TreeViewItemInvokedEventArgs info)
 		{
-			if (SelectionProgrammaticResetLoops > 0)
-			{
-				SelectionProgrammaticResetLoops--;
-				return;
-			}
-			
-			if (treeView.SelectedItem is GHubRecordViewModel gHubRecord)
+            if (info.InvokedItem is GHubRecordViewModel gHubRecord)
 			{
 				await HandleGHubRecordSelected(gHubRecord);
 			}
@@ -94,10 +84,11 @@ namespace GHelper.View
 						DisplayedRecord?.RestoreInitialState();
 						break;
 					// user doesn't actually want to change the viewed record
-					case ContentDialogResult.None:
-						// this is so stupid
-						SelectionProgrammaticResetLoops = 2;
-						TreeView.SelectedNode = LastSelectedRecord;
+                    case ContentDialogResult.None:
+                        if (LastSelectedRecord is not null)
+                        {
+                            TreeView.SelectedNode = LastSelectedRecord;
+                        }
 						return;
 				}
 			}

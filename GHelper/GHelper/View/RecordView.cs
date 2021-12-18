@@ -28,13 +28,10 @@ namespace GHelper.View
 			}
 		}
 		
-		public GHubRecordViewModel? GHubRecordViewModel { get; }
+		public    GHubRecordViewModel? GHubRecordViewModel { get; }
+        protected void                 SendRecordChangedNotification();
 
-		public    void ChainGHubRecordViewModelEventsToControls();
-		protected void SendRecordChangedNotification();
-
-
-		public static void ChangeName(RecordView recordView, object sender)
+        public static void ChangeName(RecordView recordView, object sender)
 		{
 			if (sender is TextBox textBox)
 			{
@@ -53,5 +50,7 @@ namespace GHelper.View
 				}
 			}
 		}
+        
+        
 	}
 }
