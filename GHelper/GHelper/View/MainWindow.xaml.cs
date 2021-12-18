@@ -31,9 +31,9 @@ namespace GHelper.View
 			}
 		}
 
-		public  GHubRecordViewModel?         DisplayedRecord         { get;  set; }
-		private TreeViewNode?                LastSelectedRecord      { get;  set; }
-		public  GHubSettingsFileService?     GHubSettingsFileService { get ; set ; }
+		public  GHubRecordViewModel?     DisplayedRecord         { get;  set; }
+		private TreeViewNode?            LastSelectedNode        { get;  set; }
+		public  GHubSettingsFileService? GHubSettingsFileService { get ; set ; }
 
         public event  PropertyChangedEventHandler? PropertyChanged;
         public event  UserSavedEvent?              UserSaved;
@@ -60,7 +60,8 @@ namespace GHelper.View
 		}
 
 		private async void HandleGHubRecordSelected(TreeView treeView, TreeViewItemInvokedEventArgs info)
-		{
+        {
+            LastSelectedNode = treeView.SelectedNode;
             if (info.InvokedItem is GHubRecordViewModel gHubRecord)
 			{
 				await HandleGHubRecordSelected(gHubRecord);
@@ -85,16 +86,28 @@ namespace GHelper.View
 						break;
 					// user doesn't actually want to change the viewed record
                     case ContentDialogResult.None:
-                        if (LastSelectedRecord is not null)
+                        if (LastSelectedNode is not null)
                         {
-                            TreeView.SelectedNode = LastSelectedRecord;
+                            TreeView.SelectedNode = LastSelectedNode;
                         }
 						return;
 				}
 			}
 				
-			ChangeDisplayedRecord(gHubRecord, TreeView.SelectedNode);
+			ChangeDisplayedRecord(gHubRecord);
 		}
+        private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord)
+        {
+            DisplayedRecord = gHubRecord;
+            var view = RecordView.CreateViewForViewModel(gHubRecord);
+            
+            if (view.GHubRecordViewModel is GHubRecordViewModel viewModel)
+            {
+                viewModel.UserSaved += this.UserSaved;
+                viewModel.UserDeletedRecord += this.UserPressedDelete;
+            }
+            GHubDataDisplay.Content = view;
+        }
 
 		private async Task<ContentDialogResult> DisplaySaveDialog()
 		{
@@ -127,21 +140,7 @@ namespace GHelper.View
 					break;
 			}
 		}
-
-		private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord, TreeViewNode selectedNode)
-		{
-			DisplayedRecord = gHubRecord;
-			LastSelectedRecord = selectedNode;
-
-			RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
-			if (view.GHubRecordViewModel is GHubRecordViewModel viewModel)
-			{
-				viewModel.UserSaved += this.UserSaved;
-				viewModel.UserDeletedRecord += this.UserPressedDelete;
-			}
-			GHubDataDisplay.Content = view;
-		}
-
+        
         [NotifyPropertyChangedInvocator]
 		private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{

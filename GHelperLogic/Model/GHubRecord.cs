@@ -90,8 +90,7 @@ namespace GHelperLogic.Model
 
 		public override bool Equals(object? obj)
 		{
-			
-			if (obj is not GHubRecord)
+            if (obj is not GHubRecord)
 			{
 				return false;
 			}
