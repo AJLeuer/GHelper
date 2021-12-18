@@ -1,5 +1,4 @@
 using Microsoft.UI.Xaml;
-using Windows.ApplicationModel;
 using GHelper.Service;
 using GHelper.View;
 using GHelperLogic.Utility;
@@ -32,7 +31,7 @@ namespace GHelper
 		/// will be used such as when the application is launched to open a specific file.
 		/// </summary>
 		/// <param name="args">Details about the launch request and process.</param>
-		protected override async void OnLaunched(LaunchActivatedEventArgs args)
+		protected override void OnLaunched(LaunchActivatedEventArgs args)
 		{
 			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};

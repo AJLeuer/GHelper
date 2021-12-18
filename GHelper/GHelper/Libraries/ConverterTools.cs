@@ -17,7 +17,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Converters
 		/// </summary>
 		/// <param name="parameter">Parameter to cast to a boolean</param>
 		/// <returns>Bool value or false if cast failed</returns>
-		internal static bool TryParseBool(object parameter)
+		internal static bool TryParseBool(object? parameter)
 		{
 			var parsed = false;
 			if (parameter != null)

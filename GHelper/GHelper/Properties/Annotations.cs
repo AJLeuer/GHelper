@@ -20,16 +20,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-using System;
-// ReSharper disable InheritdocConsiderUsage
-
-#pragma warning disable 1591
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable IntroduceOptionalParameters.Global
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable InconsistentNaming
+// ReSharper disable InheritdocConsiderUsage
+// ReSharper disable All
+#region No Resharper
+
+#pragma warning disable 1591
+#pragma warning disable 8618
+#pragma warning disable 1998
+
+using System;
 
 namespace GHelper.Annotations
 {
@@ -1234,3 +1239,5 @@ namespace GHelper.Annotations
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class RazorWriteMethodParameterAttribute : Attribute { }
 }
+
+#endregion

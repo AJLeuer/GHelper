@@ -23,6 +23,7 @@
         <StackPanel Grid.Row="1" Grid.Column="1" utility:Margin.Left="32" Orientation="Vertical">
             <TextBlock Text="Poster" utility:Margin.Bottom="16" Foreground="Gray"/>
             <Image Source="{x:Bind Application.Poster, Mode=OneWay}" Width="280" utility:Margin.Bottom="16"></Image>
+            <!-- ReSharper disable once UnusedMember.Local -->
             <Button x:Name="SetCustomPosterImageButton" Width="192" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Click="SetNewCustomPosterImage">
                 <StackPanel Orientation="Vertical">
                     <SymbolIcon Symbol="BrowsePhotos"/>
