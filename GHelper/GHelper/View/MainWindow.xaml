@@ -52,7 +52,7 @@
                           x:Name="TreeView"
                           ItemsSource="{x:Bind Path=Applications, Mode=OneWay}"  
                           ItemTemplateSelector="{StaticResource GHubItemTemplateSelector}"
-                          SelectionChanged="HandleSelectedGHubRecordChanged">
+                          ItemInvoked="HandleGHubRecordSelected">
                 </TreeView>
             </Grid>
         </SplitView.Pane>

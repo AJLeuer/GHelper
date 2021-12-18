@@ -11,7 +11,7 @@ namespace GHelper
 	/// </summary>
 	public partial class App : Application
 	{
-		private readonly Reference<MainWindow> window = new Reference<MainWindow>();
+		private readonly Reference<MainWindow> window = new ();
 		private readonly GHubSettingsFileService gHubSettingsFileService;
 		
 		/// <summary>
@@ -23,8 +23,7 @@ namespace GHelper
 			LogManager.Start();
 			LogManager.Log("Initializing GHelper application.");
 			this.InitializeComponent();
-			this.Suspending += OnSuspending;
-			this.UnhandledException += HandleExceptions;
+            this.UnhandledException += HandleExceptions;
 			gHubSettingsFileService = new GHubSettingsFileService(window);
 		}
 
@@ -38,6 +37,8 @@ namespace GHelper
 			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};
 			window.Referent.Activate();
+            this.window.Referent.Closed += HandleImminentExit;
+            
 			gHubSettingsFileService.Start();
 
 			if (window.Referent.Content is FrameworkElement frameworkElement)
@@ -52,26 +53,20 @@ namespace GHelper
 		/// </summary>
         private async void FinishStartUp(object sender, RoutedEventArgs routedEvent)
         {
-			await window.Referent.DisplayGHubRunningDialogIfNeeded();
-			await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
-		}
-
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+            if (window.Referent is not null)
+            {
+                await window.Referent.DisplayGHubRunningDialogIfNeeded();
+                await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
+            }
+        }
+        
+        private void HandleImminentExit(object sender, WindowEventArgs windowEvent)
 		{
-			// Save application state and stop any background activity
-			LogManager.Log("Suspending GHelper application.");
+            LogManager.Log("Shutting down GHelper application.");
 			LogManager.Stop();
 		}
-		
-		
-		private void HandleExceptions(object sender, UnhandledExceptionEventArgs exceptionInfo)
+
+        private void HandleExceptions(object sender, UnhandledExceptionEventArgs exceptionInfo)
 		{
 			exceptionInfo.Handled = true;
 			LogManager.Log($"Exception caught in {this.GetType()}");

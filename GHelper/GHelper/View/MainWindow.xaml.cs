@@ -13,7 +13,7 @@ using GHelper.ViewModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace GHelper.View
+namespace GHelper.View 
 {
 	public sealed partial class MainWindow : Window, INotifyPropertyChanged
 	{
@@ -63,7 +63,7 @@ namespace GHelper.View
 			await fileNotFoundDialog.DisplayIfNeeded();
 		}
 
-		private async void HandleSelectedGHubRecordChanged(TreeView treeView, TreeViewSelectionChangedEventArgs info)
+		private async void HandleGHubRecordSelected(TreeView treeView, TreeViewItemInvokedEventArgs info)
 		{
 			if (SelectionProgrammaticResetLoops > 0)
 			{
@@ -73,11 +73,11 @@ namespace GHelper.View
 			
 			if (treeView.SelectedItem is GHubRecordViewModel gHubRecord)
 			{
-				await HandleSelectedGHubRecordChanged(gHubRecord);
+				await HandleGHubRecordSelected(gHubRecord);
 			}
 		}
 
-		private async Task HandleSelectedGHubRecordChanged(GHubRecordViewModel gHubRecord)
+		private async Task HandleGHubRecordSelected(GHubRecordViewModel gHubRecord)
 		{
 			if (DisplayedRecord?.State == State.Modified)
 			{
@@ -110,9 +110,8 @@ namespace GHelper.View
             ContentDialog deleteFileDialog = new UnsavedChangeDialog { XamlRoot = MainView.XamlRoot };
             return await deleteFileDialog.EnqueueAndShowIfAsync();
 		}
-		
-		
-		private async void DisplayDeleteDialog(GHubRecordViewModel recordViewModel)
+
+        private async void DisplayDeleteDialog(GHubRecordViewModel recordViewModel)
 		{
 			string? typeName = recordViewModel.GHubRecord?.GetType().Name.ConvertPascalCaseToSentence().ToLower();
 			var confirmDialog = new WarnUserDialog
@@ -151,12 +150,11 @@ namespace GHelper.View
 			}
 			GHubDataDisplay.Content = view;
 		}
-		
 
-		[NotifyPropertyChangedInvocator]
+        [NotifyPropertyChangedInvocator]
 		private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
-	}
+    }
 }
