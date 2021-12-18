@@ -46,20 +46,8 @@ namespace GHelper.View
 			this.UserPressedDelete += DisplayDeleteDialog;
             this.ExtendsContentIntoTitleBar = true;
         }
-
-		public async Task DisplayGHubRunningDialogIfNeeded()
-		{
-			GHubRunningDialog gHubRunningDialog = new () { XamlRoot = MainView.XamlRoot };
-			await gHubRunningDialog.DisplayIfNeeded();
-		}
-
-        public async Task DisplayGHubSettingsFileNotFoundDialogIfNeeded()
-		{
-			GHubSettingsFileNotFoundDialog fileNotFoundDialog = new (GHubSettingsFileService) { XamlRoot = MainView.XamlRoot };
-			await fileNotFoundDialog.DisplayIfNeeded();
-		}
-
-		private async void HandleGHubRecordSelected(TreeView treeView, TreeViewItemInvokedEventArgs info)
+        
+        private async void HandleGHubRecordSelected(TreeView treeView, TreeViewItemInvokedEventArgs info)
         {
             LastSelectedNode = treeView.SelectedNode;
             if (info.InvokedItem is GHubRecordViewModel gHubRecord)
@@ -98,15 +86,40 @@ namespace GHelper.View
 		}
         private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord)
         {
-            DisplayedRecord = gHubRecord;
-            var view = RecordView.CreateViewForViewModel(gHubRecord);
-            
-            if (view.GHubRecordViewModel is GHubRecordViewModel viewModel)
+            RemoveOldDisplayedRecord();
+            SetNewDisplayedRecord(gHubRecord);
+        }
+
+        private void RemoveOldDisplayedRecord()
+        {
+            if (DisplayedRecord != null)
             {
-                viewModel.UserSaved += this.UserSaved;
-                viewModel.UserDeletedRecord += this.UserPressedDelete;
+                DisplayedRecord.UserSaved -= this.UserSaved;
+                DisplayedRecord.UserDeletedRecord -= this.UserPressedDelete;
             }
+        }
+
+        private void SetNewDisplayedRecord(GHubRecordViewModel gHubRecord)
+        {
+            DisplayedRecord = gHubRecord;
+            
+            DisplayedRecord.UserSaved += this.UserSaved;
+            DisplayedRecord.UserDeletedRecord += this.UserPressedDelete;
+            
+            RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
             GHubDataDisplay.Content = view;
+        }
+
+        public async Task DisplayGHubRunningDialogIfNeeded()
+        {
+            GHubRunningDialog gHubRunningDialog = new () { XamlRoot = MainView.XamlRoot };
+            await gHubRunningDialog.DisplayIfNeeded();
+        }
+
+        public async Task DisplayGHubSettingsFileNotFoundDialogIfNeeded()
+        {
+            GHubSettingsFileNotFoundDialog fileNotFoundDialog = new (GHubSettingsFileService) { XamlRoot = MainView.XamlRoot };
+            await fileNotFoundDialog.DisplayIfNeeded();
         }
 
 		private async Task<ContentDialogResult> DisplaySaveDialog()
