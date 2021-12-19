@@ -14,7 +14,6 @@
     Title="{x:Bind view:MainWindow.AppName, Mode=OneTime}">
 
     <SplitView x:Name="MainView" 
-               PaneBackground="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
                IsPaneOpen="True" 
                OpenPaneLength="384" 
                CompactPaneLength="256" 
@@ -47,7 +46,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="G Hub Games" Margin="24,8,0,8" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
+                <TextBlock Grid.Row="0" Text="G Hub Games" Margin="24,40,0,16" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                 <TreeView Grid.Row="1"
                           x:Name="TreeView"
                           ItemsSource="{x:Bind Path=Applications, Mode=OneWay}"  

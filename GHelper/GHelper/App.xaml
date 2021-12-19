@@ -54,7 +54,7 @@
             </Style>
             <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
             <Style x:Key="StandardButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
-                <Setter Property="Background" Value="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"></Setter>
+                <Setter Property="Background" Value="{ThemeResource AcrylicInAppFillColorDefaultBrush}"></Setter>
             </Style>
             <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"/>
         </ResourceDictionary>
