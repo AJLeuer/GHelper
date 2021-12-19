@@ -52,7 +52,10 @@
                 <Setter Property="Spacing" Value="24"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
             </Style>
-            <Style x:Key="StandardButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}" />
+            <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
+            <Style x:Key="StandardButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+                <Setter Property="Background" Value="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"></Setter>
+            </Style>
             <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"/>
         </ResourceDictionary>
     </Application.Resources>
