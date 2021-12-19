@@ -13,7 +13,7 @@ namespace GHelperLogic.IO
     {
         private static readonly string PrimaryTableName = Properties.Resources.GHubConfigDBPrimaryTableName;
 
-        private static readonly IFilePath GBHubSettingsDBFilePath =
+        private static readonly IFilePath GHubSettingsDBFilePath =
             #if RELEASE || DEBUGRELEASE
                 Properties.Configuration.DefaultGHubSettingsDBFilePath;
             #elif DEBUG
@@ -22,7 +22,7 @@ namespace GHelperLogic.IO
         
         public static State CheckDatabaseFileAvailability()
         {
-            if (File.Exists(GBHubSettingsDBFilePath.ToString()))
+            if (File.Exists(GHubSettingsDBFilePath.ToString()))
             {
                 return State.Available;
             }
@@ -109,7 +109,7 @@ namespace GHelperLogic.IO
             {
                 if (GHubSettingsDatabase is null)
                 {
-                    GHubSettingsDatabase = new SQLiteDatabase (GBHubSettingsDBFilePath.ToString(), SQLiteOpenOptions.SQLITE_OPEN_READWRITE);
+                    GHubSettingsDatabase = new SQLiteDatabase (GHubSettingsDBFilePath.ToString(), SQLiteOpenOptions.SQLITE_OPEN_READWRITE);
                 }
             }
             catch (Exception)

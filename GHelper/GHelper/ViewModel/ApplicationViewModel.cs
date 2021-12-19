@@ -17,7 +17,7 @@ namespace GHelper.ViewModel
 {
 	public class ApplicationViewModel : GHubRecordViewModel
 	{
-		public static WindowsImage DefaultPosterImage { get ; } = new ();
+        private static WindowsImage DefaultPosterImage { get ; } = new ();
 
 		private ObservableCollection<ProfileViewModel>? profiles;
 
@@ -27,7 +27,7 @@ namespace GHelper.ViewModel
 			{
 				if (profiles == null)
 				{
-					createProfileViewModelsFromApplicationProfiles();
+					CreateProfileViewModelsFromApplicationProfiles();
 				}
 				return profiles!;
 			}
@@ -114,7 +114,7 @@ namespace GHelper.ViewModel
 				}
 				else
 				{
-					return String.Empty;
+					return string.Empty;
 				}
 			}
 		}
@@ -180,7 +180,7 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		private void createProfileViewModelsFromApplicationProfiles()
+		private void CreateProfileViewModelsFromApplicationProfiles()
 		{
 			profiles = new ObservableCollection<ProfileViewModel>();
 

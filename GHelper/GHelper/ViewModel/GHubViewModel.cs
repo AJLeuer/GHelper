@@ -19,17 +19,19 @@ namespace GHelper.ViewModel
 		}
 
 		public void Delete(GHubRecordViewModel recordViewModel)
-		{
-			if (recordViewModel.GHubRecord is Application application)
-			{
-				DeleteApplication(application);
-			}
-			else if (recordViewModel.GHubRecord is Profile profile)
-			{
-				DeleteProfile(profile);
-			}
-			InitializeApplications();
-		}
+        {
+            switch (recordViewModel.GHubRecord)
+            {
+                case Application application:
+                    DeleteApplication(application);
+                    break;
+                case Profile profile:
+                    DeleteProfile(profile);
+                    break;
+            }
+
+            InitializeApplications();
+        }
 
 		public void SetInitialRecordStates()
 		{

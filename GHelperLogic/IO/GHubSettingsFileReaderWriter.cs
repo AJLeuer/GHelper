@@ -12,7 +12,7 @@ namespace GHelperLogic.IO
 {
 	public class GHubSettingsFileReaderWriter : GHubSettingsIO, IDisposable
 	{
-		private static readonly IFilePath GBHubSettingsFilePath =
+		private static readonly IFilePath GHubSettingsFilePath =
 			#if RELEASE || DEBUGRELEASE
                 Properties.Configuration.DefaultGHubSettingsFilePath;
 			#elif DEBUG
@@ -21,7 +21,7 @@ namespace GHelperLogic.IO
 		
 		public static State CheckFileAvailability()
 		{
-			if (File.Exists(GBHubSettingsFilePath.ToString()))
+			if (File.Exists(GHubSettingsFilePath.ToString()))
 			{
 				return State.Available;
 			}
@@ -140,7 +140,7 @@ namespace GHelperLogic.IO
 
 		protected Stream InitializeDefaultGHubSettingsFileStream()
 		{
-			return new FileStream(GBHubSettingsFilePath.ToString()!,
+			return new FileStream(GHubSettingsFilePath.ToString()!,
 			                      FileMode.Open,
 			                      FileAccess.ReadWrite);
 		}
