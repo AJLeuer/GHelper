@@ -10,10 +10,10 @@ namespace GHelper.View
 	public abstract class ApplicationView : UserControl, RecordView, INotifyPropertyChanged
 	{
 		public static readonly DependencyProperty ApplicationProperty = DependencyProperty.Register(
-		 nameof (Application),
-		 typeof (ApplicationViewModel),
-		 typeof (ApplicationView),
-		 new PropertyMetadata(null));
+		    nameof (Application),
+		    typeof (ApplicationViewModel),
+		    typeof (ApplicationView),
+		    new PropertyMetadata(null));
         
 		public ApplicationViewModel Application
 		{

@@ -13,8 +13,9 @@ namespace GHelperLogic.Properties
 		                                                     Resources.GHubDataDirectoryName));
 
 	    public static IAbsoluteDirectoryPath GHubProgramDataDepotsDirectoryPath { get; } =
-		    GHubProgramDataDirectoryPath.GetChildDirectoryWithName(Resources.GHubProgramDataDepotsSubdirectoryName);
-	    public static IDirectoryPath GHubAppDataDirectoryPath { get; } =
+		    GHubProgramDataDirectoryPath.GetChildDirectoryWithName(Resources.GHubProgramDataDepotsSubdirectoryName); 
+        
+        public static IDirectoryPath GHubAppDataDirectoryPath { get; } =
 		    PathHelpers.ToDirectoryPath(
 		        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
 		        Path.DirectorySeparatorChar + Resources.GHubDataDirectoryName);

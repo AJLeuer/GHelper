@@ -10,12 +10,12 @@
 
     Style="{StaticResource RecordViewStyle}">
     
-    <TextBox x:Name="NameTextBox" Header="Name" Text="{x:Bind Application.DisplayName,                        Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" PreviewKeyUp="HandleNameEdit"/>
-    <TextBox Header="Type"                      Text="{x:Bind Application.Type,                    Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableTextBox}"/>
-    <TextBox Header="Application ID"            Text="{x:Bind Application.Application.ApplicationID,          Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
-    <TextBox Header="Path"                      Text="{x:Bind Application.Application.ApplicationPath,        Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
-    <TextBox Header="Install State"             Text="{x:Bind Application.InstallState,                       Mode=OneWay}"                   Style="{StaticResource ImmutableTextBox}"/>
-    <TextBox Header="Poster Image Path"         Text="{x:Bind Application.PosterPath,                         Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
-    <TextBox Header="Last Run Time"             Text="{x:Bind Application.Application.LastRunTime.ToString(), Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
+    <TextBox x:Name="NameTextBox" Header="Name"              Text="{x:Bind Application.DisplayName,                        Mode=OneWay, FallbackValue=''}" Style="{StaticResource StandardTextBox}" PreviewKeyUp="HandleNameEdit"/>
+    <TextBox                      Header="Type"              Text="{x:Bind Application.Type,                               Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableTextBox}"/>
+    <TextBox                      Header="Application ID"    Text="{x:Bind Application.Application.ApplicationID,          Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
+    <TextBox                      Header="Path"              Text="{x:Bind Application.Application.ApplicationPath,        Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
+    <TextBox                      Header="Install State"     Text="{x:Bind Application.InstallState,                       Mode=OneWay}"                   Style="{StaticResource ImmutableTextBox}"/>
+    <TextBox                      Header="Poster Image Path" Text="{x:Bind Application.PosterPath,                         Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
+    <TextBox                      Header="Last Run Time"     Text="{x:Bind Application.Application.LastRunTime.ToString(), Mode=OneWay, FallbackValue=''}" Style="{StaticResource ImmutableMonoSpacedTextBox}"/>
     
 </StackPanel>
