@@ -44,7 +44,7 @@ namespace GHelper.Service
 				}
 				catch (Exception exception)
 				{
-					LogManager.Log("Unabled to save custom poster image to ProgramData");
+					LogManager.Log("Unable to save custom poster image to ProgramData");
 					LogManager.Log(exception);
 					throw new IOException();
 				}

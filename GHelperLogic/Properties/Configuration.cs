@@ -40,7 +40,7 @@ namespace GHelperLogic.Properties
 	    
 	    public static IFilePath LogFilePath { get ; } =
 		    PathHelpers.ToAbsoluteFilePath(
-			    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+			    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
 			    Path.DirectorySeparatorChar + Resources.GHelperAppDataDirectoryName + 
 			    Path.DirectorySeparatorChar + Resources.GHelperLogFileName);
 
