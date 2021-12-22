@@ -38,6 +38,9 @@
     <Content Include="..\..\ReadMe.md">
       <Link>ReadMe.md</Link>
     </Content>
+    <Content Include="..\..\User ReadMe.md">
+      <Link>User ReadMe.md</Link>
+    </Content>
     <Content Include="FilePermissionsUtility.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

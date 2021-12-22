@@ -1,19 +1,21 @@
-#### Overview
+### Overview
 GHelper is a utility that supplements Logitech's G Hub application, performing application profile-related tasks that currently remain unimplemented or unsupported in G Hub itself.
 
 This app's creation was the result of its developer's frustration with missing functionality in G Hub, including several obvious features that a typical user would naturally expect to be present.
 
 It is this developer's hope that Logitech will eventually implement these features in G Hub itself, thus ending GHelper's reason for existence.
 
+You can watch a demo of GHelper's features [here](https://www.youtube.com/watch?v=oRvMh4jrx54).
+
 _Disclaimer: the developer of this software is not affiliated with Logitech International S.A._
 
-#### Downloading & Updating GHelper
-The latest release can always be found [here](https://github.com/AJLeuer/GHelper/releases).
+### Downloading & Updating GHelper
+The latest release can always be found [on GitHub](https://github.com/AJLeuer/GHelper/releases).
 
-#### Installing GHelper
+### Installing GHelper
 To install GHelper, launch the `GHelper.msixbundle` installer.
 
-#### Using GHelper
+### Using GHelper
 In the current release, GHelper offers the following functionality:
 
 * Removing an application (including Logitech-provided applications):
@@ -40,7 +42,7 @@ In the current release, GHelper offers the following functionality:
   * This feature is included in GHelper purely for convenience, as renaming profiles is already possible in G Hub itself.
   * To rename an application profile, locate the application in question in GHelper's **G Hub Games** navigation view, on the left-hand side of GHelper's main window.
   * Click the caret to the left of the application's icon to uncollapse the application's child profiles.
-  * Select the profile you wish to set active.
+  * Select the profile you wish to rename.
   * In the profile overview on the right-hand side of the window, locate the **Name** field and type the new desired name for the profile.
   * Click the now-highlighted **Save** button near the top of the window to confirm your change.
 * Setting a custom poster image for an application:
@@ -55,5 +57,5 @@ In the current release, GHelper offers the following functionality:
   * A User Account Control prompt will appear. Click **Yes** on the UAC dialog to confirm.
   * Click the now-highlighted **Save** button near the top of the window to confirm your change.
 
-#### Contributing
-The source code for GHelper can be found [here](https://github.com/AJLeuer/GHelper). Contributions, including pull requests, are always welcome.
+### Contributing
+The source code for GHelper can be found [on GitHub](https://github.com/AJLeuer/GHelper). Contributions, including pull requests, are always welcome.
