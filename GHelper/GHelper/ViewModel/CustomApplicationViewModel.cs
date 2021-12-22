@@ -9,7 +9,7 @@ namespace GHelper.ViewModel
 {
 	public class CustomApplicationViewModel : ApplicationViewModel
 	{
-		public CustomApplicationViewModel(CustomApplication application)
+		protected internal CustomApplicationViewModel(CustomApplication application)
 			: base(application)
 		{
 		}

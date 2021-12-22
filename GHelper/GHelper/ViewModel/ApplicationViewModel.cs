@@ -140,7 +140,7 @@ namespace GHelper.ViewModel
 
 		public override event PropertyChangedEventHandler? PropertyChanged;
 
-		public ApplicationViewModel(Application application)
+        protected ApplicationViewModel(Application application)
 		{
 			this.Application = application;
 			SaveBackup();

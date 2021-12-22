@@ -9,7 +9,7 @@
   <Identity
     Name="GHelper"
     Publisher="CN=Adam J Leuer, O=Adam J Leuer, L=West Chicago, S=Illinois, C=US"
-    Version="1.0.2.0" />
+    Version="1.1.0.0" />
 
   <Properties>
     <DisplayName>GHelper (Package)</DisplayName>

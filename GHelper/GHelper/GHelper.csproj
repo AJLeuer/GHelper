@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\..\Developer Notes.md">
+      <Link>Developer Notes.md</Link>
+    </Content>
     <Content Include="..\..\Licenses\Credits.html">
       <Link>Licenses\Credits.html</Link>
     </Content>
