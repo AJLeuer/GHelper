@@ -56,7 +56,7 @@ namespace GHelper.ViewModel
 			{
 				if ((Application is not null) && (Application.GetType().IsSubclassOf(typeof(Application))))
 				{
-					return Application?.GetType().Name.ConvertPascalCaseToSentence();
+					return Application.GetType().Name.ConvertPascalCaseToSentence();
 				}
 				else
 				{

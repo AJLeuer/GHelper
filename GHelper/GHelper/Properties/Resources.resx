@@ -153,6 +153,9 @@
   <data name="FileExtensionTIFF" xml:space="preserve">
     <value>.tiff</value>
   </data>
+  <data name="FileExtensionTIFFAlternate" xml:space="preserve">
+    <value>.tif</value>
+  </data>
   <data name="FileExtensionTGA" xml:space="preserve">
     <value>.tga</value>
   </data>

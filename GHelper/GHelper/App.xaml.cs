@@ -36,7 +36,7 @@ namespace GHelper
 			LogManager.Log("Launching GHelper application.");
 			window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};
 			window.Referent.Activate();
-            this.window.Referent.Closed += HandleImminentExit;
+            window.Referent.Closed += HandleImminentExit;
             
 			gHubSettingsFileService.Start();
 

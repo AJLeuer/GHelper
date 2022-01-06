@@ -124,6 +124,15 @@ namespace GHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .tif.
+        /// </summary>
+        internal static string FileExtensionTIFFAlternate {
+            get {
+                return ResourceManager.GetString("FileExtensionTIFFAlternate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to settings.json.
         /// </summary>
         internal static string GHubConfigFileName {
