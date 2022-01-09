@@ -69,7 +69,10 @@ namespace GHelper
 		{
 			exceptionInfo.Handled = true;
 			LogManager.Log($"Exception caught in {this.GetType()}");
+			LogManager.Log($"Exception details:");
 			LogManager.Log(exceptionInfo.Exception);
-		}
+            LogManager.Log("Exception stack trace:");
+            LogManager.Log(exceptionInfo.Exception.StackTrace);
+        }
 	}
 }

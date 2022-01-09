@@ -33,8 +33,11 @@ reverse-engineer GHub's behavior)
 * S̶h̶o̶w̶ ̶A̶p̶p̶l̶i̶c̶a̶t̶i̶o̶n̶ ̶t̶y̶p̶e̶ ̶i̶n̶ ̶r̶e̶c̶o̶r̶d̶ ̶v̶i̶e̶w̶
     - Done
 * Delete on delete key
+  * Kinda works, but only when user focus is on the tree view (not sure why)
 * If user sets all profiles to inactive, set the first one back to active (maybe)
 * Allow TIFF files for poster images
 * ~~Change name of `FireSaveEvent()` to `Save()`.~~
 * Change return value of `SavePosterImage()` to out parameter instead
 * Load a permanent image for the desktop application
+* Clean up switches/if blocks in ApplicationViewModel
+* Configure keyboard shortcuts in a user-accessible config file

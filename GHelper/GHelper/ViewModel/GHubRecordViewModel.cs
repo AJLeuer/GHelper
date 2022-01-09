@@ -76,7 +76,7 @@ namespace GHelper.ViewModel
 			switch (keyboardEventInfo.Key)
 			{
 				case VirtualKey.S:
-					if (KeyboardState.ControlKeyState == CoreVirtualKeyStates.Down)
+					if (KeyboardState.GetModifierKeyState(VirtualKey.Control) == CoreVirtualKeyStates.Down)
 					{
 						Save();
 					}

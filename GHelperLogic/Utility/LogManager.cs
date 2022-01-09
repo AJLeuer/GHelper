@@ -23,7 +23,7 @@ namespace GHelperLogic.Utility
             LogWriter?.Close();
         }
   
-        public static void Log<OutputType>(OutputType output)
+        public static void Log<OutputType>(OutputType? output)
         {
 	        LogWriter?.Write($"{Clock?.GetCurrentInstant().ToString()} ");
             LogWriter?.WriteLine(output);
