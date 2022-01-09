@@ -1,15 +1,15 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using GHelper.Annotations;
+using GHelper.Properties;
 using GHelper.Service;
 using GHelper.Utility;
 using GHelperLogic.Model;
 using Microsoft.UI.Xaml.Media;
-using Image = SixLabors.ImageSharp.Image;
+using SixLabors.ImageSharp;
 using WindowsImage = Microsoft.UI.Xaml.Controls.Image;
 
 
@@ -60,7 +60,7 @@ namespace GHelper.ViewModel
 				}
 				else
 				{
-					return Properties.Resources.StandardApplicationTypeName;
+					return Resources.StandardApplicationTypeName;
 				}
 			}
 		}
@@ -125,15 +125,15 @@ namespace GHelper.ViewModel
 			{
 				if (Application is DesktopApplication)
 				{
-					return nameof(GHelper.ViewModel.InstallState.Installed);
+					return nameof(ViewModel.InstallState.Installed);
 				}
 				else if (Application?.IsInstalled == null || (Application.IsInstalled == false))
 				{
-					return nameof(GHelper.ViewModel.InstallState.NotInstalled).ConvertPascalCaseToSentence();
+					return nameof(ViewModel.InstallState.NotInstalled).ConvertPascalCaseToSentence();
 				}
 				else 
 				{
-					return nameof(GHelper.ViewModel.InstallState.Installed);
+					return nameof(ViewModel.InstallState.Installed);
 				}
 			}
 		}
@@ -145,8 +145,23 @@ namespace GHelper.ViewModel
 			this.Application = application;
 			SaveBackup();
 		}
+        
+        public override void DiscardUserChanges(GHubRecordViewModel? origin = null)
+        {
+            origin ??= this;
+            base.DiscardUserChanges(origin);
+            
+            //just in case any of the other profiles were changed as a side effect, we'll revert all of them
+            foreach (ProfileViewModel profile in Profiles)
+            {
+                if (profile != origin)
+                {
+                    profile.RestoreInitialState();
+                }
+            }
+        }
 		
-		public override void RestoreInitialState()
+        protected internal override void RestoreInitialState()
 		{
 			RestorePosterIfNeeded();
 			base.RestoreInitialState();
@@ -190,6 +205,7 @@ namespace GHelper.ViewModel
 				{
 					var profileViewModel = new ProfileViewModel(profile);
 					profileViewModel.PropertyChanged += HandleProfilePropertyChanged;
+                    profileViewModel.UserDiscardedChanges += DiscardUserChanges;
 					profiles.Add(profileViewModel);
 				}
 			}
@@ -224,9 +240,7 @@ namespace GHelper.ViewModel
 					}
 
 					profile.ActiveForApplication = false;
-					// Have to set their backup now, or else the user would get a "Do you want to save?" message that would appear to them to be erroneous
-					profile.SaveBackup();
-				}
+                }
 			}
 		}
 		

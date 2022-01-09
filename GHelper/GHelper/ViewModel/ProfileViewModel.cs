@@ -73,8 +73,8 @@ namespace GHelper.ViewModel
 			this.Profile = profile;
 			SaveBackup();
 		}
-		
-		public override void RestoreInitialState()
+
+        protected internal override void RestoreInitialState()
 		{
 			base.RestoreInitialState();
 			OnPropertyChanged(nameof(Profile));

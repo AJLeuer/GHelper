@@ -39,8 +39,9 @@ namespace GHelper.ViewModel
 			}
 		}
 		
-		public event UserSavedEvent?         UserSaved;
-		public event UserDeletedRecordEvent? UserDeletedRecord;
+		public event UserSavedEvent?            UserSaved;
+		public event UserDeletedRecordEvent?    UserDeletedRecord;
+		public event UserDiscardedChangesEvent? UserDiscardedChanges;
 		
 		public abstract event PropertyChangedEventHandler? PropertyChanged;
 
@@ -49,7 +50,14 @@ namespace GHelper.ViewModel
 			GHubRecordBackup = GHubRecord?.Clone();
 		}
 
-		public virtual void RestoreInitialState()
+        public virtual void DiscardUserChanges(GHubRecordViewModel? origin = null)
+        {
+            origin ??= this;
+            UserDiscardedChanges?.Invoke(origin);
+            RestoreInitialState();
+        }
+
+		protected internal virtual void RestoreInitialState()
 		{
 			if ((GHubRecord != null) && (GHubRecordBackup != null))
 			{

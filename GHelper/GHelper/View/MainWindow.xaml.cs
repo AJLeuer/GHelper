@@ -70,7 +70,7 @@ namespace GHelper.View
 						break;
 					// user doesn't want to save their changes
 					case ContentDialogResult.Secondary:
-						DisplayedRecord?.RestoreInitialState();
+						DisplayedRecord?.DiscardUserChanges();
 						break;
 					// user doesn't actually want to change the viewed record
                     case ContentDialogResult.None:
@@ -86,6 +86,7 @@ namespace GHelper.View
 				
 			ChangeDisplayedRecord(gHubRecord);
 		}
+        
         private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord)
         {
             RemoveOldDisplayedRecord();
