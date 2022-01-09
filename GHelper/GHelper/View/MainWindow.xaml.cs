@@ -35,10 +35,10 @@ namespace GHelper.View
 		private TreeViewNode?            LastSelectedNode        { get;  set; }
 		public  GHubSettingsFileService? GHubSettingsFileService { get ; set ; }
 
-        public event  PropertyChangedEventHandler? PropertyChanged;
-        public event  UserSavedEvent?              UserSaved;
-		private event UserDeletedRecordEvent?      UserPressedDelete;
-		public event  UserDeletedRecordEvent?      UserConfirmedDelete;
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public event UserSavedEvent?              UserSaved;
+        public event UserDeletedRecordEvent?      UserPressedDelete;
+		public event UserDeletedRecordEvent?      UserConfirmedDelete;
 
 		public MainWindow()
 		{
@@ -66,7 +66,7 @@ namespace GHelper.View
 				{
 					// user elected to save
 					case ContentDialogResult.Primary:
-						UserSaved?.Invoke();
+						DisplayedRecord.FireSaveEvent();
 						break;
 					// user doesn't want to save their changes
 					case ContentDialogResult.Secondary:

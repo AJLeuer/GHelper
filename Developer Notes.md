@@ -34,3 +34,6 @@ reverse-engineer GHub's behavior)
     - Done
 * Delete on delete key
 * If user sets all profiles to inactive, set the first one back to active (maybe)
+* Allow TIFF files for poster images
+* Change name of `FireSaveEvent()` to `Save()`
+* Change return value of `SavePosterImage()` to out parameter instead
