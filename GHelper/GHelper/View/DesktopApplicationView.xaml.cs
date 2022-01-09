@@ -7,8 +7,8 @@ namespace GHelper.View
         public DesktopApplicationView()
         {
             this.InitializeComponent();
-            RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.FireSaveEvent(); };
-            RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.FireDeletedEvent(); };
+            RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.Save(); };
+            RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.Delete(); };
             
             RecordViewControls.DeleteButton.Visibility = Visibility.Collapsed;
         }

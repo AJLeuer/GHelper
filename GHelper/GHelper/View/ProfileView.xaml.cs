@@ -38,8 +38,8 @@ namespace GHelper.View
 		public ProfileView( )
         {
             InitializeComponent();
-            RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.FireSaveEvent(); };
-	        RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.FireDeletedEvent(); };
+            RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.Save(); };
+	        RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.Delete(); };
         }
 
 		void RecordView.SendRecordChangedNotification()

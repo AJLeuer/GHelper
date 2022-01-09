@@ -230,11 +230,11 @@ namespace GHelper.ViewModel
 			}
 		}
 		
-		public override void FireDeletedEvent()
+		public override void Delete()
 		{
 			if (this.Application is not DesktopApplication)
 			{
-				base.FireDeletedEvent();				
+				base.Delete();				
 			}
 		}
 

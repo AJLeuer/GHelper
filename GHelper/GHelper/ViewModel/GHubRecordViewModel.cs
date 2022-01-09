@@ -61,12 +61,12 @@ namespace GHelper.ViewModel
 			}
 		}
 
-		public void FireSaveEvent()
+		public void Save()
 		{
 			UserSaved?.Invoke();
 		}
 		
-		public virtual void FireDeletedEvent()
+		public virtual void Delete()
 		{
 			UserDeletedRecord?.Invoke(this);
 		}
@@ -78,12 +78,12 @@ namespace GHelper.ViewModel
 				case VirtualKey.S:
 					if (KeyboardState.ControlKeyState == CoreVirtualKeyStates.Down)
 					{
-						FireSaveEvent();
+						Save();
 					}
 					break;
 				
 				case VirtualKey.Delete or VirtualKey.Back:
-					FireDeletedEvent();
+					Delete();
 					break;
 			}
 		}

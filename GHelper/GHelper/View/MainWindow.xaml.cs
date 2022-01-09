@@ -66,7 +66,7 @@ namespace GHelper.View
 				{
 					// user elected to save
 					case ContentDialogResult.Primary:
-						DisplayedRecord.FireSaveEvent();
+						DisplayedRecord.Save();
 						break;
 					// user doesn't want to save their changes
 					case ContentDialogResult.Secondary:
