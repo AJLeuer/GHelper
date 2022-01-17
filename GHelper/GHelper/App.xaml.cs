@@ -23,10 +23,10 @@ namespace GHelper
 			LogManager.Log("Initializing GHelper application.");
 			this.InitializeComponent();
             this.UnhandledException += HandleExceptions;
-			gHubSettingsFileService = new GHubSettingsFileService(window);
+            gHubSettingsFileService = new GHubSettingsFileService(window);
 		}
 
-		/// <summary>
+        /// <summary>
 		/// Invoked when the application is launched normally by the end user.  Other entry points
 		/// will be used such as when the application is launched to open a specific file.
 		/// </summary>
@@ -34,19 +34,19 @@ namespace GHelper
 		protected override void OnLaunched(LaunchActivatedEventArgs args)
 		{
 			LogManager.Log("Launching GHelper application.");
-			window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};
+            window.Referent = new MainWindow { GHubSettingsFileService = gHubSettingsFileService};
 			window.Referent.Activate();
             window.Referent.Closed += HandleImminentExit;
             
 			gHubSettingsFileService.Start();
 
-			if (window.Referent.Content is FrameworkElement frameworkElement)
+			if (window.Referent.Content is FrameworkElement windowContent)
             {
-				frameworkElement.Loaded += FinishStartUp;
+				windowContent.Loaded += FinishStartUp;
             }				
 		}
 
-		/// <summary>
+        /// <summary>
 		/// Performs any remaining launch tasks that require the main window to be loaded, and therefore couldn't be performed 
 		/// by OnLaunched()
 		/// </summary>
@@ -58,7 +58,7 @@ namespace GHelper
                 await window.Referent.DisplayGHubSettingsFileNotFoundDialogIfNeeded();
             }
         }
-        
+
         private void HandleImminentExit(object sender, WindowEventArgs windowEvent)
 		{
             LogManager.Log("Shutting down GHelper application.");
@@ -74,5 +74,5 @@ namespace GHelper
             LogManager.Log("Exception stack trace:");
             LogManager.Log(exceptionInfo.Exception.StackTrace);
         }
-	}
+    }
 }

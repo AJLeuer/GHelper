@@ -45,6 +45,7 @@ namespace GHelper.View
 			this.InitializeComponent();
 			this.UserPressedDelete += DisplayDeleteDialog;
             this.ExtendsContentIntoTitleBar = true;
+            this.SetTitleBar(this.TitleBar);
         }
         
         private async void HandleGHubRecordSelected(TreeView treeView, TreeViewItemInvokedEventArgs info)

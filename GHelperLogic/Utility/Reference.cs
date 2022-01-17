@@ -7,7 +7,8 @@ namespace GHelperLogic.Utility
 		public T? Referent { get; set; }
 		
 		public Reference() {}
-		public Reference(T referent)
+		
+        public Reference(T referent)
 		{
 			Referent = referent!;
 		}

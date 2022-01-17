@@ -58,6 +58,13 @@
                 <Setter Property="Background" Value="{ThemeResource AcrylicInAppFillColorDefaultBrush}"></Setter>
             </Style>
             <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"/>
+            
+            <!-- This is stupid but it's currently the only way I know of to change the color of the title bar to properly match the background ⬇ -->
+            <!-- ReSharper disable Xaml.ConstructorWarning -->
+            <SolidColorBrush x:Key="WindowCaptionBackground" Color="{Binding Color, Source={ThemeResource ApplicationPageBackgroundThemeBrush}}"/>
+            <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ApplicationPageBackgroundThemeBrush}}"/>
+            <!-- ReSharper restore Xaml.ConstructorWarning -->
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
