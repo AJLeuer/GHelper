@@ -145,6 +145,26 @@ namespace GHelper.ViewModel
 			this.Application = application;
 			SaveBackup();
 		}
+
+        private static ApplicationViewModel CreateApplicationViewModelForApplicationModel(Application application)
+        {
+            ApplicationViewModel applicationViewModel;
+			
+            switch (application)
+            {
+                case DesktopApplication desktopApplication:
+                    applicationViewModel = new DesktopApplicationViewModel(desktopApplication);
+                    break;
+                case CustomApplication customApplication:
+                    applicationViewModel = new CustomApplicationViewModel(customApplication);
+                    break;
+                default:
+                    applicationViewModel = new ApplicationViewModel(application);
+                    break;
+            }
+
+            return applicationViewModel;
+        }
         
         public override void DiscardUserChanges(GHubRecordViewModel? origin = null)
         {
@@ -243,16 +263,8 @@ namespace GHelper.ViewModel
                 }
 			}
 		}
-		
-		public override void Delete()
-		{
-			if (this.Application is not DesktopApplication)
-			{
-				base.Delete();				
-			}
-		}
 
-		[NotifyPropertyChangedInvocator]
+        [NotifyPropertyChangedInvocator]
 		protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -272,24 +284,7 @@ namespace GHelper.ViewModel
 			}
 			return applicationViewModels;
 		}
-
-		private static ApplicationViewModel CreateApplicationViewModelForApplicationModel(Application application)
-		{
-			ApplicationViewModel applicationViewModel;
-			
-			switch (application)
-			{
-				case CustomApplication customApplication:
-					applicationViewModel = new CustomApplicationViewModel(customApplication);
-					break;
-				default:
-					applicationViewModel = new ApplicationViewModel(application);
-					break;
-			}
-
-			return applicationViewModel;
-		}
-	}
+    }
 
 	public enum InstallState 
 	{
