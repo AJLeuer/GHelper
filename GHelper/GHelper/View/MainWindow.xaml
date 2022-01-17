@@ -67,7 +67,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
-                        <TextBlock Grid.Row="0" Text="G Hub Games" Margin="24,40,0,16" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        <TextBlock Grid.Row="0" Text="G Hub Games" Margin="24,0,0,16" Style="{StaticResource BodyStrongTextBlockStyle}" />
                         <TreeView Grid.Row="1"
                                   x:Name="TreeView"
                                   ItemsSource="{x:Bind Path=Applications, Mode=OneWay}"
