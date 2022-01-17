@@ -58,35 +58,39 @@ namespace GHelper.View
 		}
 
 		private async Task HandleGHubRecordSelected(GHubRecordViewModel gHubRecord)
-		{
-			if (DisplayedRecord?.State == State.Modified)
-			{
-				ContentDialogResult dialogResult = await DisplaySaveDialog();
+        {
+            await CheckForUserChanges();
+            ChangeDisplayedRecord(gHubRecord);
+		}
 
-				switch (dialogResult)
-				{
-					// user elected to save
-					case ContentDialogResult.Primary:
-						DisplayedRecord.Save();
-						break;
-					// user doesn't want to save their changes
-					case ContentDialogResult.Secondary:
-						DisplayedRecord?.DiscardUserChanges();
-						break;
-					// user doesn't actually want to change the viewed record
+        private async Task CheckForUserChanges()
+        {
+            if (DisplayedRecord?.State == State.Modified)
+            {
+                ContentDialogResult dialogResult = await DisplaySaveDialog();
+
+                switch (dialogResult)
+                {
+                    // user elected to save
+                    case ContentDialogResult.Primary:
+                        DisplayedRecord.Save();
+                        break;
+                    // user doesn't want to save their changes
+                    case ContentDialogResult.Secondary:
+                        DisplayedRecord?.DiscardUserChanges();
+                        break;
+                    // user doesn't actually want to change the viewed record
                     case ContentDialogResult.None:
                         if (LastSelectedNode is not null)
                         {
                             TreeView.SelectedNode = LastSelectedNode;
                         }
-						return;
+                        return;
                     default:
                         return;
                 }
-			}
-				
-			ChangeDisplayedRecord(gHubRecord);
-		}
+            }
+        }
         
         private void ChangeDisplayedRecord(GHubRecordViewModel gHubRecord)
         {
