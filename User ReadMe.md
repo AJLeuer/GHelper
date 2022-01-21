@@ -13,7 +13,7 @@ _Disclaimer: the developer of this software is not affiliated with Logitech Inte
 The latest release can always be found [on GitHub](https://github.com/AJLeuer/GHelper/releases).
 
 ### Installing GHelper
-To install GHelper, launch the `GHelper.msixbundle` installer.
+To install GHelper, launch the `GHelper... .msixbundle` installer. If you run into issues, you may need to run the installers found in the `\Dependencies\x64\` subfolder.
 
 ### Using GHelper
 In the current release, GHelper offers the following functionality:
