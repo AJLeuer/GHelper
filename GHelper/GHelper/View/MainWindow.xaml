@@ -77,7 +77,7 @@
                     </Grid>
                 </SplitView.Pane>
 
-                <Border Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}" CornerRadius="8,0,0,0">
+                <Border Visibility="{x:Bind BorderVisibleForGHubContent, Mode=OneWay}" Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}" CornerRadius="8,0,0,0">
                     <ContentControl x:Name="GHubDataDisplay" Margin="48,48,48,0" />
                 </Border>
 

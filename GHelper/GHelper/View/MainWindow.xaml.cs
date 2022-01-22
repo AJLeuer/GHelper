@@ -116,6 +116,7 @@ namespace GHelper.View
             
             RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
             GHubDataDisplay.Content = view;
+            OnPropertyChanged(nameof(BorderVisibleForGHubContent));
         }
 
         public async Task DisplayGHubRunningDialogIfNeeded()
@@ -167,5 +168,12 @@ namespace GHelper.View
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+
+        #region OtherProperties
+        public Visibility BorderVisibleForGHubContent
+        {
+            get { return GHubDataDisplay.Content is RecordView ? Visibility.Visible : Visibility.Collapsed; }
+        }
+        #endregion
     }
 }
