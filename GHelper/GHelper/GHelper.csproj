@@ -63,4 +63,10 @@
   <ItemGroup>
     <Folder Include="View\Text" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\SaveButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 </Project>

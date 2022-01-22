@@ -100,7 +100,7 @@ namespace GHelper.View
 
         private void RemoveOldDisplayedRecord()
         {
-            if (DisplayedRecord != null)
+            if (DisplayedRecord is not null)
             {
                 DisplayedRecord.UserSaved -= this.UserSaved;
                 DisplayedRecord.UserDeletedRecord -= this.UserPressedDelete;

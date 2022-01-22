@@ -47,6 +47,7 @@
                 <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                 <Setter Property="VerticalAlignment" Value="Top"></Setter>
                 <Setter Property="Margin" Value="0,0,0,48"/>
+                <Setter Property="Background" Value="{StaticResource StandardButtonBackgroundColorBrush}"></Setter>
             </Style>
             <Style TargetType="StackPanel" x:Key="RecordViewStyle">
                 <Setter Property="Orientation" Value="Vertical"></Setter>
@@ -60,12 +61,11 @@
             </Style>
             <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"/>
             
-            <!-- This is stupid but it's currently the only way I know of to change the color of the title bar to properly match the background ⬇ -->
+            <!-- This is stupid but it's currently the only way I know of to change the color of the title bar to properly match the background -->
             <!-- ReSharper disable Xaml.ConstructorWarning -->
             <SolidColorBrush x:Key="WindowCaptionBackground" Color="{Binding Color, Source={ThemeResource ApplicationPageBackgroundThemeBrush}}"/>
             <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled" Color="{Binding Color, Source={ThemeResource ApplicationPageBackgroundThemeBrush}}"/>
             <!-- ReSharper restore Xaml.ConstructorWarning -->
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

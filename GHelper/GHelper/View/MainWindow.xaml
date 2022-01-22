@@ -21,13 +21,13 @@
 
         <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <CommandBar Grid.Row="0" DefaultLabelPosition="Right" HorizontalAlignment="Left">
-                
-            </CommandBar>
+            
+            <StackPanel Grid.Row="0" Margin="20, 8, 0, 24" Orientation="Horizontal">
+                <view:SaveButton Visibility="Visible" Style="{StaticResource StandardButtonStyle}"/>
+            </StackPanel>
 
             <SplitView
                 x:Name="MainView"
@@ -67,7 +67,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
-                        <TextBlock Grid.Row="0" Text="G Hub Games" Margin="24,0,0,16" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        <TextBlock Grid.Row="0" Text="G Hub Games" utility:Margin.Left="20" utility:Margin.Bottom="16" Style="{StaticResource BodyStrongTextBlockStyle}" />
                         <TreeView Grid.Row="1"
                                   x:Name="TreeView"
                                   ItemsSource="{x:Bind Path=Applications, Mode=OneWay}"
