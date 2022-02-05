@@ -12,7 +12,7 @@ namespace GHelper.View
 		public readonly Collection<Action> GHubRecordSavedCallbacks   = new();
 		public readonly Collection<Action> GHubRecordDeletedCallbacks = new();
 
-		public Button DeleteButton
+		public Microsoft.UI.Xaml.Controls.Button DeleteButton
 		{
 			get { return deleteButton; }
 		}
@@ -42,7 +42,7 @@ namespace GHelper.View
         
         public void ResetAppearance()
         {
-	        var defaultButton = new Button { Style = Application.Current.Resources[Properties.Resources.StandardButtonStyle] as Style };
+	        var defaultButton = new Microsoft.UI.Xaml.Controls.Button { Style = Application.Current.Resources[Properties.Resources.StandardButtonStyle] as Style };
 
 	        SaveButton.Background = defaultButton.Background;
 	        SaveButton.Style = defaultButton.Style;

@@ -8,6 +8,7 @@
     xmlns:viewModel="using:GHelper.ViewModel"
     xmlns:selector="using:GHelper.View.Selector"
     xmlns:view="using:GHelper.View"
+    xmlns:button="using:GHelper.View.Button"
     mc:Ignorable="d"
     Title="{x:Bind view:MainWindow.AppName, Mode=OneTime}">
 
@@ -26,8 +27,8 @@
             </Grid.RowDefinitions>
             
             <StackPanel Grid.Row="0" Margin="20, 8, 0, 24" Orientation="Horizontal">
-                <view:SaveButton Visibility="Visible"/>
-                <view:DeleteButton Visibility="Visible"/>
+                <button:SaveButton Visibility="Visible"/>
+                <button:DeleteButton Visibility="Visible"/>
             </StackPanel>
 
             <SplitView

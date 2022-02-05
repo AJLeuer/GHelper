@@ -65,10 +65,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Page Update="View\SaveButton.xaml">
+        <Page Update="View\Button\SaveButton.xaml">
             <Generator>MSBuild:Compile</Generator>
         </Page>
-        <Page Update="View\DeleteButton.xaml">
+        <Page Update="View\Button\DeleteButton.xaml">
             <Generator>MSBuild:Compile</Generator>
         </Page>
     </ItemGroup>
