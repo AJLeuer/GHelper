@@ -1,0 +1,32 @@
+﻿<Button 
+    x:Class="GHelper.View.DeleteButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:controls="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    mc:Ignorable="d"
+    xmlns:utility="using:GHelper.View.Utility"
+
+    Width="128"
+    utility:Margin.Left="8"
+    CornerRadius="3">
+    
+    <controls:Button.Resources>
+        <controls:ResourceDictionary>
+            <controls:ResourceDictionary.ThemeDictionaries>
+                <controls:ResourceDictionary x:Key="Default">
+                    <SolidColorBrush Color="#ac0042" x:Key="ButtonBackground"/>
+                    <SolidColorBrush Color="#ff0061" x:Key="ButtonBackgroundPointerOver"/>
+                    <SolidColorBrush Color="#98003a" x:Key="ButtonBackgroundPressed"/>
+                </controls:ResourceDictionary>
+            </controls:ResourceDictionary.ThemeDictionaries>
+        </controls:ResourceDictionary>
+    </controls:Button.Resources>
+            
+    <controls:StackPanel Orientation="Vertical">
+        <controls:SymbolIcon Symbol="Delete"/>
+        <controls:TextBlock>Delete</controls:TextBlock>
+    </controls:StackPanel>
+            
+</Button>

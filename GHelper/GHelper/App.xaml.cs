@@ -40,7 +40,7 @@ namespace GHelper
             
 			gHubSettingsFileService.Start();
 
-			if (window.Referent.Content is FrameworkElement windowContent)
+			if (window.Referent?.Content is FrameworkElement windowContent)
             {
 				windowContent.Loaded += FinishStartUp;
             }				
@@ -69,10 +69,16 @@ namespace GHelper
 		{
 			exceptionInfo.Handled = true;
 			LogManager.Log($"Exception caught in {this.GetType()}");
+            
 			LogManager.Log($"Exception details:");
 			LogManager.Log(exceptionInfo.Exception);
             LogManager.Log("Exception stack trace:");
-            LogManager.Log(exceptionInfo.Exception.StackTrace);
+            LogManager.Log(exceptionInfo.Exception?.StackTrace);
+            
+            LogManager.Log($"Inner exception details:");
+            LogManager.Log(exceptionInfo.Exception?.InnerException);
+            LogManager.Log("Inner exception stack trace:");
+            LogManager.Log(exceptionInfo.Exception?.InnerException?.StackTrace);
         }
     }
 }

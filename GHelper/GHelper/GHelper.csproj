@@ -1,72 +1,79 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <RootNamespace>GHelper</RootNamespace>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Platforms>x64</Platforms>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
-    <Configurations>Debug;Release;DebugRelease</Configurations>
-    <Nullable>enable</Nullable>
-    <UseWinUI>true</UseWinUI>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
+        <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+        <RootNamespace>GHelper</RootNamespace>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <Platforms>x64</Platforms>
+        <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+        <Configurations>Debug;Release;DebugRelease</Configurations>
+        <Nullable>enable</Nullable>
+        <UseWinUI>true</UseWinUI>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
-    <PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
-    <PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" />
-    <PackageReference Include="NodaTime" Version="3.0.3" />
-    <PackageReference Include="Nzr.ToolBox.Core" Version="1.3.0" />
-    <Manifest Include="$(ApplicationManifest)" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+        <PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
+        <PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" />
+        <PackageReference Include="NodaTime" Version="3.0.3" />
+        <PackageReference Include="Nzr.ToolBox.Core" Version="1.3.0" />
+        <Manifest Include="$(ApplicationManifest)" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\GHelperLogic\GHelperLogic.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\GHelperLogic\GHelperLogic.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\..\Developer Notes.md">
-      <Link>Developer Notes.md</Link>
-    </Content>
-    <Content Include="..\..\Licenses\Credits.html">
-      <Link>Licenses\Credits.html</Link>
-    </Content>
-    <Content Include="..\..\Licenses\Windows Community Toolkit License.md">
-      <Link>Licenses\Windows Community Toolkit License.md</Link>
-    </Content>
-    <Content Include="..\..\ReadMe.md">
-      <Link>ReadMe.md</Link>
-    </Content>
-    <Content Include="..\..\User ReadMe.md">
-      <Link>User ReadMe.md</Link>
-    </Content>
-    <Content Include="FilePermissionsUtility.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\..\Developer Notes.md">
+            <Link>Developer Notes.md</Link>
+        </Content>
+        <Content Include="..\..\Licenses\Credits.html">
+            <Link>Licenses\Credits.html</Link>
+        </Content>
+        <Content Include="..\..\Licenses\Windows Community Toolkit License.md">
+            <Link>Licenses\Windows Community Toolkit License.md</Link>
+        </Content>
+        <Content Include="..\..\ReadMe.md">
+            <Link>ReadMe.md</Link>
+        </Content>
+        <Content Include="..\..\User ReadMe.md">
+            <Link>User ReadMe.md</Link>
+        </Content>
+        <Content Include="FilePermissionsUtility.exe">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="View\Text" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="View\Text" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Page Update="View\SaveButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
+    <ItemGroup>
+        <Page Update="View\SaveButton.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Update="View\DeleteButton.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.Xaml" />
+    </ItemGroup>
 </Project>
