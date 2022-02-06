@@ -75,11 +75,16 @@ namespace GHelper.ViewModel
 		}
 		
 		public virtual void Delete()
-		{
-			UserDeletedRecord?.Invoke(this);
-		}
-		
-		public void HandleKeyboardInput(object sender, KeyRoutedEventArgs keyboardEventInfo)
+        {
+            InvokeDeleteEvent();
+        }
+
+        protected void InvokeDeleteEvent()
+        {
+            UserDeletedRecord?.Invoke(this);
+        }
+
+        public void HandleKeyboardInput(object sender, KeyRoutedEventArgs keyboardEventInfo)
 		{
 			switch (keyboardEventInfo.Key)
 			{

@@ -166,6 +166,12 @@ namespace GHelper.ViewModel
             return applicationViewModel;
         }
         
+        public override void Delete()
+        {
+            //Do nothing, we don't allow deleting the Desktop app, and deleting a standard app would
+            //just result in G Hub reverting the change on start up. Deleting will only work on Custom Applications.
+        }
+        
         public override void DiscardUserChanges(GHubRecordViewModel? origin = null)
         {
             origin ??= this;

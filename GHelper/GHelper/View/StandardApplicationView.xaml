@@ -12,13 +12,12 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="128"/>
             <RowDefinition Height="Auto"/>            
         </Grid.RowDefinitions>
         
-        <components:ApplicationDataView Grid.Row="1" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" NamedChanged="HandleNameChange"/>
+        <components:ApplicationDataView Grid.Row="0" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" NamedChanged="HandleNameChange"/>
         
-        <StackPanel Grid.Row="1" Grid.Column="1" utility:Margin.Left="32" Orientation="Vertical">
+        <StackPanel Grid.Row="0" Grid.Column="1" utility:Margin.Left="32" Orientation="Vertical">
             <TextBlock Text="Poster" utility:Margin.Bottom="16" Foreground="Gray"/>
             <Image Source="{x:Bind Application.Poster, Mode=OneWay}" Width="280" utility:Margin.Bottom="16"></Image>
             <!-- ReSharper disable once UnusedMember.Local -->

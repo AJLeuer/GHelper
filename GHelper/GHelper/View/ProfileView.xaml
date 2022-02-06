@@ -7,11 +7,10 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="128"/>
             <RowDefinition Height="Auto"/>  
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
+        <StackPanel Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewStyle}">
             <TextBox x:Name="NameDisplay" Header="Name"             Style="{StaticResource ResourceKey=StandardTextBox}"            Text="{x:Bind Profile.DisplayName, Mode=OneWay, FallbackValue=''}" PreviewKeyUp="HandleNameEdit" GettingFocus="ShowEditableName" LosingFocus="ShowDisplayName"/>
             <ToggleSwitch                 Header="Currently Active" Style="{StaticResource ResourceKey=StandardToggleSwitch}"       OffContent="Inactive" OnContent="Active" IsOn="{x:Bind Profile.ActiveForApplication, Mode=TwoWay}" />
             <TextBox                      Header="Type"             Style="{StaticResource ResourceKey=ImmutableTextBox}"           Text="{x:Bind Profile.Type, Mode=OneWay, FallbackValue=''}"/>

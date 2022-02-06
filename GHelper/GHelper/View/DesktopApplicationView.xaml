@@ -10,11 +10,10 @@
             <ColumnDefinition MinWidth="384"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="128"/>
             <RowDefinition Height="Auto"/>  
         </Grid.RowDefinitions>
         
-        <components:ApplicationDataView Grid.Row="1" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" />
+        <components:ApplicationDataView Grid.Row="0" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" />
     </Grid>
     
 </view:ApplicationView>

@@ -26,7 +26,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             
-            <StackPanel Grid.Row="0" Margin="20, 8, 0, 24" Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Margin="20, 8, 0, 24" Orientation="Horizontal" HorizontalAlignment="Center">
                 <button:SaveButton x:Name="SaveButton" Visibility="Visible"/>
                 <button:DeleteButton x:Name="DeleteButton" Visibility="Visible"/>
             </StackPanel>

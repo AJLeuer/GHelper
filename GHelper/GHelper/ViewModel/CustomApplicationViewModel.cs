@@ -1,4 +1,5 @@
-﻿using GHelper.Service;
+﻿using GHelper.Event;
+using GHelper.Service;
 using GHelperLogic.Model;
 using NDepend.Path;
 using Optional;
@@ -13,6 +14,11 @@ namespace GHelper.ViewModel
 			: base(application)
 		{
 		}
+        
+        public override void Delete()
+        {
+            InvokeDeleteEvent();
+        }
 
 		public override void SetNewCustomPosterImage(Image customPoster)
 		{

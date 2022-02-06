@@ -31,7 +31,7 @@ namespace GHelper.View.Button
             if (GHubRecordViewModel is not null)
             {
                 this.Click += InvokeGHubRecordDelete;
-                Visibility = (GHubRecordViewModel is DesktopApplicationViewModel) ? Visibility.Collapsed : Visibility.Visible;
+                Visibility = (GHubRecordViewModel is CustomApplicationViewModel or ProfileViewModel) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
         

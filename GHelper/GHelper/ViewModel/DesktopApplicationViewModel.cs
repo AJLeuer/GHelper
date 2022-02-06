@@ -8,12 +8,7 @@ namespace GHelper.ViewModel
         protected internal DesktopApplicationViewModel(DesktopApplication application) : base(application)
         {
         }
-        
-        public override void Delete()
-        {
-            //Do nothing, we don't allow deleting the Desktop app
-        }
-        
+
         public override void SetNewCustomPosterImage(Image customPoster)
         {
             //Do nothing, we don't allow setting custom posters
