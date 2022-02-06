@@ -37,13 +37,11 @@ namespace GHelper.View
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public event UserSavedEvent?              UserSaved;
-        public event UserDeletedRecordEvent?      UserPressedDelete;
-		public event UserDeletedRecordEvent?      UserConfirmedDelete;
+        public event UserDeletedRecordEvent?      UserConfirmedDelete;
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
-			this.UserPressedDelete += DisplayDeleteDialog;
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(this.TitleBar);
         }
@@ -103,7 +101,7 @@ namespace GHelper.View
             if (DisplayedRecord is not null)
             {
                 DisplayedRecord.UserSaved -= this.UserSaved;
-                DisplayedRecord.UserDeletedRecord -= this.UserPressedDelete;
+                DisplayedRecord.UserDeletedRecord -= this.DisplayDeleteDialog;
             }
         }
 
@@ -112,7 +110,7 @@ namespace GHelper.View
             DisplayedRecord = gHubRecord;
             
             DisplayedRecord.UserSaved += this.UserSaved;
-            DisplayedRecord.UserDeletedRecord += this.UserPressedDelete;
+            DisplayedRecord.UserDeletedRecord += this.DisplayDeleteDialog;
             
             RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
             SaveButton.GHubRecordViewModel = gHubRecord;

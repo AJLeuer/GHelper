@@ -1,10 +1,9 @@
 ﻿using GHelper.ViewModel;
-using GHelperLogic.Model;
 using Microsoft.UI.Xaml;
 
 namespace GHelper.View.Button
 {
-    public sealed partial class DeleteButton : Microsoft.UI.Xaml.Controls.Button, StandardButton
+    public sealed partial class DeleteButton : Microsoft.UI.Xaml.Controls.Button
     {
         private GHubRecordViewModel? gHubRecordViewModel;
 
@@ -16,6 +15,7 @@ namespace GHelper.View.Button
             }
             set
             {
+                RemovePreviousRecord();
                 gHubRecordViewModel = value;
                 WireToGHubRecord();
             }
@@ -26,13 +26,26 @@ namespace GHelper.View.Button
             this.InitializeComponent();
         }
 
-        public void WireToGHubRecord()
+        private void WireToGHubRecord()
         {
             if (GHubRecordViewModel is not null)
             {
-                this.Click += (object _, RoutedEventArgs _) => { GHubRecordViewModel?.Delete(); };
+                this.Click += InvokeGHubRecordDelete;
                 Visibility = (GHubRecordViewModel is DesktopApplicationViewModel) ? Visibility.Collapsed : Visibility.Visible;
             }
+        }
+        
+        private void RemovePreviousRecord()
+        {
+            if (GHubRecordViewModel is not null)
+            {
+                this.Click -= InvokeGHubRecordDelete;
+            }
+        }
+
+        private void InvokeGHubRecordDelete(object o, RoutedEventArgs routedEventArgs)
+        {
+            GHubRecordViewModel?.Delete();
         }
     }
 }
