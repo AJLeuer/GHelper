@@ -23,9 +23,7 @@ namespace GHelper.View
 			set
 			{
 				SetValue(ProfileProperty, value);
-				ResetAppearance();
-				ChainGHubRecordViewModelEventsToControls();
-			}
+            }
 		}
 
 		public GHubRecordViewModel GHubRecordViewModel
@@ -38,8 +36,6 @@ namespace GHelper.View
 		public ProfileView( )
         {
             InitializeComponent();
-            RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.Save(); };
-	        RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.Delete(); };
         }
 
 		void RecordView.SendRecordChangedNotification()
@@ -53,12 +49,7 @@ namespace GHelper.View
 			routedEventInfo.Handled = true;
 		}
 
-	    private void ResetAppearance()
-	    {
-		    RecordViewControls.ResetAppearance();
-	    }
-	    
-	    [NotifyPropertyChangedInvocator]
+        [NotifyPropertyChangedInvocator]
 	    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 	    {
 		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -73,11 +64,5 @@ namespace GHelper.View
 	    {
 		    NameDisplay.Text = Profile.DisplayName;
 	    }
-	    
-	    public void ChainGHubRecordViewModelEventsToControls()
-	    {
-		    Profile.PropertyChanged += RecordViewControls.SwitchToChangedAppearance;
-		    Profile.UserSaved += RecordViewControls.ResetAppearance;
-	    }
-	}
+    }
 }

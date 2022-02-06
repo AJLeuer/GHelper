@@ -15,22 +15,9 @@ namespace GHelper.View
 		public StandardApplicationView()
         {
 	        InitializeComponent();
-	        RecordViewControls.UserClickedSaveButton += () => { GHubRecordViewModel.Save(); };
-	        RecordViewControls.UserClickedDeleteButton += () => { GHubRecordViewModel.Delete(); };
         }
 
-	    protected override void ResetAppearance()
-	    {
-		    RecordViewControls.ResetAppearance();
-	    }
-
-	    public override void ChainGHubRecordViewModelEventsToControls()
-	    {
-		    Application.PropertyChanged += RecordViewControls.SwitchToChangedAppearance;
-		    Application.UserSaved += RecordViewControls.ResetAppearance;
-	    }
-
-	    private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
+        private void HandleNameChange(object sender, RoutedEventArgs routedEventInfo)
         {
 	        RecordView.ChangeName(this, sender);
         }

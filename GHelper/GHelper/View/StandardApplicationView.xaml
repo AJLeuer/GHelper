@@ -16,8 +16,6 @@
             <RowDefinition Height="Auto"/>            
         </Grid.RowDefinitions>
         
-        <view:RecordViewControls x:Name="RecordViewControls" Grid.Row="0" Grid.Column="0" Style="{StaticResource RecordViewControlsStyle}"/>
-        
         <components:ApplicationDataView Grid.Row="1" Grid.Column="0" Application="{x:Bind Application, Mode=OneWay}" NamedChanged="HandleNameChange"/>
         
         <StackPanel Grid.Row="1" Grid.Column="1" utility:Margin.Left="32" Orientation="Vertical">
