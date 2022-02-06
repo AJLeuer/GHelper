@@ -27,8 +27,8 @@
             </Grid.RowDefinitions>
             
             <StackPanel Grid.Row="0" Margin="20, 8, 0, 24" Orientation="Horizontal">
-                <button:SaveButton Visibility="Visible"/>
-                <button:DeleteButton Visibility="Visible"/>
+                <button:SaveButton x:Name="SaveButton" Visibility="Visible"/>
+                <button:DeleteButton x:Name="DeleteButton" Visibility="Visible"/>
             </StackPanel>
 
             <SplitView

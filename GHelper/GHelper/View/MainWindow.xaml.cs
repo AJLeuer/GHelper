@@ -115,6 +115,8 @@ namespace GHelper.View
             DisplayedRecord.UserDeletedRecord += this.UserPressedDelete;
             
             RecordView view = RecordView.CreateViewForViewModel(gHubRecord);
+            SaveButton.GHubRecordViewModel = gHubRecord;
+            DeleteButton.GHubRecordViewModel = gHubRecord;
             GHubDataDisplay.Content = view;
             OnPropertyChanged(nameof(BorderVisibleForGHubContent));
         }
